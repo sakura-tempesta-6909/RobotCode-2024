@@ -1,18 +1,11 @@
 package frc.robot.mode;
 
-import frc.robot.State;
+import frc.robot.domain.model.DriveModel;
 
-public class DriveMode extends Mode {
-
-    @Override
-    public void changeMode() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void changeState() {
-        State.driveXSpeed = driveController.getLeftY();
-        State.driveZRotation = driveController.getRightX();
+public class DriveMode extends ModeManager {
+    public static void changeState() {
+        driveModel.driveBaseMode = DriveModel.DriveBaseMode.s_fastDrive;
+        driveModel.driveXSpeed = driveController.getLeftY();
+        driveModel.driveZRotation = driveController.getRightX();
     }
 }
