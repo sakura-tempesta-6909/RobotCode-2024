@@ -15,6 +15,7 @@ public class DriveRealComponent extends DriveRepository {
     private final PIDController rotationPidController;
 
     public DriveRealComponent() {
+        Const.ConstInit();
         driveRightFront = new WPI_TalonSRX(Const.Ports.DriveRightFront);
         driveLeftFront = new WPI_TalonSRX(Const.Ports.DriveLeftFront);
         driveRightBack = new VictorSPX(Const.Ports.DriveRightBack);

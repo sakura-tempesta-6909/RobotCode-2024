@@ -30,7 +30,6 @@ public class Robot extends TimedRobot {
 
         services.add(new DriveService(new DriveRealComponent()));
 
-//        State.StateInit();
         Util.sendSystemOut(defaultConsole, newConsole);
         defaultConsole.print(newConsole);
         newConsole = new ByteArrayOutputStream();
@@ -50,9 +49,8 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousPeriodic() {
-//        State.StateReset();
-
         for (Service service : services) {
+            service.resetModel();
             service.readSensors();
         }
 
@@ -104,8 +102,8 @@ public class Robot extends TimedRobot {
 
     @Override
     public void testPeriodic() {
-//        State.StateReset();
         for (Service service : services) {
+            service.resetModel();
             service.readSensors();
         }
 
