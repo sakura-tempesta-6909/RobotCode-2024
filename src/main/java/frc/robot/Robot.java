@@ -57,7 +57,7 @@ public class Robot extends TimedRobot {
 
         ModeManager.changeMode();
 
-        ModeManager.mode.changeState();
+        ModeManager.mode.changeModel();
 
         for (Service service : services) {
             service.applyModel();
@@ -87,7 +87,7 @@ public class Robot extends TimedRobot {
             service.readSensors();
         }
 
-        ModeManager.mode.changeState();
+        ModeManager.mode.changeModel();
 
         for (Service service : services) {
             service.applyModel();

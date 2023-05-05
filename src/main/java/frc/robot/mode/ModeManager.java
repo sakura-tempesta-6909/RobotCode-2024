@@ -1,7 +1,6 @@
 package frc.robot.mode;
 
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.domain.model.DriveModel;
 
 public class ModeManager {
     public static void changeMode() {
@@ -9,18 +8,18 @@ public class ModeManager {
     }
 
     public enum ModeType {
-        k_drive(DriveMode::changeState),
+        k_drive(DriveMode::changeModel),
         k_test(TestMode::changeState),
         ;
 
-        private final Runnable changeState;
+        private final Runnable changeModel;
 
-        ModeType(Runnable changeState) {
-            this.changeState = changeState;
+        ModeType(Runnable changeModel) {
+            this.changeModel = changeModel;
         }
 
-        public void changeState() {
-            this.changeState.run();
+        public void changeModel() {
+            this.changeModel.run();
         }
     }
 
