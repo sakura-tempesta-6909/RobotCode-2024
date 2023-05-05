@@ -1,4 +1,4 @@
-package frc.robot.components.Drive;
+package frc.robot.components.drive;
 
 import frc.robot.components.Service;
 import frc.robot.domain.model.DriveModel;
@@ -22,16 +22,16 @@ public class DriveService implements Service {
 
         switch (DriveModel.driveBaseMode) {
             case s_fastDrive:
-                repository.arcadeDrive(Const.Speeds.FastDrive * DriveModel.driveXSpeed, Const.Speeds.FastDrive * DriveModel.driveZRotation);
+                repository.arcadeDrive(DriveParameter.Speeds.FastDrive * DriveModel.driveXSpeed, DriveParameter.Speeds.FastDrive * DriveModel.driveZRotation);
                 break;
             case s_midDrive:
-                repository.arcadeDrive(Const.Speeds.MidDrive * DriveModel.driveXSpeed, Const.Speeds.MidDrive * DriveModel.driveZRotation);
+                repository.arcadeDrive(DriveParameter.Speeds.MidDrive * DriveModel.driveXSpeed, DriveParameter.Speeds.MidDrive * DriveModel.driveZRotation);
                 break;
             case s_slowDrive:
-                repository.arcadeDrive(Const.Speeds.SlowDrive * DriveModel.driveXSpeed, Const.Speeds.SlowDrive * DriveModel.driveZRotation);
+                repository.arcadeDrive(DriveParameter.Speeds.SlowDrive * DriveModel.driveXSpeed, DriveParameter.Speeds.SlowDrive * DriveModel.driveZRotation);
                 break;
             case s_stopDrive:
-                repository.arcadeDrive(Const.Speeds.Neutral * DriveModel.driveXSpeed, Const.Speeds.Neutral * DriveModel.driveZRotation);
+                repository.arcadeDrive(DriveParameter.Speeds.Neutral * DriveModel.driveXSpeed, DriveParameter.Speeds.Neutral * DriveModel.driveZRotation);
                 break;
             case s_pidStraight:
                 repository.straightPID(DriveModel.straightPIDTarget);

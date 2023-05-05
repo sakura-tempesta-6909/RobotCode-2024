@@ -1,45 +1,27 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import frc.robot.components.Drive.*;
 import frc.robot.components.Service;
-import frc.robot.domain.model.DriveModel;
+import frc.robot.components.drive.DriveService;
+import frc.robot.components.drive.infrastructure.BasicDrive;
 import frc.robot.mode.ModeManager;
 import frc.robot.phase.Autonomous;
-import frc.robot.subClass.MQTT;
 import frc.robot.subClass.Util;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class Robot extends TimedRobot {
     ArrayList<Service> services = new ArrayList<>();
-    MQTT mqtt = new MQTT();
-
-    PrintStream defaultConsole = System.out;
-    ByteArrayOutputStream newConsole = new ByteArrayOutputStream();
 
     @Override
     public void robotInit() {
-        System.setOut(new PrintStream(newConsole));
-        Thread thread = new Thread(() -> {
-            mqtt.connect();
-        });
-        thread.start();
-
-        services.add(new DriveService(new DriveRealComponent()));
-
-        Util.sendSystemOut(defaultConsole, newConsole);
-        defaultConsole.print(newConsole);
-        newConsole = new ByteArrayOutputStream();
+        services.add(new DriveService(new BasicDrive()));
+        ModeManager.setupMode();
     }
 
     @Override
     public void robotPeriodic() {
-        Util.sendSystemOut(defaultConsole, newConsole);
-        defaultConsole.print(newConsole);
-        newConsole = new ByteArrayOutputStream();
+        Util.allSendConsole();
     }
 
     @Override
@@ -80,8 +62,6 @@ public class Robot extends TimedRobot {
         for (Service service : services) {
             service.applyModel();
         }
-
-        Util.allSendConsole();
     }
 
     @Override
@@ -93,11 +73,11 @@ public class Robot extends TimedRobot {
         for (Service service : services) {
             service.readSensors();
         }
-        Util.allSendConsole();
     }
 
     @Override
     public void testInit() {
+        ModeManager.mode = ModeManager.ModeType.k_test;
     }
 
     @Override

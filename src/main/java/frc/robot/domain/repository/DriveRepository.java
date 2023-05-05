@@ -1,18 +1,18 @@
 package frc.robot.domain.repository;
 
-public abstract class DriveRepository {
+public interface DriveRepository {
     /**
      * ドライブベースを動かす
      *
      * @param xSpeed    直進成分 [-1, 1]
-     * @param zRotation 回転成分 [-1, 1]
+     * @param zRotation 回転成分 [-1, 1] 反時計(左)回りが正
      */
     public abstract void arcadeDrive(double xSpeed, double zRotation);
 
     /**
      * PIDで直進する
      *
-     * @param straightTarget  目標地点[cm]
+     * @param straightTarget 目標地点[cm]
      */
     public abstract void straightPID(double straightTarget);
 
