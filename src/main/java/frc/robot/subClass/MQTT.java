@@ -1,6 +1,6 @@
 package frc.robot.subClass;
 
-import frc.robot.State;
+import frc.robot.domain.model.DriveModel;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -48,10 +48,10 @@ public class MQTT{
     }
     public JSONObject convertStateToJson() {
         Map<String, Object> map = new HashMap<>();
-        Field[] classes = State.class.getDeclaredFields();
+        Field[] classes = DriveModel.class.getDeclaredFields();
         for (Field cl : classes) {
             try {
-                map.put(cl.getName(), cl.get(State.class));
+                map.put(cl.getName(), cl.get(DriveModel.class));
             } catch (IllegalAccessException e) {
                 continue;
             }
