@@ -7,7 +7,7 @@ public interface LEDRepository {
         patterntheLEDFlashes;
     }
     /**
-     * ドライブベースを動かす
+     * LEDを変えたい色に変える
      *
      * @param LEDREGSequence    LEDの色の配列
      * @param patterntheLED  LEDの点滅の仕方
