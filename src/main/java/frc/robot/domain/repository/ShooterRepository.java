@@ -28,5 +28,4 @@ public interface ShooterRepository {
      */
     void noteOuttake();
 
-    
 }
