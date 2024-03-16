@@ -28,4 +28,6 @@ public interface ShooterRepository {
      */
     void noteOuttake();
 
+    void readSensors();
+
 }
