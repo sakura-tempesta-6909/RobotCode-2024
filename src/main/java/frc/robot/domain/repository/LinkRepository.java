@@ -9,6 +9,8 @@ public interface LinkRepository {
      * 
      */
     void MoveShooterToSpecifiedAngle(double TargetShooterAngle);
+    void readSensors();
+
 
     /**
      * 
@@ -16,4 +18,6 @@ public interface LinkRepository {
      * 
      */
     void KeepCurrentAngle();
+
+    
 }

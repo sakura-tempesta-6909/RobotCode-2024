@@ -25,4 +25,5 @@ public interface LEDRepository {
      */
     void changeLight(int[] LEDRGBSequence, LEDFlashes pattern);
 
+    void readSensors();
 }

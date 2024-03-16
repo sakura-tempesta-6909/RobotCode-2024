@@ -33,5 +33,10 @@ public interface ShooterRepository {
      * Intakeをやめる（Rollerの動きを止める）
      */
     void stopIntake();
-    
+
+    /**
+     * センサーを読みとる
+     */
+
+    void readSensors();
 }
