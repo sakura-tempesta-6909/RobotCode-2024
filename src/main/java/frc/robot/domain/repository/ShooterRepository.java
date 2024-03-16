@@ -28,4 +28,10 @@ public interface ShooterRepository {
      */
     void noteOuttake();
 
+
+    /**
+     * Intakeをやめる（Rollerの動きを止める）
+     */
+    void stopIntake();
+    
 }
