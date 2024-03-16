@@ -25,5 +25,8 @@ public interface LEDRepository {
      */
     void changeLight(int[] LEDRGBSequence, LEDFlashes pattern);
 
+    /**
+     * センサーを読む
+     */
     void readSensors();
 }

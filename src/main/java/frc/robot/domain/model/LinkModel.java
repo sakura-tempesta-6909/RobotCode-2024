@@ -1,7 +1,7 @@
 package frc.robot.domain.model;
 
 public class LinkModel {
-    public static ShooterAngleMode driveBaseMode;
+    public static ShooterAngleMode shooterAngleMode;
 
     public enum ShooterAngleMode {
         /** AMPにSHOOTをする */
@@ -18,6 +18,8 @@ public class LinkModel {
         s_intakeNote,
         /** CLIMBをする */
         s_climb,
+        /** 何も入力されていない時 */
+        s_inputnothing
     }
 
     public static double driveXSpeed, driveZRotation;

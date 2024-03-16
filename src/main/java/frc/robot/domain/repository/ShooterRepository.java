@@ -20,11 +20,9 @@ public interface ShooterRepository {
 
 
     /**
-     * 
      * ミスをした時にNOTEを吐き出す
      * 上(Shoot)との違い：
      * Shootはモーターがある程度の速さで回らないといけないが、吐き出す時にはいらない
-     * 
      */
     void noteOuttake();
 
@@ -37,6 +35,5 @@ public interface ShooterRepository {
     /**
      * センサーを読みとる
      */
-
     void readSensors();
 }
