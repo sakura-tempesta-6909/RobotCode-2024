@@ -1,7 +1,7 @@
 package frc.robot.domain.model;
 
 public class LEDModel {
-    public static LEDMode driveBaseMode;
+    public static LEDMode ledMode;
 
     public enum LEDMode {
         /** LEDを変えたいように変える*/

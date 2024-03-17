@@ -1,7 +1,12 @@
 package frc.robot.components.led;
 
-public class LEDParameter {
-    public static void ConstInit() {
+import frc.robot.domain.repository.LEDRepository.LEDFlashes;
 
+public class LEDParameter {
+    public static final int[] sequence = new int[] {2,3,4};
+    public static final LEDFlashes pattern = LEDFlashes.AlwaysOff;
+
+    public static void ConstInit() {
+        
     }
 }

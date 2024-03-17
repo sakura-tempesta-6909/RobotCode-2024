@@ -1,7 +1,7 @@
 package frc.robot.domain.model;
 
 public class ShooterModel {
-    public static ShooterMode driveBaseMode;
+    public static ShooterMode shooterMode;
 
     public enum ShooterMode {
         /** NOTEの回収 */
