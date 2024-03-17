@@ -1,20 +1,9 @@
 package frc.robot.domain.repository;
 
+import frc.robot.domain.model.LEDModel.LEDFlashes;
 
 public interface LEDRepository {
-    public enum LEDFlashes {
-        //LEDの点滅のパターン
-        
-        //ずっとついている
-        AlwaysOn,
-
-        //１秒ごとに点滅を繰り返す
-        BlinkingPerSec,
-
-        //ずっと消えている
-        AlwaysOff;
-        
-    }
+    
     /**
      * LEDを変えたい色に変える
      *
