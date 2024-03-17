@@ -10,8 +10,8 @@ public class LEDModel {
         s_changeLED;    
     }
     
-    public static int[] sequence = new int[] {2, 3, 4};
-    public static LEDFlashes pattern = LEDFlashes.AlwaysOff;
+    public static int[] sequence;
+    public static LEDFlashes pattern;
 
     public static void reset() {
         
