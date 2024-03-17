@@ -2,10 +2,10 @@ package frc.robot.components.led;
 
 import frc.robot.domain.repository.LEDRepository.LEDFlashes;
 
+/**
+ * プログラムで調整可能な値
+ */
 public class LEDParameter {
-    public static final int[] sequence = new int[] {2,3,4};
-    public static final LEDFlashes pattern = LEDFlashes.AlwaysOff;
-
     public static void ConstInit() {
         
     }

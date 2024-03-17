@@ -22,20 +22,6 @@ public class LinkModel {
         s_inputnothing
     }
 
-    public static double driveXSpeed, driveZRotation;
-
-    /* s_pidStraight */
-    /** 直線PIDで進む距離 [cm] */
-    public static double straightPIDTarget;
-    /** 直線PIDのリセット */
-    public static boolean resetStraightPID;
-
-    /* s_pidTurn */
-    /** 直線PIDで回転する角度 [degree] */
-    public static double rotationPIDTarget;
-    /** 回転PIDのリセット */
-    public static boolean resetRotationPID;
-
     public static void reset() {
         
     }

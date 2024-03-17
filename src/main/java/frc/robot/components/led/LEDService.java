@@ -16,7 +16,7 @@ public class LEDService implements Service {
     public void applyModel() {
         switch (LEDModel.ledMode) {
             case s_changeLED:
-                repository.changeLight(LEDParameter.sequence, LEDParameter.pattern);
+                repository.changeLight(LEDModel.sequence, LEDModel.pattern);
                 break;
         }     
     } 
