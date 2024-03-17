@@ -1,7 +1,5 @@
 package frc.robot.components.led;
 
-import frc.robot.domain.repository.LEDRepository.LEDFlashes;
-
 /**
  * プログラムで調整可能な値
  */
