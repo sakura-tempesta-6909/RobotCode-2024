@@ -1,6 +1,8 @@
 package frc.robot.components.shooter;
 
 import frc.robot.components.Service;
+import frc.robot.components.link.LinkParameter;
+import frc.robot.domain.model.LinkModel;
 import frc.robot.domain.model.ShooterModel;
 import frc.robot.domain.repository.ShooterRepository;
 
@@ -12,17 +14,20 @@ public class ShooterService implements Service {
     @Override
     public void applyModel() {
         switch (ShooterModel.shooterMode) {
-            case s_noteIntake:
-                repository.noteIntake(ShooterParameter.Speed.ShooterIntakeSpeed, ShooterParameter.Speed.PusherSpeed);
+            case s_intake:
+                repository.noteIntake();
                 break;
-            case s_noteOuttake:
-                repository.noteOuttake(-ShooterParameter.Speed.ShooterIntakeSpeed, -ShooterParameter.Speed.PusherSpeed);
+            case s_shootSpeaker:
+                repository.noteShootSpeaker();
                 break;
-            case s_noteShootSpeaker:
-                repository.noteShootSpeaker(ShooterParameter.Speed.ShooterTargetSpeed);
+            case s_shootAmp:
+                repository.noteShootAmp();
                 break;
-            case s_noteShootAmp:
-                repository.noteShootAmp(ShooterParameter.Speed.ShooterIntakeSpeed, -ShooterParameter.Speed.PusherSpeed);
+            case s_outtake:
+                repository.noteOuttake();
+                break;
+            case s_stopIntake:
+                repository.stopIntake();
                 break;
         }
     }

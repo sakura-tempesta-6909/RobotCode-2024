@@ -2,18 +2,28 @@ package frc.robot.domain.model;
 
 public class ShooterModel {
     public static ShooterMode shooterMode;
+
     public enum ShooterMode {
-        s_noteIntake,
-        s_noteOuttake,
-        s_noteShootSpeaker,
-        s_noteShootAmp,
-
-
+        /** NOTEの回収 */
+        s_intake,
+        /** NOTEのSPEAKERへのSHOOT */
+        s_shootSpeaker,
+        /** NOTEのAMPへのSHOOT */
+        s_shootAmp,
+        /** NOTEのouttake */
+        s_outtake,
+        /** Intakeを止める */
+        s_stopIntake,
     }
+ 
     public static void reset() {
-
+        
     }
-    public  ShooterModel() {
+
+    public ShooterModel() {
         reset();
     }
+
 }
+
+

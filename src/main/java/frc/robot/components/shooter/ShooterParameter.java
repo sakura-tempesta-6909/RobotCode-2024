@@ -5,6 +5,7 @@ public class ShooterParameter {
         public static final double ShooterTargetSpeed = -4000;
         public static final double PusherSpeed = 0.2;
         public static final double ShooterIntakeSpeed = 0.3;
+        public static final double Neutral = 0;
     }
     public static class PID {
         public static final double ShooterP = 0.0002;

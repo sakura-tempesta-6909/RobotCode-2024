@@ -30,35 +30,40 @@ public class Shooter implements ShooterRepository {
         ShooterParameter.ConstInit();
     }
     @Override
-    public void noteIntake(double shooterSpeed, double pusherSpeed) {
-        noteUpperShooter.set(shooterSpeed);
-        noteLowerShooter.set(shooterSpeed);
-        notePusher.set(pusherSpeed);
+    public void noteIntake() {
+        noteUpperShooter.set(ShooterParameter.Speed.ShooterIntakeSpeed);
+        noteLowerShooter.set(ShooterParameter.Speed.ShooterIntakeSpeed);
+        notePusher.set(ShooterParameter.Speed.PusherSpeed);
 
     }
 
     @Override
-    public void noteShootSpeaker(double targetSpeed) {
-        noteUpperShooterPID.setReference(targetSpeed, CANSparkBase.ControlType.kVelocity);
-        noteLowerShooterPID.setReference(targetSpeed, CANSparkBase.ControlType.kVelocity);
+    public void noteShootSpeaker() {
+        noteUpperShooterPID.setReference(ShooterParameter.Speed.ShooterTargetSpeed, CANSparkBase.ControlType.kVelocity);
+        noteLowerShooterPID.setReference(ShooterParameter.Speed.ShooterTargetSpeed, CANSparkBase.ControlType.kVelocity);
     }
 
     @Override
-    public void noteShootAmp(double shooterSpeed, double pusherSpeed) {
-        noteUpperShooter.set(shooterSpeed);
-        noteLowerShooter.set(-shooterSpeed);
-        notePusher.set(pusherSpeed);
+    public void noteShootAmp() {
+        noteUpperShooter.set(ShooterParameter.Speed.ShooterIntakeSpeed);
+        noteLowerShooter.set(-ShooterParameter.Speed.ShooterIntakeSpeed);
+        notePusher.set(ShooterParameter.Speed.PusherSpeed);
     }
 
     @Override
-    public void noteOuttake(double shooterSpeed, double pusherSpeed) {
-        noteUpperShooter.set(shooterSpeed);
-        noteLowerShooter.set(shooterSpeed);
-        notePusher.set(pusherSpeed);
+    public void noteOuttake() {
+        noteUpperShooter.set(-ShooterParameter.Speed.ShooterIntakeSpeed);
+        noteLowerShooter.set(-ShooterParameter.Speed.ShooterIntakeSpeed);
+        notePusher.set(-ShooterParameter.Speed.PusherSpeed);
     }
 
     @Override
     public void readSensors() {
 
+    }
+    @Override
+    public void stopIntake() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'stopIntake'");
     }
 }

@@ -4,30 +4,36 @@ public interface ShooterRepository {
     /**
      * NOTEの回収をする
      */
-    void noteIntake(double shooterSpeed, double pusherSpeed);
+    void noteIntake();
 
 
     /**
      * NOTEをSPEAKERにSHOOTをする
      */
-    void noteShootSpeaker(double targetSpeed);
+    void noteShootSpeaker();
 
     
     /**
      * NOTEをAMPにSHOOTをする
      */
-    void noteShootAmp(double shooterSpeed, double pusherSpeed);
+    void noteShootAmp();
 
 
     /**
-     * 
      * ミスをした時にNOTEを吐き出す
      * 上(Shoot)との違い：
      * Shootはモーターがある程度の速さで回らないといけないが、吐き出す時にはいらない
-     * 
      */
-    void noteOuttake(double shooterSpeed, double pusherSpeed);
+    void noteOuttake();
 
+
+    /**
+     * Intakeをやめる（Rollerの動きを止める）
+     */
+    void stopIntake();
+
+    /**
+     * センサーを読みとる
+     */
     void readSensors();
-
 }
