@@ -14,11 +14,7 @@ public class LEDService implements Service {
     }
     @Override
     public void applyModel() {
-        switch (LEDModel.ledMode) {
-            case s_changeLED:
-                repository.changeLight(LEDModel.sequence, LEDModel.pattern);
-                break;
-        }     
+        repository.changeLight(LEDModel.sequence, LEDModel.pattern);    
     } 
 
     @Override
