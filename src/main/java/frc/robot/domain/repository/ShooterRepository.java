@@ -4,19 +4,19 @@ public interface ShooterRepository {
     /**
      * NOTEの回収をする
      */
-    void noteIntake();
+    void noteIntake(double shooterSpeed, double pusherSpeed);
 
 
     /**
      * NOTEをSPEAKERにSHOOTをする
      */
-    void noteShootSpeaker();
+    void noteShootSpeaker(double targetSpeed);
 
     
     /**
      * NOTEをAMPにSHOOTをする
      */
-    void noteShootAmp();
+    void noteShootAmp(double shooterSpeed, double pusherSpeed);
 
 
     /**
@@ -26,7 +26,7 @@ public interface ShooterRepository {
      * Shootはモーターがある程度の速さで回らないといけないが、吐き出す時にはいらない
      * 
      */
-    void noteOuttake();
+    void noteOuttake(double shooterSpeed, double pusherSpeed);
 
     void readSensors();
 
