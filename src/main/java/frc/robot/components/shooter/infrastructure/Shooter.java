@@ -31,4 +31,9 @@ public class Shooter implements ShooterRepository {
     public void readSensors() {
 
     }
+    @Override
+    public void stopIntake() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'stopIntake'");
+    }
 }

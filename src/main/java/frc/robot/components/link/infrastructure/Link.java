@@ -16,4 +16,9 @@ public class Link implements LinkRepository {
     public void readSensors() {
 
     }
+    @Override
+    public void KeepCurrentAngle() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'KeepCurrentAngle'");
+    }
 }
