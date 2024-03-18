@@ -17,7 +17,7 @@ public class ShooterModel {
     }
  
     public static void reset() {
-        
+        shooterMode = ShooterMode.s_stopIntake;
     }
 
     public ShooterModel() {

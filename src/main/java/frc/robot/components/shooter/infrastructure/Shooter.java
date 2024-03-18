@@ -21,10 +21,12 @@ public class Shooter implements ShooterRepository {
         noteLowerShooter.restoreFactoryDefaults();
         noteUpperShooter.setInverted(true);
         noteLowerShooter.setInverted(true);
+        notePusher.setInverted(true);
         noteUpperShooterPID = noteUpperShooter.getPIDController();
         noteLowerShooterPID = noteLowerShooter.getPIDController();
         noteDirectionSensor = new DigitalInput(ShooterConst.Ports.NoteDirectionSensor);
         upperShooterEncoder = noteUpperShooter.getEncoder();
+        
 
         noteUpperShooterPID.setP(ShooterParameter.PID.ShooterP);
         noteUpperShooterPID.setI(ShooterParameter.PID.ShooterI);
@@ -37,10 +39,10 @@ public class Shooter implements ShooterRepository {
     }
     @Override
     public void noteIntake() {
-        noteUpperShooter.set(ShooterParameter.Speed.ShooterIntakeSpeed);
-        noteLowerShooter.set(ShooterParameter.Speed.ShooterIntakeSpeed);
-        notePusher.set(ShooterParameter.Speed.PusherSpeed);
-        if (!ShooterMeasuredState.isNoteGet) {
+        noteUpperShooter.set(-ShooterParameter.Speed.ShooterIntakeSpeed);
+        noteLowerShooter.set(-ShooterParameter.Speed.ShooterIntakeSpeed);
+        notePusher.set(-ShooterParameter.Speed.PusherSpeed);
+        if (ShooterMeasuredState.isNoteGet) {
             noteUpperShooter.set(ShooterParameter.Speed.Neutral);
             noteLowerShooter.set(ShooterParameter.Speed.Neutral);
             notePusher.set(ShooterParameter.Speed.Neutral);
@@ -66,19 +68,20 @@ public class Shooter implements ShooterRepository {
 
     @Override
     public void noteOuttake() {
-        noteUpperShooter.set(-ShooterParameter.Speed.ShooterIntakeSpeed);
-        noteLowerShooter.set(-ShooterParameter.Speed.ShooterIntakeSpeed);
-        notePusher.set(-ShooterParameter.Speed.PusherSpeed);
+        noteUpperShooter.set(ShooterParameter.Speed.ShooterIntakeSpeed);
+        noteLowerShooter.set(ShooterParameter.Speed.ShooterIntakeSpeed);
+        notePusher.set(ShooterParameter.Speed.PusherSpeed);
     }
 
     @Override
     public void readSensors() {
         ShooterMeasuredState.shooterSpeed = upperShooterEncoder.getVelocity();
-        ShooterMeasuredState.isNoteGet = noteDirectionSensor.get();
+        ShooterMeasuredState.isNoteGet = !noteDirectionSensor.get();
     }
     @Override
     public void stopIntake() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'stopIntake'");
+      noteUpperShooter.set(ShooterParameter.Speed.Neutral);
+      noteLowerShooter.set(ShooterParameter.Speed.Neutral);
+      notePusher.set(ShooterParameter.Speed.Neutral);
     }
 }

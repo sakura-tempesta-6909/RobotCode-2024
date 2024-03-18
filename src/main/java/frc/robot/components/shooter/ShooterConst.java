@@ -5,6 +5,6 @@ public class ShooterConst {
         public static final int NoteLowerShooter = 13;
         public static final int NotePusher = 14;
         public static final int NoteUpperShooter = 15;
-        public static final int NoteDirectionSensor = 9;
+        public static final int NoteDirectionSensor = 0;
     }
 }

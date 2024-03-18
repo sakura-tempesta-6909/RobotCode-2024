@@ -18,7 +18,6 @@ public class Link implements LinkRepository {
     }
     @Override
     public void KeepCurrentAngle() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'KeepCurrentAngle'");
+        
     }
 }

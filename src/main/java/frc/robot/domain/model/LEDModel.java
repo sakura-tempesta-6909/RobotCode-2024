@@ -19,7 +19,8 @@ public class LEDModel {
     public static LEDFlashes pattern;
 
     public static void reset() {
-        
+        sequence = new int[]{0, 0, 0};
+        pattern = LEDFlashes.AlwaysOff;
     }
 
     public LEDModel() {
