@@ -28,12 +28,13 @@ public class ShooterService implements Service {
                 break;
             case s_stopIntake:
                 repository.stopIntake();
-                break;   
+                break;
         }
     }
 
     @Override
     public void readSensors() {
+
         repository.readSensors();
     }
 

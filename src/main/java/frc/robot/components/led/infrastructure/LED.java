@@ -14,7 +14,6 @@ public class LED implements LEDRepository {
     }
     @Override
     public void changeLight(int[] LEDRGBSequence, LEDFlashes pattern) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'changeLight'");
+      
     }
 }

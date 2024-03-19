@@ -14,11 +14,10 @@ public class ShooterModel {
         s_outtake,
         /** Intakeを止める */
         s_stopIntake,
-
     }
  
     public static void reset() {
-        
+        shooterMode = ShooterMode.s_stopIntake;
     }
 
     public ShooterModel() {
