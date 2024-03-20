@@ -6,7 +6,7 @@ import frc.robot.domain.model.ShooterModel.ShooterMode;
 
 class DriveMode extends ModeManager {
     public static void changeModel() {
-        DriveModel.driveBaseMode = DriveModel.DriveBaseMode.s_fastDrive;
+        DriveModel.DriveMovement = DriveModel.DriveMovement.s_fastDrive;
         DriveModel.driveXSpeed = driveController.getLeftY();
         DriveModel.driveZRotation = driveController.getRightX();
         if(driveController.getRightBumper()) {

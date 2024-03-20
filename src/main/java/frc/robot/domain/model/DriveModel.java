@@ -1,9 +1,8 @@
 package frc.robot.domain.model;
 
 public class DriveModel {
-    public static DriveBaseMode driveBaseMode;
-
-    public enum DriveBaseMode {
+    public static DriveMovement DriveMovement;
+    public enum DriveMovement {
         /** ロボットの速度を速くする */
         s_fastDrive,
         /** ロボットの速度を中くらいにする */
@@ -12,10 +11,20 @@ public class DriveModel {
         s_slowDrive,
         /** ロボットの速度を0にする */
         s_stopDrive,
-        /** PIDでまっすぐ前に進む */
-        s_pidStraight,
-        /** PIDで指定した角度に向く */
-        s_pidTurn,
+        /** ロボットの回転を右回転にする */
+        s_rightTurn,
+        /** ロボットの回転を左回転にする */
+        s_leftTurn,
+        /** ロボットの方向をフィールドに対して前を向く */
+        s_fowardTurn,
+    }
+
+    public static DriveOriented driveOriented;
+    public enum DriveOriented {
+        /** Field Oriented で動く */
+        s_fieldOriented,
+        /** Robot Oriented で動く */
+        s_robotOriented;
     }
 
     public static double driveXSpeed, driveZRotation;
@@ -33,7 +42,7 @@ public class DriveModel {
     public static boolean resetRotationPID;
 
     public static void reset() {
-        driveBaseMode = DriveBaseMode.s_stopDrive;
+        DriveMovement = DriveMovement.s_stopDrive;
         driveXSpeed = 0;
         driveZRotation = 0;
         straightPIDTarget = 0;
