@@ -15,21 +15,14 @@ public class DriveModel {
         s_pidTurn,
     }
 
-    public static DriveOrientedStraight driveOrientedStraight;
-    public enum DriveOrientedStraight {
-        /** Field Oriented でまっすぐ前に進む */
-        s_fieldOrientedStraight,
-        /** Robot Oriented でまっすぐ前に進む */
-        s_robotOrientedStraight;
-    }
-
     /**
      * ドライブベースを動かす
      *
      * @param driveXSpeed    直進成分 [-1 ~ 1]
+     * @param driveYSpeed    直進成分 [-1 ~ 1]
      * @param driveZRotation 回転成分 [-1 ~ 1] 反時計(左)回りが正
      */
-    public static double driveXSpeed, driveZRotation;
+    public static double driveXSpeed, driveYSpeed, driveZRotation;
 
     /* s_pidStraight */
     /** 直線PIDで進む距離 [cm] */
