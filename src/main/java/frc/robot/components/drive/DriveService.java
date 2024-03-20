@@ -16,42 +16,30 @@ public class DriveService implements Service {
     public void applyModel(){
         switch (DriveModel.driveMovement) {
             /** ロボットの速度を速くする */
-            /*case s_fastDrive:
-                repository.
-                break;*/
+            case s_fastDrive:
+                repository.arcadeDrive(DriveParameter.Speeds.FastDrive * DriveModel.driveXSpeed, DriveParameter.Speeds.FastDrive * DriveModel.driveThetaSpeed);
+                break;
             /** ロボットの速度を中くらいにする */
-            /*case s_midDrive:
-                repository. 
-                break;*/
+            case s_midDrive:
+                repository.arcadeDrive(DriveParameter.Speeds.MidDrive * DriveModel.driveXSpeed, DriveParameter.Speeds.MidDrive * DriveModel.driveThetaSpeed);
+                break;
             /** ロボットの速度を遅くする */
-            /*case s_slowDrive:
-                repository.
-                break;*/
+            case s_slowDrive:
+                repository.arcadeDrive(DriveParameter.Speeds.SlowDrive * DriveModel.driveXSpeed, DriveParameter.Speeds.SlowDrive * DriveModel.driveThetaSpeed);
+                break;
             /** ロボットの速度を0にする */
-            /*case s_stopDrive:
-                repository.
-                break;*/
-            /** ロボットの回転を右回転にする */
-            /*case s_rightTurn:
-                repository.
-                break;*/
-            /** ロボットの回転を左回転にする */
-            /*case s_leftTurn:
-                repository.
-                break;*/
-            /** ロボットの方向をフィールドに対して前を向く */
-            /*case s_fowardTurn:
-                repository.
-                break;*/
+            case s_stopDrive:
+                repository.arcadeDrive(DriveParameter.Speeds.Neutral * DriveModel.driveXSpeed, DriveParameter.Speeds.Neutral * DriveModel.driveThetaSpeed);
+                break;
         }
-        switch (DriveModel.driveOrientedY) {
+        switch (DriveModel.driveOriented) {
             /** Field Oriented でまっすぐ前に進む */
-            case s_fieldOrientedY:
-                repository.robotOriented(0, 0, 0);;
+            case s_fieldOriented:
+                repository.robotOriented(DriveModel.driveXSpeed, DriveModel.driveYSpeed, DriveModel.driveThetaSpeed);;
                 break;
             /** Robot Oriented で動く */
-            case s_robotOrientedY:
-                repository.fieldOriented(0, 0, 0);
+            case s_robotOriented:
+                repository.fieldOriented(DriveModel.driveXSpeed, DriveModel.driveYSpeed, DriveModel.driveThetaSpeed);
                 break;
         }
     }

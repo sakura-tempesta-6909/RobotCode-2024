@@ -8,7 +8,7 @@ class DriveMode extends ModeManager {
     public static void changeModel() {
         DriveModel.driveMovement = DriveModel.DriveMovement.s_fastDrive;
         DriveModel.driveXSpeed = driveController.getLeftY();
-        DriveModel.driveZRotation = driveController.getRightX();
+        DriveModel.driveThetaSpeed = driveController.getRightX();
         if(driveController.getRightBumper()) {
             ShooterModel.shooterMode = ShooterModel.ShooterMode.s_shootSpeaker;
         } else if (driveController.getLeftBumper()) {
