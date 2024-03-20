@@ -11,39 +11,29 @@ public class DriveModel {
         s_slowDrive,
         /** ロボットの速度を0にする */
         s_stopDrive,
-        /** PIDで指定した角度に向く */
-        s_pidTurn,
+    }
+
+    public static DriveOriented driveOriented;
+    public enum DriveOriented {
+        /** Robot Oriented で動く */
+        s_robotOriented,
+        /** Field Oriented で動く */
+        s_fieldOriented,
     }
 
     /**
      * ドライブベースを動かす
-     *
      * @param driveXSpeed    直進成分 [-1 ~ 1]
      * @param driveYSpeed    直進成分 [-1 ~ 1]
      * @param driveZRotation 回転成分 [-1 ~ 1] 反時計(左)回りが正
      */
     public static double driveXSpeed, driveYSpeed, driveZRotation;
 
-    /* s_pidStraight */
-    /** 直線PIDで進む距離 [cm] */
-    public static double straightPIDTarget;
-    /** 直線PIDのリセット */
-    public static boolean resetStraightPID;
-
-    /* s_pidTurn */
-    /** 直線PIDで回転する角度 [degree] */
-    public static double rotationPIDTarget;
-    /** 回転PIDのリセット */
-    public static boolean resetRotationPID;
-
     public static void reset() {
         driveMovement = DriveMovement.s_stopDrive;
         driveXSpeed = 0;
+        driveYSpeed = 0;
         driveZRotation = 0;
-        straightPIDTarget = 0;
-        rotationPIDTarget = 0;
-        resetStraightPID = false;
-        resetRotationPID = false;
     }
 
     public DriveModel() {
