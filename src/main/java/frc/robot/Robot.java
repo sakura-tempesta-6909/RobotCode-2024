@@ -3,8 +3,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.components.Service;
 import frc.robot.components.drive.DriveService;
-import frc.robot.components.drive.infrastructure.Drive;
-import frc.robot.components.drive.infrastructure.SwerveModule;
+import frc.robot.components.drive.infrastructure.BasicDrive;
 import frc.robot.mode.ModeManager;
 import frc.robot.phase.Autonomous;
 import frc.robot.subClass.Util;
@@ -16,7 +15,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
-        services.add(new DriveService(new Drive()));
+        services.add(new DriveService(new BasicDrive()));
         ModeManager.setupMode();
     }
 
