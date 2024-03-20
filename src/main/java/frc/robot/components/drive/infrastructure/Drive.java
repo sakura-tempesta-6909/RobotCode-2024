@@ -50,8 +50,6 @@ public class Drive implements DriveRepository {
 
     }
 
-    
-
     @Override
     public void readSensors() {
         // TODO Auto-generated method stub

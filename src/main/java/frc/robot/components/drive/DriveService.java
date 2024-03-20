@@ -17,21 +17,33 @@ public class DriveService implements Service {
         switch (DriveModel.driveMovement) {
             /** ロボットの速度を速くする */
             case s_fastDrive:
-                repository.arcadeDrive(DriveParameter.Speeds.FastDrive * DriveModel.driveXSpeed, DriveParameter.Speeds.FastDrive * DriveModel.driveThetaSpeed);
+                DriveModel.driveXSpeed *= DriveParameter.Speeds.FastDrive;
+                DriveModel.driveYSpeed *= DriveParameter.Speeds.FastDrive;
+                DriveModel.driveThetaSpeed *= DriveParameter.Speeds.FastDrive;
                 break;
+
             /** ロボットの速度を中くらいにする */
             case s_midDrive:
-                repository.arcadeDrive(DriveParameter.Speeds.MidDrive * DriveModel.driveXSpeed, DriveParameter.Speeds.MidDrive * DriveModel.driveThetaSpeed);
+                DriveModel.driveXSpeed *= DriveParameter.Speeds.MidDrive;
+                DriveModel.driveYSpeed *= DriveParameter.Speeds.MidDrive;
+                DriveModel.driveThetaSpeed *= DriveParameter.Speeds.MidDrive;
                 break;
+
             /** ロボットの速度を遅くする */
             case s_slowDrive:
-                repository.arcadeDrive(DriveParameter.Speeds.SlowDrive * DriveModel.driveXSpeed, DriveParameter.Speeds.SlowDrive * DriveModel.driveThetaSpeed);
+                DriveModel.driveXSpeed *= DriveParameter.Speeds.SlowDrive;
+                DriveModel.driveYSpeed *= DriveParameter.Speeds.SlowDrive;
+                DriveModel.driveThetaSpeed *= DriveParameter.Speeds.SlowDrive;
                 break;
+
             /** ロボットの速度を0にする */
             case s_stopDrive:
-                repository.arcadeDrive(DriveParameter.Speeds.Neutral * DriveModel.driveXSpeed, DriveParameter.Speeds.Neutral * DriveModel.driveThetaSpeed);
+                DriveModel.driveXSpeed *= DriveParameter.Speeds.Neutral;
+                DriveModel.driveYSpeed *= DriveParameter.Speeds.Neutral;
+                DriveModel.driveThetaSpeed *= DriveParameter.Speeds.Neutral;
                 break;
         }
+
         switch (DriveModel.driveOriented) {
             /** Field Oriented でまっすぐ前に進む */
             case s_fieldOriented:
