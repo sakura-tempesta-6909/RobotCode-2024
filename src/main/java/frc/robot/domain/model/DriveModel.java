@@ -13,26 +13,22 @@ public class DriveModel {
         s_stopDrive,
         /** PIDで指定した角度に向く */
         s_pidTurn,
-        /** ロボットの方向をフィールドに対して前を向く */
-        s_pidFowardTurn,
     }
 
-    public static DriveOrientedY driveOrientedY;
-    public enum DriveOrientedY {
+    public static DriveOrientedStraight driveOrientedStraight;
+    public enum DriveOrientedStraight {
         /** Field Oriented でまっすぐ前に進む */
-        s_fieldOrientedY,
+        s_fieldOrientedStraight,
         /** Robot Oriented でまっすぐ前に進む */
-        s_robotOrientedY;
+        s_robotOrientedStraight;
     }
 
-    public static DriveOrientedX driveOrientedX;
-    public enum DriveOrientedX {
-        /** Field Oriented でまっすぐ右に進む */
-        s_fieldOrientedX,
-        /** Robot Oriented でまっすぐ右に進む */
-        s_robotOrientedX;
-    }
-
+    /**
+     * ドライブベースを動かす
+     *
+     * @param driveXSpeed    直進成分 [-1 ~ 1]
+     * @param driveZRotation 回転成分 [-1 ~ 1] 反時計(左)回りが正
+     */
     public static double driveXSpeed, driveZRotation;
 
     /* s_pidStraight */
