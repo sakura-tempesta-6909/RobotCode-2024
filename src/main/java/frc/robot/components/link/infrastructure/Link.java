@@ -1,5 +1,6 @@
 package frc.robot.components.link.infrastructure;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -10,6 +11,7 @@ import com.revrobotics.CANSparkBase.IdleMode;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.components.link.LinkConst;
 import frc.robot.components.link.LinkParameter;
 import frc.robot.components.link.LinkParameter.PID;
@@ -17,21 +19,22 @@ import frc.robot.domain.repository.LinkRepository;
 
 public class Link implements LinkRepository {
     //Linkの持ち物検査
-    final WPI_VictorSPX linkMotorLeft;
-    final WPI_TalonSRX linkMotorRight;
+    final WPI_VictorSPX linkMotorRight;
+    final WPI_TalonSRX linkMotorLeft;
 
     public Link() {
         LinkParameter.ConstInit();
 
         //属性の初期化
-        linkMotorLeft = new WPI_VictorSPX(LinkConst.Ports.linkMotorLeft);
-        linkMotorRight = new WPI_TalonSRX(LinkConst.Ports.linkMotorRight);
+        linkMotorLeft = new WPI_TalonSRX(LinkConst.Ports.linkMotorLeft);
+        linkMotorRight = new WPI_VictorSPX(LinkConst.Ports.linkMotorRight);
 
         //moterの設定
         linkMotorLeft.configFactoryDefault();
         linkMotorLeft.configSelectedFeedbackSensor(FeedbackDevice.Analog);
         linkMotorRight.configFactoryDefault();
         linkMotorRight.configSelectedFeedbackSensor(FeedbackDevice.Analog);
+        linkMotorLeft.setInverted(true);
 
         //SoftLimit
         linkMotorLeft.configForwardSoftLimitThreshold(LinkConst.LinkSoftLimit.ForwardSoftLimit);
@@ -52,9 +55,9 @@ public class Link implements LinkRepository {
         linkMotorLeft.setNeutralMode(NeutralMode.Brake);
         linkMotorRight.setNeutralMode(NeutralMode.Brake);
 
-        //PID
-        linkMotorLeft.config_kP(0, PID.LinkP);
-        linkMotorRight.config_kP(0, PID.LinkP);
+        // //PID
+        // linkMotorLeft.config_kP(0, PID.LinkP);
+        // linkMotorRight.config_kP(0, PID.LinkP);
     }
     @Override
     public void MoveShooterToSpecifiedAngle(double TargetShooterAngle) {
@@ -68,5 +71,8 @@ public class Link implements LinkRepository {
     @Override
     public void KeepCurrentAngle() {
         
+    }
+    public void test() {
+      linkMotorLeft.set(ControlMode.PercentOutput, -0.2);
     }
 }

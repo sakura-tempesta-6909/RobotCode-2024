@@ -1,6 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.components.Service;
 import frc.robot.components.drive.DriveService;
 import frc.robot.components.drive.infrastructure.BasicDrive;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
 
 public class Robot extends TimedRobot {
     ArrayList<Service> services = new ArrayList<>();
+    Link linkMotorLink = new Link();
+    XboxController controller = new XboxController(0);
 
     @Override
     public void robotInit() {
@@ -91,16 +94,17 @@ public class Robot extends TimedRobot {
 
     @Override
     public void testPeriodic() {
-        for (Service service : services) {
-            service.resetModel();
-            service.readSensors();
-        }
+        // for (Service service : services) {
+        //     service.resetModel();
+        //     service.readSensors();
+        // }
 
-        ModeManager.mode.changeModel();
+        // ModeManager.mode.changeModel();
 
-        for (Service service : services) {
-            service.applyModel();
-        }
-
+        // for (Service service : services) {
+        //     service.applyModel();
+        // }
+        if(controller.getLeftBumper()) {
+            linkMotorLink.test();
     }
 }
