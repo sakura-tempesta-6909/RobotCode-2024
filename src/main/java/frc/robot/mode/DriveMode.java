@@ -4,13 +4,15 @@ import frc.robot.domain.measure.ShooterMeasuredState;
 import frc.robot.domain.model.DriveModel;
 import frc.robot.domain.model.LEDModel;
 import frc.robot.domain.model.ShooterModel;
+import frc.robot.domain.model.DriveModel.DriveOriented;
 import frc.robot.domain.model.ShooterModel.ShooterMode;
 
 class DriveMode extends ModeManager {
     public static void changeModel() {
-        DriveModel.driveBaseMode = DriveModel.DriveBaseMode.s_fastDrive;
-        DriveModel.driveXSpeed = driveController.getLeftY();
-        DriveModel.driveZRotation = driveController.getRightX();
+        DriveModel.driveMovement = DriveModel.DriveMovement.s_fastDrive;
+        DriveModel.driveSideSpeed = driveController.getLeftX();
+        DriveModel.driveFowardSpeed = -driveController.getLeftY(); //スティックを奥に倒すと正になるように変更
+        DriveModel.driveThetaSpeed = -driveController.getRightX(); //スティックを右に倒すと反時計回りになるように変更
         if(driveController.getRightBumper()) {
             ShooterModel.shooterMode = ShooterModel.ShooterMode.s_shootSpeaker;
         } else if (driveController.getLeftBumper()) {
@@ -25,6 +27,11 @@ class DriveMode extends ModeManager {
 
         if (ShooterMeasuredState.isNoteGet) {
             LEDModel.pattern = LEDModel.LEDFlashes.BlinkingPerSec;
+        }
+        if(DriveModel.driveOriented == DriveModel.DriveOriented.s_fieldOriented) {
+            DriveModel.driveOriented = DriveModel.DriveOriented.s_robotOriented;
+        } else {
+            DriveModel.driveOriented = DriveModel.DriveOriented.s_fieldOriented;
         }
     }
 }
