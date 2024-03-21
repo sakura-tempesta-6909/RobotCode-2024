@@ -1,6 +1,8 @@
 package frc.robot.mode;
 
+import frc.robot.domain.measure.ShooterMeasuredState;
 import frc.robot.domain.model.DriveModel;
+import frc.robot.domain.model.LEDModel;
 import frc.robot.domain.model.ShooterModel;
 import frc.robot.domain.model.ShooterModel.ShooterMode;
 
@@ -19,6 +21,10 @@ class DriveMode extends ModeManager {
             ShooterModel.shooterMode = ShooterMode.s_shootAmp;
         } else {
             ShooterModel.shooterMode = ShooterMode.s_stopIntake;
+        }
+
+        if (ShooterMeasuredState.isNoteGet) {
+            LEDModel.pattern = LEDModel.LEDFlashes.BlinkingPerSec;
         }
     }
 }
