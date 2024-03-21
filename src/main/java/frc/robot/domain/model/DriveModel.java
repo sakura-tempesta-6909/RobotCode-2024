@@ -25,9 +25,9 @@ public class DriveModel {
 
     /**
      * ドライブベースを動かす
-     * @param driveXSpeed     直進成分 [-1 ~ 1]
-     * @param driveYSpeed     直進成分 [-1 ~ 1] 奥に倒す方が負で入力される
-     * @param driveThetaSpeed 回転成分 [-1 ~ 1] 右に倒す方が正で入力される ⇒ 反時計(左)回りが正にしたい
+     * @param driveXSpeed     左右成分 [-1 ~ 1] 右に進むとき正
+     * @param driveYSpeed     前後成分 [-1 ~ 1] 前に進むとき正
+     * @param driveThetaSpeed 回転成分 [-1 ~ 1] 反時計(左)回りが正
      */
     public static double driveXSpeed, driveYSpeed, driveThetaSpeed;
 
