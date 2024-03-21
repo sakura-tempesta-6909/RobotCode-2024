@@ -47,11 +47,11 @@ public class DriveService implements Service {
         switch (DriveModel.driveOriented) {
             /** Field Oriented でまっすぐ前に進む */
             case s_fieldOriented:
-                repository.robotOriented(DriveModel.driveSideSpeed, DriveModel.driveFowardSpeed, DriveModel.driveThetaSpeed);;
+                repository.fieldOriented(DriveModel.driveSideSpeed, DriveModel.driveFowardSpeed, DriveModel.driveThetaSpeed);;
                 break;
             /** Robot Oriented で動く */
             case s_robotOriented:
-                repository.fieldOriented(DriveModel.driveSideSpeed, DriveModel.driveFowardSpeed, DriveModel.driveThetaSpeed);
+                repository.robotOriented(DriveModel.driveSideSpeed, DriveModel.driveFowardSpeed, DriveModel.driveThetaSpeed);
                 break;
         }
     }
