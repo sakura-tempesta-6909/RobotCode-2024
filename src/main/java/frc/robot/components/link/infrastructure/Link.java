@@ -74,7 +74,9 @@ public class Link implements LinkRepository {
     public void KeepCurrentAngle() {
         if(linkMotorLeft.getSelectedSensorPosition() <= -400) {
             linkMotorLeft.set(ControlMode.PercentOutput, 0.1);
-        } 
+        } else {
+            linkMotorLeft.set(ControlMode.PercentOutput, 0);
+        }
         //SmartDashboard.putNumber("linkMotorLeft position ", linkMotorLeft.getSelectedSensorPosition());
 
     }
