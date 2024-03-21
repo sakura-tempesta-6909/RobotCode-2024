@@ -17,29 +17,29 @@ public class DriveService implements Service {
         switch (DriveModel.driveMovement) {
             /** ロボットの速度を速くする */
             case s_fastDrive:
-                DriveModel.driveXSpeed *= DriveParameter.Speeds.FastDrive;
-                DriveModel.driveYSpeed *= DriveParameter.Speeds.FastDrive;
+                DriveModel.driveSideSpeed *= DriveParameter.Speeds.FastDrive;
+                DriveModel.driveFowardSpeed *= DriveParameter.Speeds.FastDrive;
                 DriveModel.driveThetaSpeed *= DriveParameter.Speeds.FastDrive;
                 break;
 
             /** ロボットの速度を中くらいにする */
             case s_midDrive:
-                DriveModel.driveXSpeed *= DriveParameter.Speeds.MidDrive;
-                DriveModel.driveYSpeed *= DriveParameter.Speeds.MidDrive;
+                DriveModel.driveSideSpeed *= DriveParameter.Speeds.MidDrive;
+                DriveModel.driveFowardSpeed *= DriveParameter.Speeds.MidDrive;
                 DriveModel.driveThetaSpeed *= DriveParameter.Speeds.MidDrive;
                 break;
 
             /** ロボットの速度を遅くする */
             case s_slowDrive:
-                DriveModel.driveXSpeed *= DriveParameter.Speeds.SlowDrive;
-                DriveModel.driveYSpeed *= DriveParameter.Speeds.SlowDrive;
+                DriveModel.driveSideSpeed *= DriveParameter.Speeds.SlowDrive;
+                DriveModel.driveFowardSpeed *= DriveParameter.Speeds.SlowDrive;
                 DriveModel.driveThetaSpeed *= DriveParameter.Speeds.SlowDrive;
                 break;
 
             /** ロボットの速度を0にする */
             case s_stopDrive:
-                DriveModel.driveXSpeed *= DriveParameter.Speeds.Neutral;
-                DriveModel.driveYSpeed *= DriveParameter.Speeds.Neutral;
+                DriveModel.driveSideSpeed *= DriveParameter.Speeds.Neutral;
+                DriveModel.driveFowardSpeed *= DriveParameter.Speeds.Neutral;
                 DriveModel.driveThetaSpeed *= DriveParameter.Speeds.Neutral;
                 break;
         }
@@ -47,11 +47,11 @@ public class DriveService implements Service {
         switch (DriveModel.driveOriented) {
             /** Field Oriented でまっすぐ前に進む */
             case s_fieldOriented:
-                repository.robotOriented(DriveModel.driveXSpeed, DriveModel.driveYSpeed, DriveModel.driveThetaSpeed);;
+                repository.robotOriented(DriveModel.driveSideSpeed, DriveModel.driveFowardSpeed, DriveModel.driveThetaSpeed);;
                 break;
             /** Robot Oriented で動く */
             case s_robotOriented:
-                repository.fieldOriented(DriveModel.driveXSpeed, DriveModel.driveYSpeed, DriveModel.driveThetaSpeed);
+                repository.fieldOriented(DriveModel.driveSideSpeed, DriveModel.driveFowardSpeed, DriveModel.driveThetaSpeed);
                 break;
         }
     }

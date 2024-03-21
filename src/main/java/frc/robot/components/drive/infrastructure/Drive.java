@@ -28,9 +28,10 @@ public class Drive implements DriveRepository {
     }
 
     @Override
-    public void robotOriented(double xSpeed, double ySpeed, double thetaSpeed) {
+    public void robotOriented(double sideSpeed, double fowardSpeed, double thetaSpeed) {
         
-        ChassisSpeeds chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, thetaSpeed);
+
+        ChassisSpeeds chassisSpeeds = new ChassisSpeeds(fowardSpeed, -sideSpeed, thetaSpeed);
         
         //5. Convert chassis speeds to individual module states [14:37]
         SwerveModuleState[] moduleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(chassisSpeeds);
@@ -42,9 +43,9 @@ public class Drive implements DriveRepository {
     }
 
     @Override
-    public void fieldOriented(double xSpeed, double ySpeed, double thetaSpeed) {
+    public void fieldOriented(double sideSpeed, double fowardSpeed, double thetaSpeed) {
         ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
-            xSpeed, ySpeed, thetaSpeed, driveSubsystem.getRotation2d());
+            fowardSpeed, -sideSpeed, thetaSpeed, driveSubsystem.getRotation2d());
         SwerveModuleState[] moduleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(chassisSpeeds);
         driveSubsystem.setModuleStates(moduleStates);
 
@@ -52,7 +53,6 @@ public class Drive implements DriveRepository {
 
     @Override
     public void readSensors() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'readSensors'");
+        
     }
 }

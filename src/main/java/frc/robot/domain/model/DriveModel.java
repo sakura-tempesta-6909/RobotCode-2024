@@ -25,16 +25,17 @@ public class DriveModel {
 
     /**
      * ドライブベースを動かす
-     * @param driveXSpeed     左右成分 [-1 ~ 1] 右に進むとき正
-     * @param driveYSpeed     前後成分 [-1 ~ 1] 前に進むとき正
+     * @param driveSideSpeed     左右成分 [-1 ~ 1] 右に進むとき正
+     * @param driveFowardSpeed     前後成分 [-1 ~ 1] 前に進むとき正
      * @param driveThetaSpeed 回転成分 [-1 ~ 1] 反時計(左)回りが正
      */
-    public static double driveXSpeed, driveYSpeed, driveThetaSpeed;
+    public static double driveSideSpeed, driveFowardSpeed, driveThetaSpeed;
 
     public static void reset() {
         driveMovement = DriveMovement.s_stopDrive;
-        driveXSpeed = 0;
-        driveYSpeed = 0;
+        driveOriented = DriveOriented.s_robotOriented; //後でfieldに直してね
+        driveSideSpeed = 0;
+        driveFowardSpeed = 0;
         driveThetaSpeed = 0;
     }
 

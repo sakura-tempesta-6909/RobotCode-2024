@@ -11,6 +11,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.units.Time;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.components.drive.DriveConst;
@@ -69,7 +70,14 @@ public class SwerveModule {
         //kasugaya
 
         //エンコーダーの値をリセットする
-        resetEncoders();
+        Thread thread = new Thread(() -> {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {}
+            resetEncoders();
+        });
+        thread.start();
+        
     }
 
     //エンコーダーの値を取得するための便利なメソッド [7:11]
