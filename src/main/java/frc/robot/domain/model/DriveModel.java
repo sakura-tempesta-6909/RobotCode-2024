@@ -1,6 +1,7 @@
 package frc.robot.domain.model;
 
 public class DriveModel {
+    /** ロボットの速度切り替え (fast, mid, slow, stop) */
     public static DriveMovement driveMovement;
     public enum DriveMovement {
         /** ロボットの速度を速くする */
@@ -13,6 +14,7 @@ public class DriveModel {
         s_stopDrive,
     }
 
+    /** Robot Oriented と Field Oriented の切り替え */
     public static DriveOriented driveOriented;
     public enum DriveOriented {
         /** Robot Oriented で動く */
