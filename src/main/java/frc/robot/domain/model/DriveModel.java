@@ -1,9 +1,9 @@
 package frc.robot.domain.model;
 
 public class DriveModel {
-    public static DriveBaseMode driveBaseMode;
-
-    public enum DriveBaseMode {
+    /** ロボットの速度切り替え (fast, mid, slow, stop) */
+    public static DriveMovement driveMovement;
+    public enum DriveMovement {
         /** ロボットの速度を速くする */
         s_fastDrive,
         /** ロボットの速度を中くらいにする */
@@ -12,34 +12,31 @@ public class DriveModel {
         s_slowDrive,
         /** ロボットの速度を0にする */
         s_stopDrive,
-        /** PIDでまっすぐ前に進む */
-        s_pidStraight,
-        /** PIDで指定した角度に向く */
-        s_pidTurn,
     }
 
-    public static double driveXSpeed, driveZRotation;
+    /** Robot Oriented と Field Oriented の切り替え */
+    public static DriveOriented driveOriented;
+    public enum DriveOriented {
+        /** Robot Oriented で動く */
+        s_robotOriented,
+        /** Field Oriented で動く */
+        s_fieldOriented,
+    }
 
-    /* s_pidStraight */
-    /** 直線PIDで進む距離 [cm] */
-    public static double straightPIDTarget;
-    /** 直線PIDのリセット */
-    public static boolean resetStraightPID;
-
-    /* s_pidTurn */
-    /** 直線PIDで回転する角度 [degree] */
-    public static double rotationPIDTarget;
-    /** 回転PIDのリセット */
-    public static boolean resetRotationPID;
+    /**
+     * ドライブベースを動かす
+     * @param driveSideSpeed     左右成分 [-1 ~ 1] 右に進むとき正
+     * @param driveFowardSpeed     前後成分 [-1 ~ 1] 前に進むとき正
+     * @param driveThetaSpeed 回転成分 [-1 ~ 1] 反時計(左)回りが正
+     */
+    public static double driveSideSpeed, driveFowardSpeed, driveThetaSpeed;
 
     public static void reset() {
-        driveBaseMode = DriveBaseMode.s_stopDrive;
-        driveXSpeed = 0;
-        driveZRotation = 0;
-        straightPIDTarget = 0;
-        rotationPIDTarget = 0;
-        resetStraightPID = false;
-        resetRotationPID = false;
+        driveMovement = DriveMovement.s_stopDrive;
+        driveOriented = DriveOriented.s_fieldOriented;
+        driveSideSpeed = 0;
+        driveFowardSpeed = 0;
+        driveThetaSpeed = 0;
     }
 
     public DriveModel() {

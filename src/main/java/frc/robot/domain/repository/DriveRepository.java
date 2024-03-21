@@ -2,36 +2,21 @@ package frc.robot.domain.repository;
 
 public interface DriveRepository {
     /**
-     * ドライブベースを動かす
-     *
-     * @param xSpeed    直進成分 [-1, 1]
-     * @param zRotation 回転成分 [-1, 1] 反時計(左)回りが正
+     * Robot orientedでロボットを動かす
+     * @param sideSpeed    左右方向に移動するスピード | [-1, 1] | 止めたいとき0 | Robotに対して右に進むとき正
+     * @param fowardSpeed    前後方向に移動するスピード | [-1, 1] | 止めたいとき0 | Robotに対して前に進むとき正
+     * @param thetaSpeed    回転するスピード | [-1, 1] | 止めたいとき0 | Robotに対して反時計回りを正とする
      */
-    void arcadeDrive(double xSpeed, double zRotation);
+    void robotOriented(double sideSpeed, double fowardSpeed, double thetaSpeed);
 
+    
     /**
-     * PIDで直進する
-     *
-     * @param straightTarget 目標地点[cm]
+     * Field orientedでロボットを動かす
+     * @param sideSpeed    左右方向に移動するスピード | [-1, 1] | 止めたいとき0 | Fieldに対して右に進むとき正
+     * @param fowardSpeed    前後方向に移動するスピード | [-1, 1] | 止めたいとき0 | Fieldに対して前に進むとき正
+     * @param thetaSpeed    回転するスピード | [-1, 1] | 止めたいとき0 | Robotに対して反時計回りを正とする
      */
-    void straightPID(double straightTarget);
-
-    /**
-     * 直進用のPIDControllerをリセットする
-     */
-    void resetStraightPIDController();
-
-    /**
-     * PIDで回転する
-     *
-     * @param targetAngle 目標角度
-     */
-    void rotationPID(double targetAngle);
-
-    /**
-     * 回転用のPIDControllerをリセットする
-     */
-    void resetRotationPIDController();
+    void fieldOriented(double sideSpeed, double fowardSpeed, double thetaSpeed);
 
     /**
      * センサーを読む
