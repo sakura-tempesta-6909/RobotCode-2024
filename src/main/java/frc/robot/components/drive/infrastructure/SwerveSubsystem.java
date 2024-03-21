@@ -88,16 +88,4 @@ public class SwerveSubsystem extends SubsystemBase{
         backRight.setDesiredState(desiredStates[3]);
     }
 
-    
-    
-    public void robotOriented(double xSpeed, double ySpeed, double thetaSpeed) {
-        
-
-    }
-
-    
-    public void fieldOriented(double xSpeed, double ySpeed, double thetaSpeed) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'fieldOriented'");
-    }
 }

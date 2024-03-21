@@ -29,8 +29,6 @@ public class Drive implements DriveRepository {
 
     @Override
     public void robotOriented(double sideSpeed, double fowardSpeed, double thetaSpeed) {
-        
-
         ChassisSpeeds chassisSpeeds = new ChassisSpeeds(fowardSpeed, -sideSpeed, thetaSpeed);
         
         //5. Convert chassis speeds to individual module states [14:37]

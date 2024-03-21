@@ -33,7 +33,7 @@ public class DriveModel {
 
     public static void reset() {
         driveMovement = DriveMovement.s_stopDrive;
-        driveOriented = DriveOriented.s_robotOriented; //後でfieldに直してね
+        driveOriented = DriveOriented.s_fieldOriented;
         driveSideSpeed = 0;
         driveFowardSpeed = 0;
         driveThetaSpeed = 0;

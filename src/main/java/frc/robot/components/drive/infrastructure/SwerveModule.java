@@ -145,9 +145,7 @@ public class SwerveModule {
 
         //春日谷
         double setPoint = state.angle.getDegrees(); //getDegreesで度数法に変換
-        SmartDashboard.putNumber("setPoint", setPoint);
         double current = turningEncoder.getPosition() / Math.PI / 2 * 360; //ラジアンを度数法に変換
-        SmartDashboard.putNumber("current", current);
         if(setPoint < 0) {
             setPoint = setPoint % 360 ;
             setPoint = setPoint + 360 ;
@@ -164,16 +162,9 @@ public class SwerveModule {
         SmartDashboard.putNumber("SetPoint", setPoint);*/
         //度数法から弧度法(ラジアン)に変換
         double x_setPoint = setPoint * Math.PI * 2 / 360;
-        SmartDashboard.putNumber("setPoint2", setPoint);
 
         m_pidController.setReference(x_setPoint, CANSparkMax.ControlType.kPosition);
-
-        SmartDashboard.putNumber("ProcessVariable", turningEncoder.getPosition());
         //春日谷
-
-        //System.out.println(getTurningPosition() + " " + state.angle.getRotations());
-        //デバッグ情報を送信 [9:03]
-        SmartDashboard.putString("Swerve[" + absoluteEncoder.getDeviceID() + "] state", state.toString());
     }
     
     //[9:36]
