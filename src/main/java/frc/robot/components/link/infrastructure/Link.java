@@ -19,15 +19,15 @@ import frc.robot.domain.repository.LinkRepository;
 
 public class Link implements LinkRepository {
     //Linkの持ち物検査
-    final WPI_VictorSPX linkMotorRight;
-    final WPI_TalonSRX linkMotorLeft;
+    final VictorSPX linkMotorRight;
+    final TalonSRX linkMotorLeft;
 
     public Link() {
         LinkParameter.ConstInit();
 
         //属性の初期化
-        linkMotorLeft = new WPI_TalonSRX(LinkConst.Ports.linkMotorLeft);
-        linkMotorRight = new WPI_VictorSPX(LinkConst.Ports.linkMotorRight);
+        linkMotorLeft = new TalonSRX(LinkConst.Ports.linkMotorLeft);
+        linkMotorRight = new VictorSPX(LinkConst.Ports.linkMotorRight);
 
         //moterの設定
         linkMotorLeft.configFactoryDefault();
@@ -55,24 +55,28 @@ public class Link implements LinkRepository {
         linkMotorLeft.setNeutralMode(NeutralMode.Brake);
         linkMotorRight.setNeutralMode(NeutralMode.Brake);
 
-        // //PID
-        // linkMotorLeft.config_kP(0, PID.LinkP);
-        // linkMotorRight.config_kP(0, PID.LinkP);
+        //PID
+        linkMotorLeft.config_kP(0, PID.LinkP);
+        linkMotorRight.config_kP(0, PID.LinkP);
     }
     @Override
     public void MoveShooterToSpecifiedAngle(double TargetShooterAngle) {
-
+        linkMotorLeft.set(ControlMode.Position, TargetShooterAngle);
     }
 
     @Override
     public void readSensors() {
         //Smartdashbordはここ！
+        linkMotorLeft.getSelectedSensorPosition();
+        SmartDashboard.putNumber("linkMotorLeft position ", linkMotorLeft.getSelectedSensorPosition());
     }
     @Override
     public void KeepCurrentAngle() {
-        
+        if(linkMotorLeft.getSelectedSensorPosition() <= -400) {
+            linkMotorLeft.set(ControlMode.PercentOutput, 0.1);
+        } 
+        //SmartDashboard.putNumber("linkMotorLeft position ", linkMotorLeft.getSelectedSensorPosition());
+
     }
-    public void test() {
-      linkMotorLeft.set(ControlMode.PercentOutput, -0.2);
-    }
+    public void test() {}
 }

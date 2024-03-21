@@ -7,9 +7,9 @@ public class LinkConst {
     }
     //1つのfileにpublic classは1つだけ！
     public class LinkSoftLimit {
-    public static final int ForwardSoftLimit = -255;
+    public static final int ForwardSoftLimit = -270;
     public static final int ReverseSoftLimit = -480;
     public static final double PeakOutputForward = .3;
     public static final double PeakOutputReverse = -.3;
-}
+    }
 }

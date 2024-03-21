@@ -17,10 +17,10 @@ import frc.robot.subClass.Util;
 
 import java.util.ArrayList;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 public class Robot extends TimedRobot {
     ArrayList<Service> services = new ArrayList<>();
-    Link linkMotorLink = new Link();
-    XboxController controller = new XboxController(0);
 
     @Override
     public void robotInit() {
@@ -92,6 +92,9 @@ public class Robot extends TimedRobot {
         ModeManager.mode = ModeManager.ModeType.k_test;
     }
 
+    Link linkMotorLeft = new Link();
+    XboxController controller = new XboxController(0);
+
     @Override
     public void testPeriodic() {
         // for (Service service : services) {
@@ -105,6 +108,12 @@ public class Robot extends TimedRobot {
         //     service.applyModel();
         // }
         if(controller.getLeftBumper()) {
-            linkMotorLink.test();
+            linkMotorLeft.MoveShooterToSpecifiedAngle(-400);
+        } else if (controller.getRightBumper()) {
+            linkMotorLeft.MoveShooterToSpecifiedAngle(-255);
+        } else if (controller.getBButton()) {
+            linkMotorLeft.MoveShooterToSpecifiedAngle(-480);
+        } else linkMotorLeft.KeepCurrentAngle(); {
+        }
     }
 }
