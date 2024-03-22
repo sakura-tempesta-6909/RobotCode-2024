@@ -30,21 +30,19 @@ public class LED implements LEDRepository {
     @Override
     public void changeLight() {
         for (var i = 0; i < ledBuffer.getLength(); i++) {
-            LEDMeasuredState.Hue = (rainbowFirstPixelHue + (i * 180 / ledBuffer.getLength())) % 180;
-            ledBuffer.setHSV(i, LEDMeasuredState.Hue, 128, 128);
+            ledBuffer.setRGB(i, 255, 125, 255);
         }
-        rainbowFirstPixelHue += 3;
-        rainbowFirstPixelHue %= 180;
-        led.setData(ledBuffer);
     }
     @Override
     public void flashLight() {
-        if (timer.get() < 1) {
-            ledBuffer.setRGB(1, 255, 120, 60);
-        } else if (timer.get() < 2) {
-            ledBuffer.setRGB(1, 0 , 0, 0);
-        } else {
-            timer.restart();
+        for (var i = 0; i < ledBuffer.getLength(); i++) {
+            if (timer.get() < 1) {
+                ledBuffer.setRGB(i, 255, 120, 60);
+            } else if (timer.get() < 2) {
+                led.stop();
+            } else {
+                timer.restart();
+            }
         }
     }
 }
