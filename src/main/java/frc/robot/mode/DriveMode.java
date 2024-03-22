@@ -1,5 +1,6 @@
 package frc.robot.mode;
 
+import frc.robot.domain.measure.LinkMeasuredState;
 import frc.robot.domain.measure.ShooterMeasuredState;
 import frc.robot.domain.model.DriveModel;
 import frc.robot.domain.model.LEDModel;
@@ -26,6 +27,8 @@ class DriveMode extends ModeManager {
 
         if (ShooterMeasuredState.isNoteGet) {
             LEDModel.pattern = LEDModel.LEDFlashes.NOTEGet;
+        } else if (LinkMeasuredState.linkUnderStage) {
+            LEDModel.pattern = LEDModel.LEDFlashes.Under720mm;
         }
         if(DriveModel.driveOriented == DriveModel.DriveOriented.s_fieldOriented) {
             DriveModel.driveOriented = DriveModel.DriveOriented.s_robotOriented;
