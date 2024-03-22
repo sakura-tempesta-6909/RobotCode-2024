@@ -13,9 +13,14 @@ public class LinkParameter {
         public static final double Intake = 0.02;
          public static final double Climb = 0.02;
     }
+     //pidの値を書く
+        public static class PID {
+          public static final double LinkP = 5;
+          public static final double LinkI = 0;
+          public static final double LinkD = 0;
+        }
 
     public static void ConstInit() {
-
     }
     
 }
