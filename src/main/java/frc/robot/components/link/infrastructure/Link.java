@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.components.link.LinkConst;
 import frc.robot.components.link.LinkParameter;
 import frc.robot.components.link.LinkParameter.PID;
+import frc.robot.domain.measure.LinkMeasuredState;
 import frc.robot.domain.repository.LinkRepository;
 
 public class Link implements LinkRepository {
@@ -60,10 +61,11 @@ public class Link implements LinkRepository {
 
     @Override
     public void readSensors() {
-        //Smartdashbordはここ！
-        linkMotorLeft.getSelectedSensorPosition();
+        //linkMotorLeft.getSelectedSensorPosition();
         //SmartDashboard.putNumber("linkMotorLeft position", linkMotorLeft.getSelectedSensorPosition());
-        
+        LinkMeasuredState.linkAngleAmp = linkMotorLeft.getSelectedSensorPosition(-255);
+        LinkMeasuredState.linkAngleSpeaker = linkMotorLeft.getSelectedSensorPosition(-400);
+        LinkMeasuredState.linkUnderStage = linkMotorLeft.getSelectedSensorPosition(-480);
     }
 
     @Override
