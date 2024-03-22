@@ -4,9 +4,9 @@ public class LinkMeasuredState {
     // /**Linkの現在の角度 */
     // public static double linkAngleSensor;
     /**Ampの高さ */
-    public static boolean linkAngleAmp;
+    public static double linkAngleAmp;
     /**Speakerの高さ */
-    public static boolean linkAngleSpeaker;
+    public static double linkAngleSpeaker;
     /**720mm以下(Stageの高さより下) */
-    public static boolean linkUnderStage;
+    public static double linkUnderStage;
 }
