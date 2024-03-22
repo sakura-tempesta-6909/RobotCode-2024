@@ -64,26 +64,20 @@ public class Link implements LinkRepository {
     public void readSensors() {
         double linkAngle = linkMotorLeft.getSelectedSensorPosition();
         //SmartDashboard.putNumber("linkMotorLeft position", linkMotorLeft.getSelectedSensorPosition());
+        // 初期化
+        LinkMeasuredState.linkAmpsHight = false;
+        LinkMeasuredState.linkClimbHight = false;
+        LinkMeasuredState.linkSpeakerHight = false;
+        LinkMeasuredState.linkUnderStage = false;
+
+        // 条件に応じてboolean変数の値を更新
         if (linkAngle == -255) {
-            LinkMeasuredState.linkAmpsHight = true;
-            LinkMeasuredState.linkClimbHight = true;
-            LinkMeasuredState.linkSpeakerHight = false;
-            LinkMeasuredState.linkUnderStage = false;
+          LinkMeasuredState.linkAmpsHight = true;
+          LinkMeasuredState.linkClimbHight = true;
         } else if (linkAngle == -400) {
-            LinkMeasuredState.linkAmpsHight = false;
-            LinkMeasuredState.linkClimbHight = false;
-            LinkMeasuredState.linkSpeakerHight = true;
-            LinkMeasuredState.linkUnderStage = false;
+          LinkMeasuredState.linkSpeakerHight = true;
         } else if (linkAngle <= -480) {
-            LinkMeasuredState.linkAmpsHight = false;
-            LinkMeasuredState.linkClimbHight = false;
-            LinkMeasuredState.linkSpeakerHight = false;
-            LinkMeasuredState.linkUnderStage = true;
-        } else {
-            LinkMeasuredState.linkAmpsHight = false;
-            LinkMeasuredState.linkClimbHight = false;
-            LinkMeasuredState.linkSpeakerHight = false;
-            LinkMeasuredState.linkUnderStage = false;
+          LinkMeasuredState.linkUnderStage = true;
         }
     }
 
