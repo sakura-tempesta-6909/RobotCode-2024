@@ -109,14 +109,5 @@ public class Robot extends TimedRobot {
             service.applyModel();
         }
         
-        if(controller.getLeftBumper()) {
-            link.MoveShooterToSpecifiedAngle(-400);
-        } else if (controller.getRightBumper()) {
-            link.MoveShooterToSpecifiedAngle(-255);
-        } else if (controller.getBButton()) {
-            link.MoveShooterToSpecifiedAngle(-480);
-        } else {
-            link.KeepCurrentAngle();
-        }
     }
 }
