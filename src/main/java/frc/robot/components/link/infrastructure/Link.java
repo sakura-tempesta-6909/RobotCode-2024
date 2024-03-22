@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.CANSparkBase.IdleMode;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.units.Angle;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.components.link.LinkConst;
@@ -61,11 +62,29 @@ public class Link implements LinkRepository {
 
     @Override
     public void readSensors() {
-        //linkMotorLeft.getSelectedSensorPosition();
+        double linkAngle = linkMotorLeft.getSelectedSensorPosition();
         //SmartDashboard.putNumber("linkMotorLeft position", linkMotorLeft.getSelectedSensorPosition());
-        LinkMeasuredState.linkAngleAmp = linkMotorLeft.getSelectedSensorPosition(-255);
-        LinkMeasuredState.linkAngleSpeaker = linkMotorLeft.getSelectedSensorPosition(-400);
-        LinkMeasuredState.linkUnderStage = linkMotorLeft.getSelectedSensorPosition(-480);
+        if (linkAngle == -255) {
+            LinkMeasuredState.linkAmpsHight = true;
+            LinkMeasuredState.linkClimbHight = true;
+            LinkMeasuredState.linkSpeakerHight = false;
+            LinkMeasuredState.linkUnderStage = false;
+        } else if (linkAngle == -400) {
+            LinkMeasuredState.linkAmpsHight = false;
+            LinkMeasuredState.linkClimbHight = false;
+            LinkMeasuredState.linkSpeakerHight = true;
+            LinkMeasuredState.linkUnderStage = false;
+        } else if (linkAngle <= -480) {
+            LinkMeasuredState.linkAmpsHight = false;
+            LinkMeasuredState.linkClimbHight = false;
+            LinkMeasuredState.linkSpeakerHight = false;
+            LinkMeasuredState.linkUnderStage = true;
+        } else {
+            LinkMeasuredState.linkAmpsHight = false;
+            LinkMeasuredState.linkClimbHight = false;
+            LinkMeasuredState.linkSpeakerHight = false;
+            LinkMeasuredState.linkUnderStage = false;
+        }
     }
 
     @Override
