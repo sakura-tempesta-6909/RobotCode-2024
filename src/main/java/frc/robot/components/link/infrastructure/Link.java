@@ -2,6 +2,7 @@ package frc.robot.components.link.infrastructure;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.FollowerType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -32,9 +33,10 @@ public class Link implements LinkRepository {
         //moterの設定
         linkMotorLeft.configFactoryDefault();
         linkMotorLeft.configSelectedFeedbackSensor(FeedbackDevice.Analog);
-        linkMotorRight.configFactoryDefault();
-        linkMotorRight.configSelectedFeedbackSensor(FeedbackDevice.Analog);
         linkMotorLeft.setInverted(true);
+        linkMotorRight.configFactoryDefault();
+        //linkMotorRight.follow(linkMotorLeft);
+        linkMotorRight.follow(linkMotorLeft, FollowerType.PercentOutput);
 
         //SoftLimit
         linkMotorLeft.configForwardSoftLimitThreshold(LinkConst.LinkSoftLimit.ForwardSoftLimit);
@@ -44,20 +46,12 @@ public class Link implements LinkRepository {
         linkMotorLeft.configPeakOutputForward(LinkConst.LinkSoftLimit.PeakOutputForward);
         linkMotorLeft.configPeakOutputReverse(LinkConst.LinkSoftLimit.PeakOutputReverse);
 
-        linkMotorRight.configForwardSoftLimitThreshold(LinkConst.LinkSoftLimit.ForwardSoftLimit);
-        linkMotorRight.configForwardSoftLimitEnable(true);
-        linkMotorRight.configReverseSoftLimitThreshold(LinkConst.LinkSoftLimit.ReverseSoftLimit);
-        linkMotorRight.configReverseSoftLimitEnable(true);
-        linkMotorRight.configPeakOutputForward(LinkConst.LinkSoftLimit.PeakOutputForward);
-        linkMotorRight.configPeakOutputReverse(LinkConst.LinkSoftLimit.PeakOutputReverse);
-
         //IdleMode設定
         linkMotorLeft.setNeutralMode(NeutralMode.Brake);
         linkMotorRight.setNeutralMode(NeutralMode.Brake);
 
         //PID
         linkMotorLeft.config_kP(0, PID.LinkP);
-        linkMotorRight.config_kP(0, PID.LinkP);
     }
     @Override
     public void MoveShooterToSpecifiedAngle(double TargetShooterAngle) {
@@ -68,17 +62,19 @@ public class Link implements LinkRepository {
     public void readSensors() {
         //Smartdashbordはここ！
         linkMotorLeft.getSelectedSensorPosition();
-        SmartDashboard.putNumber("linkMotorLeft position ", linkMotorLeft.getSelectedSensorPosition());
+        SmartDashboard.putNumber("linkMotorLeft position", linkMotorLeft.getSelectedSensorPosition());
     }
+
     @Override
     public void KeepCurrentAngle() {
         if(linkMotorLeft.getSelectedSensorPosition() <= -400) {
-            linkMotorLeft.set(ControlMode.PercentOutput, 0.1);
+            linkMotorLeft.set(ControlMode.PercentOutput, 0.05);
         } else {
             linkMotorLeft.set(ControlMode.PercentOutput, 0);
         }
-        //SmartDashboard.putNumber("linkMotorLeft position ", linkMotorLeft.getSelectedSensorPosition());
 
     }
-    public void test() {}
+    public void test() {
+
+    }
 }

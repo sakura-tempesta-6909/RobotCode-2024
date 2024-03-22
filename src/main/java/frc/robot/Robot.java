@@ -93,29 +93,30 @@ public class Robot extends TimedRobot {
         ModeManager.mode = ModeManager.ModeType.k_test;
     }
 
-    Link linkMotorLeft = new Link();
+    Link link = new Link();
     XboxController controller = new XboxController(0);
 
     @Override
     public void testPeriodic() {
-        // for (Service service : services) {
-        //     service.resetModel();
-        //     service.readSensors();
-        // }
+        for (Service service : services) {
+            service.resetModel();
+            service.readSensors();
+        }
 
-        // ModeManager.mode.changeModel();
+        ModeManager.mode.changeModel();
 
-        // for (Service service : services) {
-        //     service.applyModel();
-        // }
+        for (Service service : services) {
+            service.applyModel();
+        }
+        
         if(controller.getLeftBumper()) {
-            linkMotorLeft.MoveShooterToSpecifiedAngle(-400);
+            link.MoveShooterToSpecifiedAngle(-400);
         } else if (controller.getRightBumper()) {
-            linkMotorLeft.MoveShooterToSpecifiedAngle(-255);
+            link.MoveShooterToSpecifiedAngle(-255);
         } else if (controller.getBButton()) {
-            linkMotorLeft.MoveShooterToSpecifiedAngle(-480);
-        } else linkMotorLeft.KeepCurrentAngle(); {
-
+            link.MoveShooterToSpecifiedAngle(-480);
+        } else {
+            link.KeepCurrentAngle();
         }
     }
 }

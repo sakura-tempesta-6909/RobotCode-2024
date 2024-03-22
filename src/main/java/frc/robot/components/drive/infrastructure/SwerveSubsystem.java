@@ -38,7 +38,7 @@ public class SwerveSubsystem extends SubsystemBase{
     //AHRS -> ADXRS450_Gyro
     //AHRS(SPI.Port.kMXP) -> ADXRS450_Gyro()
     //このジャイロだよって教える
-    private final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+    public static final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 
     //ジャイロスコープは起動するたびに再調整で忙しいから、1秒遅らせてからリクエストする[10:35]
     public SwerveSubsystem(){
