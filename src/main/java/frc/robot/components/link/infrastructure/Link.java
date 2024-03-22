@@ -64,12 +64,8 @@ public class Link implements LinkRepository {
     public void readSensors() {
         double linkAngle = linkMotorLeft.getSelectedSensorPosition();
         //SmartDashboard.putNumber("linkMotorLeft position", linkMotorLeft.getSelectedSensorPosition());
-        // 初期化
-        LinkMeasuredState.linkAmpsHight = false;
-        LinkMeasuredState.linkClimbHight = false;
-        LinkMeasuredState.linkSpeakerHight = false;
-        LinkMeasuredState.linkUnderStage = false;
-
+        LinkMeasuredState.linkAngleSensor = linkMotorLeft.getSelectedSensorPosition();
+        SmartDashboard.putNumber("Link Angle", LinkMeasuredState.linkAngleSensor);
         // 条件に応じてboolean変数の値を更新
         if (linkAngle == -255) {
           LinkMeasuredState.linkAmpsHight = true;
@@ -78,7 +74,11 @@ public class Link implements LinkRepository {
           LinkMeasuredState.linkSpeakerHight = true;
         } else if (linkAngle <= -480) {
           LinkMeasuredState.linkUnderStage = true;
-        }
+        } 
+        SmartDashboard.putBoolean("Amp", LinkMeasuredState.linkAmpsHight);
+        SmartDashboard.putBoolean("Speaker", LinkMeasuredState.linkSpeakerHight);
+        SmartDashboard.putBoolean("Climb", LinkMeasuredState.linkClimbHight);
+        SmartDashboard.putBoolean("Stage", LinkMeasuredState.linkUnderStage);
     }
 
     @Override

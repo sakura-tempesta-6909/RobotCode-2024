@@ -1,8 +1,8 @@
 package frc.robot.domain.measure;
 
 public class LinkMeasuredState {
-    // /**Linkの現在の角度 */
-    // public static double linkAngleSensor;
+    /**Linkの現在の角度 */
+    public static double linkAngleSensor;
     /**Ampの高さか否か */
     public static boolean linkAmpsHight;
     /**Speakerの高さか否か */

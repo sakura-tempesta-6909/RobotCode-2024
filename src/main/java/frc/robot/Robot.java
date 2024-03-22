@@ -92,7 +92,8 @@ public class Robot extends TimedRobot {
     public void testInit() {
         ModeManager.mode = ModeManager.ModeType.k_test;
     }
-
+    XboxController controller = new XboxController(0);
+    Link link = new Link();
     @Override
     public void testPeriodic() {
         for (Service service : services) {
@@ -105,6 +106,12 @@ public class Robot extends TimedRobot {
         for (Service service : services) {
             service.applyModel();
         }
-        
+        if (controller.getLeftBumper()) {
+            link.MoveShooterToSpecifiedAngle(-255);
+        } else if (controller.getRightBumper()) {
+            link.MoveShooterToSpecifiedAngle(-480);
+        } else {
+            link.KeepCurrentAngle();
+        }
     }
 }
