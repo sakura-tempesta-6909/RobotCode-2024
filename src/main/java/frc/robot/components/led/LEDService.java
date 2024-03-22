@@ -16,18 +16,13 @@ public class LEDService implements Service {
     }
     @Override
     public void applyModel() {
-        repository.changeLight(LEDModel.sequence, LEDModel.pattern);
         switch (LEDModel.pattern) {
             case AlwaysOn:
-                LEDModel.sequence = new int[]{128, 128};
+                repository.changeLight();
                 break;
             case BlinkingPerSec:
-                LEDModel.sequence = new int[]{255, 120};
+                repository.flashLight();
                 break;
-            case AlwaysOff:
-                LEDModel.sequence = new int[]{0, 0};
-                break;
-
         }
     } 
 
