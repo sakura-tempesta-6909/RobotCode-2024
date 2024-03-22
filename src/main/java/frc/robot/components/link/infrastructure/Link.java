@@ -66,13 +66,18 @@ public class Link implements LinkRepository {
         //SmartDashboard.putNumber("linkMotorLeft position", linkMotorLeft.getSelectedSensorPosition());
         LinkMeasuredState.linkAngleSensor = linkMotorLeft.getSelectedSensorPosition();
         SmartDashboard.putNumber("Link Angle", LinkMeasuredState.linkAngleSensor);
+        // 初期化
+        LinkMeasuredState.linkAmpsHight = false;
+        LinkMeasuredState.linkClimbHight = false;
+        LinkMeasuredState.linkSpeakerHight = false;
+        LinkMeasuredState.linkUnderStage = false;
         // 条件に応じてboolean変数の値を更新
-        if (linkAngle == -255) {
+        if (linkAngle <= -250 && linkAngle >= -260) {
           LinkMeasuredState.linkAmpsHight = true;
           LinkMeasuredState.linkClimbHight = true;
-        } else if (linkAngle == -400) {
+        } else if (linkAngle <= -405 && linkAngle >= -395) {
           LinkMeasuredState.linkSpeakerHight = true;
-        } else if (linkAngle <= -480) {
+        } else if (linkAngle <= -485) {
           LinkMeasuredState.linkUnderStage = true;
         } 
         SmartDashboard.putBoolean("Amp", LinkMeasuredState.linkAmpsHight);

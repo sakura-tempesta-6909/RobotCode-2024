@@ -109,7 +109,7 @@ public class Robot extends TimedRobot {
         if (controller.getLeftBumper()) {
             link.MoveShooterToSpecifiedAngle(-255);
         } else if (controller.getRightBumper()) {
-            link.MoveShooterToSpecifiedAngle(-480);
+            link.MoveShooterToSpecifiedAngle(-485);
         } else {
             link.KeepCurrentAngle();
         }
