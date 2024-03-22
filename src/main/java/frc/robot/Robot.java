@@ -92,8 +92,7 @@ public class Robot extends TimedRobot {
     public void testInit() {
         ModeManager.mode = ModeManager.ModeType.k_test;
     }
-    XboxController controller = new XboxController(0);
-    Link link = new Link();
+    
     @Override
     public void testPeriodic() {
         for (Service service : services) {
