@@ -32,6 +32,7 @@ public class LED implements LEDRepository {
         for (var i = 0; i < ledBuffer.getLength(); i++) {
             ledBuffer.setRGB(i, 255, 125, 255);
         }
+        led.setData(ledBuffer);
     }
     @Override
     public void flashLight() {
@@ -44,5 +45,6 @@ public class LED implements LEDRepository {
                 timer.restart();
             }
         }
+        led.setData(ledBuffer);
     }
 }
