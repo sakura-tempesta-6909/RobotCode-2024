@@ -62,7 +62,8 @@ public class Link implements LinkRepository {
     public void readSensors() {
         //Smartdashbordはここ！
         linkMotorLeft.getSelectedSensorPosition();
-        SmartDashboard.putNumber("linkMotorLeft position", linkMotorLeft.getSelectedSensorPosition());
+        //SmartDashboard.putNumber("linkMotorLeft position", linkMotorLeft.getSelectedSensorPosition());
+        
     }
 
     @Override
