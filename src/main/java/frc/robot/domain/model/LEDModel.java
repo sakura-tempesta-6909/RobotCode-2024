@@ -6,7 +6,8 @@ public class LEDModel {
         /** ずっとついている */
         AlwaysOn,
         /** １秒ごとに点滅を繰り返す */
-        BlinkingPerSec,
+        NOTEGet,
+        Under720mm,
         /** ずっと消えている */
         AlwaysOff;
         

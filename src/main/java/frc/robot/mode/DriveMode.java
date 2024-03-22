@@ -4,7 +4,6 @@ import frc.robot.domain.measure.ShooterMeasuredState;
 import frc.robot.domain.model.DriveModel;
 import frc.robot.domain.model.LEDModel;
 import frc.robot.domain.model.ShooterModel;
-import frc.robot.domain.model.DriveModel.DriveOriented;
 import frc.robot.domain.model.ShooterModel.ShooterMode;
 
 class DriveMode extends ModeManager {
@@ -26,7 +25,7 @@ class DriveMode extends ModeManager {
         }
 
         if (ShooterMeasuredState.isNoteGet) {
-            LEDModel.pattern = LEDModel.LEDFlashes.BlinkingPerSec;
+            LEDModel.pattern = LEDModel.LEDFlashes.NOTEGet;
         }
         if(DriveModel.driveOriented == DriveModel.DriveOriented.s_fieldOriented) {
             DriveModel.driveOriented = DriveModel.DriveOriented.s_robotOriented;

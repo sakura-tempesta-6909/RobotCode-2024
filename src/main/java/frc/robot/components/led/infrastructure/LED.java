@@ -33,18 +33,18 @@ public class LED implements LEDRepository {
     }
 
     @Override
-    public void changeLight() {
+    public void changeLight(int red, int green, int blue) {
         for (var i = 0; i < ledBuffer.getLength(); i++) {
-            ledBuffer.setRGB(i, 255, 0, 255);
+            ledBuffer.setRGB(i, red, green, blue);
         }
         led.setData(ledBuffer);
     }
 
     @Override
-    public void flashLight() {
+    public void flashLight(int red, int green, int blue) {
         for (var i = 0; i < ledBuffer.getLength(); i++) {
             if (timer.get() < 0.1) {
-                ledBuffer.setRGB(i, 255, 50, 0);
+                ledBuffer.setRGB(i, red, green, blue);
             } else if (timer.get() < 0.2) {
                 ledBuffer.setRGB(i, 0, 0, 0);
             } else {
