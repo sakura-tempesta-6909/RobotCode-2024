@@ -62,28 +62,32 @@ public class Link implements LinkRepository {
 
     @Override
     public void readSensors() {
-        double linkAngle = linkMotorLeft.getSelectedSensorPosition();
-        //SmartDashboard.putNumber("linkMotorLeft position", linkMotorLeft.getSelectedSensorPosition());
-        LinkMeasuredState.linkAngleSensor = linkMotorLeft.getSelectedSensorPosition();
-        SmartDashboard.putNumber("Link Angle", LinkMeasuredState.linkAngleSensor);
+        LinkMeasuredState.linkAngle = linkMotorLeft.getSelectedSensorPosition();
+        SmartDashboard.putNumber("Link Angle", LinkMeasuredState.linkAngle);
         // 初期化
-        LinkMeasuredState.linkAmpsHight = false;
-        LinkMeasuredState.linkClimbHight = false;
-        LinkMeasuredState.linkSpeakerHight = false;
+        LinkMeasuredState.linkAmpHeight = false;
+        LinkMeasuredState.linkClimbHeight = false;
+        LinkMeasuredState.linkSpeakerHeight = false;
         LinkMeasuredState.linkUnderStage = false;
         // 条件に応じてboolean変数の値を更新
-        if (linkAngle <= -250 && linkAngle >= -260) {
-          LinkMeasuredState.linkAmpsHight = true;
-          LinkMeasuredState.linkClimbHight = true;
-        } else if (linkAngle <= -405 && linkAngle >= -395) {
-          LinkMeasuredState.linkSpeakerHight = true;
-        } else if (linkAngle <= -485) {
+        if (LinkMeasuredState.linkAngle <= -250 && LinkMeasuredState.linkAngle >= -260) {
+          LinkMeasuredState.linkAmpHeight = true;
+          LinkMeasuredState.linkClimbHeight = true;
+        } else if (LinkMeasuredState.linkAngle <= -405 && LinkMeasuredState.linkAngle >= -395) {
+          LinkMeasuredState.linkOverPodium = true;
+        } else if (LinkMeasuredState.linkAngle <= -405 && LinkMeasuredState.linkAngle >= -395) {  
+          LinkMeasuredState.linkSourceHeight = true;
+        } else if (LinkMeasuredState.linkAngle <= -485) {
           LinkMeasuredState.linkUnderStage = true;
-        } 
-        SmartDashboard.putBoolean("Amp", LinkMeasuredState.linkAmpsHight);
-        SmartDashboard.putBoolean("Speaker", LinkMeasuredState.linkSpeakerHight);
-        SmartDashboard.putBoolean("Climb", LinkMeasuredState.linkClimbHight);
+        } else if (LinkMeasuredState.linkAngle <= -295 && LinkMeasuredState.linkAngle >= -305) {
+          LinkMeasuredState.linkSpeakerHeight = true;
+        }
+        SmartDashboard.putBoolean("Amp", LinkMeasuredState.linkAmpHeight);
+        SmartDashboard.putBoolean("Speaker", LinkMeasuredState.linkSpeakerHeight);
+        SmartDashboard.putBoolean("Climb", LinkMeasuredState.linkClimbHeight);
         SmartDashboard.putBoolean("Stage", LinkMeasuredState.linkUnderStage);
+        SmartDashboard.putBoolean("Source", LinkMeasuredState.linkSourceHeight);
+        SmartDashboard.putBoolean("Podium", LinkMeasuredState.linkOverPodium);
     }
 
     @Override
