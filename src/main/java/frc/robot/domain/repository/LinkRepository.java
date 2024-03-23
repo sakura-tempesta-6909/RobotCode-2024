@@ -17,4 +17,9 @@ public interface LinkRepository {
      * センサーを読む
      */
     void readSensors();
+
+    /**
+     * climbする(Linkの角度上げる→Linkの角度下げる→Linkの角度維持する)
+     */
+    void MoveShooterClimb();
 }
