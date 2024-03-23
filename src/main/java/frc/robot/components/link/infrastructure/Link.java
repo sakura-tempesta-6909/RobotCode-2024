@@ -115,6 +115,12 @@ public class Link implements LinkRepository {
         }
 
     }
+
+    @Override 
+    public void MoveShooterClimb() {
+
+    }
+
     public void test1() {
         linkMotorRight.set(ControlMode.PercentOutput, 0.2);
     }
