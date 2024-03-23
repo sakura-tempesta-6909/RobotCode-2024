@@ -53,10 +53,10 @@ public class SwerveSubsystem extends SubsystemBase{
         gyro.reset();
     }
 
-    //デフォルトでジャイロスコープからロボットの進行方向を取得する関数を作るよ[10:44]
+    //デフォルトでジャイロスコープからロボットの進行方向を取得する関数を作る[10:44]
     //ジャイロスコープは連続値のため、360度や720度などになってしまうので、わかりやすくするため-180度~180度に変換[11:01]
     public double getHeading(){
-        return Math.IEEEremainder(-gyro.getAngle(), 360);
+        return Math.IEEEremainder(gyro.getAngle(), 360);
     }
     //getHeading()は度数法なので Rotation2d 型に変換する
     public Rotation2d getRotation2d(){
