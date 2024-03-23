@@ -12,12 +12,9 @@ class DriveMode extends ModeManager {
         DriveModel.driveSideSpeed = driveController.getLeftX();
         DriveModel.driveFowardSpeed = -driveController.getLeftY(); //スティックを奥に倒すと正になるように変更
         DriveModel.driveThetaSpeed = -driveController.getRightX(); //スティックを右に倒すと反時計回りになるように変更
+        DriveModel.driveOriented = DriveModel.DriveOriented.s_fieldOriented;
         if(driveController.getRightBumper()) {
-            if(DriveModel.driveOriented == DriveModel.DriveOriented.s_fieldOriented) {
-                DriveModel.driveOriented = DriveModel.DriveOriented.s_robotOriented;
-            } else {
-                DriveModel.driveOriented = DriveModel.DriveOriented.s_fieldOriented;
-            }
+            DriveModel.driveOriented = DriveModel.DriveOriented.s_robotOriented;
         } 
     }
 }
