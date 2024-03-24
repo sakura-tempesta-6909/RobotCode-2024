@@ -6,10 +6,16 @@ public class LinkConst {
         public static final int linkMotorRight = 17;
     }
     //1つのfileにpublic classは1つだけ！
-    public class LinkSoftLimit {
-    public static final int ForwardSoftLimit = -250;
-    public static final int ReverseSoftLimit = -490;
-    public static final double PeakOutputForward = .3;
-    public static final double PeakOutputReverse = -.3;
+    public class LinkLeftSoftLimit {
+      public static final int ForwardSoftLimit = -250;
+      public static final int ReverseSoftLimit = -490;
+      public static final double PeakOutputForward = .3;
+      public static final double PeakOutputReverse = -.3;
+    }
+    public class LinkRightSoftLimit {
+      public static final int ForwardSoftLimit = -250;
+      public static final int ReverseSoftLimit = -490;
+      public static final double PeakOutputForward = .3;
+      public static final double PeakOutputReverse = -.3;
     }
 }
