@@ -6,13 +6,7 @@ import com.ctre.phoenix.motorcontrol.FollowerType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-import com.revrobotics.CANSparkBase.IdleMode;
 
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.units.Angle;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.components.link.LinkConst;
 import frc.robot.components.link.LinkParameter;
@@ -76,16 +70,28 @@ public class Link implements LinkRepository {
 
     @Override
     public void readSensors() {
+        double linkAngle = linkMotorLeft.getSelectedSensorPosition();
+        //SmartDashboard.putNumber("linkMotorLeft position", linkMotorLeft.getSelectedSensorPosition());
         LinkMeasuredState.linkLeftAngle = linkMotorLeft.getSelectedSensorPosition();
         SmartDashboard.putNumber("LinkLeftAngle", LinkMeasuredState.linkLeftAngle);
         double linkRightAngle = linkMotorRight.getSelectedSensorPosition();
         SmartDashboard.putNumber("linkRightAngle", linkRightAngle);
         // 初期化
+        LinkMeasuredState.linkAmpsHeight = false;
         LinkMeasuredState.linkAmpHeight = false;
         LinkMeasuredState.linkClimbHeight = false;
         LinkMeasuredState.linkSpeakerHeight = false;
         LinkMeasuredState.linkUnderStage = false;
         // 条件に応じてboolean変数の値を更新
+        if (linkAngle <= -250 && linkAngle >= -260) {
+          LinkMeasuredState.linkAmpsHeight = true;
+          LinkMeasuredState.linkClimbHeight = true;
+        } else if (linkAngle <= -405 && linkAngle >= -395) {
+          LinkMeasuredState.linkSpeakerHeight = true;
+        } else if (linkAngle <= -485) {
+          LinkMeasuredState.linkUnderStage = true;
+        } 
+        SmartDashboard.putBoolean("Amp", LinkMeasuredState.linkAmpsHeight);
         if (LinkMeasuredState.linkLeftAngle <= -250 && LinkMeasuredState.linkLeftAngle >= -260) {
           LinkMeasuredState.linkAmpHeight = true;
           LinkMeasuredState.linkClimbHeight = true;
