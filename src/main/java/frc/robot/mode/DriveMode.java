@@ -55,7 +55,7 @@ class DriveMode extends ModeManager {
         }
 
         /**  SPEAKERにシュートする*/
-        if(-1 <= operateController.getRightTriggerAxis() && operateController.getRightTriggerAxis() <= 1) {
+        if(0.6 <= operateController.getRightTriggerAxis()) {
             ShooterModel.shooterMode = ShooterMode.s_shootSpeaker;
         }
 
@@ -66,7 +66,7 @@ class DriveMode extends ModeManager {
         }
 
         /** AMPにシュートする */
-        if(-1 <= operateController.getLeftTriggerAxis() && operateController.getLeftTriggerAxis() <= 1) {
+        if(0.6 <= operateController.getLeftTriggerAxis()) {
             ShooterModel.shooterMode = ShooterMode.s_shootAmp;
         }
 
