@@ -29,6 +29,9 @@ public class ShooterService implements Service {
             case s_stopIntake:
                 repository.stopIntake();
                 break;
+            case s_increaseRotation:
+                repository.increaseRotation();
+                break;
         }
     }
 

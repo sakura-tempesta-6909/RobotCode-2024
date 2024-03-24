@@ -13,7 +13,9 @@ public class ShooterModel {
         /** NOTEのouttake */
         s_outtake,
         /** Intakeを止める */
-        s_stopIntake,
+        s_stopIntake, 
+        /**　回転数を早める */
+        s_increaseRotation,
     }
  
     public static void reset() {

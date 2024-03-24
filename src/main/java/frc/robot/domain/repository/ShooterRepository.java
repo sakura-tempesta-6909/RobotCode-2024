@@ -33,6 +33,11 @@ public interface ShooterRepository {
     void stopIntake();
 
     /**
+     * 回転率を早める
+     */
+    void increaseRotation();
+
+    /**
      * センサーを読みとる
      */
     void readSensors();
