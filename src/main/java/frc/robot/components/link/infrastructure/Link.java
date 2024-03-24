@@ -118,7 +118,10 @@ public class Link implements LinkRepository {
 
     @Override 
     public void MoveShooterClimb() {
+    }
 
+    @Override
+    public void MoveShooterFineAdjustment() {
     }
 
     public void test1() {
