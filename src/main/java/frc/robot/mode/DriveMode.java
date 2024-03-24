@@ -73,14 +73,6 @@ class DriveMode extends ModeManager {
         if(0.6 <= operateController.getLeftTriggerAxis()) {
             ShooterModel.shooterMode = ShooterMode.s_shootAmp;
         }
-
-
-        /** SPEAKERの左右からShootできるようにリンクの角度を変えて回転数を早くする */
-        if(operateController.getBButton()) {
-            LinkModel.shooterAngleMode = ShooterAngleMode.s_speakerShootSide;
-            ShooterModel.shooterMode = ShooterMode.s_increaseRotation;
-        }
-
     }
     
 }
