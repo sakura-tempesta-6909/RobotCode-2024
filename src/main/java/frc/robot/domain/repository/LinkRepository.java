@@ -2,7 +2,7 @@ package frc.robot.domain.repository;
 
 public interface LinkRepository {
     /**
-     * リンクを曲げることによってシューターを傾ける
+     * リンク機構を特定の角度に傾けることで、シューターの角度を傾ける
      * 
      * @param TargetShooterAngle 目標のlinkAngle[deg] シューターの角度を上げる方向を正とする
      */
@@ -17,4 +17,9 @@ public interface LinkRepository {
      * センサーを読む
      */
     void readSensors();
+
+    /**
+     * climbする(Linkの角度上げる→Linkの角度下げる→Linkの角度維持する)
+     */
+    void MoveShooterClimb();
 }

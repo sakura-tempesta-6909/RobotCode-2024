@@ -1,6 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.components.Service;
 import frc.robot.components.drive.DriveService;
 import frc.robot.components.drive.infrastructure.Drive;
@@ -16,6 +17,8 @@ import frc.robot.phase.Autonomous;
 import frc.robot.subClass.Util;
 
 import java.util.ArrayList;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 public class Robot extends TimedRobot {
     ArrayList<Service> services = new ArrayList<>();
@@ -90,9 +93,9 @@ public class Robot extends TimedRobot {
         ModeManager.mode = ModeManager.ModeType.k_test;
     }
 
+
     @Override
     public void testPeriodic() {
-
         for (Service service : services) {
             service.resetModel();
             service.readSensors();
@@ -103,6 +106,5 @@ public class Robot extends TimedRobot {
         for (Service service : services) {
             service.applyModel();
         }
-
     }
 }

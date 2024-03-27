@@ -1,8 +1,6 @@
 package frc.robot.components.led;
 
 import frc.robot.components.Service;
-import frc.robot.components.drive.DriveParameter;
-import frc.robot.domain.model.DriveModel;
 import frc.robot.domain.model.LEDModel;
 import frc.robot.domain.repository.LEDRepository;
 
@@ -14,7 +12,17 @@ public class LEDService implements Service {
     }
     @Override
     public void applyModel() {
-        repository.changeLight(LEDModel.sequence, LEDModel.pattern);    
+        switch (LEDModel.pattern) {
+            case AlwaysOn:
+                repository.changeLight(255, 0, 255);
+                break;
+            case NOTEGet:
+                repository.flashLight(255, 50, 0);
+                break;
+            case Under720mm:
+                repository.flashLight(0, 0, 255);
+                break;
+        }
     } 
 
     @Override
