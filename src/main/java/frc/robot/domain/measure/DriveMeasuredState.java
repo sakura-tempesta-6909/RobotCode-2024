@@ -1,10 +1,12 @@
 package frc.robot.domain.measure;
 
 public class DriveMeasuredState {
-    /** 左のタイヤのポジション [cm] */
-    public static double leftActualPosition;
-    /** 右のタイヤのポジション [cm] */
-    public static double rightActualPosition;
-    /** ロボットの向いてる向き [degree] */
-    public static double actualAngle;
+    /** Podium までどれだけ距離があるか */
+    public static double podiumDistance;
+    /** 第二Podium(左)までどれだけ距離があるか */
+    public static double podiumLeftDistance;
+    /** 第二Podium(右)までどれだけ距離があるか */
+    public static double podiumRightDistance;
+    /** スピーカの真下のシュート位置までどれだけ距離があるか */
+    public static double speakerDistance;
 }
