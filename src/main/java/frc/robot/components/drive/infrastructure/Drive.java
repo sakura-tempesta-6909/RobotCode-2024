@@ -51,5 +51,6 @@ public class Drive implements DriveRepository {
 
     @Override
     public void readSensors() {
+        SmartDashboard.putNumber("Robot Heading", driveSubsystem.getHeading());
     }
 }

@@ -1,25 +1,25 @@
 package frc.robot.mode;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.domain.measure.LinkMeasuredState;
+import frc.robot.domain.measure.ShooterMeasuredState;
 import frc.robot.domain.model.DriveModel;
+import frc.robot.domain.model.LEDModel;
 import frc.robot.domain.model.ShooterModel;
 import frc.robot.domain.model.DriveModel.DriveOriented;
 import frc.robot.domain.model.LinkModel;
 import frc.robot.domain.model.LinkModel.ShooterAngleMode;
 import frc.robot.domain.model.ShooterModel.ShooterMode;
+import frc.robot.subClass.Util;
 
 class DriveMode extends ModeManager {
     public static void changeModel() {
         DriveModel.driveMovement = DriveModel.DriveMovement.s_fastDrive;
-        DriveModel.driveSideSpeed = driveController.getLeftX();
-        DriveModel.driveFowardSpeed = -driveController.getLeftY(); //スティックを奥に倒すと正になるように変更
-        DriveModel.driveThetaSpeed = -driveController.getRightX(); //スティックを右に倒すと反時計回りになるように変更
+        DriveModel.driveSideSpeed = Util.deadband(driveController.getLeftX());
+        DriveModel.driveFowardSpeed = Util.deadband(-driveController.getLeftY()); //スティックを奥に倒すと正になるように変更
+        DriveModel.driveThetaSpeed = Util.deadband(-driveController.getRightX()); //スティックを右に倒すと反時計回りになるように変更
+        DriveModel.driveOriented = DriveModel.DriveOriented.s_fieldOriented;
         if(driveController.getRightBumper()) {
-            if(DriveModel.driveOriented == DriveModel.DriveOriented.s_fieldOriented) {
-                DriveModel.driveOriented = DriveModel.DriveOriented.s_robotOriented;
-            } else {
-                DriveModel.driveOriented = DriveModel.DriveOriented.s_fieldOriented;
-            }
+            DriveModel.driveOriented = DriveModel.DriveOriented.s_robotOriented;
         } 
         
 
@@ -72,6 +72,13 @@ class DriveMode extends ModeManager {
         if(0.6 <= operateController.getLeftTriggerAxis()) {
             ShooterModel.shooterMode = ShooterMode.s_shootAmp;
             LinkModel.shooterAngleMode = ShooterAngleMode.s_keepCurrentAngle;
+        }
+        
+
+        if (ShooterMeasuredState.isNoteGet) {
+            LEDModel.pattern = LEDModel.LEDFlashes.NOTEGet;
+        } else if (LinkMeasuredState.linkUnderStage) {
+            LEDModel.pattern = LEDModel.LEDFlashes.Under720mm;
         }
     }
     

@@ -84,4 +84,9 @@ public class Shooter implements ShooterRepository {
       noteLowerShooter.set(ShooterParameter.Speed.Neutral);
       notePusher.set(ShooterParameter.Speed.Neutral);
     }
+    @Override
+    public void increaseRotation() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'increaseRotation'");
+    }
 }
