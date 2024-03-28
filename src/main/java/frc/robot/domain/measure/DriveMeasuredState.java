@@ -1,12 +1,8 @@
 package frc.robot.domain.measure;
 
+import edu.wpi.first.math.geometry.Pose2d;
+
 public class DriveMeasuredState {
-    /** Podium までどれだけ距離があるか */
-    public static double podiumDistance;
-    /** 第二Podium(左)までどれだけ距離があるか */
-    public static double podiumLeftDistance;
-    /** 第二Podium(右)までどれだけ距離があるか */
-    public static double podiumRightDistance;
-    /** スピーカの真下のシュート位置までどれだけ距離があるか */
-    public static double speakerDistance;
+    /** スタート地点を原点としたロボットの位置(x: 前後方向 (メートル),　y: 左右方向 (メートル)) | 前・左が正 */
+    public static Pose2d drivePosition;
 }

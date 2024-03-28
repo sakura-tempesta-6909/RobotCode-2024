@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.components.drive.DriveConst;
 import frc.robot.components.drive.DriveConst.DriveConstants;
+import frc.robot.domain.measure.DriveMeasuredState;
 
 public class SwerveSubsystem extends SubsystemBase{
     public final SwerveModule frontLeft = new SwerveModule(
@@ -101,6 +102,7 @@ public class SwerveSubsystem extends SubsystemBase{
         SmartDashboard.putNumber("Robot Heading", getHeading());
         //[20:30]
         SmartDashboard.putString("Robot Location", getPose().getTranslation().toString());
+        DriveMeasuredState.drivePosition = getPose();
     }
 
     //モジュールを停止する関数[11:20]

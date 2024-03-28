@@ -8,7 +8,7 @@ import edu.wpi.first.math.util.Units;
 public final class DriveConst {
     public static final class ModuleConstants{
         public static final double kWheelDiameterMeters = edu.wpi.first.math.util.Units.inchesToMeters(4); //wheelの直径(メートル)?
-        public static final double kDriveMotorGearRatio = 1/5.8462; // NEO 1回転でdrive motor が 1/5.8462 回転する | drive motor 1回転 : NEO 5.8462回転
+        public static final double kDriveMotorGearRatio = 1/6.12; // NEO 1回転でdrive motor が 1/6.12 回転する | drive motor 1回転 : NEO 6.12回転
         public static final double kTurningMotorGearRatio = 7./150; // 数値改変  // NEO 1回転でturning motor が 7/150 回転する | turning motor 7回転 : NEO 150回転
         public static final double kDriveEncoderRot2Meter = kDriveMotorGearRatio * Math.PI * kWheelDiameterMeters; //NEOが1回転すると何メートル進むか
         public static final double kTurningEncoderRot2Rad = kTurningMotorGearRatio * 2 * Math.PI; //NEOが1回転すると何ラジアン回転するか
