@@ -51,6 +51,8 @@ public class Shooter implements ShooterRepository {
     }
 
     @Override
+    UpperSpeedとLowerSpeedの差分の絶対値が一定値以下かつ
+    UpperSpeedとLowerSpeedの速度が一定以上だったらシュートする
     public void noteShootSpeaker() {
         noteUpperShooterPID.setReference(ShooterParameter.Speed.ShooterTargetSpeed, CANSparkBase.ControlType.kVelocity);
         noteLowerShooterPID.setReference(ShooterParameter.Speed.ShooterTargetSpeed, CANSparkBase.ControlType.kVelocity);

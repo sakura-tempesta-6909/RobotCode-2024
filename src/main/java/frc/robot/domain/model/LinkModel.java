@@ -17,10 +17,10 @@ public class LinkModel {
         /** CLIMBをする */
         s_climb,
         /** 何も入力されていない時今の角度を維持する */
-        s_keepCurrentAngle
+        s_keepCurrentAngle, 
     }
     public static void reset() {
-        shooterAngleMode = ShooterAngleMode.s_inputnothing;
+        shooterAngleMode = ShooterAngleMode.s_keepCurrentAngle;
     }
 
     public LinkModel() {
