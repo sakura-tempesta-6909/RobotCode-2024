@@ -24,10 +24,7 @@ public class LinkService implements Service {
             case s_speakerShootPodium:
                 repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.SpeakerPodium);
                 break;
-            case s_speakerShootLeft:
-                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.SpeakerLeft);                
-                break;
-            case s_speakerShootRight:
+            case s_speakerShootSide:
                 repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.SpeakerRight);
                 break;
             case s_intakeNote:
@@ -36,7 +33,7 @@ public class LinkService implements Service {
             case s_climb:
                 repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.Climb);
                 break;
-            case s_inputnothing:
+            case s_keepCurrentAngle:
                 repository.KeepCurrentAngle();
                 break;
         }

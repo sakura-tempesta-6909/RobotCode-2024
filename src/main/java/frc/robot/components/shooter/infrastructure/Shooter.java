@@ -84,4 +84,8 @@ public class Shooter implements ShooterRepository {
       noteLowerShooter.set(ShooterParameter.Speed.Neutral);
       notePusher.set(ShooterParameter.Speed.Neutral);
     }
+    @Override
+    public void increaseRotation() {
+        
+    }
 }
