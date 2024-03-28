@@ -12,7 +12,7 @@ public class Shooter implements ShooterRepository {
     final CANSparkMax noteUpperShooter, noteLowerShooter, notePusher;
     final SparkPIDController noteUpperShooterPID, noteLowerShooterPID;
     final DigitalInput noteDirectionSensor;
-    final RelativeEncoder upperShooterEncoder;
+    final RelativeEncoder upperShooterEncoder, lowerShooterEncoder;
     public Shooter() {
         noteUpperShooter = new CANSparkMax(ShooterConst.Ports.NoteUpperShooter, CANSparkLowLevel.MotorType.kBrushless);
         noteLowerShooter = new CANSparkMax(ShooterConst.Ports.NoteLowerShooter, CANSparkLowLevel.MotorType.kBrushless);
@@ -26,6 +26,7 @@ public class Shooter implements ShooterRepository {
         noteLowerShooterPID = noteLowerShooter.getPIDController();
         noteDirectionSensor = new DigitalInput(ShooterConst.Ports.NoteDirectionSensor);
         upperShooterEncoder = noteUpperShooter.getEncoder();
+        lowerShooterEncoder = noteLowerShooter.getEncoder();
         
 
         noteUpperShooterPID.setP(ShooterParameter.PID.ShooterP);
@@ -41,7 +42,7 @@ public class Shooter implements ShooterRepository {
     public void noteIntake() {
         noteUpperShooter.set(-ShooterParameter.Speed.ShooterIntakeSpeed);
         noteLowerShooter.set(-ShooterParameter.Speed.ShooterIntakeSpeed);
-        notePusher.set(-ShooterParameter.Speed.PusherSpeed);
+        notePusher.set(-ShooterParameter.Speed.PusherIntakeSpeed);
         if (ShooterMeasuredState.isNoteGet) {
             noteUpperShooter.set(ShooterParameter.Speed.Neutral);
             noteLowerShooter.set(ShooterParameter.Speed.Neutral);
@@ -57,7 +58,7 @@ public class Shooter implements ShooterRepository {
         noteUpperShooterPID.setReference(ShooterParameter.Speed.ShooterTargetSpeed, CANSparkBase.ControlType.kVelocity);
         noteLowerShooterPID.setReference(ShooterParameter.Speed.ShooterTargetSpeed, CANSparkBase.ControlType.kVelocity);
         if (ShooterMeasuredState.shooterSpeed > ShooterParameter.Speed.ShooterSpeedWhenPusherMove) {
-            notePusher.set(ShooterParameter.Speed.PusherSpeed);
+            notePusher.set(ShooterParameter.Speed.PusherShootSpeed);
         }
     }
 
@@ -65,20 +66,23 @@ public class Shooter implements ShooterRepository {
     public void noteShootAmp() {
         noteUpperShooter.set(ShooterParameter.Speed.ShooterIntakeSpeed);
         noteLowerShooter.set(-ShooterParameter.Speed.ShooterIntakeSpeed);
-        notePusher.set(ShooterParameter.Speed.PusherSpeed);
+        notePusher.set(ShooterParameter.Speed.PusherShootSpeed);
     }
 
     @Override
     public void noteOuttake() {
         noteUpperShooter.set(ShooterParameter.Speed.ShooterIntakeSpeed);
         noteLowerShooter.set(ShooterParameter.Speed.ShooterIntakeSpeed);
-        notePusher.set(ShooterParameter.Speed.PusherSpeed);
+        notePusher.set(ShooterParameter.Speed.PusherOuttakeSpeed);
     }
 
     @Override
     public void readSensors() {
         ShooterMeasuredState.shooterSpeed = upperShooterEncoder.getVelocity();
         ShooterMeasuredState.isNoteGet = !noteDirectionSensor.get();
+        SmartDashboard.putNumber("noteUpperShooter", upperShooterEncoder.getVelocity());
+        SmartDashboard.putNumber("noteLowerShooter", lowerShooterEncoder.getVelocity());
+        SmartDashboard.putNumber("diff", upperShooterEncoder.getVelocity()-lowerShooterEncoder.getVelocity());
     }
     @Override
     public void stopIntake() {
