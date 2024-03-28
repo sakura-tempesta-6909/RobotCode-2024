@@ -11,26 +11,30 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.CANSparkBase.IdleMode;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.networktables.PubSub;
 import edu.wpi.first.units.Angle;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.components.link.LinkConst;
 import frc.robot.components.link.LinkParameter;
+import frc.robot.components.link.LinkConst.LinkLeftSoftLimit;
+import frc.robot.components.link.LinkConst.LinkRightSoftLimit;
+import frc.robot.components.link.LinkParameter.LeftAngles;
+import frc.robot.components.link.LinkParameter.RightAngles;
 import frc.robot.components.link.LinkParameter.PID;
 import frc.robot.domain.measure.LinkMeasuredState;
 import frc.robot.domain.repository.LinkRepository;
 
 public class Link implements LinkRepository {
     //Linkの持ち物検査
-    final VictorSPX linkMotorRight;
-    final TalonSRX linkMotorLeft;
+    final TalonSRX linkMotorLeft, linkMotorRight;
 
     public Link() {
         LinkParameter.ConstInit();
 
         //属性の初期化
         linkMotorLeft = new TalonSRX(LinkConst.Ports.linkMotorLeft);
-        linkMotorRight = new VictorSPX(LinkConst.Ports.linkMotorRight);
+        linkMotorRight = new TalonSRX(LinkConst.Ports.linkMotorRight);
 
         //moterの設定
         linkMotorLeft.configFactoryDefault();
@@ -41,8 +45,8 @@ public class Link implements LinkRepository {
 
         linkMotorRight.configFactoryDefault();
         linkMotorRight.configSelectedFeedbackSensor(FeedbackDevice.Analog);
-        //linkMotorRight.setSensorPhase(false);
-        //linkMotorRight.setInverted(true);
+        linkMotorRight.setSensorPhase(false);
+        linkMotorRight.setInverted(true);
         //linkMotorRight.follow(linkMotorLeft);
         //linkMotorRight.follow(linkMotorLeft, FollowerType.PercentOutput);
 
@@ -54,12 +58,12 @@ public class Link implements LinkRepository {
         linkMotorLeft.configPeakOutputForward(LinkConst.LinkLeftSoftLimit.PeakOutputForward);
         linkMotorLeft.configPeakOutputReverse(LinkConst.LinkLeftSoftLimit.PeakOutputReverse);
 
-        // linkMotorRight.configForwardSoftLimitThreshold(LinkConst.LinkSoftLimit.ForwardSoftLimit);
-        // linkMotorRight.configForwardSoftLimitEnable(true);
-        // linkMotorRight.configReverseSoftLimitThreshold(LinkConst.LinkSoftLimit.ReverseSoftLimit);
-        // linkMotorRight.configReverseSoftLimitEnable(true);
-        // linkMotorRight.configPeakOutputForward(LinkConst.LinkSoftLimit.PeakOutputForward);
-        // linkMotorRight.configPeakOutputReverse(LinkConst.LinkSoftLimit.PeakOutputReverse);
+        linkMotorRight.configForwardSoftLimitThreshold(LinkConst.LinkRightSoftLimit.ForwardSoftLimit);
+        linkMotorRight.configForwardSoftLimitEnable(true);
+        linkMotorRight.configReverseSoftLimitThreshold(LinkConst.LinkRightSoftLimit.ReverseSoftLimit);
+        linkMotorRight.configReverseSoftLimitEnable(true);
+        linkMotorRight.configPeakOutputForward(LinkConst.LinkRightSoftLimit.PeakOutputForward);
+        linkMotorRight.configPeakOutputReverse(LinkConst.LinkRightSoftLimit.PeakOutputReverse);
 
         //IdleMode設定
         linkMotorLeft.setNeutralMode(NeutralMode.Brake);
@@ -67,6 +71,12 @@ public class Link implements LinkRepository {
 
         //PID
         linkMotorLeft.config_kP(0, PID.LinkP);
+        linkMotorLeft.config_kI(0, PID.LinkI);
+        linkMotorLeft.config_kD(0, PID.LinkD);
+
+        linkMotorRight.config_kP(0, PID.LinkP);
+        linkMotorRight.config_kI(0, PID.LinkI);
+        linkMotorRight.config_kD(0, PID.LinkD);
     }
     @Override
     public void MoveShooterToSpecifiedAngle(double TargetShooterAngle) {
@@ -78,15 +88,15 @@ public class Link implements LinkRepository {
     public void readSensors() {
         LinkMeasuredState.linkLeftAngle = linkMotorLeft.getSelectedSensorPosition();
         SmartDashboard.putNumber("LinkLeftAngle", LinkMeasuredState.linkLeftAngle);
-        double linkRightAngle = linkMotorRight.getSelectedSensorPosition();
-        SmartDashboard.putNumber("linkRightAngle", linkRightAngle);
+        LinkMeasuredState.linkRightAngle = linkMotorRight.getSelectedSensorPosition();
+        SmartDashboard.putNumber("linkRightAngle", LinkMeasuredState.linkRightAngle);
         // 初期化
         LinkMeasuredState.linkAmpHeight = false;
         LinkMeasuredState.linkClimbHeight = false;
         LinkMeasuredState.linkSpeakerHeight = false;
         LinkMeasuredState.linkUnderStage = false;
         // 条件に応じてboolean変数の値を更新
-        if (LinkMeasuredState.linkLeftAngle <= -250 && LinkMeasuredState.linkLeftAngle >= -260) {
+        if (LinkMeasuredState.linkLeftAngle <= LeftAngles.Amp + 5 && LeftAngles.Amp >= LinkLeftSoftLimit.ForwardSoftLimit - 5) {
           LinkMeasuredState.linkAmpHeight = true;
           LinkMeasuredState.linkClimbHeight = true;
         } else if (LinkMeasuredState.linkLeftAngle <= -405 && LinkMeasuredState.linkLeftAngle >= -395) {
@@ -104,30 +114,49 @@ public class Link implements LinkRepository {
         SmartDashboard.putBoolean("Stage", LinkMeasuredState.linkUnderStage);
         SmartDashboard.putBoolean("Source", LinkMeasuredState.linkSourceHeight);
         SmartDashboard.putBoolean("Podium", LinkMeasuredState.linkOverPodium);
-    }
 
+        SmartDashboard.putNumber("linkMotorLeftOutputPersent", linkMotorLeft.getMotorOutputPercent());
+        SmartDashboard.putNumber("linkMotorRightOutputPersent", linkMotorRight.getMotorOutputPercent());
+    }
     @Override
     public void KeepCurrentAngle() {
-        if(linkMotorLeft.getSelectedSensorPosition() <= -400) {
-            linkMotorLeft.set(ControlMode.PercentOutput, 0.1);
+        if(linkMotorLeft.getSelectedSensorPosition() <= LinkLeftSoftLimit.ReverseSoftLimit + 40 && linkMotorRight.getSelectedSensorPosition() <= LinkRightSoftLimit.ReverseSoftLimit + 40) {
+            linkMotorLeft.set(ControlMode.PercentOutput, 0.05);
+            linkMotorRight.set(ControlMode.PercentOutput, 0.05);
         } else {
             linkMotorLeft.set(ControlMode.PercentOutput, 0);
+            linkMotorRight.set(ControlMode.PercentOutput, 0);
         }
 
     }
 
     @Override 
     public void MoveShooterClimb() {
+      linkMotorLeft.set(ControlMode.PercentOutput, LinkParameter.LeftAngles.Climb);
+      linkMotorRight.set(ControlMode.PercentOutput, LinkParameter.RightAngles.Climb);
     }
 
     @Override
-    public void MoveShooterFineAdjustment() {
+    public void MoveShooterFineAdjustment(double upOrDown) {
+      //Climb時の微調整用
+      //CheakConst
+      linkMotorLeft.set(ControlMode.PercentOutput, upOrDown);
+      linkMotorRight.set(ControlMode.PercentOutput, upOrDown);
     }
 
+    // @Override
+    // public void MoveShooterDownFineAdjustment() {
+    //   //Climb時の微調整用(↓)
+    //   linkMotorLeft.set(ControlMode.PercentOutput, -0.1);
+    //   linkMotorRight.set(ControlMode.PercentOutput, -0.1);
+    // }
+
     public void test1() {
-        linkMotorRight.set(ControlMode.PercentOutput, 0.2);
+      linkMotorLeft.set(ControlMode.Position, LinkLeftSoftLimit.ForwardSoftLimit);
+      linkMotorRight.set(ControlMode.Position, LinkRightSoftLimit.ForwardSoftLimit);
     }
     public void test2() {
-        linkMotorRight.set(ControlMode.PercentOutput, -0.2);
+      linkMotorLeft.set(ControlMode.Position, LinkLeftSoftLimit.ReverseSoftLimit);
+      linkMotorRight.set(ControlMode.Position,  LinkRightSoftLimit.ReverseSoftLimit);
     }
 }

@@ -21,11 +21,15 @@ public interface LinkRepository {
 
     /**
      * climbする(Linkの角度を下げる時にPersentOutputを使用)
+     * @param MostlyClimb 大体のClimb時の角度
      */
     void MoveShooterClimb();
 
     /**
-     * climbするときにLinkの角度を微調整するために上げ下げする
+     * climbするときにLinkの角度を微調整するために上げる
+     * @param Upp
+     * @param Down
+     * wn
      */
-    void MoveShooterFineAdjustment();
+    void MoveShooterFineAdjustment(double upOrDown); 
 }
