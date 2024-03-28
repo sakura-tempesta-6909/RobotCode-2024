@@ -86,7 +86,6 @@ public class Shooter implements ShooterRepository {
     }
     @Override
     public void increaseRotation() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'increaseRotation'");
+        
     }
 }
