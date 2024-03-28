@@ -1,6 +1,9 @@
 package frc.robot.components.drive.infrastructure;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.SPI;
@@ -8,6 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //9:54
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.components.drive.DriveConst;
+import frc.robot.components.drive.DriveConst.DriveConstants;
+import frc.robot.domain.measure.DriveMeasuredState;
 
 public class SwerveSubsystem extends SubsystemBase{
     public final SwerveModule frontLeft = new SwerveModule(
@@ -37,8 +42,16 @@ public class SwerveSubsystem extends SubsystemBase{
     //ロボットを起動するたびにジャイロスコープをリセットし、その方向を順方向に設定したい[10:08]
     //AHRS -> ADXRS450_Gyro
     //AHRS(SPI.Port.kMXP) -> ADXRS450_Gyro()
-    //このジャイロだよって教える
+    //このジャイロだと教える
     private final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+    //[20:00]
+    private final SwerveDriveOdometry odometer = new SwerveDriveOdometry(DriveConstants.kDriveKinematics, new Rotation2d(0),
+    new SwerveModulePosition[]{
+        frontLeft.getPosition(),
+        frontRight.getPosition(),
+        backLeft.getPosition(),
+        backRight.getPosition()
+    });
 
     //ジャイロスコープは起動するたびに再調整で忙しいから、1秒遅らせてからリクエストする[10:35]
     public SwerveSubsystem(){
@@ -62,10 +75,34 @@ public class SwerveSubsystem extends SubsystemBase{
     public Rotation2d getRotation2d(){
         return Rotation2d.fromDegrees(getHeading());
     }
+    //[20:13]
+    public Pose2d getPose(){
+        return odometer.getPoseMeters();
+    }
+    //Pose2d は平行移動2Dと回転2Dを持つクラス
+    public void resetOdometry(Pose2d pose) {
+        odometer.resetPosition(getRotation2d(), new SwerveModulePosition[]{
+        frontLeft.getPosition(),
+        frontRight.getPosition(),
+        backLeft.getPosition(),
+        backRight.getPosition()
+    },pose);
+    }
+
     //ロボットの進行方向の値を監視[11:13]
     @Override
     public void periodic(){
+        //[20:10]
+        odometer.update(getRotation2d(), new SwerveModulePosition[]{
+        frontLeft.getPosition(),
+        frontRight.getPosition(),
+        backLeft.getPosition(),
+        backRight.getPosition()
+    });
         SmartDashboard.putNumber("Robot Heading", getHeading());
+        //[20:30]
+        SmartDashboard.putString("Robot Location", getPose().getTranslation().toString());
+        DriveMeasuredState.drivePosition = getPose();
     }
 
     //モジュールを停止する関数[11:20]

@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.units.Time;
 import edu.wpi.first.wpilibj.RobotController;
@@ -99,6 +100,10 @@ public class SwerveModule {
     public double getTurningVelocity(){
         //turning motor により秒速何ラジアンで動いたかを返す
         return turningEncoder.getVelocity();
+    }
+
+    public SwerveModulePosition getPosition() {
+        return new SwerveModulePosition(getDrivePosition(), new Rotation2d(getTurningPosition()));
     }
 
     public double getAbsoluteEncoderRad(){
