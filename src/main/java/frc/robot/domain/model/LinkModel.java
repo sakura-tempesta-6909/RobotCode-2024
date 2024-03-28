@@ -20,7 +20,7 @@ public class LinkModel {
         s_keepCurrentAngle
     }
     public static void reset() {
-        shooterAngleMode = ShooterAngleMode.s_inputnothing;
+        shooterAngleMode = ShooterAngleMode.s_keepCurrentAngle;
     }
 
     public LinkModel() {
