@@ -16,25 +16,25 @@ public class LinkService implements Service {
     public void applyModel() {
         switch (LinkModel.shooterAngleMode) {
             case s_ampShoot:
-                repository.MoveShooterToSpecifiedAngle(LinkParameter.LeftAngles.Amp);
+                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.AmpLinkLeft);
                 break;
             case s_speakerShootBelow:
-                repository.MoveShooterToSpecifiedAngle(LinkParameter.LeftAngles.SpeakerBelow);
+                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.SpeakerBelowLinkLeft);
                 break;
             case s_speakerShootPodium:
-                repository.MoveShooterToSpecifiedAngle(LinkParameter.LeftAngles.SpeakerPodium);
+                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.SpeakerPodiumLinkLeft);
                 break;
             case s_speakerShootLeft:
-                repository.MoveShooterToSpecifiedAngle(LinkParameter.LeftAngles.SpeakerLeft);                
+                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.SpeakerLeftLinkLeft);                
                 break;
             case s_speakerShootRight:
-                repository.MoveShooterToSpecifiedAngle(LinkParameter.LeftAngles.SpeakerRight);
+                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.SpeakerRightLinkLeft);
                 break;
             case s_intakeNote:
-                repository.MoveShooterToSpecifiedAngle(LinkParameter.LeftAngles.Intake);
+                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.IntakeLinkLeft);
                 break;
             case s_climb:
-                repository.MoveShooterToSpecifiedAngle(LinkParameter.LeftAngles.Climb);
+                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.ClimbLinkLeft);
                 break;
             case s_inputnothing:
                 repository.KeepCurrentAngle();

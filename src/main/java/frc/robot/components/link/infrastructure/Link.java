@@ -19,8 +19,7 @@ import frc.robot.components.link.LinkConst;
 import frc.robot.components.link.LinkParameter;
 import frc.robot.components.link.LinkConst.LinkLeftSoftLimit;
 import frc.robot.components.link.LinkConst.LinkRightSoftLimit;
-import frc.robot.components.link.LinkParameter.LeftAngles;
-import frc.robot.components.link.LinkParameter.RightAngles;
+import frc.robot.components.link.LinkParameter.Angles;
 import frc.robot.components.link.LinkParameter.PID;
 import frc.robot.domain.measure.LinkMeasuredState;
 import frc.robot.domain.repository.LinkRepository;
@@ -96,7 +95,7 @@ public class Link implements LinkRepository {
         LinkMeasuredState.linkSpeakerHeight = false;
         LinkMeasuredState.linkUnderStage = false;
         // 条件に応じてboolean変数の値を更新
-        if (LinkMeasuredState.linkLeftAngle <= LeftAngles.Amp + 5 && LeftAngles.Amp >= LinkLeftSoftLimit.ForwardSoftLimit - 5) {
+        if (LinkMeasuredState.linkLeftAngle <= Angles.AmpLinkLeft + 5 && Angles.AmpLinkLeft >= LinkLeftSoftLimit.ForwardSoftLimit - 5) {
           LinkMeasuredState.linkAmpHeight = true;
           LinkMeasuredState.linkClimbHeight = true;
         } else if (LinkMeasuredState.linkLeftAngle <= -405 && LinkMeasuredState.linkLeftAngle >= -395) {
@@ -132,8 +131,8 @@ public class Link implements LinkRepository {
 
     @Override 
     public void MoveShooterClimb() {
-      linkMotorLeft.set(ControlMode.PercentOutput, LinkParameter.LeftAngles.Climb);
-      linkMotorRight.set(ControlMode.PercentOutput, LinkParameter.RightAngles.Climb);
+      linkMotorLeft.set(ControlMode.PercentOutput, LinkParameter.Angles.ClimbLinkLeft);
+      linkMotorRight.set(ControlMode.PercentOutput, LinkParameter.Angles.ClimbLinkRight);
     }
 
     @Override
