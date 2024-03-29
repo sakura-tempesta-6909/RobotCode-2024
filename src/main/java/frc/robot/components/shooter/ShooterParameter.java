@@ -15,6 +15,15 @@ public class ShooterParameter {
         public static final double ShooterI = 5e-7;
         public static final double ShooterD = 0;
     }
+
+    public static class ShootingMotor {
+        /** シュートできるUpper&Lower Speedの速度 */
+        public static final double shootAvailableSpeedUpper = 0;
+        public static final double shootAvailableSpeedLower = 0;
+        /** シュートできる絶対値の値 */
+        public static final double shootAvailableAbsolute = 0;
+
+    }
     public static void ConstInit() {
 
     }
