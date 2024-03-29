@@ -94,9 +94,7 @@ public class Robot extends TimedRobot {
     }
 
     Link link = new Link();
-    XboxController controller = new XboxController(0);
-    Shooter shooter = new Shooter();
-
+    XboxController controller = new XboxController(0); 
     @Override
     public void testPeriodic() {
         for (Service service : services) {

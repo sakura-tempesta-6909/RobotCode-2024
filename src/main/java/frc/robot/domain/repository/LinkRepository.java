@@ -7,7 +7,7 @@ public interface LinkRepository {
      * 
      * @param TargetShooterAngle 目標のlinkAngle[deg] シューターの角度を上げる方向を正とする
      */
-    void MoveShooterToSpecifiedAngle(double TargetShooterAngle);
+    void MoveShooterToSpecifiedAngle(double TargetShooterLeftAngle, double TargetShooterRightAngle);
     
     /**
      * 今の角度を維持する

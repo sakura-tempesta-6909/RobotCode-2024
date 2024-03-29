@@ -69,9 +69,9 @@ public class Link implements LinkRepository {
         linkMotorRight.config_kD(0, PID.LinkD);
     }
     @Override
-    public void MoveShooterToSpecifiedAngle(double TargetShooterAngle) {
-        linkMotorLeft.set(ControlMode.Position, TargetShooterAngle);
-        linkMotorRight.set(ControlMode.Position, TargetShooterAngle);
+    public void MoveShooterToSpecifiedAngle(double TargetShooterLeftAngle, double TargetShooterRightAngle) {
+        linkMotorLeft.set(ControlMode.Position, TargetShooterLeftAngle);
+        linkMotorRight.set(ControlMode.Position, TargetShooterRightAngle);
     }
 
     @Override
