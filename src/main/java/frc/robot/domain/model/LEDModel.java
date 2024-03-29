@@ -1,13 +1,13 @@
 package frc.robot.domain.model;
 
 public class LEDModel {
-
     /** LEDの点滅のパターン */
     public enum LEDFlashes {
         /** ずっとついている */
         AlwaysOn,
         /** １秒ごとに点滅を繰り返す */
-        BlinkingPerSec,
+        NOTEGet,
+        Under720mm,
         /** ずっと消えている */
         AlwaysOff;
         
@@ -20,7 +20,7 @@ public class LEDModel {
 
     public static void reset() {
         sequence = new int[]{0, 0, 0};
-        pattern = LEDFlashes.AlwaysOff;
+        pattern = LEDFlashes.AlwaysOn;
     }
 
     public LEDModel() {

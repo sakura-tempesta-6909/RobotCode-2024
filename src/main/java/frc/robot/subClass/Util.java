@@ -14,6 +14,14 @@ public class Util {
         SmartDashboard.putBoolean(key, which);
     }
 
+    public static double deadband(double input){
+        if(input < 0.1 && input > -0.1){
+            return 0.0;
+        } else {
+            return input;
+        }
+    }
+
     public static void allSendConsole(){
     }
 }

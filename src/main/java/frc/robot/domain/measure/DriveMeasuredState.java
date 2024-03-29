@@ -1,10 +1,8 @@
 package frc.robot.domain.measure;
 
+import edu.wpi.first.math.geometry.Pose2d;
+
 public class DriveMeasuredState {
-    /** 左のタイヤのポジション [cm] */
-    public static double leftActualPosition;
-    /** 右のタイヤのポジション [cm] */
-    public static double rightActualPosition;
-    /** ロボットの向いてる向き [degree] */
-    public static double actualAngle;
+    /** スタート地点を原点としたロボットの位置(x: 前後方向 (メートル),　y: 左右方向 (メートル)) | 前・左が正 */
+    public static Pose2d drivePosition;
 }

@@ -95,6 +95,7 @@ public class Robot extends TimedRobot {
 
     Link link = new Link();
     XboxController controller = new XboxController(0);
+    Shooter shooter = new Shooter();
 
     @Override
     public void testPeriodic() {

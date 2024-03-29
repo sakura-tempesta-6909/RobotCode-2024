@@ -5,15 +5,6 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.FollowerType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-import com.revrobotics.CANSparkBase.IdleMode;
-
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.networktables.PubSub;
-import edu.wpi.first.units.Angle;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.components.link.LinkConst;
 import frc.robot.components.link.LinkParameter;
@@ -85,11 +76,14 @@ public class Link implements LinkRepository {
 
     @Override
     public void readSensors() {
+        double linkAngle = linkMotorLeft.getSelectedSensorPosition();
+        //SmartDashboard.putNumber("linkMotorLeft position", linkMotorLeft.getSelectedSensorPosition());
         LinkMeasuredState.linkLeftAngle = linkMotorLeft.getSelectedSensorPosition();
         SmartDashboard.putNumber("LinkLeftAngle", LinkMeasuredState.linkLeftAngle);
         LinkMeasuredState.linkRightAngle = linkMotorRight.getSelectedSensorPosition();
         SmartDashboard.putNumber("linkRightAngle", LinkMeasuredState.linkRightAngle);
         // 初期化
+        LinkMeasuredState.linkAmpsHeight = false;
         LinkMeasuredState.linkAmpHeight = false;
         LinkMeasuredState.linkClimbHeight = false;
         LinkMeasuredState.linkSpeakerHeight = false;

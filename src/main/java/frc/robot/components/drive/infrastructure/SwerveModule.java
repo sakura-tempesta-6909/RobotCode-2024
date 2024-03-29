@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.units.Time;
 import edu.wpi.first.wpilibj.RobotController;
@@ -22,7 +23,7 @@ public class SwerveModule {
     private final CANSparkMax driveMotor;
     private final CANSparkMax turningMotor;
 
-    //だから2つのエンコーダーにアクセスしたいよね[5:11]
+    //2つのエンコーダーにアクセスしたい[5:11]
     //CANEncoder -> RelativeEncoder
     private final RelativeEncoder driveEncoder;
     private final RelativeEncoder turningEncoder;
@@ -101,6 +102,10 @@ public class SwerveModule {
         return turningEncoder.getVelocity();
     }
 
+    public SwerveModulePosition getPosition() {
+        return new SwerveModulePosition(getDrivePosition(), new Rotation2d(getTurningPosition()));
+    }
+
     public double getAbsoluteEncoderRad(){
         //読み取った電圧の値を電圧で割る [7:22]
         //動画とさくてんが使うエンコーダーが違うので、神が直したよ
@@ -132,14 +137,14 @@ public class SwerveModule {
     public void setDesiredState(SwerveModuleState state){
         //コントローラーを使い始めるとき毎回タイヤが0度になる問題を解決 [9:29]
         if(Math.abs(state.speedMetersPerSecond) < 0.001){
-            stop();//15行後にあるよ
+           stop();//15行後にあるよ
             return;
         }
         
         //操縦するときjoystickが90度を超えなくていいようにする [8:35]
         state = SwerveModuleState.optimize(state,getState().angle);
         //動きが速すぎるので 1/3 かけて遅くする [8:50]
-        driveMotor.set(state.speedMetersPerSecond /3);
+        driveMotor.set(state.speedMetersPerSecond);
         //pid制御について角度の目標値と現在値を計算する？ [9:00]　春日谷君のコードに変える
         //turningMotor.set(turningPidController.calculate(getTurningPosition(), state.angle.getRadians()));
 
@@ -164,13 +169,17 @@ public class SwerveModule {
         double x_setPoint = setPoint * Math.PI * 2 / 360;
 
         m_pidController.setReference(x_setPoint, CANSparkMax.ControlType.kPosition);
+        // //現在の角度
+        // SmartDashboard.putNumber("current" + absoluteEncoder.getDeviceID(), current);
+        // //目標値
+        // SmartDashboard.putNumber("setPoint" + absoluteEncoder.getDeviceID(), setPoint);
         //春日谷
     }
     
     //[9:36]
     public void stop() {
         driveMotor.set(0);
-        turningMotor.set(0);
+        // turningMotor.set(0);
     }
 
 }

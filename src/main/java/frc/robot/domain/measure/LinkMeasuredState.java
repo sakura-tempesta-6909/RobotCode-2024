@@ -6,6 +6,8 @@ public class LinkMeasuredState {
     //*LinkRightの現在の角度 */
     public static double linkRightAngle;
     /**Ampの高さか否か */
+    public static boolean linkAmpsHeight;
+    /**Speakerの高さか否か */
     //A
     public static boolean linkAmpHeight;
     /**Speakerの真下の高さか否か */
