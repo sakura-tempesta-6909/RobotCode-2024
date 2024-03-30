@@ -2,7 +2,6 @@ package frc.robot.components.link.infrastructure;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.FollowerType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -26,7 +25,7 @@ public class Link implements LinkRepository {
         linkMotorLeft = new TalonSRX(LinkConst.Ports.linkMotorLeft);
         linkMotorRight = new VictorSPX(LinkConst.Ports.linkMotorRight);
 
-        //moterの設定
+        //motorの設定
         linkMotorLeft.configFactoryDefault();
         linkMotorLeft.configSelectedFeedbackSensor(FeedbackDevice.Analog);
         //Sensorの値を逆にしている
@@ -61,6 +60,8 @@ public class Link implements LinkRepository {
 
         //PID
         linkMotorLeft.config_kP(0, PID.LinkP);
+        linkMotorLeft.config_kI(0, PID.LinkI);
+        linkMotorLeft.config_kD(0, PID.LinkD);
     }
     @Override
     public void MoveShooterToSpecifiedAngle(double TargetShooterAngle) {
@@ -70,27 +71,18 @@ public class Link implements LinkRepository {
 
     @Override
     public void readSensors() {
-        double linkAngle = linkMotorLeft.getSelectedSensorPosition();
         //SmartDashboard.putNumber("linkMotorLeft position", linkMotorLeft.getSelectedSensorPosition());
         LinkMeasuredState.linkLeftAngle = linkMotorLeft.getSelectedSensorPosition();
-        SmartDashboard.putNumber("LinkLeftAngle", LinkMeasuredState.linkLeftAngle);
-        double linkRightAngle = linkMotorRight.getSelectedSensorPosition();
-        SmartDashboard.putNumber("linkRightAngle", linkRightAngle);
+        LinkMeasuredState.linkRightAngle = linkMotorRight.getSelectedSensorPosition();
+
         // 初期化
         LinkMeasuredState.linkAmpsHeight = false;
         LinkMeasuredState.linkAmpHeight = false;
         LinkMeasuredState.linkClimbHeight = false;
         LinkMeasuredState.linkSpeakerHeight = false;
         LinkMeasuredState.linkUnderStage = false;
+
         // 条件に応じてboolean変数の値を更新
-        if (linkAngle <= -250 && linkAngle >= -260) {
-          LinkMeasuredState.linkAmpsHeight = true;
-          LinkMeasuredState.linkClimbHeight = true;
-        } else if (linkAngle <= -405 && linkAngle >= -395) {
-          LinkMeasuredState.linkSpeakerHeight = true;
-        } else if (linkAngle <= -485) {
-          LinkMeasuredState.linkUnderStage = true;
-        } 
         SmartDashboard.putBoolean("Amp", LinkMeasuredState.linkAmpsHeight);
         if (LinkMeasuredState.linkLeftAngle <= -250 && LinkMeasuredState.linkLeftAngle >= -260) {
           LinkMeasuredState.linkAmpHeight = true;
@@ -104,6 +96,9 @@ public class Link implements LinkRepository {
         } else if (LinkMeasuredState.linkLeftAngle <= -295 && LinkMeasuredState.linkLeftAngle >= -305) {
           LinkMeasuredState.linkSpeakerHeight = true;
         }
+
+        SmartDashboard.putNumber("LinkLeftAngle", LinkMeasuredState.linkLeftAngle);
+        SmartDashboard.putNumber("linkRightAngle", LinkMeasuredState.linkRightAngle);
         SmartDashboard.putBoolean("Amp", LinkMeasuredState.linkAmpHeight);
         SmartDashboard.putBoolean("Speaker", LinkMeasuredState.linkSpeakerHeight);
         SmartDashboard.putBoolean("Climb", LinkMeasuredState.linkClimbHeight);
@@ -125,12 +120,5 @@ public class Link implements LinkRepository {
     @Override 
     public void MoveShooterClimb() {
 
-    }
-
-    public void test1() {
-        linkMotorRight.set(ControlMode.PercentOutput, 0.2);
-    }
-    public void test2() {
-        linkMotorRight.set(ControlMode.PercentOutput, -0.2);
     }
 }
