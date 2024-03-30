@@ -19,6 +19,9 @@ public class LinkParameter {
           public static final double LinkI = 0;
           public static final double LinkD = 0;
         }
+        public static class Current {
+        public static final double ClimbCurrent = 0;
+        }
 
     public static void ConstInit() {
     }

@@ -22,4 +22,6 @@ public class LinkMeasuredState {
     public static boolean linkSourceHeight;
     //**Podiumを後ろのBumperが超えているときのLinkの高さに達しているか否か */
     public static boolean linkOverPodium;
+
+    public static double linkCurrent;
 }

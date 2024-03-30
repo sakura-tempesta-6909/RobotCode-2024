@@ -19,8 +19,14 @@ public class LEDService implements Service {
             case NOTEGet:
                 repository.flashLight(255, 50, 0);
                 break;
-            case Under720mm:
+            case ShooterSpeed:
+                repository.flashLight(0, 255, 0);
+                break;
+            case UnderStage:
                 repository.flashLight(0, 0, 255);
+                break;
+            case ClimbSuccess:
+                repository.flashLight(255, 0, 0);
                 break;
         }
     } 

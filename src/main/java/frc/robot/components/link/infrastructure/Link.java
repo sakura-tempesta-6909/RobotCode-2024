@@ -104,6 +104,7 @@ public class Link implements LinkRepository {
         } else if (LinkMeasuredState.linkLeftAngle <= -295 && LinkMeasuredState.linkLeftAngle >= -305) {
           LinkMeasuredState.linkSpeakerHeight = true;
         }
+        LinkMeasuredState.linkCurrent = linkMotorLeft.getStatorCurrent();
         SmartDashboard.putBoolean("Amp", LinkMeasuredState.linkAmpHeight);
         SmartDashboard.putBoolean("Speaker", LinkMeasuredState.linkSpeakerHeight);
         SmartDashboard.putBoolean("Climb", LinkMeasuredState.linkClimbHeight);
