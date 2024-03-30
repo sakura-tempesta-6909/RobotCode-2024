@@ -76,8 +76,6 @@ public class Link implements LinkRepository {
 
     @Override
     public void readSensors() {
-        double linkAngle = linkMotorLeft.getSelectedSensorPosition();
-        //SmartDashboard.putNumber("linkMotorLeft position", linkMotorLeft.getSelectedSensorPosition());
         LinkMeasuredState.linkLeftAngle = linkMotorLeft.getSelectedSensorPosition();
         SmartDashboard.putNumber("LinkLeftAngle", LinkMeasuredState.linkLeftAngle);
         LinkMeasuredState.linkRightAngle = linkMotorRight.getSelectedSensorPosition();
@@ -87,35 +85,39 @@ public class Link implements LinkRepository {
         LinkMeasuredState.linkAmpHeight = false;
         LinkMeasuredState.linkClimbHeight = false;
         LinkMeasuredState.linkSpeakerHeight = false;
-        LinkMeasuredState.linkUnderStage = false;
+        LinkMeasuredState.linkUnderStageHeight = false;
+        LinkMeasuredState.linkSpeakerSideHeight = false;
         // 条件に応じてboolean変数の値を更新
-        if (LinkMeasuredState.linkLeftAngle <= Angles.AmpLinkLeft + 5 && Angles.AmpLinkLeft >= LinkLeftSoftLimit.ForwardSoftLimit - 5) {
+        if(LinkMeasuredState.linkLeftAngle <= Angles.AmpLinkLeft + 5 && Angles.AmpLinkLeft >= LinkLeftSoftLimit.ForwardSoftLimit - 5) {
           LinkMeasuredState.linkAmpHeight = true;
           LinkMeasuredState.linkClimbHeight = true;
-        } else if (LinkMeasuredState.linkLeftAngle <= -405 && LinkMeasuredState.linkLeftAngle >= -395) {
-          LinkMeasuredState.linkOverPodium = true;
-        } else if (LinkMeasuredState.linkLeftAngle <= -405 && LinkMeasuredState.linkLeftAngle >= -395) {  
-          LinkMeasuredState.linkSourceHeight = true;
-        } else if (LinkMeasuredState.linkLeftAngle <= -485) {
-          LinkMeasuredState.linkUnderStage = true;
-        } else if (LinkMeasuredState.linkLeftAngle <= -295 && LinkMeasuredState.linkLeftAngle >= -305) {
+        } else if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerPodiumLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerPodiumLinkLeft - 5) {
+          LinkMeasuredState.linkPodiumHeight = true;
+        } else if(LinkMeasuredState.linkLeftAngle <= Angles.IntakeLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.IntakeLinkLeft - 5) {  
+          LinkMeasuredState.linkIntakeHeight = true;
+        } else if(LinkMeasuredState.linkLeftAngle <= Angles.StageLinkLeft) {
+          LinkMeasuredState.linkUnderStageHeight = true;
+        } else if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerSideLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerSideLinkLeft - 5) {
           LinkMeasuredState.linkSpeakerHeight = true;
+        } else if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerSideLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerSideLinkLeft - 5) {
+          LinkMeasuredState.linkSpeakerSideHeight = true;
         }
         SmartDashboard.putBoolean("Amp", LinkMeasuredState.linkAmpHeight);
-        SmartDashboard.putBoolean("Speaker", LinkMeasuredState.linkSpeakerHeight);
+        SmartDashboard.putBoolean("SpeakerBelow", LinkMeasuredState.linkSpeakerHeight);
         SmartDashboard.putBoolean("Climb", LinkMeasuredState.linkClimbHeight);
-        SmartDashboard.putBoolean("Stage", LinkMeasuredState.linkUnderStage);
-        SmartDashboard.putBoolean("Source", LinkMeasuredState.linkSourceHeight);
-        SmartDashboard.putBoolean("Podium", LinkMeasuredState.linkOverPodium);
+        SmartDashboard.putBoolean("UnderStage", LinkMeasuredState.linkUnderStageHeight);
+        SmartDashboard.putBoolean("Intake", LinkMeasuredState.linkIntakeHeight);
+        SmartDashboard.putBoolean("Podium", LinkMeasuredState.linkPodiumHeight);
+        SmartDashboard.putBoolean("SpeakerSide", LinkMeasuredState.linkSpeakerSideHeight);
 
         SmartDashboard.putNumber("linkMotorLeftOutputPersent", linkMotorLeft.getMotorOutputPercent());
         SmartDashboard.putNumber("linkMotorRightOutputPersent", linkMotorRight.getMotorOutputPercent());
     }
     @Override
     public void KeepCurrentAngle() {
-        if(linkMotorLeft.getSelectedSensorPosition() <= LinkLeftSoftLimit.ReverseSoftLimit + 40 && linkMotorRight.getSelectedSensorPosition() <= LinkRightSoftLimit.ReverseSoftLimit + 40) {
-            linkMotorLeft.set(ControlMode.PercentOutput, 0.05);
-            linkMotorRight.set(ControlMode.PercentOutput, 0.05);
+        if(linkMotorLeft.getSelectedSensorPosition() <= LinkParameter.Angles.KeepCurrentAngleLinkLeft && linkMotorRight.getSelectedSensorPosition() <= LinkParameter.Angles.KeepCurrentAngleLinkRight) {
+            linkMotorLeft.set(ControlMode.PercentOutput, LinkParameter.Percent.KeepCurrentAngleLink);
+            linkMotorRight.set(ControlMode.PercentOutput, LinkParameter.Percent.KeepCurrentAngleLink);
         } else {
             linkMotorLeft.set(ControlMode.PercentOutput, 0);
             linkMotorRight.set(ControlMode.PercentOutput, 0);
@@ -136,7 +138,7 @@ public class Link implements LinkRepository {
       linkMotorLeft.set(ControlMode.PercentOutput, upOrDown);
       linkMotorRight.set(ControlMode.PercentOutput, upOrDown);
     }
-    
+
     public void test() {
     }
 }

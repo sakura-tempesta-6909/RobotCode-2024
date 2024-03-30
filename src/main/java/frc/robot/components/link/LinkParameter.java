@@ -15,6 +15,7 @@ public class LinkParameter {
         public static final double IntakeLinkLeft = 0.02;
         public static final double ClimbLinkLeft = -0.6;
         public static final double StageLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit;
+        public static final double KeepCurrentAngleLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 40;
 
         public static final double AmpLinkRight = LinkRightSoftLimit.ForwardSoftLimit;
         public static final double SpeakerBelowLinkRight = LinkRightSoftLimit.ForwardSoftLimit - 24;
@@ -23,6 +24,7 @@ public class LinkParameter {
         public static final double IntakeLinkRight = 0.02;
         public static final double ClimbLinkRight = -0.6;
         public static final double StageLinkRight = LinkRightSoftLimit.ReverseSoftLimit;
+        public static final double KeepCurrentAngleLinkRight = LinkLeftSoftLimit.ReverseSoftLimit + 40;
     }
      //pidの値を書く
     public static class PID {
@@ -32,6 +34,7 @@ public class LinkParameter {
     }
     public static class Percent {
         public static final double Climb = -0.6;
+        public static final double KeepCurrentAngleLink = 0.05;
     }
 
     public static void ConstInit() {
