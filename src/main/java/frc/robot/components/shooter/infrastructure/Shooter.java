@@ -89,7 +89,7 @@ public class Shooter implements ShooterRepository {
 
         ShooterMeasuredState.readyToShoot = ShooterMeasuredState.shooterUpperSpeed > ShootingMotor.shootAvailableSpeedUpper 
         && ShooterMeasuredState.shooterLowerSpeed > ShootingMotor.shootAvailableSpeedLower 
-        && Math.abs(ShooterMeasuredState.shooterLowerSpeed - ShooterMeasuredState.shooterUpperSpeed) > ShootingMotor.shootAvailableAbsolute;
+        && Math.abs(ShooterMeasuredState.shooterLowerSpeed - ShooterMeasuredState.shooterUpperSpeed) < ShootingMotor.shootAvailableAbsolute;
 
         SmartDashboard.putBoolean("ready to shoot", ShooterMeasuredState.readyToShoot);
     }
