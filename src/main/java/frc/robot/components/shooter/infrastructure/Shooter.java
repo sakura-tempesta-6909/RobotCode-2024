@@ -90,6 +90,8 @@ public class Shooter implements ShooterRepository {
         ShooterMeasuredState.readyToShoot = ShooterMeasuredState.shooterUpperSpeed > ShootingMotor.shootAvailableSpeedUpper 
         && ShooterMeasuredState.shooterLowerSpeed > ShootingMotor.shootAvailableSpeedLower 
         && Math.abs(ShooterMeasuredState.shooterLowerSpeed - ShooterMeasuredState.shooterUpperSpeed) > ShootingMotor.shootAvailableAbsolute;
+
+        SmartDashboard.putBoolean("ready to shoot", ShooterMeasuredState.readyToShoot);
     }
     @Override
     public void stopIntake() {
@@ -99,6 +101,7 @@ public class Shooter implements ShooterRepository {
     }
     @Override
     public void increaseRotation() {
-        
+        noteUpperShooterPID.setReference(ShooterParameter.Speed.ShooterTargetSpeed, CANSparkBase.ControlType.kVelocity);
+        noteLowerShooterPID.setReference(ShooterParameter.Speed.ShooterTargetSpeed, CANSparkBase.ControlType.kVelocity);
     }
 }
