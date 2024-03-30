@@ -29,11 +29,11 @@ public class Shooter implements ShooterRepository {
         lowerShooterEncoder = noteLowerShooter.getEncoder();
         
 
-        noteUpperShooterPID.setP(ShooterParameter.PID.ShooterP);
+        noteUpperShooterPID.setP(ShooterParameter.PID.UpperShooterP);
         noteUpperShooterPID.setI(ShooterParameter.PID.ShooterI);
         noteUpperShooterPID.setD(ShooterParameter.PID.ShooterD);
         noteUpperShooterPID.setFF(ShooterParameter.PID.ShooterF);
-        noteLowerShooterPID.setP(ShooterParameter.PID.ShooterP);
+        noteLowerShooterPID.setP(ShooterParameter.PID.LowerShooterP);
         noteLowerShooterPID.setI(ShooterParameter.PID.ShooterI);
         noteLowerShooterPID.setD(ShooterParameter.PID.ShooterD);
         noteUpperShooterPID.setFF(ShooterParameter.PID.ShooterF);
