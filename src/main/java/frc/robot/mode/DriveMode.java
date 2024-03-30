@@ -77,7 +77,7 @@ class DriveMode extends ModeManager {
 
         if (ShooterMeasuredState.isNoteGet) {
             LEDModel.pattern = LEDModel.LEDFlashes.NOTEGet;
-        } else if (LinkMeasuredState.linkUnderStage) {
+        } else if (LinkMeasuredState.linkUnderStageHeight) {
             LEDModel.pattern = LEDModel.LEDFlashes.Under720mm;
         }
     }
