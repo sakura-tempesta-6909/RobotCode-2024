@@ -125,8 +125,8 @@ public class Link implements LinkRepository {
 
     @Override 
     public void MoveShooterClimb() {
-      linkMotorLeft.set(ControlMode.PercentOutput, LinkParameter.Angles.ClimbLinkLeft);
-      linkMotorRight.set(ControlMode.PercentOutput, LinkParameter.Angles.ClimbLinkRight);
+      linkMotorLeft.set(ControlMode.PercentOutput, LinkParameter.Percent.Climb);
+      linkMotorRight.set(ControlMode.PercentOutput, LinkParameter.Percent.Climb);
     }
 
     @Override
@@ -136,20 +136,7 @@ public class Link implements LinkRepository {
       linkMotorLeft.set(ControlMode.PercentOutput, upOrDown);
       linkMotorRight.set(ControlMode.PercentOutput, upOrDown);
     }
-
-    // @Override
-    // public void MoveShooterDownFineAdjustment() {
-    //   //Climb時の微調整用(↓)
-    //   linkMotorLeft.set(ControlMode.PercentOutput, -0.1);
-    //   linkMotorRight.set(ControlMode.PercentOutput, -0.1);
-    // }
-
-    public void test1() {
-      linkMotorLeft.set(ControlMode.Position, LinkLeftSoftLimit.ForwardSoftLimit);
-      linkMotorRight.set(ControlMode.Position, LinkRightSoftLimit.ForwardSoftLimit);
-    }
-    public void test2() {
-      linkMotorLeft.set(ControlMode.Position, LinkLeftSoftLimit.ReverseSoftLimit);
-      linkMotorRight.set(ControlMode.Position,  LinkRightSoftLimit.ReverseSoftLimit);
+    
+    public void test() {
     }
 }

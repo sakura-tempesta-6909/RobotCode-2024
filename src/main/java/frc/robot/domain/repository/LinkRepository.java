@@ -27,9 +27,8 @@ public interface LinkRepository {
 
     /**
      * climbするときにLinkの角度を微調整するために上げる
-     * @param Upp
+     * @param Up
      * @param Down
-     * wn
      */
     void MoveShooterFineAdjustment(double upOrDown); 
 }

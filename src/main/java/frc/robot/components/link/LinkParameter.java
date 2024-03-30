@@ -17,7 +17,7 @@ public class LinkParameter {
         public static final double StageLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit;
 
         public static final double AmpLinkRight = LinkRightSoftLimit.ForwardSoftLimit;
-        public static final double SpeakerBelowLinkRight = LinkRightSoftLimit.ForwardSoftLimit - 23;
+        public static final double SpeakerBelowLinkRight = LinkRightSoftLimit.ForwardSoftLimit - 24;
         public static final double SpeakerPodiumLinkRight = 0.3;
         public static final double SpeakerSideLinkRight = 0.02;
         public static final double IntakeLinkRight = 0.02;
@@ -29,6 +29,9 @@ public class LinkParameter {
           public static final double LinkP = 5;
           public static final double LinkI = 2.5e-3;
           public static final double LinkD = 2;
+    }
+    public static class Percent {
+        public static final double Climb = -0.6;
     }
 
     public static void ConstInit() {
