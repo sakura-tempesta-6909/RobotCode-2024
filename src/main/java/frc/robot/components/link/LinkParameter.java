@@ -10,21 +10,21 @@ public class LinkParameter {
          */
         public static final double AmpLinkLeft = LinkLeftSoftLimit.ForwardSoftLimit;
         public static final double SpeakerBelowLinkLeft = LinkLeftSoftLimit.ForwardSoftLimit - 24;
-        public static final double SpeakerPodiumLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 60;
+        public static final double SpeakerPodiumLinkLeft = LinkLeftSoftLimit.ForwardSoftLimit - 176;
         public static final double SpeakerSideLinkLeft = LinkLeftSoftLimit.ForwardSoftLimit - 50;
         public static final double IntakeLinkLeft = LinkLeftSoftLimit.ForwardSoftLimit - 80;
         public static final double ClimbLinkLeft = LinkLeftSoftLimit.ForwardSoftLimit;
-        public static final double StageLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit;
-        public static final double KeepCurrentAngleLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 40;
+        public static final double StageLinkLeft = LinkLeftSoftLimit.ForwardSoftLimit;
+        public static final double KeepCurrentAngleLinkLeft = LinkLeftSoftLimit.ForwardSoftLimit - 196;
 
         public static final double AmpLinkRight = LinkRightSoftLimit.ForwardSoftLimit;
         public static final double SpeakerBelowLinkRight = LinkRightSoftLimit.ForwardSoftLimit - 24;
-        public static final double SpeakerPodiumLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 60;
+        public static final double SpeakerPodiumLinkRight = LinkRightSoftLimit.ForwardSoftLimit - 176;
         public static final double SpeakerSideLinkRight = LinkRightSoftLimit.ForwardSoftLimit - 50;
         public static final double IntakeLinkRight = LinkRightSoftLimit.ForwardSoftLimit - 80;
         public static final double ClimbLinkRight = LinkRightSoftLimit.ForwardSoftLimit;
-        public static final double StageLinkRight = LinkRightSoftLimit.ReverseSoftLimit;
-        public static final double KeepCurrentAngleLinkRight = LinkLeftSoftLimit.ReverseSoftLimit + 40;
+        public static final double StageLinkRight = LinkRightSoftLimit.ForwardSoftLimit;
+        public static final double KeepCurrentAngleLinkRight = LinkLeftSoftLimit.ForwardSoftLimit - 196;
     }
      //pidの値を書く
     public static class PID {
