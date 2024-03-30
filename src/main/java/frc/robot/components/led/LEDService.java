@@ -27,6 +27,9 @@ public class LEDService implements Service {
                 break;
             case ClimbSuccess:
                 repository.flashLight(255, 0, 0);
+            case AlwaysOff:
+                break;
+            default:
                 break;
         }
     } 

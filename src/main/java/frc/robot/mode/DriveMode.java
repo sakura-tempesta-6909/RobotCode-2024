@@ -41,14 +41,12 @@ class DriveMode extends ModeManager {
         if(operateController.getYButton()) {
             LinkModel.shooterAngleMode = ShooterAngleMode.s_speakerShootBelow;
             ShooterModel.shooterMode = ShooterMode.s_increaseRotation;
-            LinkModel.shooterAngleMode = ShooterAngleMode.s_keepCurrentAngle;
         }
 
         /** podiumからのシュートの角度にする＆回転速度を上げる  */
         if(operateController.getBButton()) {
             LinkModel.shooterAngleMode = ShooterAngleMode.s_speakerShootPodium;
             ShooterModel.shooterMode = ShooterMode.s_increaseRotation;
-            LinkModel.shooterAngleMode = ShooterAngleMode.s_keepCurrentAngle;
         }
 
         /** SPEAKERのleft&rightからのシュートの角度にする＆回転速度上げる */
@@ -80,13 +78,13 @@ class DriveMode extends ModeManager {
             LEDModel.pattern = LEDModel.LEDFlashes.NOTEGet;
         } else if (LinkMeasuredState.linkUnderStageHeight) {
             LEDModel.pattern = LEDModel.LEDFlashes.UnderStage;
-        } else if (ShooterMeasuredState.shooterSpeed > ShooterParameter.Speed.ShooterSpeedWhenPusherMove) {
+        } else if (ShooterMeasuredState.readyToShoot) {
             LEDModel.pattern = LEDModel.LEDFlashes.ShooterSpeed;
         } else if (LinkParameter.Current.ClimbCurrent > LinkMeasuredState.linkCurrent) {
             LEDModel.pattern = LEDModel.LEDFlashes.ClimbSuccess;
-        } else if (ShooterMeasuredState.isNoteGet && ShooterMeasuredState.shooterSpeed > ShooterParameter.Speed.ShooterSpeedWhenPusherMove) {
+        } else if (ShooterMeasuredState.isNoteGet && ShooterMeasuredState.readyToShoot) {
             LEDModel.pattern = LEDModel.LEDFlashes.NOTEGet;
-        } else if (ShooterMeasuredState.shooterSpeed > ShooterParameter.Speed.ShooterSpeedWhenPusherMove && LinkMeasuredState.linkUnderStageHeight) {
+        } else if (ShooterMeasuredState.readyToShoot && LinkMeasuredState.linkUnderStageHeight) {
             LEDModel.pattern = LEDModel.LEDFlashes.ShooterSpeed;
         } else if (ShooterMeasuredState.isNoteGet && LinkMeasuredState.linkUnderStageHeight) {
             LEDModel.pattern = LEDModel.LEDFlashes.NOTEGet;
