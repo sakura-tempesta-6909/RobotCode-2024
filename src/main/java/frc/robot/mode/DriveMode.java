@@ -78,7 +78,7 @@ class DriveMode extends ModeManager {
 
         if (ShooterMeasuredState.isNoteGet) {
             LEDModel.pattern = LEDModel.LEDFlashes.NOTEGet;
-        } else if (LinkMeasuredState.linkUnderStage) {
+        } else if (LinkMeasuredState.linkUnderStageHeight) {
             LEDModel.pattern = LEDModel.LEDFlashes.UnderStage;
         } else if (ShooterMeasuredState.shooterSpeed > ShooterParameter.Speed.ShooterSpeedWhenPusherMove) {
             LEDModel.pattern = LEDModel.LEDFlashes.ShooterSpeed;
@@ -86,9 +86,9 @@ class DriveMode extends ModeManager {
             LEDModel.pattern = LEDModel.LEDFlashes.ClimbSuccess;
         } else if (ShooterMeasuredState.isNoteGet && ShooterMeasuredState.shooterSpeed > ShooterParameter.Speed.ShooterSpeedWhenPusherMove) {
             LEDModel.pattern = LEDModel.LEDFlashes.NOTEGet;
-        } else if (ShooterMeasuredState.shooterSpeed > ShooterParameter.Speed.ShooterSpeedWhenPusherMove && LinkMeasuredState.linkUnderStage) {
+        } else if (ShooterMeasuredState.shooterSpeed > ShooterParameter.Speed.ShooterSpeedWhenPusherMove && LinkMeasuredState.linkUnderStageHeight) {
             LEDModel.pattern = LEDModel.LEDFlashes.ShooterSpeed;
-        } else if (ShooterMeasuredState.isNoteGet && LinkMeasuredState.linkUnderStage) {
+        } else if (ShooterMeasuredState.isNoteGet && LinkMeasuredState.linkUnderStageHeight) {
             LEDModel.pattern = LEDModel.LEDFlashes.NOTEGet;
         }
     }
