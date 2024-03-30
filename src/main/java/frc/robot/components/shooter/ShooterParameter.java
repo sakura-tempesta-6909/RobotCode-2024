@@ -12,8 +12,9 @@ public class ShooterParameter {
     }
     public static class PID {
         public static final double ShooterP = 0.0002;
-        public static final double ShooterI = 5e-7;
+        public static final double ShooterI = 2.05e-7;
         public static final double ShooterD = 0;
+        public static final double ShooterF = 0.00015;
     }
     public static void ConstInit() {
 
