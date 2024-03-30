@@ -5,14 +5,17 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.components.shooter.ShooterConst;
 import frc.robot.components.shooter.ShooterParameter;
+import frc.robot.components.shooter.ShooterParameter.ShootingMotor;
 import frc.robot.domain.measure.ShooterMeasuredState;
 import frc.robot.domain.repository.ShooterRepository;
 
 public class Shooter implements ShooterRepository {
+
     final CANSparkMax noteUpperShooter, noteLowerShooter, notePusher;
     final SparkPIDController noteUpperShooterPID, noteLowerShooterPID;
     final DigitalInput noteDirectionSensor;
     final RelativeEncoder upperShooterEncoder, lowerShooterEncoder;
+
     public Shooter() {
         noteUpperShooter = new CANSparkMax(ShooterConst.Ports.NoteUpperShooter, CANSparkLowLevel.MotorType.kBrushless);
         noteLowerShooter = new CANSparkMax(ShooterConst.Ports.NoteLowerShooter, CANSparkLowLevel.MotorType.kBrushless);
@@ -57,10 +60,14 @@ public class Shooter implements ShooterRepository {
     public void noteShootSpeaker() {
         noteUpperShooterPID.setReference(ShooterParameter.Speed.ShooterTargetSpeed, CANSparkBase.ControlType.kVelocity);
         noteLowerShooterPID.setReference(ShooterParameter.Speed.ShooterTargetSpeed, CANSparkBase.ControlType.kVelocity);
-        if (ShooterMeasuredState.shooterSpeed > ShooterParameter.Speed.ShooterSpeedWhenPusherMove) {
+        if(ShooterMeasuredState.readyToShoot) {
             notePusher.set(ShooterParameter.Speed.PusherShootSpeed);
         }
+        else {
+            notePusher.set(ShooterParameter.Speed.Neutral);
+        }
     }
+    
 
     @Override
     public void noteShootAmp() {
@@ -78,11 +85,19 @@ public class Shooter implements ShooterRepository {
 
     @Override
     public void readSensors() {
-        ShooterMeasuredState.shooterSpeed = upperShooterEncoder.getVelocity();
+        ShooterMeasuredState.shooterUpperSpeed = upperShooterEncoder.getVelocity();
+        ShooterMeasuredState.shooterLowerSpeed = lowerShooterEncoder.getVelocity();
+
         ShooterMeasuredState.isNoteGet = !noteDirectionSensor.get();
         SmartDashboard.putNumber("noteUpperShooter", upperShooterEncoder.getVelocity());
         SmartDashboard.putNumber("noteLowerShooter", lowerShooterEncoder.getVelocity());
         SmartDashboard.putNumber("diff", upperShooterEncoder.getVelocity()-lowerShooterEncoder.getVelocity());
+
+        ShooterMeasuredState.readyToShoot = ShooterMeasuredState.shooterUpperSpeed > ShootingMotor.shootAvailableSpeedUpper 
+        && ShooterMeasuredState.shooterLowerSpeed > ShootingMotor.shootAvailableSpeedLower 
+        && Math.abs(ShooterMeasuredState.shooterLowerSpeed - ShooterMeasuredState.shooterUpperSpeed) < ShootingMotor.shootAvailableAbsolute;
+
+        SmartDashboard.putBoolean("ready to shoot", ShooterMeasuredState.readyToShoot);
     }
     @Override
     public void stopIntake() {
@@ -92,6 +107,7 @@ public class Shooter implements ShooterRepository {
     }
     @Override
     public void increaseRotation() {
-        
+        noteUpperShooterPID.setReference(ShooterParameter.Speed.ShooterTargetSpeed, CANSparkBase.ControlType.kVelocity);
+        noteLowerShooterPID.setReference(ShooterParameter.Speed.ShooterTargetSpeed, CANSparkBase.ControlType.kVelocity);
     }
 }
