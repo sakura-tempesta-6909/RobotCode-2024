@@ -10,19 +10,19 @@ public class LinkParameter {
          */
         public static final double AmpLinkLeft = LinkLeftSoftLimit.ForwardSoftLimit;
         public static final double SpeakerBelowLinkLeft = LinkLeftSoftLimit.ForwardSoftLimit - 24;
-        public static final double SpeakerPodiumLinkLeft = 0.3;
-        public static final double SpeakerSideLinkLeft = 0.02;
-        public static final double IntakeLinkLeft = 0.02;
-        public static final double ClimbLinkLeft = -0.6;
+        public static final double SpeakerPodiumLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 60;
+        public static final double SpeakerSideLinkLeft = LinkLeftSoftLimit.ForwardSoftLimit - 50;
+        public static final double IntakeLinkLeft = LinkLeftSoftLimit.ForwardSoftLimit - 80;
+        public static final double ClimbLinkLeft = LinkLeftSoftLimit.ForwardSoftLimit;
         public static final double StageLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit;
         public static final double KeepCurrentAngleLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 40;
 
         public static final double AmpLinkRight = LinkRightSoftLimit.ForwardSoftLimit;
         public static final double SpeakerBelowLinkRight = LinkRightSoftLimit.ForwardSoftLimit - 24;
-        public static final double SpeakerPodiumLinkRight = 0.3;
-        public static final double SpeakerSideLinkRight = 0.02;
-        public static final double IntakeLinkRight = 0.02;
-        public static final double ClimbLinkRight = -0.6;
+        public static final double SpeakerPodiumLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 60;
+        public static final double SpeakerSideLinkRight = LinkRightSoftLimit.ForwardSoftLimit - 50;
+        public static final double IntakeLinkRight = LinkRightSoftLimit.ForwardSoftLimit - 80;
+        public static final double ClimbLinkRight = LinkRightSoftLimit.ForwardSoftLimit;
         public static final double StageLinkRight = LinkRightSoftLimit.ReverseSoftLimit;
         public static final double KeepCurrentAngleLinkRight = LinkLeftSoftLimit.ReverseSoftLimit + 40;
     }
