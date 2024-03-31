@@ -69,8 +69,8 @@ public class Shooter implements ShooterRepository {
 
     @Override
     public void noteShootAmp() {
-        noteUpperShooter.set(ShooterParameter.Speed.ShooterIntakeSpeed);
-        noteLowerShooter.set(-ShooterParameter.Speed.ShooterIntakeSpeed);
+        noteUpperShooter.set(ShooterParameter.Speed.AmpShootSpeed);
+        noteLowerShooter.set(-ShooterParameter.Speed.AmpShootSpeed);
         notePusher.set(ShooterParameter.Speed.PusherShootSpeed);
     }
 
