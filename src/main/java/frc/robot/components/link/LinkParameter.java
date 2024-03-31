@@ -35,7 +35,7 @@ public class LinkParameter {
     }
 
     public static class Current {
-        public static final double ClimbCurrent = 0;
+        public static final double ClimbCurrent = 40;
     }
 
     public static class Percent {
