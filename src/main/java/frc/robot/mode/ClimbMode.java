@@ -23,10 +23,5 @@ class ClimbMode extends ModeManager {
         } else {
             LinkModel.shooterAngleMode = ShooterAngleMode.s_keepCurrentAngle;
         }
-
-        /** DriveModeに切り替える */
-        if(driveController.getBackButton()) {
-            
-        }
     }
 }

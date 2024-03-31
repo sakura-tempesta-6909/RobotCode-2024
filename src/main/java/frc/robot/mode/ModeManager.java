@@ -4,12 +4,21 @@ import edu.wpi.first.wpilibj.XboxController;
 
 public class ModeManager {
     public static void changeMode() {
+        //ClimbModeからDriveMode
+        if(driveController.getBackButton()) {
+            mode = ModeType.k_drive;
+        }
 
+        //DriveModeからClimbMode
+        if(driveController.getStartButton()) {
+            mode = ModeType.k_climb;
+        }
     }
 
     public enum ModeType {
         k_drive(DriveMode::changeModel),
         k_test(TestMode::changeState),
+        k_climb(ClimbMode::changeModel),
         ;
 
         private final Runnable changeModel;
