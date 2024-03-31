@@ -4,8 +4,8 @@ import edu.wpi.first.wpilibj.StadiaController;
 
 public class LinkConst {
     public static final class Ports {
-        public static final int linkMotorLeft = 16;
-        public static final int linkMotorRight = 17;
+        public static final int linkMotorLeft = 17;
+        public static final int linkMotorRight = 16;
     }
     //1つのfileにpublic classは1つだけ！
     public class LinkLeftSoftLimit {
