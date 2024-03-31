@@ -20,7 +20,7 @@ public interface LinkRepository {
     void readSensors();
 
     /**
-     * climbする(Linkの角度を下げる時にPersentOutputを使用)
+     * climbする(Linkの角度を下げる時にPercentOutputを使用)
      * @param MostlyClimb 大体のClimb時の角度
      */
     void MoveShooterClimb();
