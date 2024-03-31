@@ -26,12 +26,18 @@ public class LinkParameter {
         public static final double StageLinkRight = LinkRightSoftLimit.ReverseSoftLimit;
         public static final double KeepCurrentAngleLinkRight = LinkLeftSoftLimit.ReverseSoftLimit + 40;
     }
-     //pidの値を書く
+
+    //pidの値を書く
     public static class PID {
-          public static final double LinkP = 5;
-          public static final double LinkI = 2.5e-3;
-          public static final double LinkD = 2;
+        public static final double LinkP = 5;
+        public static final double LinkI = 2.5e-3;
+        public static final double LinkD = 2;
     }
+
+    public static class Current {
+        public static final double ClimbCurrent = 40;
+    }
+
     public static class Percent {
         public static final double Climb = -0.6;
         public static final double KeepCurrentAngleLink = 0.05;
@@ -39,5 +45,5 @@ public class LinkParameter {
 
     public static void ConstInit() {
     }
-    
+
 }

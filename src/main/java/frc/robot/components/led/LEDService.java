@@ -14,14 +14,19 @@ public class LEDService implements Service {
     public void applyModel() {
         switch (LEDModel.pattern) {
             case AlwaysOn:
-                repository.changeLight(255, 0, 255);
+                repository.changeLight(150, 0, 150);
                 break;
             case NOTEGet:
-                repository.flashLight(255, 50, 0);
+                repository.flashLight(150, 25, 0);
                 break;
-            case Under720mm:
-                repository.flashLight(0, 0, 255);
+            case ShooterSpeed:
+                repository.flashLight(0, 150, 0);
                 break;
+            case UnderStage:
+                repository.flashLight(0, 0, 150);
+                break;
+            case ClimbSuccess:
+                repository.flashLight(150, 0, 0);
             case AlwaysOff:
                 break;
             default:

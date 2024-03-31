@@ -7,7 +7,9 @@ public class LEDModel {
         AlwaysOn,
         /** １秒ごとに点滅を繰り返す */
         NOTEGet,
-        Under720mm,
+        UnderStage,
+        ShooterSpeed,
+        ClimbSuccess,
         /** ずっと消えている */
         AlwaysOff;
         
