@@ -16,11 +16,11 @@ public class LinkModel {
         s_intakeNote,
         /** CLIMBをする */
         s_climb,
-        //*Climbの角度にする */
+        /** Climbの角度にする */
         s_climbAngle,
-        //*Climb時のLinkの角度を上に微調整する */
+        /** Climb時のLinkの角度を上に微調整する */
         s_climbUpFineAdjustment,
-        //*Climb時のLinkの角度を下に微調整する */
+        /** Climb時のLinkの角度を下に微調整する */
         s_climbDownFineAdjustment,
         /** 何も入力されていない時今の角度を維持する */
         s_keepCurrentAngle
