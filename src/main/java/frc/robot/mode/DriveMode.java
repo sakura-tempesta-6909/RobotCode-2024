@@ -74,7 +74,7 @@ class DriveMode extends ModeManager {
         }
         
 
-        if (ShooterMeasuredState.isNoteGet) {
+        if (ShooterMeasuredState.isNoteGet && operateController.getRightBumper()) {
             LEDModel.pattern = LEDModel.LEDFlashes.NOTEGet;
         } else if (ShooterMeasuredState.readyToShoot) {
             LEDModel.pattern = LEDModel.LEDFlashes.ShooterSpeed;
