@@ -40,14 +40,12 @@ class DriveMode extends ModeManager {
         if(operateController.getYButton()) {
             LinkModel.shooterAngleMode = ShooterAngleMode.s_speakerShootBelow;
             ShooterModel.shooterMode = ShooterMode.s_increaseRotation;
-            LinkModel.shooterAngleMode = ShooterAngleMode.s_keepCurrentAngle;
         }
 
         /** podiumからのシュートの角度にする＆回転速度を上げる  */
         if(operateController.getBButton()) {
             LinkModel.shooterAngleMode = ShooterAngleMode.s_speakerShootPodium;
             ShooterModel.shooterMode = ShooterMode.s_increaseRotation;
-            LinkModel.shooterAngleMode = ShooterAngleMode.s_keepCurrentAngle;
         }
 
         /** SPEAKERのleft&rightからのシュートの角度にする＆回転速度上げる */
@@ -77,7 +75,7 @@ class DriveMode extends ModeManager {
 
         if (ShooterMeasuredState.isNoteGet) {
             LEDModel.pattern = LEDModel.LEDFlashes.NOTEGet;
-        } else if (LinkMeasuredState.linkUnderStage) {
+        } else if (LinkMeasuredState.linkUnderStageHeight) {
             LEDModel.pattern = LEDModel.LEDFlashes.Under720mm;
         }
     }

@@ -1,25 +1,24 @@
 package frc.robot.domain.measure;
 
 public class LinkMeasuredState {
-    /**Linkの現在の角度 */
+    /**LinkLeftの現在の角度 */
     public static double linkLeftAngle;
+    //*LinkRightの現在の角度 */
+    public static double linkRightAngle;
     /**Ampの高さか否か */
     public static boolean linkAmpsHeight;
-    /**Speakerの高さか否か */
-    //A
+    /**SpeakerBelowの高さか否か */
     public static boolean linkAmpHeight;
     /**Speakerの真下の高さか否か */
-    //B
     public static boolean linkSpeakerHeight;
     /**720mm以下か否か(Stageの高さより下) */
-    //L
-    public static boolean linkUnderStage;
+    public static boolean linkUnderStageHeight;
     /**climbの高さか否か */
-    //Y
     public static boolean linkClimbHeight;
     //**Sourceの高さか否か */
-    //X
-    public static boolean linkSourceHeight;
+    public static boolean linkIntakeHeight;
     //**Podiumを後ろのBumperが超えているときのLinkの高さに達しているか否か */
-    public static boolean linkOverPodium;
+    public static boolean linkPodiumHeight;
+    //**SpeakerSideの高さに達しているか否か */
+    public static boolean linkSpeakerSideHeight;
 }
