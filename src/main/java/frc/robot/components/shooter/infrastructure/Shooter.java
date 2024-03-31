@@ -60,7 +60,7 @@ public class Shooter implements ShooterRepository {
     public void noteShootSpeaker() {
         noteUpperShooterPID.setReference(ShooterParameter.Speed.ShooterTargetSpeed, CANSparkBase.ControlType.kVelocity);
         noteLowerShooterPID.setReference(ShooterParameter.Speed.ShooterTargetSpeed, CANSparkBase.ControlType.kVelocity);
-        if (ShooterMeasuredState.shooterSpeed > ShooterParameter.Speed.ShooterSpeedWhenPusherMove) {
+        if(ShooterMeasuredState.readyToShoot) {
             notePusher.set(ShooterParameter.Speed.PusherShootSpeed);
         }
         else {
