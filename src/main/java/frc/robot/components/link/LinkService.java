@@ -39,9 +39,11 @@ public class LinkService implements Service {
             case s_climb:
                 repository.MoveShooterClimb();
                 break;
-            case s_climbFineAdjustment:
-                repository.MoveShooterFineAdjustment(0);
+            case s_climbUpFineAdjustment:
+                repository.MoveShooterFineAdjustment(LinkConst.FineAdjustment.upAdjustment);
                 break;
+            case s_climbDownFineAdjustment:
+                repository.MoveShooterFineAdjustment(LinkConst.FineAdjustment.downAdjustment);
         }
     }
 
