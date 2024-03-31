@@ -76,18 +76,12 @@ class DriveMode extends ModeManager {
 
         if (ShooterMeasuredState.isNoteGet) {
             LEDModel.pattern = LEDModel.LEDFlashes.NOTEGet;
-        } else if (LinkMeasuredState.linkUnderStageHeight) {
-            LEDModel.pattern = LEDModel.LEDFlashes.UnderStage;
         } else if (ShooterMeasuredState.readyToShoot) {
             LEDModel.pattern = LEDModel.LEDFlashes.ShooterSpeed;
         } else if (LinkParameter.Current.ClimbCurrent > LinkMeasuredState.linkCurrent) {
             LEDModel.pattern = LEDModel.LEDFlashes.ClimbSuccess;
-        } else if (ShooterMeasuredState.isNoteGet && ShooterMeasuredState.readyToShoot) {
-            LEDModel.pattern = LEDModel.LEDFlashes.NOTEGet;
-        } else if (ShooterMeasuredState.readyToShoot && LinkMeasuredState.linkUnderStageHeight) {
-            LEDModel.pattern = LEDModel.LEDFlashes.ShooterSpeed;
-        } else if (ShooterMeasuredState.isNoteGet && LinkMeasuredState.linkUnderStageHeight) {
-            LEDModel.pattern = LEDModel.LEDFlashes.NOTEGet;
+        } else if (LinkMeasuredState.linkUnderStageHeight) {
+            LEDModel.pattern = LEDModel.LEDFlashes.UnderStage;
         }
     }
     
