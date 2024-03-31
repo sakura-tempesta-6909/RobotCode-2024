@@ -35,7 +35,7 @@ public class Link implements LinkRepository {
 
         linkMotorRight.configFactoryDefault();
         linkMotorRight.configSelectedFeedbackSensor(FeedbackDevice.Analog);
-        linkMotorRight.setSensorPhase(false);
+        linkMotorRight.setSensorPhase(true);
         linkMotorRight.setInverted(true);
         //linkMotorRight.follow(linkMotorLeft);
         //linkMotorRight.follow(linkMotorLeft, FollowerType.PercentOutput);
