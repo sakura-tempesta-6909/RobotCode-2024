@@ -22,6 +22,10 @@ public class LEDService implements Service {
             case Under720mm:
                 repository.flashLight(0, 0, 255);
                 break;
+            case AlwaysOff:
+                break;
+            default:
+                break;
         }
     } 
 

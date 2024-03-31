@@ -23,7 +23,7 @@ public class LinkModel {
         /** Climb時のLinkの角度を下に微調整する */
         s_climbDownFineAdjustment,
         /** 何も入力されていない時今の角度を維持する */
-        s_keepCurrentAngle
+        s_keepCurrentAngle, 
     }
     public static void reset() {
         shooterAngleMode = ShooterAngleMode.s_keepCurrentAngle;
