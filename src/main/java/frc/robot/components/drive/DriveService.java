@@ -20,21 +20,21 @@ public class DriveService implements Service {
             case s_fastDrive:
                 DriveModel.driveSideSpeed *= DriveParameter.Speeds.FastDrive;
                 DriveModel.driveFowardSpeed *= DriveParameter.Speeds.FastDrive;
-                DriveModel.driveThetaSpeed *= DriveParameter.Speeds.ThetaDrive;
+                DriveModel.driveThetaSpeed *= DriveParameter.Speeds.FastThetaDrive;
                 break;
 
             /** ロボットの速度を中くらいにする */
             case s_midDrive:
                 DriveModel.driveSideSpeed *= DriveParameter.Speeds.MidDrive;
                 DriveModel.driveFowardSpeed *= DriveParameter.Speeds.MidDrive;
-                DriveModel.driveThetaSpeed *= DriveParameter.Speeds.ThetaDrive;
+                DriveModel.driveThetaSpeed *= DriveParameter.Speeds.MidThetaDrive;
                 break;
 
             /** ロボットの速度を遅くする */
             case s_slowDrive:
                 DriveModel.driveSideSpeed *= DriveParameter.Speeds.SlowDrive;
                 DriveModel.driveFowardSpeed *= DriveParameter.Speeds.SlowDrive;
-                DriveModel.driveThetaSpeed *= DriveParameter.Speeds.ThetaDrive;
+                DriveModel.driveThetaSpeed *= DriveParameter.Speeds.SlowThetaDrive;
                 break;
 
             /** ロボットの速度を0にする */
