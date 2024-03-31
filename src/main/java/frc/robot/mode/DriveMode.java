@@ -71,8 +71,8 @@ class DriveMode extends ModeManager {
             ShooterModel.shooterMode = ShooterMode.s_shootAmp;
             LinkModel.shooterAngleMode = ShooterAngleMode.s_keepCurrentAngle;
         }
-        
 
+        /* ロボットの状態を色で表す */
         if (ShooterMeasuredState.isNoteGet) {
             LEDModel.pattern = LEDModel.LEDFlashes.NOTEGet;
         } else if (LinkMeasuredState.linkUnderStageHeight) {

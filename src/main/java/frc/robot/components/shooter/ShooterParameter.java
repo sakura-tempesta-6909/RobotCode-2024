@@ -2,12 +2,16 @@ package frc.robot.components.shooter;
 
 public class ShooterParameter {
     public static class Speed {
+        // SPEAKERにShootするときの目標の速さ(RPM)
         public static final double ShooterTargetSpeed = 4000;
+        // PusherのShootするときの速さ
         public static final double PusherShootSpeed = 0.5;
+        // PusherのIntakeするときの速さ
         public static final double PusherIntakeSpeed = 0.2;
+        // PusherのOuttakeするときの速さ
         public static final double PusherOuttakeSpeed = 0.2;
+        // ShooterのIntakeするときの速さ
         public static final double ShooterIntakeSpeed = 0.3;
-        public static final double ShooterSpeedWhenPusherMove = 3950;
         public static final double Neutral = 0;
     }
     public static class PID {

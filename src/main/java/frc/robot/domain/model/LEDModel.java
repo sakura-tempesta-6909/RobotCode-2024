@@ -5,8 +5,9 @@ public class LEDModel {
     public enum LEDFlashes {
         /** ずっとついている */
         AlwaysOn,
-        /** １秒ごとに点滅を繰り返す */
+        /** Noteを持っているか */
         NOTEGet,
+        /** ロボットの高さが720mm以下か　*/
         Under720mm,
         /** ずっと消えている */
         AlwaysOff;
