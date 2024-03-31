@@ -4,6 +4,7 @@ public class ShooterParameter {
     public static class Speed {
         public static final double ShooterTargetSpeed = 4000;
         public static final double PusherShootSpeed = 0.5;
+        public static final double PusherAmpSpeed = 0.2;
         public static final double PusherIntakeSpeed = 0.2;
         public static final double PusherOuttakeSpeed = 0.2;
         public static final double ShooterIntakeSpeed = 0.3;
