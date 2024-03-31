@@ -63,7 +63,6 @@ class DriveMode extends ModeManager {
         /** AMPからのシュートの角度にする＆回転速度を上げる */
         if(operateController.getLeftBumper()) {
             LinkModel.shooterAngleMode = ShooterAngleMode.s_ampShoot;
-            ShooterModel.shooterMode = ShooterMode.s_increaseRotation;
         }
 
         /** AMPにシュートする */
