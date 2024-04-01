@@ -6,6 +6,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -18,13 +19,20 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import frc.robot.components.drive.DriveConst.DriveConstants;
 import frc.robot.components.drive.DriveConst.ModuleConstants;
 import frc.robot.components.drive.DriveParameter;
+import frc.robot.components.shooter.ShooterParameter;
+import frc.robot.domain.measure.DriveMeasuredState;
 import frc.robot.domain.repository.DriveRepository;
 
 public class Drive implements DriveRepository {
     SwerveSubsystem driveSubsystem;
+    PIDController pid;
 
     public Drive(){
         driveSubsystem = new SwerveSubsystem();
+        // Creates a PIDController with gains kP, kI, and kD
+        pid = new PIDController(DriveParameter.Speeds.kP, DriveParameter.Speeds.kI, DriveParameter.Speeds.kD);
+        // Enables continuous input on a range from -180 to 180
+        pid.enableContinuousInput(-180, 180);
     }
 
     @Override
@@ -35,9 +43,7 @@ public class Drive implements DriveRepository {
         SwerveModuleState[] moduleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(chassisSpeeds);
         
         //6. Output each module states to wheels[14:49]
-        driveSubsystem.setModuleStates(moduleStates);
-
-        
+        driveSubsystem.setModuleStates(moduleStates);        
     }
 
     @Override
@@ -50,8 +56,22 @@ public class Drive implements DriveRepository {
     }
 
     @Override
+    public double setAngle(double setPoint) {
+        // Calculates the output of the PID algorithm based on the sensor reading
+        double thetaSpeedToSetAngle = pid.calculate(DriveMeasuredState.currentAngle, setPoint);
+        return thetaSpeedToSetAngle;
+    }
+
+    @Override
+    public void resetGyroSensor() {
+        driveSubsystem.zeroHeading();
+    }
+
+    @Override
     public void readSensors() {
         SmartDashboard.putNumber("Robot Heading", driveSubsystem.getHeading());
         driveSubsystem.periodic();
+
+        DriveMeasuredState.currentAngle = driveSubsystem.getHeading();
     }
 }
