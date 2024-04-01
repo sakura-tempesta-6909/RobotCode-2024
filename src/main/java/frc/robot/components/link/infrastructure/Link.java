@@ -97,9 +97,9 @@ public class Link implements LinkRepository {
           LinkMeasuredState.linkIntakeHeight = true;
         } else if(LinkMeasuredState.linkLeftAngle <= Angles.StageLinkLeft) {
           LinkMeasuredState.linkUnderStageHeight = true;
-        } else if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerSideLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerSideLinkLeft - 5) {
+        } else if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerSecondPodiumLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerSecondPodiumLinkLeft - 5) {
           LinkMeasuredState.linkSpeakerHeight = true;
-        } else if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerSideLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerSideLinkLeft - 5) {
+        } else if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerSecondPodiumLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerSecondPodiumLinkLeft - 5) {
           LinkMeasuredState.linkSpeakerSideHeight = true;
         }
         SmartDashboard.putBoolean("Amp", LinkMeasuredState.linkAmpHeight);

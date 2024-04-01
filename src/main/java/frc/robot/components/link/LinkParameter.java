@@ -10,8 +10,8 @@ public class LinkParameter {
          */
         public static final double AmpLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 236;
         public static final double SpeakerBelowLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 212;
-        public static final double SpeakerPodiumLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 60;
-        public static final double SpeakerSideLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 186;
+        public static final double SpeakerPodiumLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 141;
+        public static final double SpeakerSecondPodiumLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 186;
         public static final double IntakeLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 156;
         public static final double ClimbLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 236;
         public static final double StageLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit;
@@ -19,8 +19,8 @@ public class LinkParameter {
 
         public static final double AmpLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 236;
         public static final double SpeakerBelowLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 212;
-        public static final double SpeakerPodiumLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 60;
-        public static final double SpeakerSideLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 186;
+        public static final double SpeakerPodiumLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 141;
+        public static final double SpeakerSecondPodiumLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 186;
         public static final double IntakeLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 156;
         public static final double ClimbLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 236;
         public static final double StageLinkRight = LinkRightSoftLimit.ReverseSoftLimit;
