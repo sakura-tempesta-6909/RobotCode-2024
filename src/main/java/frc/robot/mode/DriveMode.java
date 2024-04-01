@@ -5,7 +5,6 @@ import frc.robot.domain.measure.ShooterMeasuredState;
 import frc.robot.domain.model.DriveModel;
 import frc.robot.domain.model.LEDModel;
 import frc.robot.domain.model.ShooterModel;
-import frc.robot.domain.model.DriveModel.DriveOriented;
 import frc.robot.domain.model.LinkModel;
 import frc.robot.domain.model.LinkModel.ShooterAngleMode;
 import frc.robot.domain.model.ShooterModel.ShooterMode;
