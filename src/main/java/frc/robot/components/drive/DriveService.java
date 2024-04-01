@@ -47,7 +47,7 @@ public class DriveService implements Service {
         }
 
         if(DriveModel.driveAngle){
-            DriveModel.driveThetaSpeed = repository.setAngle(DriveMeasuredState.currentAngle, DriveModel.setAngle);
+            DriveModel.driveThetaSpeed = repository.setAngle(DriveModel.setAngle);
         }
 
         switch (DriveModel.driveOriented) {

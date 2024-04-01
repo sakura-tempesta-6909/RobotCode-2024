@@ -19,14 +19,18 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import frc.robot.components.drive.DriveConst.DriveConstants;
 import frc.robot.components.drive.DriveConst.ModuleConstants;
 import frc.robot.components.drive.DriveParameter;
+import frc.robot.components.shooter.ShooterParameter;
 import frc.robot.domain.measure.DriveMeasuredState;
 import frc.robot.domain.repository.DriveRepository;
 
 public class Drive implements DriveRepository {
     SwerveSubsystem driveSubsystem;
+    PIDController pid;
 
     public Drive(){
         driveSubsystem = new SwerveSubsystem();
+        // Creates a PIDController with gains kP, kI, and kD
+        pid = new PIDController(DriveParameter.Speeds.kP, DriveParameter.Speeds.kI, DriveParameter.Speeds.kD);
     }
 
     @Override
@@ -37,9 +41,7 @@ public class Drive implements DriveRepository {
         SwerveModuleState[] moduleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(chassisSpeeds);
         
         //6. Output each module states to wheels[14:49]
-        driveSubsystem.setModuleStates(moduleStates);
-
-        
+        driveSubsystem.setModuleStates(moduleStates);        
     }
 
     @Override
@@ -52,15 +54,9 @@ public class Drive implements DriveRepository {
     }
 
     @Override
-    public double setAngle(double currentAngle, double setPoint) {
-        // Creates a PIDController with gains kP, kI, and kD
-        double kP, kI, kD;
-        kP = 0.5;
-        kI = 0.5;
-        kD = 0.5;
-        PIDController pid = new PIDController(kP, kI, kD);
+    public double setAngle(double setPoint) {
         // Calculates the output of the PID algorithm based on the sensor reading
-        double thetaSpeedToSetAngle = pid.calculate(currentAngle, setPoint);
+        double thetaSpeedToSetAngle = pid.calculate(DriveMeasuredState.currentAngle, setPoint);
         return thetaSpeedToSetAngle;
     }
 

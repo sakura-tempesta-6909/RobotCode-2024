@@ -24,7 +24,7 @@ public interface DriveRepository {
      * @param setAngle 目標値の角度
      * @return thetaSpeedToSetAngle  回転させる角度
      */
-    double setAngle(double currentAngle, double setAngle);
+    double setAngle(double setAngle);
 
     /**
      * センサーを読む
