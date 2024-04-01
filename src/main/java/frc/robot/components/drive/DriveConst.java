@@ -31,15 +31,15 @@ public final class DriveConst {
                 new Translation2d(-kWheelBase / 2, -kTrackWidth / 2)); //backRightの情報が[3]に入っている
 
         //motorのIDを教える
-        public static final int kFrontLeftDriveMotorPort = 10;//4
-        public static final int kBackLeftDriveMotorPort = 1;//7
-        public static final int kFrontRightDriveMotorPort = 7;//1
-        public static final int kBackRightDriveMotorPort = 4;//10
+        public static final int kFrontLeftDriveMotorPort = 10;
+        public static final int kBackLeftDriveMotorPort = 1;
+        public static final int kFrontRightDriveMotorPort = 7;
+        public static final int kBackRightDriveMotorPort = 4;
 
-        public static final int kFrontLeftTurningMotorPort = 12;//6
-        public static final int kBackLeftTurningMotorPort = 3;//9
-        public static final int kFrontRightTurningMotorPort = 9;//3
-        public static final int kBackRightTurningMotorPort = 6;//12
+        public static final int kFrontLeftTurningMotorPort = 12;
+        public static final int kBackLeftTurningMotorPort = 3;
+        public static final int kFrontRightTurningMotorPort = 9;
+        public static final int kBackRightTurningMotorPort = 6;
 
         //反時計回り(true) , 時計回り(false)
         public static final boolean kFrontLeftTurningEncoderReversed = true;
@@ -48,10 +48,10 @@ public final class DriveConst {
         public static final boolean kBackRightTurningEncoderReversed = true;
 
         //absolute encoder (CANCoder) のIDを教える
-        public static final int kFrontLeftDriveAbsoluteEncoderPort = 11;//5
-        public static final int kBackLeftDriveAbsoluteEncoderPort = 2;//8
-        public static final int kFrontRightDriveAbsoluteEncoderPort = 8;//2
-        public static final int kBackRightDriveAbsoluteEncoderPort = 5;//11
+        public static final int kFrontLeftDriveAbsoluteEncoderPort = 11;
+        public static final int kBackLeftDriveAbsoluteEncoderPort = 2;
+        public static final int kFrontRightDriveAbsoluteEncoderPort = 8;
+        public static final int kBackRightDriveAbsoluteEncoderPort = 5;
 
         public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 3;
         public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 3;
