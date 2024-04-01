@@ -1,34 +1,21 @@
 package frc.robot.phase;
 
-import apple.laf.JRSUIConstants.State;
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.proto.Trajectory;
-import edu.wpi.first.math.trajectory.TrajectoryConfig;
-import edu.wpi.first.math.trajectory.TrajectoryGenerator;
-import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.components.drive.DriveConst.DriveConstants;
-import frc.robot.components.link.LinkParameter;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.components.drive.DriveParameter;
 import frc.robot.domain.measure.LinkMeasuredState;
 import frc.robot.domain.measure.ShooterMeasuredState;
+import frc.robot.domain.model.DriveModel;
 import frc.robot.domain.model.LinkModel;
 import frc.robot.domain.model.ShooterModel;
+import frc.robot.domain.model.DriveModel.DriveOriented;
 import frc.robot.domain.model.LinkModel.ShooterAngleMode;
 import frc.robot.domain.model.ShooterModel.ShooterMode;
 
 
-public static void autonomousInit() {
-
-	}
-
-	public static void run() {
-
-	}
-	 package frc.robot.phase;
 
 
-public class Autonomous {
+public class Autonomous {	
     /**
      * ノートをシューターに入れる<br>
      * バックする
@@ -44,28 +31,21 @@ public class Autonomous {
      */
     private static PhaseTransition phaseTransitionC;
 	/**
-     * なし(アウトテーク)
+     * なし
      */
     private static PhaseTransition phaseTransitionD;
+	
+	private static String m_autoSelected;
+	
+	private final static SendableChooser<String> m_chooser = new SendableChooser<>();
 
-    /**
-     * outTakeを一定時間[sec]行う
-     *
-     * @param waiter    outTakeする時間（実行時間）[sec]
-     * @param phaseName 出力されるフェーズの名前
-     */
-    private static PhaseTransition.Phase outTake(double waiter, String phaseName) {
-        return new PhaseTransition.Phase(
-                () -> {
-                    IntakeState.intakeExtensionState = IntakeState.IntakeExtensionStates.s_openIntake;
-                    IntakeState.intakeState = IntakeState.RollerStates.s_outtakeGamePiece;
-                },
-                (double time) -> {
-                    return time > waiter;
-                },
-                phaseName
-        );
-    }
+	public void robotInit() {
+		m_chooser.setDefaultOption("Default", "D");
+		m_chooser.addOption("Shoot Speaker & Taxi", "A");
+		m_chooser.addOption("Shoot Amp & Taxi", "B");
+		m_chooser.addOption("Taxi", "C");
+		SmartDashboard.putData("Auto choices", m_chooser);
+	}
 
 	/**
 	 * Taxiをする
@@ -77,7 +57,15 @@ public class Autonomous {
     private static PhaseTransition.Phase taxi(double waiter, String phaseName) {
         return new PhaseTransition.Phase(
                 () -> {
-                    
+                    DriveModel.driveOriented = DriveOriented.s_fieldOriented;
+					DriveModel.driveSideSpeed = 0;
+					DriveModel.driveFowardSpeed = DriveParameter.Speeds.SlowDrive;
+					/**
+					 * ドライブベースを動かす
+					 * @param driveSideSpeed     左右成分 [-1 ~ 1] 右に進むとき正
+					 * @param driveFowardSpeed     前後成分 [-1 ~ 1] 前に進むとき正
+					 * @param driveThetaSpeed 回転成分 [-1 ~ 1] 反時計(左)回りが正
+					 */
                 },
                 (double time) -> {
                     return time > waiter;
@@ -85,8 +73,6 @@ public class Autonomous {
                 phaseName
         );
     }
-
-
 	/**
      * LINKの値をSHOOTERにSHOOTする角度に変える
 	 * 
@@ -96,10 +82,6 @@ public class Autonomous {
         return new PhaseTransition.Phase(
                 () -> {
 					LinkModel.shooterAngleMode = ShooterAngleMode.s_speakerShootPodium;
-				//	ShooterMode.shooterMode = ShooterMode.s_shootSpeaker;
-				//	LinkModel.shooterAngleMode = ShooterAngleMode.s_keepCurrentAngle;
-           	 	//	ShooterModel.shooterMode = ShooterMode.s_increaseRotation;
-				// ShooterMeasuredState.shooterUpperSpeed = ShooterParameter.Speed.ShooterTargetSpeed;
                 },
                 (double time) -> {
                     return LinkMeasuredState.linkSpeakerHeight = true;
@@ -121,8 +103,7 @@ public class Autonomous {
 					LinkModel.shooterAngleMode = ShooterAngleMode.s_ampShoot;
                 },
                 (double time) -> {
-                    return LinkMeasuredState.linkAmpsHeight = true;
-					// Amps か Amp かわからん
+                     return LinkMeasuredState.linkAmpHeight = true;
                 },
                 () -> {
                 },
@@ -145,7 +126,7 @@ public class Autonomous {
                 },
                 () -> {
                 },
-                phaseName
+                phaseName 
         );
 	}
 
@@ -176,13 +157,13 @@ public class Autonomous {
     private static PhaseTransition.Phase adjustLinkBack(String phaseName) {
         return new PhaseTransition.Phase(
                 () -> {
-					
+					LinkModel.shooterAngleMode = ShooterAngleMode.s_stageAngle;
                 },
                 (double time) -> {
                     return LinkMeasuredState.linkUnderStage == true;
                 },
                 () -> {
-                },
+                }, 
                 phaseName
         );
 	}
@@ -226,12 +207,14 @@ public class Autonomous {
         );
 
 		phaseTransitionD.registerPhase(
-                outTake(5, "GamePiece Outtake")
+                //なんもしない
         );
-    }
+
+		m_autoSelected = m_chooser.getSelected();
+	}
 
     public static void run() {
-        switch (State.autonomousPhaseTransType) {
+        switch (m_autoSelected) {
             case "A":
                 phaseTransitionA.run();
                 break;

@@ -18,6 +18,8 @@ public class LinkModel {
         s_climb,
         /** 何も入力されていない時今の角度を維持する */
         s_keepCurrentAngle, 
+        /** 720mm以下の角度 */
+        s_stageAngle,
     }
     public static void reset() {
         shooterAngleMode = ShooterAngleMode.s_keepCurrentAngle;

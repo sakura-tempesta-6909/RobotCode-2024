@@ -36,6 +36,10 @@ public class LinkService implements Service {
             case s_keepCurrentAngle:
                 repository.KeepCurrentAngle();
                 break;
+            case s_stageAngle:
+                break;
+            default:
+                break;
         }
     }
 

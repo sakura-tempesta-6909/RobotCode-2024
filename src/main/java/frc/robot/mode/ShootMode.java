@@ -13,9 +13,3 @@ class ShootMode extends ModeManager {
     }
     
 }
-
-/**
- * shootする時にリンクの角度を確認する（事故防止）
- * ->ampとshootの違い
- */
-
