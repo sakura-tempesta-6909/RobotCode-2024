@@ -48,7 +48,7 @@ public class SwerveModule {
         driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless);
         turningMotor = new CANSparkMax(turningMotorId, MotorType.kBrushless);
 
-        driveMotor.setInverted(false);
+        driveMotor.setInverted(true);
         turningMotor.setInverted(turningMotorReversed);
 
         //どのエンコーダーを使うか教えてあげる
