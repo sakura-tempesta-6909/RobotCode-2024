@@ -26,7 +26,9 @@ class DriveMode extends ModeManager {
             DriveModel.driveAngle = true;
             DriveModel.setAngle = 180;
         }
-        
+        if(driveController.getAButton()) {
+            DriveModel.resetGyroSensor = true;
+        }
         
 
         /**SHOOTER LINK系 */

@@ -28,6 +28,9 @@ public class DriveModel {
     /** ロボットの目標の角度 */
     public static double setAngle;
 
+    /** trueの時にジャイロセンサーをリセットする */
+    public static boolean resetGyroSensor;
+
     /**
      * ドライブベースを動かす
      * @param driveSideSpeed     左右成分 [-1 ~ 1] 右に進むとき正
@@ -43,6 +46,7 @@ public class DriveModel {
         driveFowardSpeed = 0;
         driveThetaSpeed = 0;
         driveAngle = false;
+        resetGyroSensor = false;
     }
 
     public DriveModel() {

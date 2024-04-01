@@ -60,6 +60,10 @@ public class DriveService implements Service {
                 repository.robotOriented(DriveModel.driveSideSpeed, DriveModel.driveFowardSpeed, DriveModel.driveThetaSpeed);
                 break;
         }
+
+        if(DriveModel.resetGyroSensor) {
+            repository.resetGyroSensor();
+        }
     }
     
     @Override
