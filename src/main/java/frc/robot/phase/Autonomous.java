@@ -48,6 +48,27 @@ public class Autonomous {
 	}
 
 	/**
+     * Empty 
+	 * 
+     * @param waiter time
+	 * @param string 
+     */
+    private static PhaseTransition.Phase shooting(double waiter, String phaseName) {
+        return new PhaseTransition.Phase(
+                () -> {
+					ShooterModel.shooterMode = ShooterMode.s_shootSpeaker;
+                },
+                (double time) -> {
+                    return time > waiter;
+                },
+                () -> {
+                },
+                phaseName
+        );
+    }
+
+
+	/**
 	 * Taxiをする
      * 後ろに一定時間[sec]下がる
      *
@@ -161,7 +182,7 @@ public class Autonomous {
 					LinkModel.shooterAngleMode = ShooterAngleMode.s_stageAngle;
                 },
                 (double time) -> {
-                    return LinkMeasuredState.linkSpeakerBelowHeight;
+                    return LinkMeasuredState.linkUnderStageHeight;
                 },
                 () -> {
                 }, 
@@ -183,10 +204,12 @@ public class Autonomous {
 				//SPEAKERにSHOOT
 				shootSpeaker("Shoot to Speaker"),
 
+				shooting(0.5, "Shooting"),
+
 				//LINKの角度を元の位置にまで戻す
-				adjustLinkBack("Move Angle Back")
+				adjustLinkBack("Move Angle Back"),
 				//Taxi
-				//taxi(3, "Move out of Robot Starting Zone")
+				taxi(3, "Move out of Robot Starting Zone")
         );
 
         phaseTransitionB.registerPhase(
@@ -196,10 +219,12 @@ public class Autonomous {
 				//AMPにSHOOT
 				shootAmp("Shoot to Amp"),
 
+				shooting(0.5, "Shooting"),
+
 				//LINKの角度を元の位置にまで戻す
-				adjustLinkBack("Move Angle Back")
+				adjustLinkBack("Move Angle Back"),
 				//Taxi
-				//taxi(3, "Move out of Robot Starting Zone") 
+				taxi(3, "Move out of Robot Starting Zone") 
         );
 
         phaseTransitionC.registerPhase(

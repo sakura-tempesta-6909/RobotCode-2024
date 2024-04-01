@@ -109,15 +109,20 @@ public class Link implements LinkRepository {
         if(LinkMeasuredState.linkLeftAngle <= Angles.AmpLinkLeft + 5 && Angles.AmpLinkLeft >= LinkLeftSoftLimit.ForwardSoftLimit - 5) {
           LinkMeasuredState.linkAmpHeight = true;
           LinkMeasuredState.linkClimbHeight = true;
-        } else if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerPodiumLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerPodiumLinkLeft - 5) {
+        }
+        if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerPodiumLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerPodiumLinkLeft - 5) {
           LinkMeasuredState.linkPodiumHeight = true;
-        } else if(LinkMeasuredState.linkLeftAngle <= Angles.IntakeLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.IntakeLinkLeft - 5) {  
+        } 
+        if(LinkMeasuredState.linkLeftAngle <= Angles.IntakeLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.IntakeLinkLeft - 5) {  
           LinkMeasuredState.linkIntakeHeight = true;
-        } else if(LinkMeasuredState.linkLeftAngle <= Angles.StageLinkLeft) {
+        } 
+        if(LinkMeasuredState.linkLeftAngle <= Angles.StageLinkLeft) {
           LinkMeasuredState.linkUnderStageHeight = true;
-        } else if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerSecondPodiumLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerSecondPodiumLinkLeft - 5) {
+        } 
+        if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerBelowLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerBelowLinkLeft - 5) {
           LinkMeasuredState.linkSpeakerBelowHeight = true;
-        } else if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerSecondPodiumLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerSecondPodiumLinkLeft - 5) {
+        } 
+        if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerSecondPodiumLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerSecondPodiumLinkLeft - 5) {
           LinkMeasuredState.linkSpeakerSecondPodiumHeight = true;
         }
         LinkMeasuredState.linkCurrent = linkMotorLeft.getStatorCurrent();
