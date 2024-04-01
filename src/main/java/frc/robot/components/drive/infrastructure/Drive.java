@@ -64,12 +64,11 @@ public class Drive implements DriveRepository {
         return thetaSpeedToSetAngle;
     }
 
-    RelativeEncoder turningEncoder;
     @Override
     public void readSensors() {
         SmartDashboard.putNumber("Robot Heading", driveSubsystem.getHeading());
         driveSubsystem.periodic();
 
-        DriveMeasuredState.currentAngle = turningEncoder.getPosition() / Math.PI / 2 * 360;
+        DriveMeasuredState.currentAngle = driveSubsystem.getHeading();
     }
 }
