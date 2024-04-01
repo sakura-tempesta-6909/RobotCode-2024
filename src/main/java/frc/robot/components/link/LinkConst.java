@@ -15,7 +15,7 @@ public class LinkConst {
 
       //3/25の値
       public static final int ForwardSoftLimit = -255;
-      public static final int ReverseSoftLimit = -482;
+      public static final int ReverseSoftLimit = -490;
       public static final double PeakOutputForward = .6;
       public static final double PeakOutputReverse = -.6;
     }
@@ -26,7 +26,7 @@ public class LinkConst {
 
       //3/25の値
       public static final int ForwardSoftLimit = 512;
-      public static final int ReverseSoftLimit = 285;
+      public static final int ReverseSoftLimit = 277;
       public static final double PeakOutputForward = .6;
       public static final double PeakOutputReverse = -.6;
     }

@@ -8,23 +8,23 @@ public class LinkParameter {
         /**
          * 数値を変える！！
          */
-        public static final double AmpLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 226;
-        public static final double SpeakerBelowLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 196;
-        public static final double SpeakerPodiumLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 151;
-        public static final double SpeakerSecondPodiumLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 80;
-        public static final double IntakeLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 146;
-        public static final double ClimbLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 226;
-        public static final double StageLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 6;
-        public static final double KeepCurrentAngleLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 40;
+        public static final double AmpLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 235;
+        public static final double SpeakerBelowLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 206;
+        public static final double SpeakerPodiumLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 159;
+        public static final double SpeakerSecondPodiumLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 88;
+        public static final double IntakeLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 154;
+        public static final double ClimbLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 235;
+        public static final double StageLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit;
+        public static final double KeepCurrentAngleLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 48;
 
-        public static final double AmpLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 236;
-        public static final double SpeakerBelowLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 186;
-        public static final double SpeakerPodiumLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 141;
-        public static final double SpeakerSecondPodiumLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 80;
-        public static final double IntakeLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 156;
-        public static final double ClimbLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 236;
-        public static final double StageLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 6;
-        public static final double KeepCurrentAngleLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 40;
+        public static final double AmpLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 235;
+        public static final double SpeakerBelowLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 206;
+        public static final double SpeakerPodiumLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 159;
+        public static final double SpeakerSecondPodiumLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 88;
+        public static final double IntakeLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 154;
+        public static final double ClimbLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 235;
+        public static final double StageLinkRight = LinkRightSoftLimit.ReverseSoftLimit;
+        public static final double KeepCurrentAngleLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 48;
     }
      //pidの値を書く
     public static class PID {
