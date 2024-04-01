@@ -82,10 +82,10 @@ public class Autonomous {
     private static PhaseTransition.Phase adjustLinkSpeaker(String phaseName) {
         return new PhaseTransition.Phase(
                 () -> {
-					LinkModel.shooterAngleMode = ShooterAngleMode.s_speakerShootPodium;
+					LinkModel.shooterAngleMode = ShooterAngleMode.s_speakerShootBelow;
                 },
                 (double time) -> {
-                    return LinkMeasuredState.linkSpeakerHeight;
+                    return LinkMeasuredState.linkSpeakerBelowHeight;
                 },
                 () -> {
                 },
@@ -161,7 +161,7 @@ public class Autonomous {
 					LinkModel.shooterAngleMode = ShooterAngleMode.s_stageAngle;
                 },
                 (double time) -> {
-                    return LinkMeasuredState.linkUnderStage;
+                    return LinkMeasuredState.linkSpeakerBelowHeight;
                 },
                 () -> {
                 }, 
@@ -173,6 +173,7 @@ public class Autonomous {
         phaseTransitionA = new PhaseTransition();
         phaseTransitionB = new PhaseTransition();
         phaseTransitionC = new PhaseTransition();
+		phaseTransitionD = new PhaseTransition();
         PhaseTransition.Phase.PhaseInit();
 
         phaseTransitionA.registerPhase(
@@ -183,9 +184,9 @@ public class Autonomous {
 				shootSpeaker("Shoot to Speaker"),
 
 				//LINKの角度を元の位置にまで戻す
-				adjustLinkBack("Move Angle Back"),
+				adjustLinkBack("Move Angle Back")
 				//Taxi
-				taxi(3, "Move out of Robot Starting Zone")
+				//taxi(3, "Move out of Robot Starting Zone")
         );
 
         phaseTransitionB.registerPhase(
@@ -196,19 +197,20 @@ public class Autonomous {
 				shootAmp("Shoot to Amp"),
 
 				//LINKの角度を元の位置にまで戻す
-				adjustLinkBack("Move Angle Back"),
+				adjustLinkBack("Move Angle Back")
 				//Taxi
-				taxi(3, "Move out of Robot Starting Zone") 
+				//taxi(3, "Move out of Robot Starting Zone") 
         );
 
         phaseTransitionC.registerPhase(
 				//Taxi
-            	taxi(3, "Move out of Robot Starting Zone")
+            	//taxi(3, "Move out of Robot Starting Zone")
 
         );
 
 		phaseTransitionD.registerPhase(
                 //なんもしない
+
         );
 
 		m_autoSelected = m_chooser.getSelected();

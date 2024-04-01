@@ -18,6 +18,8 @@ public interface DriveRepository {
      */
     void fieldOriented(double sideSpeed, double fowardSpeed, double thetaSpeed);
 
+    /** 任意の */
+
     /**
      * センサーを読む
      */

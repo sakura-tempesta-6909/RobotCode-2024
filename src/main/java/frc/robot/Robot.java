@@ -7,6 +7,7 @@ import frc.robot.components.drive.DriveService;
 import frc.robot.components.drive.infrastructure.Drive;
 import frc.robot.components.led.LEDService;
 import frc.robot.components.led.infrastructure.LED;
+import frc.robot.components.link.LinkConst;
 import frc.robot.components.link.LinkService;
 import frc.robot.components.link.infrastructure.Link;
 import frc.robot.components.shooter.ShooterService;
@@ -93,7 +94,6 @@ public class Robot extends TimedRobot {
     public void testInit() {
         ModeManager.mode = ModeManager.ModeType.k_test;
     }
-
 
     @Override
     public void testPeriodic() {

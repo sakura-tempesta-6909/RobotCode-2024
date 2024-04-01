@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.function.DoublePredicate;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class PhaseTransition {
 	private ArrayList<Phase> phaseList = new ArrayList<>();
@@ -54,6 +55,8 @@ public class PhaseTransition {
 		} else {
 			currentPhase.action.run();
 		}
+
+		SmartDashboard.putString("Autonomous Phase",currentPhase.toString());
 	}
 
 
