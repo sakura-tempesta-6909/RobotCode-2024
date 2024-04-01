@@ -81,12 +81,12 @@ public class Link implements LinkRepository {
         LinkMeasuredState.linkRightAngle = linkMotorRight.getSelectedSensorPosition();
         SmartDashboard.putNumber("linkRightAngle", LinkMeasuredState.linkRightAngle);
         // 初期化
-        LinkMeasuredState.linkAmpsHeight = false;
         LinkMeasuredState.linkAmpHeight = false;
         LinkMeasuredState.linkClimbHeight = false;
-        LinkMeasuredState.linkSpeakerHeight = false;
+        LinkMeasuredState.linkSpeakerBelowHeight = false;
         LinkMeasuredState.linkUnderStageHeight = false;
-        LinkMeasuredState.linkSpeakerSideHeight = false;
+        LinkMeasuredState.linkSpeakerSecondPodiumHeight = false;
+        LinkMeasuredState.linkPodiumHeight = false;
         // 条件に応じてboolean変数の値を更新
         if(LinkMeasuredState.linkLeftAngle <= Angles.AmpLinkLeft + 5 && Angles.AmpLinkLeft >= LinkLeftSoftLimit.ForwardSoftLimit - 5) {
           LinkMeasuredState.linkAmpHeight = true;
@@ -98,17 +98,17 @@ public class Link implements LinkRepository {
         } else if(LinkMeasuredState.linkLeftAngle <= Angles.StageLinkLeft) {
           LinkMeasuredState.linkUnderStageHeight = true;
         } else if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerSecondPodiumLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerSecondPodiumLinkLeft - 5) {
-          LinkMeasuredState.linkSpeakerHeight = true;
+          LinkMeasuredState.linkSpeakerBelowHeight = true;
         } else if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerSecondPodiumLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerSecondPodiumLinkLeft - 5) {
-          LinkMeasuredState.linkSpeakerSideHeight = true;
+          LinkMeasuredState.linkSpeakerSecondPodiumHeight = true;
         }
         SmartDashboard.putBoolean("Amp", LinkMeasuredState.linkAmpHeight);
-        SmartDashboard.putBoolean("SpeakerBelow", LinkMeasuredState.linkSpeakerHeight);
+        SmartDashboard.putBoolean("SpeakerBelow", LinkMeasuredState.linkSpeakerBelowHeight);
         SmartDashboard.putBoolean("Climb", LinkMeasuredState.linkClimbHeight);
         SmartDashboard.putBoolean("UnderStage", LinkMeasuredState.linkUnderStageHeight);
         SmartDashboard.putBoolean("Intake", LinkMeasuredState.linkIntakeHeight);
         SmartDashboard.putBoolean("Podium", LinkMeasuredState.linkPodiumHeight);
-        SmartDashboard.putBoolean("SpeakerSide", LinkMeasuredState.linkSpeakerSideHeight);
+        SmartDashboard.putBoolean("SecondPodium", LinkMeasuredState.linkSpeakerSecondPodiumHeight);
 
         SmartDashboard.putNumber("linkMotorLeftOutputPersent", linkMotorLeft.getMotorOutputPercent());
         SmartDashboard.putNumber("linkMotorRightOutputPersent", linkMotorRight.getMotorOutputPercent());

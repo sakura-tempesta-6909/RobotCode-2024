@@ -45,6 +45,9 @@ public class LinkService implements Service {
             case s_climbDownFineAdjustment:
                 repository.MoveShooterFineAdjustment(LinkConst.FineAdjustment.downAdjustment);
                 break;
+            case s_stageAngle:
+                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.StageLinkLeft, LinkParameter.Angles.StageLinkRight);
+                break;
         }
     }
 
