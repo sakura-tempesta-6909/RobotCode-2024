@@ -26,6 +26,9 @@ public interface DriveRepository {
      */
     double setAngle(double setAngle);
 
+    /** ジャイロセンサーをリセットする */
+    void resetGyroSensor();
+
     /**
      * センサーを読む
      */

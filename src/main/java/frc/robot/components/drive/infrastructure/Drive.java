@@ -63,6 +63,11 @@ public class Drive implements DriveRepository {
     }
 
     @Override
+    public void resetGyroSensor() {
+        driveSubsystem.zeroHeading();
+    }
+
+    @Override
     public void readSensors() {
         SmartDashboard.putNumber("Robot Heading", driveSubsystem.getHeading());
         driveSubsystem.periodic();
