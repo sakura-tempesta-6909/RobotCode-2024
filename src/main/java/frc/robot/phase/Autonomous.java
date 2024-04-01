@@ -122,7 +122,7 @@ public class Autonomous {
 					ShooterModel.shooterMode = ShooterMode.s_shootSpeaker;
                 },
                 (double time) -> {
-                    return ShooterMeasuredState.isNoteGet == false;
+                    return ShooterMeasuredState.isNoteGet = false;
                 },
                 () -> {
                 },
@@ -141,7 +141,7 @@ public class Autonomous {
 					ShooterModel.shooterMode = ShooterMode.s_shootAmp;
                 },
                 (double time) -> {
-                    return ShooterMeasuredState.isNoteGet == false;
+                    return ShooterMeasuredState.isNoteGet = false;
                 },
                 () -> {
                 },
@@ -160,7 +160,7 @@ public class Autonomous {
 					LinkModel.shooterAngleMode = ShooterAngleMode.s_stageAngle;
                 },
                 (double time) -> {
-                    return LinkMeasuredState.linkUnderStage == true;
+                    return LinkMeasuredState.linkUnderStage = true;
                 },
                 () -> {
                 }, 
