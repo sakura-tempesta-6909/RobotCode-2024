@@ -70,16 +70,6 @@ class DriveMode extends ModeManager {
             ShooterModel.shooterMode = ShooterMode.s_shootAmp;
             LinkModel.shooterAngleMode = ShooterAngleMode.s_keepCurrentAngle;
         }
-         /** Linkを上方向に微調整する */
-         if(operateController.getBButton()) {
-            LinkModel.shooterAngleMode = ShooterAngleMode.s_climbUpFineAdjustment;
-        }
-
-        /** Linkを下方向に動かす */
-        if(operateController.getAButton()) {
-            LinkModel.shooterAngleMode = ShooterAngleMode.s_climb;
-        }
-        
 
         if (ShooterMeasuredState.isNoteGet) {
             LEDModel.pattern = LEDModel.LEDFlashes.NOTEGet;
