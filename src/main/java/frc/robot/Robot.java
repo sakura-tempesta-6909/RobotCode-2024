@@ -3,6 +3,9 @@ package frc.robot;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.CvSink;
 import edu.wpi.first.cscore.CvSource;
+import edu.wpi.first.cscore.MjpegServer;
+import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.util.PixelFormat;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.components.Service;
@@ -28,6 +31,8 @@ public class Robot extends TimedRobot {
     ArrayList<Service> services = new ArrayList<>();
     CvSink cvSink;
     CvSource outputStream;
+    MjpegServer mjpegServer1,mjpegServer2;
+    UsbCamera usbCamera
 
     @Override
     public void robotInit() {
@@ -36,7 +41,19 @@ public class Robot extends TimedRobot {
         services.add(new LinkService((new Link())));
         services.add(new ShooterService(new Shooter()));
         ModeManager.setupMode();
+        CameraServer.startAutomaticCapture();
+        cvSink = CameraServer.getVideo();
+        outputStream = CameraServer.putVideo("Blur", 640, 480);
+        usbCamera = new UsbCamera("USB Camera 0", 0);
+        mjpegServer1 = new MjpegServer("serve_USB Camera 0", 1181);
+        mjpegServer1.setSource(usbCamera);
 
+        cvSink = new CvSink("opencv_USB Camera 0");
+        cvSink.setSource(usbCamera);
+
+        outputStream = new CvSource("Blur", PixelFormat.kMJPEG, 640, 480, 30);
+        mjpegServer2 = new MjpegServer("serve_Blur", 1182);
+        mjpegServer2.setSource(outputStream);
     }
 
     @Override
@@ -73,11 +90,7 @@ public class Robot extends TimedRobot {
         for (Service service : services) {
             service.resetModel();
             service.readSensors();
-            CameraServer.startAutomaticCapture();
-            cvSink = CameraServer.getVideo();
-            outputStream = CameraServer.putVideo("Blur", 640, 480);
         }
-
         ModeManager.changeMode();
 
         ModeManager.mode.changeModel();
