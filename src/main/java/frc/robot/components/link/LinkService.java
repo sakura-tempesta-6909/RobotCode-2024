@@ -31,7 +31,7 @@ public class LinkService implements Service {
                 repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.IntakeLinkLeft, LinkParameter.Angles.IntakeLinkRight);
                 break;
             case s_climbAngle:
-                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.ClimbLinkLeft, LinkParameter.Angles.ClimbLinkRight);
+                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.ClimbLinkLeft, LinkParameter.Angles.SetClimbLinkRight);
                 break;
             case s_keepCurrentAngle:
                 repository.KeepCurrentAngle();

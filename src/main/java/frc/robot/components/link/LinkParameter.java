@@ -13,18 +13,20 @@ public class LinkParameter {
         public static final double SpeakerPodiumLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 159;
         public static final double SpeakerSecondPodiumLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 88;
         public static final double IntakeLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 154;
-        public static final double ClimbLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 235;
+        public static final double SetClimbLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 235;
         public static final double StageLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit;
         public static final double KeepCurrentAngleLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 48;
+        public static final double ClimbLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit;
 
         public static final double AmpLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 235;
         public static final double SpeakerBelowLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 206;
         public static final double SpeakerPodiumLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 159;
         public static final double SpeakerSecondPodiumLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 88;
         public static final double IntakeLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 154;
-        public static final double ClimbLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 235;
+        public static final double SetClimbLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 235;
         public static final double StageLinkRight = LinkRightSoftLimit.ReverseSoftLimit;
         public static final double KeepCurrentAngleLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 48;
+        public static final double ClimbLinkRight = LinkRightSoftLimit.ReverseSoftLimit;
     }
 
     //pidの値を書く
@@ -36,6 +38,10 @@ public class LinkParameter {
           public static final double DownLinkP = 2;
           public static final double DownLinkI = 2.5e-4;
           public static final double DownLinkD = 2;
+
+          public static final double ClimbLinkP = 8;
+          public static final double ClimbLinkI = 4e-3;
+          public static final double ClimbLinkD = 2;
     }
 
     public static class Current {
