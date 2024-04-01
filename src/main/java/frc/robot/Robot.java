@@ -1,5 +1,8 @@
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.CvSink;
+import edu.wpi.first.cscore.CvSource;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.components.Service;
@@ -23,6 +26,8 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 
 public class Robot extends TimedRobot {
     ArrayList<Service> services = new ArrayList<>();
+    CvSink cvSink;
+    CvSource outputStream;
 
     @Override
     public void robotInit() {
@@ -31,6 +36,7 @@ public class Robot extends TimedRobot {
         services.add(new LinkService((new Link())));
         services.add(new ShooterService(new Shooter()));
         ModeManager.setupMode();
+
     }
 
     @Override
@@ -67,6 +73,9 @@ public class Robot extends TimedRobot {
         for (Service service : services) {
             service.resetModel();
             service.readSensors();
+            CameraServer.startAutomaticCapture();
+            cvSink = CameraServer.getVideo();
+            outputStream = CameraServer.putVideo("Blur", 640, 480);
         }
 
         ModeManager.changeMode();
