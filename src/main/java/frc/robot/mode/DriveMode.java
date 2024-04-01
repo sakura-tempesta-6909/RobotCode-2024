@@ -22,6 +22,10 @@ class DriveMode extends ModeManager {
         if(driveController.getRightBumper()) {
             DriveModel.driveOriented = DriveModel.DriveOriented.s_robotOriented;
         } 
+        if(driveController.getBButton()) {
+            DriveModel.driveAngle = true;
+            DriveModel.setAngle = 180;
+        }
         
 
         /**SHOOTER LINK系 */

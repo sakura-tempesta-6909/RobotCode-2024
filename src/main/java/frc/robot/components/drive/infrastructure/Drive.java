@@ -57,6 +57,8 @@ public class Drive implements DriveRepository {
     public double setAngle(double setPoint) {
         // Calculates the output of the PID algorithm based on the sensor reading
         double thetaSpeedToSetAngle = pid.calculate(DriveMeasuredState.currentAngle, setPoint);
+        // Enables continuous input on a range from -180 to 180
+        pid.enableContinuousInput(-180, 180);
         return thetaSpeedToSetAngle;
     }
 
