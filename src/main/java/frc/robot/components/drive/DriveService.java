@@ -2,6 +2,7 @@ package frc.robot.components.drive;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.components.Service;
+import frc.robot.domain.measure.DriveMeasuredState;
 import frc.robot.domain.model.DriveModel;
 import frc.robot.domain.model.ShooterModel;
 import frc.robot.domain.repository.DriveRepository;
@@ -43,6 +44,10 @@ public class DriveService implements Service {
                 DriveModel.driveFowardSpeed *= DriveParameter.Speeds.Neutral;
                 DriveModel.driveThetaSpeed *= DriveParameter.Speeds.Neutral;
                 break;
+        }
+
+        if(DriveModel.driveAngle){
+            DriveModel.driveThetaSpeed = repository.setAngle(DriveMeasuredState.currentAngle, DriveModel.setAngle);
         }
 
         switch (DriveModel.driveOriented) {

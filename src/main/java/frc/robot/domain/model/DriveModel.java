@@ -23,6 +23,11 @@ public class DriveModel {
         s_fieldOriented,
     }
 
+    /** ロボットを任意の角度に回転させる trueの時にPIDで回転させる　falseの時にdriveThetaSpeed */
+    public static boolean driveAngle;
+    /** ロボットの目標の角度 */
+    public static double setAngle;
+
     /**
      * ドライブベースを動かす
      * @param driveSideSpeed     左右成分 [-1 ~ 1] 右に進むとき正

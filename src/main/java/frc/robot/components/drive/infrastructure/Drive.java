@@ -6,6 +6,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -18,6 +19,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import frc.robot.components.drive.DriveConst.DriveConstants;
 import frc.robot.components.drive.DriveConst.ModuleConstants;
 import frc.robot.components.drive.DriveParameter;
+import frc.robot.domain.measure.DriveMeasuredState;
 import frc.robot.domain.repository.DriveRepository;
 
 public class Drive implements DriveRepository {
@@ -50,8 +52,24 @@ public class Drive implements DriveRepository {
     }
 
     @Override
+    public double setAngle(double currentAngle, double setPoint) {
+        // Creates a PIDController with gains kP, kI, and kD
+        double kP, kI, kD;
+        kP = 0.5;
+        kI = 0.5;
+        kD = 0.5;
+        PIDController pid = new PIDController(kP, kI, kD);
+        // Calculates the output of the PID algorithm based on the sensor reading
+        double thetaSpeedToSetAngle = pid.calculate(currentAngle, setPoint);
+        return thetaSpeedToSetAngle;
+    }
+
+    RelativeEncoder turningEncoder;
+    @Override
     public void readSensors() {
         SmartDashboard.putNumber("Robot Heading", driveSubsystem.getHeading());
         driveSubsystem.periodic();
+
+        DriveMeasuredState.currentAngle = turningEncoder.getPosition() / Math.PI / 2 * 360;
     }
 }
