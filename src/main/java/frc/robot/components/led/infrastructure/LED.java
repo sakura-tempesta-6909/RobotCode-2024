@@ -61,7 +61,7 @@ public class LED implements LEDRepository {
              // shape is a circle so only one value needs to precess
              LEDMeasuredState.Hue = (rainbowFirstPixelHue + (i * 180 / ledBuffer.getLength())) % 180;
              // Set the value
-             ledBuffer.setHSV(i, LEDMeasuredState.Hue, 255, 128);
+             ledBuffer.setHSV(i, LEDMeasuredState.Hue, s, v);
          }
          // Increase by to make the rainbow "move"
          rainbowFirstPixelHue += 3;
