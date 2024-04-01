@@ -31,6 +31,8 @@ public class Drive implements DriveRepository {
         driveSubsystem = new SwerveSubsystem();
         // Creates a PIDController with gains kP, kI, and kD
         pid = new PIDController(DriveParameter.Speeds.kP, DriveParameter.Speeds.kI, DriveParameter.Speeds.kD);
+        // Enables continuous input on a range from -180 to 180
+        pid.enableContinuousInput(-180, 180);
     }
 
     @Override
@@ -57,8 +59,6 @@ public class Drive implements DriveRepository {
     public double setAngle(double setPoint) {
         // Calculates the output of the PID algorithm based on the sensor reading
         double thetaSpeedToSetAngle = pid.calculate(DriveMeasuredState.currentAngle, setPoint);
-        // Enables continuous input on a range from -180 to 180
-        pid.enableContinuousInput(-180, 180);
         return thetaSpeedToSetAngle;
     }
 

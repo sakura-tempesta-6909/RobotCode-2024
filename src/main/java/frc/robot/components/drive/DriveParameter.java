@@ -13,8 +13,8 @@ public class DriveParameter {
         public static final double MidThetaDrive = 0.3;
         public static final double SlowThetaDrive = 0.15;
 
-        public static final double kP = 0.003;
-        public static final double kI = 0;
+        public static final double kP = 0.008;
+        public static final double kI = 0.0005;
         public static final double kD = 0;
         
     }
