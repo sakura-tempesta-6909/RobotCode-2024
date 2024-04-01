@@ -44,14 +44,14 @@ class DriveMode extends ModeManager {
 
         /** podiumからのシュートの角度にする＆回転速度を上げる  */
         if(operateController.getBButton()) {
-            LinkModel.shooterAngleMode = ShooterAngleMode.s_speakerShootPodium;
-            ShooterModel.shooterMode = ShooterMode.s_increaseRotation;
+            //LinkModel.shooterAngleMode = ShooterAngleMode.s_speakerShootPodium;
+            //ShooterModel.shooterMode = ShooterMode.s_increaseRotation;
         }
 
         /** SPEAKERのleft&rightからのシュートの角度にする＆回転速度上げる */
         if(operateController.getAButton()) {
-            LinkModel.shooterAngleMode = ShooterAngleMode.s_speakerShootSide;
-            ShooterModel.shooterMode = ShooterMode.s_increaseRotation;
+            //LinkModel.shooterAngleMode = ShooterAngleMode.s_speakerShootSide;
+            //ShooterModel.shooterMode = ShooterMode.s_increaseRotation;
         }
 
         /**  SPEAKERにシュートする*/
@@ -69,6 +69,15 @@ class DriveMode extends ModeManager {
         if(0.6 <= operateController.getLeftTriggerAxis()) {
             ShooterModel.shooterMode = ShooterMode.s_shootAmp;
             LinkModel.shooterAngleMode = ShooterAngleMode.s_keepCurrentAngle;
+        }
+         /** Linkを上方向に微調整する */
+         if(operateController.getBButton()) {
+            LinkModel.shooterAngleMode = ShooterAngleMode.s_climbUpFineAdjustment;
+        }
+
+        /** Linkを下方向に動かす */
+        if(operateController.getAButton()) {
+            LinkModel.shooterAngleMode = ShooterAngleMode.s_climb;
         }
         
 
