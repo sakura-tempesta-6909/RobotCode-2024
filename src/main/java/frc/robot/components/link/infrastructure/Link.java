@@ -5,6 +5,8 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.FollowerType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix6.configs.Slot0Configs;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.components.link.LinkConst;
 import frc.robot.components.link.LinkParameter;
@@ -60,16 +62,29 @@ public class Link implements LinkRepository {
         linkMotorRight.setNeutralMode(NeutralMode.Brake);
 
         //PID
-        linkMotorLeft.config_kP(0, PID.LinkP);
-        linkMotorLeft.config_kI(0, PID.LinkI);
-        linkMotorLeft.config_kD(0, PID.LinkD);
+        linkMotorLeft.config_kP(0, PID.UpLinkP);
+        linkMotorLeft.config_kI(0, PID.UpLinkI);
+        linkMotorLeft.config_kD(0, PID.UpLinkD);
+        linkMotorLeft.config_kP(1, PID.DownLinkP);
+        linkMotorLeft.config_kI(1, PID.DownLinkI);
+        linkMotorLeft.config_kD(1, PID.DownLinkD);
 
-        linkMotorRight.config_kP(0, PID.LinkP);
-        linkMotorRight.config_kI(0, PID.LinkI);
-        linkMotorRight.config_kD(0, PID.LinkD);
+        linkMotorRight.config_kP(0, PID.UpLinkP);
+        linkMotorRight.config_kI(0, PID.UpLinkI);
+        linkMotorRight.config_kD(0, PID.UpLinkD);
+        linkMotorRight.config_kP(1, PID.DownLinkP);
+        linkMotorRight.config_kI(1, PID.DownLinkI);
+        linkMotorRight.config_kD(1, PID.DownLinkD);
     }
     @Override
     public void MoveShooterToSpecifiedAngle(double TargetShooterLeftAngle, double TargetShooterRightAngle) {
+      if(TargetShooterLeftAngle >= LinkParameter.Angles.SpeakerSecondPodiumLinkLeft && TargetShooterRightAngle >= LinkParameter.Angles.SpeakerSecondPodiumLinkRight) {
+        linkMotorLeft.selectProfileSlot(0, 0);
+        linkMotorRight.selectProfileSlot(0, 0);
+      } else {
+        linkMotorLeft.selectProfileSlot(1, 0);
+        linkMotorRight.selectProfileSlot(1, 0);
+      }
         linkMotorLeft.set(ControlMode.Position, TargetShooterLeftAngle);
         linkMotorRight.set(ControlMode.Position, TargetShooterRightAngle);
     }
