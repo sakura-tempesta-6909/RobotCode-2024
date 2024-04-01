@@ -39,7 +39,7 @@ public class Autonomous {
 	
 	private final static SendableChooser<String> m_chooser = new SendableChooser<>();
 
-	public void robotInit() {
+	public static void robotInit() {
 		m_chooser.setDefaultOption("Default", "D");
 		m_chooser.addOption("Shoot Speaker & Taxi", "A");
 		m_chooser.addOption("Shoot Amp & Taxi", "B");
