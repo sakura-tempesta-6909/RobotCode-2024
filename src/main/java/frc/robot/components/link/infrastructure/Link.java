@@ -79,12 +79,15 @@ public class Link implements LinkRepository {
     @Override
     public void MoveShooterToSpecifiedAngle(double TargetShooterLeftAngle, double TargetShooterRightAngle) {
       if(TargetShooterLeftAngle >= LinkParameter.Angles.SpeakerSecondPodiumLinkLeft && TargetShooterRightAngle >= LinkParameter.Angles.SpeakerSecondPodiumLinkRight) {
+            SmartDashboard.putNumber("PiDslot", 0);
         linkMotorLeft.selectProfileSlot(0, 0);
         linkMotorRight.selectProfileSlot(0, 0);
       } else {
+              SmartDashboard.putNumber("PiDslot", 1);
         linkMotorLeft.selectProfileSlot(1, 0);
         linkMotorRight.selectProfileSlot(1, 0);
       }
+
         linkMotorLeft.set(ControlMode.Position, TargetShooterLeftAngle);
         linkMotorRight.set(ControlMode.Position, TargetShooterRightAngle);
     }

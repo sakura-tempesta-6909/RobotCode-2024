@@ -28,12 +28,12 @@ public class LinkParameter {
     }
      //pidの値を書く
     public static class PID {
-          public static final double UpLinkP = 8;
-          public static final double UpLinkI = 4e-3;
+          public static final double UpLinkP = 6;
+          public static final double UpLinkI = 1e-3;
           public static final double UpLinkD = 2;
 
-          public static final double DownLinkP = 5;
-          public static final double DownLinkI = 2.5e-3;
+          public static final double DownLinkP = 2;
+          public static final double DownLinkI = 2.5e-4;
           public static final double DownLinkD = 2;
     }
     public static class Percent {
