@@ -18,7 +18,16 @@ public interface DriveRepository {
      */
     void fieldOriented(double sideSpeed, double fowardSpeed, double thetaSpeed);
 
-    /** 任意の */
+    
+    /** ロボットを任意の角度に回転させる
+     * @param currentAngle 現在の角度
+     * @param setAngle 目標値の角度
+     * @return thetaSpeedToSetAngle  回転させる角度
+     */
+    double setAngle(double setAngle);
+
+    /** ジャイロセンサーをリセットする */
+    void resetGyroSensor();
 
     /**
      * センサーを読む

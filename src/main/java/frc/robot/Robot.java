@@ -1,5 +1,11 @@
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.CvSink;
+import edu.wpi.first.cscore.CvSource;
+import edu.wpi.first.cscore.MjpegServer;
+import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.util.PixelFormat;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.components.Service;
@@ -26,11 +32,14 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
+        Autonomous.robotInit();
         services.add(new DriveService(new Drive()));
         services.add(new LEDService(new LED()));
         services.add(new LinkService((new Link())));
         services.add(new ShooterService(new Shooter()));
         ModeManager.setupMode();
+        CameraServer.startAutomaticCapture();
+
     }
 
     @Override
@@ -68,7 +77,6 @@ public class Robot extends TimedRobot {
             service.resetModel();
             service.readSensors();
         }
-
         ModeManager.changeMode();
 
         ModeManager.mode.changeModel();
