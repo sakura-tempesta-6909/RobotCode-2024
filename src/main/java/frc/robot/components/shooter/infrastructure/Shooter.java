@@ -4,6 +4,7 @@ import com.revrobotics.*;
 
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.components.shooter.ShooterConst;
 import frc.robot.components.shooter.ShooterParameter;
@@ -17,7 +18,7 @@ public class Shooter implements ShooterRepository {
     final SparkPIDController noteUpperShooterPID, noteLowerShooterPID;
     final DigitalInput noteDirectionSensor;
     final RelativeEncoder upperShooterEncoder, lowerShooterEncoder;
-    final Counter counter;
+    final Timer timer;
 
     public Shooter() {
         noteUpperShooter = new CANSparkMax(ShooterConst.Ports.NoteUpperShooter, CANSparkLowLevel.MotorType.kBrushless);
@@ -44,7 +45,7 @@ public class Shooter implements ShooterRepository {
         noteLowerShooterPID.setD(ShooterParameter.PID.ShooterD);
         noteLowerShooterPID.setFF(ShooterParameter.PID.ShooterF);
 
-        counter = new Counter();
+        timer = new Timer();
 
         ShooterParameter.ConstInit();
     }
@@ -66,9 +67,10 @@ public class Shooter implements ShooterRepository {
         noteUpperShooterPID.setReference(ShooterParameter.Speed.ShooterTargetSpeed, CANSparkBase.ControlType.kVelocity);
         noteLowerShooterPID.setReference(ShooterParameter.Speed.ShooterTargetSpeed, CANSparkBase.ControlType.kVelocity);
         if(ShooterMeasuredState.readyToShoot && ShooterMeasuredState.shooterUpperSpeed < 4050) {
-            counter.reset();
-            if (counter.get() >= 10) {
+            timer.start();
+            if (timer.get() >= 0.5) {
                 notePusher.set(ShooterParameter.Speed.PusherShootSpeed);
+                timer.reset();
             }
         }
         else {
