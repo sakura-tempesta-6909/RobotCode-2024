@@ -4,8 +4,8 @@ import edu.wpi.first.wpilibj.StadiaController;
 
 public class LinkConst {
     public static final class Ports {
-        public static final int linkMotorLeft = 16;
-        public static final int linkMotorRight = 17;
+        public static final int linkMotorLeft = 17;
+        public static final int linkMotorRight = 16;
     }
     //1つのfileにpublic classは1つだけ！
     public class LinkLeftSoftLimit {
@@ -14,8 +14,8 @@ public class LinkConst {
       // public static final int ReverseSoftLimit = -1500;
 
       //3/25の値
-      public static final int ForwardSoftLimit = -244;
-      public static final int ReverseSoftLimit = -480;
+      public static final int ForwardSoftLimit = -260;
+      public static final int ReverseSoftLimit = -490;
       public static final double PeakOutputForward = .6;
       public static final double PeakOutputReverse = -.6;
     }
@@ -25,8 +25,8 @@ public class LinkConst {
       // public static final int ReverseSoftLimit = 1316;
 
       //3/25の値
-      public static final int ForwardSoftLimit = -499;
-      public static final int ReverseSoftLimit = -735;
+      public static final int ForwardSoftLimit = 507;
+      public static final int ReverseSoftLimit = 277;
       public static final double PeakOutputForward = .6;
       public static final double PeakOutputReverse = -.6;
     }

@@ -22,19 +22,31 @@ public class LinkService implements Service {
                 repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.SpeakerBelowLinkLeft, LinkParameter.Angles.SpeakerBelowLinkRight);
                 break;
             case s_speakerShootPodium:
-                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.SpeakerPodiumLinkLeft, LinkParameter.Angles.SpeakerBelowLinkRight);
+                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.SpeakerPodiumLinkLeft, LinkParameter.Angles.SpeakerPodiumLinkRight);
                 break;
             case s_speakerShootSide:
-                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.SpeakerSideLinkLeft, LinkParameter.Angles.SpeakerSideLinkRight);                
+                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.SpeakerSecondPodiumLinkLeft, LinkParameter.Angles.SpeakerSecondPodiumLinkRight);                
                 break;
             case s_intakeNote:
                 repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.IntakeLinkLeft, LinkParameter.Angles.IntakeLinkRight);
                 break;
-            case s_climb:
+            case s_climbAngle:
                 repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.ClimbLinkLeft, LinkParameter.Angles.ClimbLinkRight);
                 break;
             case s_keepCurrentAngle:
                 repository.KeepCurrentAngle();
+                break;
+            case s_climb:
+                repository.MoveShooterClimb();
+                break;
+            case s_climbUpFineAdjustment:
+                repository.MoveShooterFineAdjustment(LinkConst.FineAdjustment.upAdjustment);
+                break;
+            case s_climbDownFineAdjustment:
+                repository.MoveShooterFineAdjustment(LinkConst.FineAdjustment.downAdjustment);
+                break;
+            case s_stageAngle:
+                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.StageLinkLeft, LinkParameter.Angles.StageLinkRight);
                 break;
         }
     }
