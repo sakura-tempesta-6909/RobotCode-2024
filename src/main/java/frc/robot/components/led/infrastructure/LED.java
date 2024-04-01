@@ -53,6 +53,19 @@ public class LED implements LEDRepository {
             }
         }
         led.setData(ledBuffer);
-
     }
+     @Override
+    public void rainbow(int h, int s, int v) {
+         for (var i = 0; i < ledBuffer.getLength(); i++) {
+             // Calculate the hue - hue is easier for rainbows because the color
+             // shape is a circle so only one value needs to precess
+             LEDMeasuredState.Hue = (rainbowFirstPixelHue + (i * 180 / ledBuffer.getLength())) % 180;
+             // Set the value
+             ledBuffer.setHSV(i, LEDMeasuredState.Hue, 255, 128);
+         }
+         // Increase by to make the rainbow "move"
+         rainbowFirstPixelHue += 3;
+         // Check bounds
+         rainbowFirstPixelHue %= 180;
+     }
 }
