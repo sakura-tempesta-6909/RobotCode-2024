@@ -1,11 +1,12 @@
 package frc.robot.mode;
 
+import frc.robot.components.link.LinkParameter;
+import frc.robot.components.shooter.ShooterParameter;
 import frc.robot.domain.measure.LinkMeasuredState;
 import frc.robot.domain.measure.ShooterMeasuredState;
 import frc.robot.domain.model.DriveModel;
 import frc.robot.domain.model.LEDModel;
 import frc.robot.domain.model.ShooterModel;
-import frc.robot.domain.model.DriveModel.DriveOriented;
 import frc.robot.domain.model.LinkModel;
 import frc.robot.domain.model.LinkModel.ShooterAngleMode;
 import frc.robot.domain.model.ShooterModel.ShooterMode;
@@ -76,10 +77,14 @@ class DriveMode extends ModeManager {
             LinkModel.shooterAngleMode = ShooterAngleMode.s_stageAngle;
         }
 
-        if (ShooterMeasuredState.isNoteGet) {
+        if (ShooterMeasuredState.isNoteGet && operateController.getRightBumper()) {
             LEDModel.pattern = LEDModel.LEDFlashes.NOTEGet;
+        } else if (ShooterMeasuredState.readyToShoot) {
+            LEDModel.pattern = LEDModel.LEDFlashes.ShooterSpeed;
+        } else if (LinkParameter.Current.ClimbCurrent <= LinkMeasuredState.linkCurrent) {
+            LEDModel.pattern = LEDModel.LEDFlashes.ClimbSuccess;
         } else if (LinkMeasuredState.linkUnderStageHeight) {
-            LEDModel.pattern = LEDModel.LEDFlashes.Under720mm;
+            LEDModel.pattern = LEDModel.LEDFlashes.UnderStage;
         }
     }
     
