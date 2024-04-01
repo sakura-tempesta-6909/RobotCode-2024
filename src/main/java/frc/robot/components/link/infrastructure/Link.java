@@ -5,6 +5,8 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.FollowerType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix6.configs.Slot0Configs;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.components.link.LinkConst;
 import frc.robot.components.link.LinkParameter;
@@ -35,7 +37,7 @@ public class Link implements LinkRepository {
 
         linkMotorRight.configFactoryDefault();
         linkMotorRight.configSelectedFeedbackSensor(FeedbackDevice.Analog);
-        linkMotorRight.setSensorPhase(false);
+        linkMotorRight.setSensorPhase(true);
         linkMotorRight.setInverted(true);
         //linkMotorRight.follow(linkMotorLeft);
         //linkMotorRight.follow(linkMotorLeft, FollowerType.PercentOutput);
@@ -60,16 +62,32 @@ public class Link implements LinkRepository {
         linkMotorRight.setNeutralMode(NeutralMode.Brake);
 
         //PID
-        linkMotorLeft.config_kP(0, PID.LinkP);
-        linkMotorLeft.config_kI(0, PID.LinkI);
-        linkMotorLeft.config_kD(0, PID.LinkD);
+        linkMotorLeft.config_kP(0, PID.UpLinkP);
+        linkMotorLeft.config_kI(0, PID.UpLinkI);
+        linkMotorLeft.config_kD(0, PID.UpLinkD);
+        linkMotorLeft.config_kP(1, PID.DownLinkP);
+        linkMotorLeft.config_kI(1, PID.DownLinkI);
+        linkMotorLeft.config_kD(1, PID.DownLinkD);
 
-        linkMotorRight.config_kP(0, PID.LinkP);
-        linkMotorRight.config_kI(0, PID.LinkI);
-        linkMotorRight.config_kD(0, PID.LinkD);
+        linkMotorRight.config_kP(0, PID.UpLinkP);
+        linkMotorRight.config_kI(0, PID.UpLinkI);
+        linkMotorRight.config_kD(0, PID.UpLinkD);
+        linkMotorRight.config_kP(1, PID.DownLinkP);
+        linkMotorRight.config_kI(1, PID.DownLinkI);
+        linkMotorRight.config_kD(1, PID.DownLinkD);
     }
     @Override
     public void MoveShooterToSpecifiedAngle(double TargetShooterLeftAngle, double TargetShooterRightAngle) {
+      if(TargetShooterLeftAngle >= LinkParameter.Angles.SpeakerSecondPodiumLinkLeft && TargetShooterRightAngle >= LinkParameter.Angles.SpeakerSecondPodiumLinkRight) {
+            SmartDashboard.putNumber("PiDslot", 0);
+        linkMotorLeft.selectProfileSlot(0, 0);
+        linkMotorRight.selectProfileSlot(0, 0);
+      } else {
+              SmartDashboard.putNumber("PiDslot", 1);
+        linkMotorLeft.selectProfileSlot(1, 0);
+        linkMotorRight.selectProfileSlot(1, 0);
+      }
+
         linkMotorLeft.set(ControlMode.Position, TargetShooterLeftAngle);
         linkMotorRight.set(ControlMode.Position, TargetShooterRightAngle);
     }
@@ -81,12 +99,12 @@ public class Link implements LinkRepository {
         LinkMeasuredState.linkRightAngle = linkMotorRight.getSelectedSensorPosition();
         SmartDashboard.putNumber("linkRightAngle", LinkMeasuredState.linkRightAngle);
         // 初期化
-        LinkMeasuredState.linkAmpsHeight = false;
         LinkMeasuredState.linkAmpHeight = false;
         LinkMeasuredState.linkClimbHeight = false;
-        LinkMeasuredState.linkSpeakerHeight = false;
+        LinkMeasuredState.linkSpeakerBelowHeight = false;
         LinkMeasuredState.linkUnderStageHeight = false;
-        LinkMeasuredState.linkSpeakerSideHeight = false;
+        LinkMeasuredState.linkSpeakerSecondPodiumHeight = false;
+        LinkMeasuredState.linkPodiumHeight = false;
         // 条件に応じてboolean変数の値を更新
         if(LinkMeasuredState.linkLeftAngle <= Angles.AmpLinkLeft + 5 && Angles.AmpLinkLeft >= LinkLeftSoftLimit.ForwardSoftLimit - 5) {
           LinkMeasuredState.linkAmpHeight = true;
@@ -97,19 +115,19 @@ public class Link implements LinkRepository {
           LinkMeasuredState.linkIntakeHeight = true;
         } else if(LinkMeasuredState.linkLeftAngle <= Angles.StageLinkLeft) {
           LinkMeasuredState.linkUnderStageHeight = true;
-        } else if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerSideLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerSideLinkLeft - 5) {
-          LinkMeasuredState.linkSpeakerHeight = true;
-        } else if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerSideLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerSideLinkLeft - 5) {
-          LinkMeasuredState.linkSpeakerSideHeight = true;
+        } else if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerBelowLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerBelowLinkLeft - 5) {
+          LinkMeasuredState.linkSpeakerBelowHeight = true;
+        } else if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerSecondPodiumLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerSecondPodiumLinkLeft - 5) {
+          LinkMeasuredState.linkSpeakerSecondPodiumHeight = true;
         }
         LinkMeasuredState.linkCurrent = linkMotorLeft.getStatorCurrent();
         SmartDashboard.putBoolean("Amp", LinkMeasuredState.linkAmpHeight);
-        SmartDashboard.putBoolean("SpeakerBelow", LinkMeasuredState.linkSpeakerHeight);
+        SmartDashboard.putBoolean("SpeakerBelow", LinkMeasuredState.linkSpeakerBelowHeight);
         SmartDashboard.putBoolean("Climb", LinkMeasuredState.linkClimbHeight);
         SmartDashboard.putBoolean("UnderStage", LinkMeasuredState.linkUnderStageHeight);
         SmartDashboard.putBoolean("Intake", LinkMeasuredState.linkIntakeHeight);
         SmartDashboard.putBoolean("Podium", LinkMeasuredState.linkPodiumHeight);
-        SmartDashboard.putBoolean("SpeakerSide", LinkMeasuredState.linkSpeakerSideHeight);
+        SmartDashboard.putBoolean("SecondPodium", LinkMeasuredState.linkSpeakerSecondPodiumHeight);
 
         SmartDashboard.putNumber("linkMotorLeftOutputPersent", linkMotorLeft.getMotorOutputPercent());
         SmartDashboard.putNumber("linkMotorRightOutputPersent", linkMotorRight.getMotorOutputPercent());
