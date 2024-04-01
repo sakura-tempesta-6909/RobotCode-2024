@@ -32,6 +32,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
+        Autonomous.robotInit();
         services.add(new DriveService(new Drive()));
         services.add(new LEDService(new LED()));
         services.add(new LinkService((new Link())));

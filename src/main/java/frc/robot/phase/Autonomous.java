@@ -1,43 +1,265 @@
 package frc.robot.phase;
 
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.proto.Trajectory;
-import edu.wpi.first.math.trajectory.TrajectoryConfig;
-import edu.wpi.first.math.trajectory.TrajectoryGenerator;
-import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.components.drive.DriveConst.DriveConstants;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.components.drive.DriveParameter;
+import frc.robot.domain.measure.LinkMeasuredState;
+import frc.robot.domain.measure.ShooterMeasuredState;
+import frc.robot.domain.model.DriveModel;
+import frc.robot.domain.model.LinkModel;
+import frc.robot.domain.model.ShooterModel;
+import frc.robot.domain.model.DriveModel.DriveOriented;
+import frc.robot.domain.model.LinkModel.ShooterAngleMode;
+import frc.robot.domain.model.ShooterModel.ShooterMode;
 
-public class Autonomous {
-	public static void autonomousInit() {
 
+
+
+public class Autonomous {	
+    /**
+     * ノートをシューターに入れる<br>
+     * バックする
+     */
+    private static PhaseTransition phaseTransitionA;
+    /**
+     * ノートをアンプに入れる<br>
+     * バックする
+     */
+    private static PhaseTransition phaseTransitionB;
+    /**
+     * バックする
+     */
+    private static PhaseTransition phaseTransitionC;
+	/**
+     * なし
+     */
+    private static PhaseTransition phaseTransitionD;
+	
+	private static String m_autoSelected;
+	
+	private final static SendableChooser<String> m_chooser = new SendableChooser<>();
+
+	public static void robotInit() {
+		m_chooser.setDefaultOption("Default", "D");
+		m_chooser.addOption("Shoot Speaker & Taxi", "A");
+		m_chooser.addOption("Shoot Amp & Taxi", "B");
+		m_chooser.addOption("Taxi", "C");
+		SmartDashboard.putData("Auto choices", m_chooser);
 	}
 
-	public static void run() {
+	/**
+     * Empty 
+	 * 
+     * @param waiter time
+	 * @param string 
+     */
+    private static PhaseTransition.Phase shooting(double waiter, String phaseName) {
+        return new PhaseTransition.Phase(
+                () -> {
+					ShooterModel.shooterMode = ShooterMode.s_shootSpeaker;
+                },
+                (double time) -> {
+                    return time > waiter;
+                },
+                () -> {
+                },
+                phaseName
+        );
+    }
 
+
+	/**
+	 * Taxiをする
+     * 後ろに一定時間[sec]下がる
+     *
+     * @param waiter    後ろに下がる時間（実行時間）[sec]
+     * @param phaseName 出力されるフェーズの名前
+     */
+    private static PhaseTransition.Phase taxi(double waiter, String phaseName) {
+        return new PhaseTransition.Phase(
+                () -> {
+                    DriveModel.driveOriented = DriveOriented.s_fieldOriented;
+					DriveModel.driveSideSpeed = 0;
+					DriveModel.driveMovement = DriveModel.DriveMovement.s_slowDrive;
+					DriveModel.driveFowardSpeed = 1;
+					/**
+					 * ドライブベースを動かす
+					 * @param driveSideSpeed     左右成分 [-1 ~ 1] 右に進むとき正
+					 * @param driveFowardSpeed     前後成分 [-1 ~ 1] 前に進むとき正
+					 * @param driveThetaSpeed 回転成分 [-1 ~ 1] 反時計(左)回りが正
+					 */
+                },
+                (double time) -> {
+                    return time > waiter;
+                },
+                phaseName
+        );
+    }
+	/**
+     * LINKの値をSHOOTERにSHOOTする角度に変える
+	 * 
+     * @param phaseName 出力されるフェーズの名前
+     */
+    private static PhaseTransition.Phase adjustLinkSpeaker(String phaseName) {
+        return new PhaseTransition.Phase(
+                () -> {
+					LinkModel.shooterAngleMode = ShooterAngleMode.s_speakerShootBelow;
+                },
+                (double time) -> {
+                    return LinkMeasuredState.linkSpeakerBelowHeight;
+                },
+                () -> {
+                },
+                phaseName
+        );
+    }
+
+	/**
+     * LINKの値をAMPにSHOOTする角度に変える
+	 * 
+     * @param phaseName 出力されるフェーズの名前
+     */
+    private static PhaseTransition.Phase adjustLinkAmp(String phaseName) {
+        return new PhaseTransition.Phase(
+                () -> {
+					LinkModel.shooterAngleMode = ShooterAngleMode.s_ampShoot;
+                },
+                (double time) -> {
+                     return LinkMeasuredState.linkAmpHeight;
+                },
+                () -> {
+                },
+                phaseName
+        );
+    }
+
+    /**
+     * SPEAKERにSHOOTする
+     *
+     * @param phaseName 出力されるフェーズの名前
+     */
+    private static PhaseTransition.Phase shootSpeaker(String phaseName) {
+        return new PhaseTransition.Phase(
+                () -> {
+					ShooterModel.shooterMode = ShooterMode.s_shootSpeaker;
+                },
+                (double time) -> {
+                    return !ShooterMeasuredState.isNoteGet;
+                },
+                () -> {
+                },
+                phaseName 
+        );
 	}
 
-	//[20:40]コードを書く場所が違いそうなので確認して
-	/*public Command getAutonomousCommand() {
-		//1. Create trajectory settings
-		TrajectoryConfig trajectoryConfig = new TrajectoryConfig(
-			AutoConstants.kMaxSpeedMetersPerSecond,
-			AutoConstants.kMaxAccelerationMetersPerSecondSquared)
-				.setKinematics(DriveConstants.kDriveKinematics);
-		//2. Generate trajectory
-		Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
-			new Pose2d(0, 0, new Rotation2d(0)),
-			List.of(
-				new Translation2d(1, 0),
-				new Translation2d(1, 1)
-			),
-			new Pose2d(2, 1, Rotation2d.fromDegrees(180)),
-			trajectoryConfig
-		);
-		//3. Define PID controllers for tracking trajectory
-		PIDController xController = new PIDController(AutoConstants.kPXController, 0, 0);
-		PIDController yController = new PIDController(AutoConstants.kPYController, 0, 0);
-		return null;
-	}*/
+	/**
+     * AMPにSHOOTする
+     *
+     * @param phaseName 出力されるフェーズの名前
+     */
+    private static PhaseTransition.Phase shootAmp(String phaseName) {
+        return new PhaseTransition.Phase(
+                () -> {
+					ShooterModel.shooterMode = ShooterMode.s_shootAmp;
+                },
+                (double time) -> {
+                    return !ShooterMeasuredState.isNoteGet;
+                },
+                () -> {
+                },
+                phaseName
+        );
+	}
+
+	/**
+     * LINKの角度を元に戻す
+     *
+     * @param phaseName 出力されるフェーズの名前
+     */
+    private static PhaseTransition.Phase adjustLinkBack(String phaseName) {
+        return new PhaseTransition.Phase(
+                () -> {
+					LinkModel.shooterAngleMode = ShooterAngleMode.s_stageAngle;
+                },
+                (double time) -> {
+                    return LinkMeasuredState.linkUnderStageHeight;
+                },
+                () -> {
+                }, 
+                phaseName
+        );
+	}
+
+    public static void autonomousInit() {
+        phaseTransitionA = new PhaseTransition();
+        phaseTransitionB = new PhaseTransition();
+        phaseTransitionC = new PhaseTransition();
+		phaseTransitionD = new PhaseTransition();
+        PhaseTransition.Phase.PhaseInit();
+
+        phaseTransitionA.registerPhase(
+				//LINKの角度をSHOOTERにSHOOTする角度に変える
+				adjustLinkSpeaker("Move to Shooter Angle"),
+
+				//SPEAKERにSHOOT
+				shootSpeaker("Shoot to Speaker"),
+
+				shooting(0.5, "Shooting"),
+
+				//LINKの角度を元の位置にまで戻す
+				adjustLinkBack("Move Angle Back"),
+				//Taxi
+				taxi(3, "Move out of Robot Starting Zone")
+        );
+
+        phaseTransitionB.registerPhase(
+               //LINKの角度をAMPにSHOOTする角度に変える
+				adjustLinkAmp("Move to Amp Angle"),
+
+				//AMPにSHOOT
+				shootAmp("Shoot to Amp"),
+
+				shooting(0.5, "Shooting"),
+
+				//LINKの角度を元の位置にまで戻す
+				adjustLinkBack("Move Angle Back"),
+				//Taxi
+				taxi(3, "Move out of Robot Starting Zone") 
+        );
+
+        phaseTransitionC.registerPhase(
+				//Taxi
+            	//taxi(3, "Move out of Robot Starting Zone")
+
+        );
+
+		phaseTransitionD.registerPhase(
+                //なんもしない
+
+        );
+
+		m_autoSelected = m_chooser.getSelected();
+	}
+
+    public static void run() {
+        switch (m_autoSelected) {
+            case "A":
+                phaseTransitionA.run();
+                break;
+            case "B":
+                phaseTransitionB.run();
+                break;
+            case "C":
+                phaseTransitionC.run();
+                break;
+			case "D":
+                phaseTransitionD.run();
+                break;
+            default:
+                phaseTransitionD.run();
+                System.out.println("Now Running TransitionC!\nThere's something wrong\nPlease Enter Autonomous Phase Transition Type!!!");
+                break;
+        }
+    }
 }
+
