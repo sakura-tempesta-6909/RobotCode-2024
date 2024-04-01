@@ -116,7 +116,7 @@ public class Link implements LinkRepository {
         if(LinkMeasuredState.linkLeftAngle <= Angles.IntakeLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.IntakeLinkLeft - 5) {  
           LinkMeasuredState.linkIntakeHeight = true;
         }
-        if(LinkMeasuredState.linkLeftAngle <= Angles.StageLinkLeft) {
+        if(LinkMeasuredState.linkLeftAngle <= Angles.StageLinkLeft + 5) {
           LinkMeasuredState.linkUnderStageHeight = true;
         }
         if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerBelowLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerBelowLinkLeft - 5) {
