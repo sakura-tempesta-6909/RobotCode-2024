@@ -1,6 +1,8 @@
 package frc.robot.components.shooter.infrastructure;
 
 import com.revrobotics.*;
+
+import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.components.shooter.ShooterConst;
@@ -61,12 +63,6 @@ public class Shooter implements ShooterRepository {
     public void noteShootSpeaker() {
         noteUpperShooterPID.setReference(ShooterParameter.Speed.ShooterTargetSpeed, CANSparkBase.ControlType.kVelocity);
         noteLowerShooterPID.setReference(ShooterParameter.Speed.ShooterTargetSpeed, CANSparkBase.ControlType.kVelocity);
-        if(ShooterMeasuredState.readyToShoot) {
-            notePusher.set(ShooterParameter.Speed.PusherShootSpeed);
-        }
-        else {
-            notePusher.set(ShooterParameter.Speed.Neutral);
-        }
     }
     
 

@@ -15,6 +15,8 @@ import frc.robot.components.link.LinkConst.LinkRightSoftLimit;
 import frc.robot.components.link.LinkParameter.Angles;
 import frc.robot.components.link.LinkParameter.PID;
 import frc.robot.domain.measure.LinkMeasuredState;
+import frc.robot.domain.model.LinkModel;
+import frc.robot.domain.model.ShooterModel.ShooterMode;
 import frc.robot.domain.repository.LinkRepository;
 
 public class Link implements LinkRepository {
@@ -68,6 +70,9 @@ public class Link implements LinkRepository {
         linkMotorLeft.config_kP(1, PID.DownLinkP);
         linkMotorLeft.config_kI(1, PID.DownLinkI);
         linkMotorLeft.config_kD(1, PID.DownLinkD);
+        linkMotorLeft.config_kP(2, PID.ClimbLinkP);
+        linkMotorLeft.config_kI(2, PID.ClimbLinkI);
+        linkMotorLeft.config_kD(2, PID.ClimbLinkD);  
 
         linkMotorRight.config_kP(0, PID.UpLinkP);
         linkMotorRight.config_kI(0, PID.UpLinkI);
@@ -75,15 +80,16 @@ public class Link implements LinkRepository {
         linkMotorRight.config_kP(1, PID.DownLinkP);
         linkMotorRight.config_kI(1, PID.DownLinkI);
         linkMotorRight.config_kD(1, PID.DownLinkD);
+        linkMotorRight.config_kP(2, PID.ClimbLinkP);
+        linkMotorRight.config_kI(2, PID.ClimbLinkI);
+        linkMotorRight.config_kD(2, PID.ClimbLinkD); 
     }
     @Override
     public void MoveShooterToSpecifiedAngle(double TargetShooterLeftAngle, double TargetShooterRightAngle) {
       if(TargetShooterLeftAngle >= LinkParameter.Angles.SpeakerSecondPodiumLinkLeft && TargetShooterRightAngle >= LinkParameter.Angles.SpeakerSecondPodiumLinkRight) {
-            SmartDashboard.putNumber("PiDslot", 0);
         linkMotorLeft.selectProfileSlot(0, 0);
         linkMotorRight.selectProfileSlot(0, 0);
       } else {
-              SmartDashboard.putNumber("PiDslot", 1);
         linkMotorLeft.selectProfileSlot(1, 0);
         linkMotorRight.selectProfileSlot(1, 0);
       }
@@ -112,16 +118,16 @@ public class Link implements LinkRepository {
         }
         if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerPodiumLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerPodiumLinkLeft - 5) {
           LinkMeasuredState.linkPodiumHeight = true;
-        } 
+        }
         if(LinkMeasuredState.linkLeftAngle <= Angles.IntakeLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.IntakeLinkLeft - 5) {  
           LinkMeasuredState.linkIntakeHeight = true;
-        } 
-        if(LinkMeasuredState.linkLeftAngle <= Angles.StageLinkLeft) {
+        }
+        if(LinkMeasuredState.linkLeftAngle <= Angles.StageLinkLeft + 5) {
           LinkMeasuredState.linkUnderStageHeight = true;
-        } 
+        }
         if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerBelowLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerBelowLinkLeft - 5) {
           LinkMeasuredState.linkSpeakerBelowHeight = true;
-        } 
+        }
         if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerSecondPodiumLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerSecondPodiumLinkLeft - 5) {
           LinkMeasuredState.linkSpeakerSecondPodiumHeight = true;
         }
@@ -136,6 +142,7 @@ public class Link implements LinkRepository {
 
         SmartDashboard.putNumber("linkMotorLeftOutputPersent", linkMotorLeft.getMotorOutputPercent());
         SmartDashboard.putNumber("linkMotorRightOutputPersent", linkMotorRight.getMotorOutputPercent());
+        SmartDashboard.putNumber("curremnt", linkMotorLeft.getStatorCurrent());
     }
     @Override
     public void KeepCurrentAngle() {
@@ -151,8 +158,10 @@ public class Link implements LinkRepository {
 
     @Override 
     public void MoveShooterClimb() {
-      linkMotorLeft.set(ControlMode.PercentOutput, LinkParameter.Percent.Climb);
-      linkMotorRight.set(ControlMode.PercentOutput, LinkParameter.Percent.Climb);
+      linkMotorLeft.selectProfileSlot(2, 0);
+      linkMotorRight.selectProfileSlot(2, 0);
+      linkMotorLeft.set(ControlMode.Position, LinkParameter.Angles.ClimbLinkLeft);
+      linkMotorRight.set(ControlMode.PercentOutput, LinkParameter.Angles.ClimbLinkRight);
     }
 
     @Override
