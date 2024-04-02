@@ -17,7 +17,8 @@ class ClimbMode extends ModeManager {
 
         /** Linkを下方向に動かす */
         if(0.8 <= driveController.getLeftTriggerAxis()) {
-            LinkModel.shooterAngleMode = ShooterAngleMode.s_climb;
+            LinkModel.shooterAngleMode = ShooterAngleMode.s_stageAngle;
+       
         }
     }
 }

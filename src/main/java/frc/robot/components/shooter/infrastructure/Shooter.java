@@ -1,6 +1,8 @@
 package frc.robot.components.shooter.infrastructure;
 
 import com.revrobotics.*;
+
+import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -44,6 +46,7 @@ public class Shooter implements ShooterRepository {
 
         ShooterParameter.ConstInit();
     }
+    
     @Override
     public void noteIntake() {
         noteUpperShooter.set(-ShooterParameter.Speed.ShooterIntakeSpeed);
@@ -62,11 +65,7 @@ public class Shooter implements ShooterRepository {
         noteUpperShooterPID.setReference(ShooterParameter.Speed.ShooterTargetSpeed, CANSparkBase.ControlType.kVelocity);
         noteLowerShooterPID.setReference(ShooterParameter.Speed.ShooterTargetSpeed, CANSparkBase.ControlType.kVelocity);
         
-        final Timer timer;
-        timer = new Timer();
-        timer.start();
-    
-        if(timer.get() >= 0.2 && ShooterMeasuredState.readyToShoot) {
+        if(ShooterMeasuredState.readyToShoot) {
             notePusher.set(ShooterParameter.Speed.PusherShootSpeed);
         }
         else { 
@@ -100,12 +99,18 @@ public class Shooter implements ShooterRepository {
         SmartDashboard.putNumber("noteLowerShooter", lowerShooterEncoder.getVelocity());
         SmartDashboard.putNumber("diff", upperShooterEncoder.getVelocity()-lowerShooterEncoder.getVelocity());
 
-        ShooterMeasuredState.readyToShoot = ShooterMeasuredState.shooterUpperSpeed > ShootingMotor.shootAvailableSpeedUpper 
+        
+        boolean ShootAvaiable = ShooterMeasuredState.shooterUpperSpeed > ShootingMotor.shootAvailableSpeedUpper 
         && ShooterMeasuredState.shooterLowerSpeed > ShootingMotor.shootAvailableSpeedLower 
         && Math.abs(ShooterMeasuredState.shooterLowerSpeed - ShooterMeasuredState.shooterUpperSpeed) < ShootingMotor.shootAvailableAbsolute
         && ShooterMeasuredState.shooterLowerSpeed < ShooterParameter.ShootingMotor.overlimit
         && ShooterMeasuredState.shooterUpperSpeed < ShooterParameter.ShootingMotor.overlimit;
-
+        
+        if(ShootAvaiable) ShooterMeasuredState.counter++;
+        else ShooterMeasuredState.counter = 0;
+        
+        if(ShooterMeasuredState.counter >= 10) ShooterMeasuredState.readyToShoot = true;
+        else ShooterMeasuredState.readyToShoot = false;
 
         SmartDashboard.putBoolean("ready to shoot", ShooterMeasuredState.readyToShoot);
     }

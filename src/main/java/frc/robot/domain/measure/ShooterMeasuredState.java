@@ -7,5 +7,5 @@ public class ShooterMeasuredState {
     public static boolean isNoteGet;
     public static boolean readyToShoot;
 
-    public static double counter = 0.2;
+    public static int counter = 0;
 }

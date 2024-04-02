@@ -71,6 +71,7 @@ public class SwerveModule {
         //kasugaya
 
         //エンコーダーの値をリセットする
+        //1秒遅らせる
         Thread thread = new Thread(() -> {
             try {
                 Thread.sleep(1000);

@@ -13,7 +13,11 @@ import frc.robot.subClass.Util;
 
 class DriveMode extends ModeManager {
     public static void changeModel() {
-        DriveModel.driveMovement = DriveModel.DriveMovement.s_midDrive;
+        DriveModel.driveMovement = DriveModel.DriveMovement.s_fastDrive;
+        if(driveController.getLeftBumper()){
+            DriveModel.driveMovement = DriveModel.DriveMovement.s_slowDrive;
+        }
+
         DriveModel.driveSideSpeed = Util.deadband(driveController.getLeftX());
         DriveModel.driveFowardSpeed = Util.deadband(-driveController.getLeftY()); //スティックを奥に倒すと正になるように変更
         DriveModel.driveThetaSpeed = Util.deadband(-driveController.getRightX()); //スティックを右に倒すと反時計回りになるように変更
@@ -81,6 +85,13 @@ class DriveMode extends ModeManager {
         /** 720mm以下にする */
         if(operateController.getBackButton()) {
             LinkModel.shooterAngleMode = ShooterAngleMode.s_stageAngle;
+        }
+
+        /** Linkを微調整する */
+        if(operateController.getLeftY() >= 0.8) {
+            LinkModel.shooterAngleMode = ShooterAngleMode.s_climbDownFineAdjustment;
+        } else if(operateController.getLeftY() <= -0.8) {
+            LinkModel.shooterAngleMode = ShooterAngleMode.s_climbUpFineAdjustment;
         }
 
         if (ShooterMeasuredState.isNoteGet && operateController.getRightBumper()) {

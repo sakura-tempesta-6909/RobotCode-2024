@@ -2,7 +2,7 @@ package frc.robot.components.shooter;
 
 public class ShooterParameter {
     public static class Speed {
-        public static final double ShooterTargetSpeed = 4000;
+        public static final double ShooterTargetSpeed = 4500;
         public static final double PusherShootSpeed = 0.5;
         public static final double PusherAmpSpeed = 0.2;
         public static final double PusherIntakeSpeed = 0.2;
@@ -21,8 +21,8 @@ public class ShooterParameter {
 
     public static class ShootingMotor {
         /** シュートできるUpper&Lower Speedの速度 */
-        public static final double shootAvailableSpeedUpper = 4500;
-        public static final double shootAvailableSpeedLower = 4500;
+        public static final double shootAvailableSpeedUpper = 4000;
+        public static final double shootAvailableSpeedLower = 4000;
         /** シュートできる絶対値の値 */
         public static final double shootAvailableAbsolute = 200;
 
