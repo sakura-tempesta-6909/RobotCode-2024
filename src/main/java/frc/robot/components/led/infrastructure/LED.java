@@ -13,7 +13,7 @@ public class LED implements LEDRepository {
     final AddressableLEDBuffer ledBuffer;
     final Timer timer;
     int rainbowFirstPixelHue;
-
+ 
     public LED() {
         led = new AddressableLED(LEDConst.Ports.LED);
         ledBuffer = new AddressableLEDBuffer(LEDConst.Ports.LEDBuffer);
