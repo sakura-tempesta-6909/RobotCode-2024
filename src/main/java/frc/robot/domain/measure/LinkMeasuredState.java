@@ -17,6 +17,7 @@ public class LinkMeasuredState {
     public static boolean linkIntakeHeight;
     //**Podiumを後ろのBumperが超えているときのLinkの高さに達しているか否か */
     public static double linkCurrent;
+    
     public static boolean linkPodiumHeight;
     //**Speakerが第2Podiumの高さに達しているか否か */
     public static boolean linkSpeakerSecondPodiumHeight;
