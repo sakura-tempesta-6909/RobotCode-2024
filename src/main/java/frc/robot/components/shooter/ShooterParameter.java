@@ -24,7 +24,7 @@ public class ShooterParameter {
         
         public static final double ShootUpperLimitSpeed = 4550;
 
-        /** シュートできる絶対値の値 */
+        /** シュートできる時のUpperとLowerの速度絶対値の値 */
         public static final double ShootLimitAbsoluteValue = 50;
     }
     public static void ConstInit() {
