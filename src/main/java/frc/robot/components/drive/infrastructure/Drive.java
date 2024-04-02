@@ -1,25 +1,12 @@
 package frc.robot.components.drive.infrastructure;
 
-import com.ctre.phoenix6.hardware.CANcoder;
-import com.ctre.phoenix6.mechanisms.swerve.SwerveModule;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkPIDController;
-
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import com.revrobotics.CANSparkLowLevel.MotorType;
-
 import frc.robot.components.drive.DriveConst.DriveConstants;
-import frc.robot.components.drive.DriveConst.ModuleConstants;
 import frc.robot.components.drive.DriveParameter;
-import frc.robot.components.shooter.ShooterParameter;
 import frc.robot.domain.measure.DriveMeasuredState;
 import frc.robot.domain.repository.DriveRepository;
 
