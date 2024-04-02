@@ -7,7 +7,7 @@ public class DriveParameter {
 
         public static final double FastDrive = 0.8;
         public static final double MidDrive = 0.4;
-        public static final double SlowDrive = 0.2;
+        public static final double SlowDrive = 0.25;
 
         public static final double FastThetaDrive = 0.6;
         public static final double MidThetaDrive = 0.3;

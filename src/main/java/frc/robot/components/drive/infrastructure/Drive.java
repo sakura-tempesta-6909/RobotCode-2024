@@ -23,8 +23,8 @@ public class Drive implements DriveRepository {
     }
 
     @Override
-    public void robotOriented(double sideSpeed, double fowardSpeed, double thetaSpeed) {
-        ChassisSpeeds chassisSpeeds = new ChassisSpeeds(fowardSpeed, -sideSpeed, thetaSpeed);
+    public void robotOriented(double sideSpeed, double forwardSpeed, double thetaSpeed) {
+        ChassisSpeeds chassisSpeeds = new ChassisSpeeds(forwardSpeed, -sideSpeed, thetaSpeed);
         //5. Convert chassis speeds to individual module states [14:37]
         SwerveModuleState[] moduleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(chassisSpeeds);
         //6. Output each module states to wheels[14:49]
@@ -32,9 +32,9 @@ public class Drive implements DriveRepository {
     }
 
     @Override
-    public void fieldOriented(double sideSpeed, double fowardSpeed, double thetaSpeed) {
+    public void fieldOriented(double sideSpeed, double forwardSpeed, double thetaSpeed) {
         ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
-            fowardSpeed, -sideSpeed, thetaSpeed, driveSubsystem.getRotation2d());
+            forwardSpeed, -sideSpeed, thetaSpeed, driveSubsystem.getRotation2d());
         SwerveModuleState[] moduleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(chassisSpeeds);
         driveSubsystem.setModuleStates(moduleStates);
 
