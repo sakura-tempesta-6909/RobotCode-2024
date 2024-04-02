@@ -100,8 +100,8 @@ public class Shooter implements ShooterRepository {
         SmartDashboard.putNumber("diff", upperShooterEncoder.getVelocity()-lowerShooterEncoder.getVelocity());
 
         
-        boolean ShootAvaiable = ShooterMeasuredState.shooterUpperSpeed > ShootingMotor.shootAvailableSpeedUpper 
-        && ShooterMeasuredState.shooterLowerSpeed > ShootingMotor.shootAvailableSpeedLower 
+        boolean ShootAvaiable = ShooterMeasuredState.shooterUpperSpeed > ShootingMotor.shootAvailableSpeed
+        && ShooterMeasuredState.shooterLowerSpeed > ShootingMotor.shootAvailableSpeed
         && Math.abs(ShooterMeasuredState.shooterLowerSpeed - ShooterMeasuredState.shooterUpperSpeed) < ShootingMotor.shootAvailableAbsolute
         && ShooterMeasuredState.shooterLowerSpeed < ShooterParameter.ShootingMotor.overlimit
         && ShooterMeasuredState.shooterUpperSpeed < ShooterParameter.ShootingMotor.overlimit;
