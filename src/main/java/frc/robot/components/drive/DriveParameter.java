@@ -6,18 +6,18 @@ public class DriveParameter {
         /** ロボットを止めるときの速度 */
         public static final double Neutral = 0;
 
-        /** ロボットが速いときのDriveMotorの速度 */
+        /** ロボットが速いときの進む速度 */
         public static final double FastDrive = 0.8;
-        /** ロボットが普通の速さのときのDriveMotorの速度 */
+        /** ロボットが普通の速さのときの進む速度 */
         public static final double MidDrive = 0.4;
-        /** ロボットが遅いときのDriveMotorの速度 */
+        /** ロボットが遅いときの進む速度 */
         public static final double SlowDrive = 0.25;
 
-        /** ロボットが速いときのTurningMotorの速度 */
+        /** ロボットが速いときの回転速度 */
         public static final double FastThetaDrive = 0.6;
-        /** ロボットが普通の速さときのTurningMotorの速度 */
+        /** ロボットが普通の速さときの回転速度 */
         public static final double MidThetaDrive = 0.3;
-        /** ロボットが遅いときのTurningMotorの速度 */
+        /** ロボットが遅いときの回転速度 */
         public static final double SlowThetaDrive = 0.2;
 
         /** gyroのPID制御　Pの値 */
