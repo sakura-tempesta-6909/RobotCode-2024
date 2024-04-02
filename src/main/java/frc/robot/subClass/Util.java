@@ -15,7 +15,7 @@ public class Util {
     }
 
     public static double deadband(double input){
-        if(input < 0.1 && input > -0.1){
+        if(input < 0.15 && input > -0.15){
             return 0.0;
         } else {
             return input;

@@ -43,6 +43,7 @@ public class Shooter implements ShooterRepository {
 
         ShooterParameter.ConstInit();
     }
+    
     @Override
     public void noteIntake() {
         noteUpperShooter.set(-ShooterParameter.Speed.ShooterIntakeSpeed);
