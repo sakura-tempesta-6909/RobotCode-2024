@@ -8,6 +8,6 @@ public class ShooterMeasuredState {
     public static boolean isNoteGet;
     /** 今Shootができるかどうか */
     public static boolean readyToShoot;
-    /*: Shootが0.2秒以上できる状態を維持できるかのためのカウンター */
+    /** Shootが0.2秒以上維持できるかのためのカウンター */
     public static int counter = 0;
 }
