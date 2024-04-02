@@ -93,6 +93,34 @@ public class Link implements LinkRepository {
         linkMotorLeft.set(ControlMode.Position, TargetShooterLeftAngle);
         linkMotorRight.set(ControlMode.Position, TargetShooterRightAngle);
     }
+    
+    @Override
+    public void KeepCurrentAngle() {
+      if(linkMotorLeft.getSelectedSensorPosition() <= LinkParameter.Angles.KeepCurrentAngleLinkLeft && linkMotorRight.getSelectedSensorPosition() <= LinkParameter.Angles.KeepCurrentAngleLinkRight) {
+        linkMotorLeft.set(ControlMode.PercentOutput, LinkParameter.Percent.KeepCurrentAngleLink);
+        linkMotorRight.set(ControlMode.PercentOutput, LinkParameter.Percent.KeepCurrentAngleLink);
+      } else {
+        linkMotorLeft.set(ControlMode.PercentOutput, 0);
+        linkMotorRight.set(ControlMode.PercentOutput, 0);
+      }
+
+    }
+
+    @Override 
+    public void MoveShooterClimb() {
+      linkMotorLeft.selectProfileSlot(2, 0);
+      linkMotorRight.selectProfileSlot(2, 0);
+      linkMotorLeft.set(ControlMode.Position, LinkParameter.Angles.ClimbLinkLeft);
+      linkMotorRight.set(ControlMode.PercentOutput, LinkParameter.Angles.ClimbLinkRight);
+    }
+
+    @Override
+    public void MoveShooterFineAdjustment(double upOrDown) {
+      //Climb時の微調整用
+      //CheakConst
+      linkMotorLeft.set(ControlMode.PercentOutput, upOrDown);
+      linkMotorRight.set(ControlMode.PercentOutput, upOrDown);
+    }
 
     @Override
     public void readSensors() {
@@ -100,6 +128,7 @@ public class Link implements LinkRepository {
         SmartDashboard.putNumber("LinkLeftAngle", LinkMeasuredState.linkLeftAngle);
         LinkMeasuredState.linkRightAngle = linkMotorRight.getSelectedSensorPosition();
         SmartDashboard.putNumber("linkRightAngle", LinkMeasuredState.linkRightAngle);
+
         // 初期化
         LinkMeasuredState.linkAmpHeight = false;
         LinkMeasuredState.linkClimbHeight = false;
@@ -128,6 +157,7 @@ public class Link implements LinkRepository {
           LinkMeasuredState.linkSpeakerSecondPodiumHeight = true;
         }
         LinkMeasuredState.linkCurrent = linkMotorLeft.getStatorCurrent();
+
         SmartDashboard.putBoolean("Amp", LinkMeasuredState.linkAmpHeight);
         SmartDashboard.putBoolean("SpeakerBelow", LinkMeasuredState.linkSpeakerBelowHeight);
         SmartDashboard.putBoolean("Climb", LinkMeasuredState.linkClimbHeight);
@@ -139,33 +169,6 @@ public class Link implements LinkRepository {
         SmartDashboard.putNumber("linkMotorLeftOutputPersent", linkMotorLeft.getMotorOutputPercent());
         SmartDashboard.putNumber("linkMotorRightOutputPersent", linkMotorRight.getMotorOutputPercent());
         SmartDashboard.putNumber("curremnt", linkMotorLeft.getStatorCurrent());
-    }
-    @Override
-    public void KeepCurrentAngle() {
-      if(linkMotorLeft.getSelectedSensorPosition() <= LinkParameter.Angles.KeepCurrentAngleLinkLeft && linkMotorRight.getSelectedSensorPosition() <= LinkParameter.Angles.KeepCurrentAngleLinkRight) {
-        linkMotorLeft.set(ControlMode.PercentOutput, LinkParameter.Percent.KeepCurrentAngleLink);
-        linkMotorRight.set(ControlMode.PercentOutput, LinkParameter.Percent.KeepCurrentAngleLink);
-      } else {
-        linkMotorLeft.set(ControlMode.PercentOutput, 0);
-        linkMotorRight.set(ControlMode.PercentOutput, 0);
-      }
-
-    }
-
-    @Override 
-    public void MoveShooterClimb() {
-      linkMotorLeft.selectProfileSlot(2, 0);
-      linkMotorRight.selectProfileSlot(2, 0);
-      linkMotorLeft.set(ControlMode.Position, LinkParameter.Angles.ClimbLinkLeft);
-      linkMotorRight.set(ControlMode.PercentOutput, LinkParameter.Angles.ClimbLinkRight);
-    }
-
-    @Override
-    public void MoveShooterFineAdjustment(double upOrDown) {
-      //Climb時の微調整用
-      //CheakConst
-      linkMotorLeft.set(ControlMode.PercentOutput, upOrDown);
-      linkMotorRight.set(ControlMode.PercentOutput, upOrDown);
     }
 
     public void test() {
