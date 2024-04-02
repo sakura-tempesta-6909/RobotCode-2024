@@ -30,8 +30,4 @@ public class LinkConst {
       public static final double PeakOutputForward = .6;
       public static final double PeakOutputReverse = -.6;
     }
-    public class FineAdjustment {
-      public static final double downAdjustment = -0.1;
-      public static final double upAdjustment = 0.1;
-    }
 }
