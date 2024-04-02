@@ -17,7 +17,6 @@ public class Shooter implements ShooterRepository {
     final SparkPIDController noteUpperShooterPID, noteLowerShooterPID;
     final DigitalInput noteDirectionSensor;
     final RelativeEncoder upperShooterEncoder, lowerShooterEncoder;
-    final Counter counter;
 
     public Shooter() {
         noteUpperShooter = new CANSparkMax(ShooterConst.Ports.NoteUpperShooter, CANSparkLowLevel.MotorType.kBrushless);
