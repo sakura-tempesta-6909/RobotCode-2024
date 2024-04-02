@@ -15,9 +15,9 @@ import frc.robot.subClass.Util;
 class DriveMode extends ModeManager {
     public static void changeModel() {
         if(driveController.getRightY() > 0.8 && (driveController.getRightX() > - 0.4 || driveController.getRightX() < 0.4)){
-            DriveModel.driveMovement = DriveModel.driveMovement.s_fastDrive;
+            DriveModel.driveMovement = DriveModel.DriveMovement.s_fastDrive;
         }else if(driveController.getRightY() < 0.8 && (driveController.getRightX() > -0.4 || driveController.getRightX() < 0.4)){
-            DriveModel.driveMovement = DriveModel.driveMovement.s_slowDrive;
+            DriveModel.driveMovement = DriveModel.DriveMovement.s_slowDrive;
         }else {
             DriveModel.driveMovement = DriveModel.DriveMovement.s_midDrive;
         }
