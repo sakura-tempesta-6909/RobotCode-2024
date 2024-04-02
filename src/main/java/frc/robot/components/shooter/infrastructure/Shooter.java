@@ -2,6 +2,7 @@ package frc.robot.components.shooter.infrastructure;
 
 import com.revrobotics.*;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.components.shooter.ShooterConst;
 import frc.robot.components.shooter.ShooterParameter;
@@ -35,9 +36,11 @@ public class Shooter implements ShooterRepository {
         noteUpperShooterPID.setP(ShooterParameter.PID.ShooterP);
         noteUpperShooterPID.setI(ShooterParameter.PID.ShooterI);
         noteUpperShooterPID.setD(ShooterParameter.PID.ShooterD);
+        noteUpperShooterPID.setFF(ShooterParameter.PID.ShooterF);
         noteLowerShooterPID.setP(ShooterParameter.PID.ShooterP);
         noteLowerShooterPID.setI(ShooterParameter.PID.ShooterI);
         noteLowerShooterPID.setD(ShooterParameter.PID.ShooterD);
+        noteLowerShooterPID.setFF(ShooterParameter.PID.ShooterF);
 
         ShooterParameter.ConstInit();
     }
@@ -58,12 +61,18 @@ public class Shooter implements ShooterRepository {
     public void noteShootSpeaker() {
         noteUpperShooterPID.setReference(ShooterParameter.Speed.ShooterTargetSpeed, CANSparkBase.ControlType.kVelocity);
         noteLowerShooterPID.setReference(ShooterParameter.Speed.ShooterTargetSpeed, CANSparkBase.ControlType.kVelocity);
-        if(ShooterMeasuredState.readyToShoot) {
+        
+        final Timer timer;
+        timer = new Timer();
+        timer.start();
+    
+        if(timer.get() >= 0.2 && ShooterMeasuredState.readyToShoot) {
             notePusher.set(ShooterParameter.Speed.PusherShootSpeed);
         }
-        else {
+        else { 
             notePusher.set(ShooterParameter.Speed.Neutral);
         }
+
     }
     
 
@@ -93,7 +102,10 @@ public class Shooter implements ShooterRepository {
 
         ShooterMeasuredState.readyToShoot = ShooterMeasuredState.shooterUpperSpeed > ShootingMotor.shootAvailableSpeedUpper 
         && ShooterMeasuredState.shooterLowerSpeed > ShootingMotor.shootAvailableSpeedLower 
-        && Math.abs(ShooterMeasuredState.shooterLowerSpeed - ShooterMeasuredState.shooterUpperSpeed) < ShootingMotor.shootAvailableAbsolute;
+        && Math.abs(ShooterMeasuredState.shooterLowerSpeed - ShooterMeasuredState.shooterUpperSpeed) < ShootingMotor.shootAvailableAbsolute
+        && ShooterMeasuredState.shooterLowerSpeed < ShooterParameter.ShootingMotor.overlimit
+        && ShooterMeasuredState.shooterUpperSpeed < ShooterParameter.ShootingMotor.overlimit;
+
 
         SmartDashboard.putBoolean("ready to shoot", ShooterMeasuredState.readyToShoot);
     }

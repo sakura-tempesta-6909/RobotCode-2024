@@ -5,9 +5,18 @@ public class DriveParameter {
     public static final class Speeds {
         public static final double Neutral = 0;
 
-        public static final double FastDrive = 0.5;
-        public static final double MidDrive = 0.3;
-        public static final double SlowDrive = 0.1;
+        public static final double FastDrive = 0.8;
+        public static final double MidDrive = 0.4;
+        public static final double SlowDrive = 0.2;
+
+        public static final double FastThetaDrive = 0.6;
+        public static final double MidThetaDrive = 0.3;
+        public static final double SlowThetaDrive = 0.15;
+
+        public static final double kP = 0.008;
+        public static final double kI = 0.0005;
+        public static final double kD = 0;
+        
     }
 
     public static void ConstInit(){

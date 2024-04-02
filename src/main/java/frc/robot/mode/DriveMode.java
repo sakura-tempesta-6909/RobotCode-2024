@@ -1,5 +1,6 @@
 package frc.robot.mode;
 
+import frc.robot.components.link.LinkParameter;
 import frc.robot.domain.measure.LinkMeasuredState;
 import frc.robot.domain.measure.ShooterMeasuredState;
 import frc.robot.domain.model.DriveModel;
@@ -20,6 +21,13 @@ class DriveMode extends ModeManager {
         if(driveController.getRightBumper()) {
             DriveModel.driveOriented = DriveModel.DriveOriented.s_robotOriented;
         } 
+        if(driveController.getBButton()) {
+            DriveModel.driveAngle = true;
+            DriveModel.setAngle = 180;
+        }
+        if(driveController.getAButton()) {
+            DriveModel.resetGyroSensor = true;
+        }
         
 
         /**SHOOTER LINK系 */
@@ -47,7 +55,7 @@ class DriveMode extends ModeManager {
             ShooterModel.shooterMode = ShooterMode.s_increaseRotation;
         }
 
-        /** SPEAKERのleft&rightからのシュートの角度にする＆回転速度上げる */
+        /** 第2Podiumからのシュートの角度にする＆回転速度上げる */
         if(operateController.getAButton()) {
             LinkModel.shooterAngleMode = ShooterAngleMode.s_speakerShootSide;
             ShooterModel.shooterMode = ShooterMode.s_increaseRotation;
@@ -61,8 +69,7 @@ class DriveMode extends ModeManager {
 
         /** AMPからのシュートの角度にする＆回転速度を上げる */
         if(operateController.getLeftBumper()) {
-            LinkModel.shooterAngleMode = ShooterAngleMode.s_speakerShootSide;
-            ShooterModel.shooterMode = ShooterMode.s_increaseRotation;
+            LinkModel.shooterAngleMode = ShooterAngleMode.s_ampShoot;
         }
 
         /** AMPにシュートする */
@@ -70,12 +77,20 @@ class DriveMode extends ModeManager {
             ShooterModel.shooterMode = ShooterMode.s_shootAmp;
             LinkModel.shooterAngleMode = ShooterAngleMode.s_keepCurrentAngle;
         }
-        
 
-        if (ShooterMeasuredState.isNoteGet) {
+        /** 720mm以下にする */
+        if(operateController.getBackButton()) {
+            LinkModel.shooterAngleMode = ShooterAngleMode.s_stageAngle;
+        }
+
+        if (ShooterMeasuredState.isNoteGet && operateController.getRightBumper()) {
             LEDModel.pattern = LEDModel.LEDFlashes.NOTEGet;
-        } else if (LinkMeasuredState.linkUnderStage) {
-            LEDModel.pattern = LEDModel.LEDFlashes.Under720mm;
+        } else if (ShooterMeasuredState.readyToShoot) {
+            LEDModel.pattern = LEDModel.LEDFlashes.ShooterSpeed;
+        } else if (LinkParameter.Current.ClimbCurrent <= LinkMeasuredState.linkCurrent) {
+            LEDModel.pattern = LEDModel.LEDFlashes.ClimbSuccess;
+        } else if (LinkMeasuredState.linkUnderStageHeight) {
+            LEDModel.pattern = LEDModel.LEDFlashes.UnderStage;
         }
     }
     

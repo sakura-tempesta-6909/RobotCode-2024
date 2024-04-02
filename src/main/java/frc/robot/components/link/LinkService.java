@@ -1,8 +1,6 @@
 package frc.robot.components.link;
 
 import frc.robot.components.Service;
-import frc.robot.components.drive.DriveParameter;
-import frc.robot.domain.model.DriveModel;
 import frc.robot.domain.model.LinkModel;
 import frc.robot.domain.repository.LinkRepository;
 
@@ -16,29 +14,37 @@ public class LinkService implements Service {
     public void applyModel() {
         switch (LinkModel.shooterAngleMode) {
             case s_ampShoot:
-                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.Amp);
+                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.AmpLinkLeft, LinkParameter.Angles.AmpLinkRight);
                 break;
             case s_speakerShootBelow:
-                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.SpeakerBelow);
+                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.SpeakerBelowLinkLeft, LinkParameter.Angles.SpeakerBelowLinkRight);
                 break;
             case s_speakerShootPodium:
-                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.SpeakerPodium);
+                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.SpeakerPodiumLinkLeft, LinkParameter.Angles.SpeakerPodiumLinkRight);
                 break;
             case s_speakerShootSide:
-                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.SpeakerRight);
+                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.SpeakerSecondPodiumLinkLeft, LinkParameter.Angles.SpeakerSecondPodiumLinkRight);                
                 break;
             case s_intakeNote:
-                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.Intake);
+                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.IntakeLinkLeft, LinkParameter.Angles.IntakeLinkRight);
                 break;
-            case s_climb:
-                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.Climb);
+            case s_climbAngle:
+                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.ClimbLinkLeft, LinkParameter.Angles.ClimbLinkRight);
                 break;
             case s_keepCurrentAngle:
                 repository.KeepCurrentAngle();
                 break;
-            case s_stageAngle:
+            case s_climb:
+                repository.MoveShooterClimb();
                 break;
-            default:
+            case s_climbUpFineAdjustment:
+                repository.MoveShooterFineAdjustment(LinkConst.FineAdjustment.upAdjustment);
+                break;
+            case s_climbDownFineAdjustment:
+                repository.MoveShooterFineAdjustment(LinkConst.FineAdjustment.downAdjustment);
+                break;
+            case s_stageAngle:
+                repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.StageLinkLeft, LinkParameter.Angles.StageLinkRight);
                 break;
         }
     }
