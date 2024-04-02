@@ -93,16 +93,16 @@ public class Shooter implements ShooterRepository {
         ShooterMeasuredState.shooterLowerSpeed = lowerShooterEncoder.getVelocity();
 
         ShooterMeasuredState.isNoteGet = !noteDirectionSensor.get();
-        SmartDashboard.putNumber("noteUpperShooter", upperShooterEncoder.getVelocity());
-        SmartDashboard.putNumber("noteLowerShooter", lowerShooterEncoder.getVelocity());
-        SmartDashboard.putNumber("diff", upperShooterEncoder.getVelocity()-lowerShooterEncoder.getVelocity());
+        SmartDashboard.putNumber("noteUpperShooter", ShooterMeasuredState.shooterUpperSpeed);
+        SmartDashboard.putNumber("noteLowerShooter", ShooterMeasuredState.shooterLowerSpeed);
+        SmartDashboard.putNumber("diff", ShooterMeasuredState.shooterUpperSpeed-ShooterMeasuredState.shooterLowerSpeed);
 
         
-        boolean ShootAvaiable = ShooterMeasuredState.shooterUpperSpeed > ShootingMotor.shootAvailableSpeed
-        && ShooterMeasuredState.shooterLowerSpeed > ShootingMotor.shootAvailableSpeed
-        && Math.abs(ShooterMeasuredState.shooterLowerSpeed - ShooterMeasuredState.shooterUpperSpeed) < ShootingMotor.shootAvailableAbsolute
-        && ShooterMeasuredState.shooterLowerSpeed < ShooterParameter.ShootingMotor.overlimit
-        && ShooterMeasuredState.shooterUpperSpeed < ShooterParameter.ShootingMotor.overlimit;
+        boolean ShootAvaiable = ShooterMeasuredState.shooterUpperSpeed > ShootingMotor.ShootLowerLimitSpeed
+        && ShooterMeasuredState.shooterLowerSpeed > ShootingMotor.ShootLowerLimitSpeed
+        && Math.abs(ShooterMeasuredState.shooterLowerSpeed - ShooterMeasuredState.shooterUpperSpeed) < ShootingMotor.ShootLimitAbsoluteValue
+        && ShooterMeasuredState.shooterLowerSpeed < ShooterParameter.ShootingMotor.ShootUpperLimitSpeed
+        && ShooterMeasuredState.shooterUpperSpeed < ShooterParameter.ShootingMotor.ShootUpperLimitSpeed;
         
         if(ShootAvaiable) ShooterMeasuredState.counter++;
         else ShooterMeasuredState.counter = 0;
