@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.components.shooter.ShooterConst;
 import frc.robot.components.shooter.ShooterParameter;
-import frc.robot.components.shooter.ShooterParameter.ShootingMotor;
+import frc.robot.components.shooter.ShooterParameter.ShootLimit;
 import frc.robot.domain.measure.ShooterMeasuredState;
 import frc.robot.domain.repository.ShooterRepository;
 
@@ -63,13 +63,9 @@ public class Shooter implements ShooterRepository {
         noteUpperShooterPID.setReference(ShooterParameter.Speed.ShooterTargetSpeed, CANSparkBase.ControlType.kVelocity);
         noteLowerShooterPID.setReference(ShooterParameter.Speed.ShooterTargetSpeed, CANSparkBase.ControlType.kVelocity);
         
-        if(ShooterMeasuredState.readyToShoot) {
-            notePusher.set(ShooterParameter.Speed.PusherShootSpeed);
-        }
-        else { 
-            notePusher.set(ShooterParameter.Speed.Neutral);
-        }
-
+        if(ShooterMeasuredState.readyToShoot) notePusher.set(ShooterParameter.Speed.PusherShootSpeed);
+        else notePusher.set(ShooterParameter.Speed.Neutral);
+        
     }
     
 
@@ -98,11 +94,11 @@ public class Shooter implements ShooterRepository {
         SmartDashboard.putNumber("diff", ShooterMeasuredState.shooterUpperSpeed-ShooterMeasuredState.shooterLowerSpeed);
 
         
-        boolean ShootAvaiable = ShooterMeasuredState.shooterUpperSpeed > ShootingMotor.ShootLowerLimitSpeed
-        && ShooterMeasuredState.shooterLowerSpeed > ShootingMotor.ShootLowerLimitSpeed
-        && Math.abs(ShooterMeasuredState.shooterLowerSpeed - ShooterMeasuredState.shooterUpperSpeed) < ShootingMotor.ShootLimitAbsoluteValue
-        && ShooterMeasuredState.shooterLowerSpeed < ShooterParameter.ShootingMotor.ShootUpperLimitSpeed
-        && ShooterMeasuredState.shooterUpperSpeed < ShooterParameter.ShootingMotor.ShootUpperLimitSpeed;
+        boolean ShootAvaiable = ShooterMeasuredState.shooterUpperSpeed > ShootLimit.ShootLowerLimitSpeed
+        && ShooterMeasuredState.shooterLowerSpeed > ShootLimit.ShootLowerLimitSpeed
+        && Math.abs(ShooterMeasuredState.shooterLowerSpeed - ShooterMeasuredState.shooterUpperSpeed) < ShootLimit.ShootLimitAbsoluteValue
+        && ShooterMeasuredState.shooterLowerSpeed < ShooterParameter.ShootLimit.ShootUpperLimitSpeed
+        && ShooterMeasuredState.shooterUpperSpeed < ShooterParameter.ShootLimit.ShootUpperLimitSpeed;
         
         if(ShootAvaiable) ShooterMeasuredState.counter++;
         else ShooterMeasuredState.counter = 0;
@@ -114,9 +110,9 @@ public class Shooter implements ShooterRepository {
     }
     @Override
     public void stopIntake() {
-      noteUpperShooter.set(ShooterParameter.Speed.Neutral);
-      noteLowerShooter.set(ShooterParameter.Speed.Neutral);
-      notePusher.set(ShooterParameter.Speed.Neutral);
+        noteUpperShooter.set(ShooterParameter.Speed.Neutral);
+        noteLowerShooter.set(ShooterParameter.Speed.Neutral);
+        notePusher.set(ShooterParameter.Speed.Neutral);
     }
     @Override
     public void increaseRotation() {
