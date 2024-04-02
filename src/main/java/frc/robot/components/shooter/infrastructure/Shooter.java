@@ -98,11 +98,11 @@ public class Shooter implements ShooterRepository {
         SmartDashboard.putNumber("diff", ShooterMeasuredState.shooterUpperSpeed-ShooterMeasuredState.shooterLowerSpeed);
 
         
-        boolean ShootAvaiable = ShooterMeasuredState.shooterUpperSpeed > ShootingMotor.shootAvailableSpeed
-        && ShooterMeasuredState.shooterLowerSpeed > ShootingMotor.shootAvailableSpeed
-        && Math.abs(ShooterMeasuredState.shooterLowerSpeed - ShooterMeasuredState.shooterUpperSpeed) < ShootingMotor.shootAvailableAbsolute
-        && ShooterMeasuredState.shooterLowerSpeed < ShooterParameter.ShootingMotor.overlimit
-        && ShooterMeasuredState.shooterUpperSpeed < ShooterParameter.ShootingMotor.overlimit;
+        boolean ShootAvaiable = ShooterMeasuredState.shooterUpperSpeed > ShootingMotor.ShootUpperLimitSpeed
+        && ShooterMeasuredState.shooterLowerSpeed > ShootingMotor.ShootUpperLimitSpeed
+        && Math.abs(ShooterMeasuredState.shooterLowerSpeed - ShooterMeasuredState.shooterUpperSpeed) < ShootingMotor.ShootUpperLimitAbsolute
+        && ShooterMeasuredState.shooterLowerSpeed < ShooterParameter.ShootingMotor.ShootUnderLimitSpeed
+        && ShooterMeasuredState.shooterUpperSpeed < ShooterParameter.ShootingMotor.ShootUnderLimitSpeed;
         
         if(ShootAvaiable) ShooterMeasuredState.counter++;
         else ShooterMeasuredState.counter = 0;

@@ -9,7 +9,6 @@ public class ShooterParameter {
         public static final double PusherOuttakeSpeed = 0.3;
         public static final double ShooterIntakeSpeed = 0.3;
         public static final double ShooterAmpSpeed = 0.38;
-        public static final double ShooterSpeedWhenPusherMove = 3950;
         public static final double Neutral = 0;
     }
     public static class PID {
@@ -21,11 +20,11 @@ public class ShooterParameter {
 
     public static class ShootingMotor {
         /** シュートできるUpper&Lower Speedの速度 */
-        public static final double shootAvailableSpeed = 4450;
+        public static final double ShootUpperLimitSpeed = 4450;
         /** シュートできる絶対値の値 */
-        public static final double shootAvailableAbsolute = 50;
+        public static final double ShootUpperLimitAbsolute = 50;
 
-        public static final double overlimit = 4550;
+        public static final double ShootUnderLimitSpeed = 4550;
     }
     public static void ConstInit() {
 
