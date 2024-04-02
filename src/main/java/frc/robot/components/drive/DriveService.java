@@ -17,28 +17,28 @@ public class DriveService implements Service {
             /** ロボットの速度を速くする */
             case s_fastDrive:
                 DriveModel.driveSideSpeed *= DriveParameter.Speeds.FastDrive;
-                DriveModel.driveFowardSpeed *= DriveParameter.Speeds.FastDrive;
+                DriveModel.driveForwardSpeed *= DriveParameter.Speeds.FastDrive;
                 DriveModel.driveThetaSpeed *= DriveParameter.Speeds.FastThetaDrive;
                 break;
 
             /** ロボットの速度を中くらいにする */
             case s_midDrive:
                 DriveModel.driveSideSpeed *= DriveParameter.Speeds.MidDrive;
-                DriveModel.driveFowardSpeed *= DriveParameter.Speeds.MidDrive;
+                DriveModel.driveForwardSpeed *= DriveParameter.Speeds.MidDrive;
                 DriveModel.driveThetaSpeed *= DriveParameter.Speeds.MidThetaDrive;
                 break;
 
             /** ロボットの速度を遅くする */
             case s_slowDrive:
                 DriveModel.driveSideSpeed *= DriveParameter.Speeds.SlowDrive;
-                DriveModel.driveFowardSpeed *= DriveParameter.Speeds.SlowDrive;
+                DriveModel.driveForwardSpeed *= DriveParameter.Speeds.SlowDrive;
                 DriveModel.driveThetaSpeed *= DriveParameter.Speeds.SlowThetaDrive;
                 break;
 
             /** ロボットの速度を0にする */
             case s_stopDrive:
                 DriveModel.driveSideSpeed *= DriveParameter.Speeds.Neutral;
-                DriveModel.driveFowardSpeed *= DriveParameter.Speeds.Neutral;
+                DriveModel.driveForwardSpeed *= DriveParameter.Speeds.Neutral;
                 DriveModel.driveThetaSpeed *= DriveParameter.Speeds.Neutral;
                 break;
         }
@@ -50,11 +50,11 @@ public class DriveService implements Service {
         switch (DriveModel.driveOriented) {
             /** Field Oriented でまっすぐ前に進む */
             case s_fieldOriented:
-                repository.fieldOriented(DriveModel.driveSideSpeed, DriveModel.driveFowardSpeed, DriveModel.driveThetaSpeed);
+                repository.fieldOriented(DriveModel.driveSideSpeed, DriveModel.driveForwardSpeed, DriveModel.driveThetaSpeed);
                 break;
             /** Robot Oriented で動く */
             case s_robotOriented:
-                repository.robotOriented(DriveModel.driveSideSpeed, DriveModel.driveFowardSpeed, DriveModel.driveThetaSpeed);
+                repository.robotOriented(DriveModel.driveSideSpeed, DriveModel.driveForwardSpeed, DriveModel.driveThetaSpeed);
                 break;
         }
 
