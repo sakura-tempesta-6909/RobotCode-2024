@@ -164,9 +164,6 @@ public class Link implements LinkRepository {
         SmartDashboard.putBoolean("Intake", LinkMeasuredState.linkIntakeHeight);
         SmartDashboard.putBoolean("Podium", LinkMeasuredState.linkPodiumHeight);
         SmartDashboard.putBoolean("SecondPodium", LinkMeasuredState.linkSpeakerSecondPodiumHeight);
-
-        SmartDashboard.putNumber("linkMotorLeftOutputPersent", linkMotorLeft.getMotorOutputPercent());
-        SmartDashboard.putNumber("linkMotorRightOutputPersent", linkMotorRight.getMotorOutputPercent());
     }
 
     public void test() {
