@@ -15,11 +15,6 @@ public interface LinkRepository {
     void KeepCurrentAngle();
 
     /**
-     * センサーを読む
-     */
-    void readSensors();
-
-    /**
      * climbする(Linkの角度を下げる時にPersentOutputを使用)
      * @param MostlyClimb 大体のClimb時の角度
      */
@@ -31,4 +26,9 @@ public interface LinkRepository {
      * @param Down Climb時にLInkの角度を任意の分だけ少しずつ下げる(PercentOutput使用)
      */
     void MoveShooterFineAdjustment(double upOrDown); 
+
+    /**
+     * センサーを読む
+     */
+    void readSensors();
 }
