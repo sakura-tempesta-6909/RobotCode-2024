@@ -44,8 +44,6 @@ public class Shooter implements ShooterRepository {
         noteLowerShooterPID.setD(ShooterParameter.PID.ShooterD);
         noteLowerShooterPID.setFF(ShooterParameter.PID.ShooterF);
 
-        counter = new Counter();
-
         ShooterParameter.ConstInit();
     }
     @Override
