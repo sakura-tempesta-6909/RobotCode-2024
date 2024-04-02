@@ -2,16 +2,12 @@ package frc.robot.components.link.infrastructure;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.FollowerType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix6.configs.Slot0Configs;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.components.link.LinkConst;
 import frc.robot.components.link.LinkParameter;
 import frc.robot.components.link.LinkConst.LinkLeftSoftLimit;
-import frc.robot.components.link.LinkConst.LinkRightSoftLimit;
 import frc.robot.components.link.LinkParameter.Angles;
 import frc.robot.components.link.LinkParameter.PID;
 import frc.robot.domain.measure.LinkMeasuredState;

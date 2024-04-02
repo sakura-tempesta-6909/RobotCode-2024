@@ -21,11 +21,11 @@ public class ShooterParameter {
 
     public static class ShootingMotor {
         /** シュートできるUpper&Lower Speedの速度 */
-        public static final double shootAvailableSpeedUpper = 3950;
-        public static final double shootAvailableSpeedLower = 3950;
+        public static final double shootAvailableSpeed = 4450;
         /** シュートできる絶対値の値 */
-        public static final double shootAvailableAbsolute = 200;
+        public static final double shootAvailableAbsolute = 50;
 
+        public static final double overlimit = 4550;
     }
     public static void ConstInit() {
 

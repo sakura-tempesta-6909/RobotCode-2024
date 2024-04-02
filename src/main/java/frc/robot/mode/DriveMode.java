@@ -1,7 +1,6 @@
 package frc.robot.mode;
 
 import frc.robot.components.link.LinkParameter;
-import frc.robot.components.shooter.ShooterParameter;
 import frc.robot.domain.measure.LinkMeasuredState;
 import frc.robot.domain.measure.ShooterMeasuredState;
 import frc.robot.domain.model.DriveModel;

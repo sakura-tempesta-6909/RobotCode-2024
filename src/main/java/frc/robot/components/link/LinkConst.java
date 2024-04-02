@@ -1,7 +1,5 @@
  package frc.robot.components.link;
 
-import edu.wpi.first.wpilibj.StadiaController;
-
 public class LinkConst {
     public static final class Ports {
         public static final int linkMotorLeft = 17;

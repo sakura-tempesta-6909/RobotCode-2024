@@ -1,8 +1,6 @@
 package frc.robot.components.link;
 
 import frc.robot.components.Service;
-import frc.robot.components.drive.DriveParameter;
-import frc.robot.domain.model.DriveModel;
 import frc.robot.domain.model.LinkModel;
 import frc.robot.domain.repository.LinkRepository;
 

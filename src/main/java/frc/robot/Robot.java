@@ -1,31 +1,21 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.cscore.CvSink;
-import edu.wpi.first.cscore.CvSource;
-import edu.wpi.first.cscore.MjpegServer;
-import edu.wpi.first.cscore.UsbCamera;
-import edu.wpi.first.util.PixelFormat;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.components.Service;
 import frc.robot.components.drive.DriveService;
 import frc.robot.components.drive.infrastructure.Drive;
 import frc.robot.components.led.LEDService;
 import frc.robot.components.led.infrastructure.LED;
-import frc.robot.components.link.LinkConst;
 import frc.robot.components.link.LinkService;
 import frc.robot.components.link.infrastructure.Link;
 import frc.robot.components.shooter.ShooterService;
 import frc.robot.components.shooter.infrastructure.Shooter;
-import frc.robot.domain.repository.DriveRepository;
 import frc.robot.mode.ModeManager;
 import frc.robot.phase.Autonomous;
 import frc.robot.subClass.Util;
 
 import java.util.ArrayList;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
 
 public class Robot extends TimedRobot {
     ArrayList<Service> services = new ArrayList<>();

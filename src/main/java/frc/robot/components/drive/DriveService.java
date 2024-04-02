@@ -1,10 +1,7 @@
 package frc.robot.components.drive;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.components.Service;
-import frc.robot.domain.measure.DriveMeasuredState;
 import frc.robot.domain.model.DriveModel;
-import frc.robot.domain.model.ShooterModel;
 import frc.robot.domain.repository.DriveRepository;
 
 public class DriveService implements Service {

@@ -1,7 +1,5 @@
 package frc.robot.domain.repository;
 
-import frc.robot.domain.model.LEDModel.LEDFlashes;
-
 public interface LEDRepository {
     
     /**

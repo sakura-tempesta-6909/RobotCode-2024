@@ -2,7 +2,6 @@ package frc.robot.phase;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.components.drive.DriveParameter;
 import frc.robot.domain.measure.LinkMeasuredState;
 import frc.robot.domain.measure.ShooterMeasuredState;
 import frc.robot.domain.model.DriveModel;
@@ -262,4 +261,3 @@ public class Autonomous {
         }
     }
 }
-
