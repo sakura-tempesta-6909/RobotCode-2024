@@ -11,8 +11,6 @@ import frc.robot.components.link.LinkConst.LinkLeftSoftLimit;
 import frc.robot.components.link.LinkParameter.Angles;
 import frc.robot.components.link.LinkParameter.PID;
 import frc.robot.domain.measure.LinkMeasuredState;
-import frc.robot.domain.model.LinkModel;
-import frc.robot.domain.model.ShooterModel.ShooterMode;
 import frc.robot.domain.repository.LinkRepository;
 
 public class Link implements LinkRepository {
