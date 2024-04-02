@@ -19,7 +19,7 @@ class DriveMode extends ModeManager {
         }
 
         DriveModel.driveSideSpeed = Util.deadband(driveController.getLeftX());
-        DriveModel.driveFowardSpeed = Util.deadband(-driveController.getLeftY()); //スティックを奥に倒すと正になるように変更
+        DriveModel.driveForwardSpeed = Util.deadband(-driveController.getLeftY()); //スティックを奥に倒すと正になるように変更
         DriveModel.driveThetaSpeed = Util.deadband(-driveController.getRightX()); //スティックを右に倒すと反時計回りになるように変更
         DriveModel.driveOriented = DriveModel.DriveOriented.s_fieldOriented;
         if(driveController.getRightBumper()) {
