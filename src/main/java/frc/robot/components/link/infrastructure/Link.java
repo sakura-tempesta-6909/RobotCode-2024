@@ -146,13 +146,13 @@ public class Link implements LinkRepository {
     }
     @Override
     public void KeepCurrentAngle() {
-        if(linkMotorLeft.getSelectedSensorPosition() <= LinkParameter.Angles.KeepCurrentAngleLinkLeft && linkMotorRight.getSelectedSensorPosition() <= LinkParameter.Angles.KeepCurrentAngleLinkRight) {
-            linkMotorLeft.set(ControlMode.PercentOutput, LinkParameter.Percent.KeepCurrentAngleLink);
-            linkMotorRight.set(ControlMode.PercentOutput, LinkParameter.Percent.KeepCurrentAngleLink);
-        } else {
-            linkMotorLeft.set(ControlMode.PercentOutput, 0);
-            linkMotorRight.set(ControlMode.PercentOutput, 0);
-        }
+      if(linkMotorLeft.getSelectedSensorPosition() <= LinkParameter.Angles.KeepCurrentAngleLinkLeft && linkMotorRight.getSelectedSensorPosition() <= LinkParameter.Angles.KeepCurrentAngleLinkRight) {
+        linkMotorLeft.set(ControlMode.PercentOutput, LinkParameter.Percent.KeepCurrentAngleLink);
+        linkMotorRight.set(ControlMode.PercentOutput, LinkParameter.Percent.KeepCurrentAngleLink);
+      } else {
+        linkMotorLeft.set(ControlMode.PercentOutput, 0);
+        linkMotorRight.set(ControlMode.PercentOutput, 0);
+      }
 
     }
 
