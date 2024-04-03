@@ -14,31 +14,33 @@ import frc.robot.domain.measure.LinkMeasuredState;
 import frc.robot.domain.repository.LinkRepository;
 
 public class Link implements LinkRepository {
-    //Linkの持ち物検査
+    // Linkの持ち物検査
     final TalonSRX linkMotorLeft, linkMotorRight;
 
     public Link() {
         LinkParameter.ConstInit();
 
-        //属性の初期化
+        // 属性の初期化
         linkMotorLeft = new TalonSRX(LinkConst.Ports.linkMotorLeft);
         linkMotorRight = new TalonSRX(LinkConst.Ports.linkMotorRight);
 
-        //moterの設定
+        // motorの初期化
         linkMotorLeft.configFactoryDefault();
-        linkMotorLeft.configSelectedFeedbackSensor(FeedbackDevice.Analog);
-        //Sensorの値を逆にしている
-        linkMotorLeft.setSensorPhase(true);
-        linkMotorLeft.setInverted(false);
-
         linkMotorRight.configFactoryDefault();
+        // Sensorの種類
+        linkMotorLeft.configSelectedFeedbackSensor(FeedbackDevice.Analog);
         linkMotorRight.configSelectedFeedbackSensor(FeedbackDevice.Analog);
+        // Sensorの値を(false)で逆にしている
+        linkMotorLeft.setSensorPhase(true);
         linkMotorRight.setSensorPhase(true);
+        // motorの向きを(true)で逆にしている
+        linkMotorLeft.setInverted(false);
         linkMotorRight.setInverted(true);
+
         //linkMotorRight.follow(linkMotorLeft);
         //linkMotorRight.follow(linkMotorLeft, FollowerType.PercentOutput);
 
-        //SoftLimit
+        //SoftLimitの設定
         linkMotorLeft.configForwardSoftLimitThreshold(LinkConst.LinkLeftSoftLimit.ForwardSoftLimit);
         linkMotorLeft.configForwardSoftLimitEnable(true);
         linkMotorLeft.configReverseSoftLimitThreshold(LinkConst.LinkLeftSoftLimit.ReverseSoftLimit);
@@ -53,11 +55,11 @@ public class Link implements LinkRepository {
         linkMotorRight.configPeakOutputForward(LinkConst.LinkRightSoftLimit.PeakOutputForward);
         linkMotorRight.configPeakOutputReverse(LinkConst.LinkRightSoftLimit.PeakOutputReverse);
 
-        //IdleMode設定
+        // IdleMode(motorのモード)設定
         linkMotorLeft.setNeutralMode(NeutralMode.Brake);
         linkMotorRight.setNeutralMode(NeutralMode.Brake);
 
-        //PID
+        // PIDの設定
         linkMotorLeft.config_kP(0, PID.UpLinkP);
         linkMotorLeft.config_kI(0, PID.UpLinkI);
         linkMotorLeft.config_kD(0, PID.UpLinkD);
@@ -78,8 +80,10 @@ public class Link implements LinkRepository {
         linkMotorRight.config_kI(2, PID.ClimbLinkI);
         linkMotorRight.config_kD(2, PID.ClimbLinkD); 
     }
+
     @Override
     public void MoveShooterToSpecifiedAngle(double TargetShooterLeftAngle, double TargetShooterRightAngle) {
+      // Linkを上げるときと下げるときでのPIDのslot切り替え
       if(TargetShooterLeftAngle >= LinkParameter.Angles.SpeakerSecondPodiumLinkLeft && TargetShooterRightAngle >= LinkParameter.Angles.SpeakerSecondPodiumLinkRight) {
         linkMotorLeft.selectProfileSlot(0, 0);
         linkMotorRight.selectProfileSlot(0, 0);
@@ -87,13 +91,14 @@ public class Link implements LinkRepository {
         linkMotorLeft.selectProfileSlot(1, 0);
         linkMotorRight.selectProfileSlot(1, 0);
       }
-
-        linkMotorLeft.set(ControlMode.Position, TargetShooterLeftAngle);
-        linkMotorRight.set(ControlMode.Position, TargetShooterRightAngle);
+      // LinkをsetpointまでPIDで動かすようにする
+      linkMotorLeft.set(ControlMode.Position, TargetShooterLeftAngle);
+      linkMotorRight.set(ControlMode.Position, TargetShooterRightAngle);
     }
     
     @Override
     public void KeepCurrentAngle() {
+      // Linkの角度が重さで落ちないようしている
       if(linkMotorLeft.getSelectedSensorPosition() <= LinkParameter.Angles.KeepCurrentAngleLinkLeft && linkMotorRight.getSelectedSensorPosition() <= LinkParameter.Angles.KeepCurrentAngleLinkRight) {
         linkMotorLeft.set(ControlMode.PercentOutput, LinkParameter.Percent.KeepCurrentAngleLink);
         linkMotorRight.set(ControlMode.PercentOutput, LinkParameter.Percent.KeepCurrentAngleLink);
@@ -109,7 +114,7 @@ public class Link implements LinkRepository {
       linkMotorLeft.selectProfileSlot(2, 0);
       linkMotorRight.selectProfileSlot(2, 0);
       linkMotorLeft.set(ControlMode.Position, LinkParameter.Angles.ClimbLinkLeft);
-      linkMotorRight.set(ControlMode.PercentOutput, LinkParameter.Angles.ClimbLinkRight);
+      linkMotorRight.set(ControlMode.Position, LinkParameter.Angles.ClimbLinkRight);
     }
 
     @Override
