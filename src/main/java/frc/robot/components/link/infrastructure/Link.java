@@ -26,7 +26,7 @@ public class Link implements LinkRepository {
         linkMotorLeft = new TalonSRX(LinkConst.Ports.linkMotorLeft);
         linkMotorRight = new TalonSRX(LinkConst.Ports.linkMotorRight);
 
-        // moterの初期化
+        // motorの初期化
         linkMotorLeft.configFactoryDefault();
         linkMotorRight.configFactoryDefault();
         // Sensorの種類
@@ -43,19 +43,19 @@ public class Link implements LinkRepository {
         //linkMotorRight.follow(linkMotorLeft, FollowerType.PercentOutput);
 
         // SoftLimitの設定
-        linkMotorLeft.configForwardSoftLimitThreshold(LinkConst.LinkLeftSoftLimit.ForwardSoftLimit);
-        linkMotorLeft.configForwardSoftLimitEnable(true);
-        linkMotorLeft.configReverseSoftLimitThreshold(LinkConst.LinkLeftSoftLimit.ReverseSoftLimit);
-        linkMotorLeft.configReverseSoftLimitEnable(true);
-        linkMotorLeft.configPeakOutputForward(LinkConst.LinkLeftSoftLimit.PeakOutputForward);
-        linkMotorLeft.configPeakOutputReverse(LinkConst.LinkLeftSoftLimit.PeakOutputReverse);
+        // linkMotorLeft.configForwardSoftLimitThreshold(LinkConst.LinkLeftSoftLimit.ForwardSoftLimit);
+        // linkMotorLeft.configForwardSoftLimitEnable(true);
+        // linkMotorLeft.configReverseSoftLimitThreshold(LinkConst.LinkLeftSoftLimit.ReverseSoftLimit);
+        // linkMotorLeft.configReverseSoftLimitEnable(true);
+        // linkMotorLeft.configPeakOutputForward(LinkConst.LinkLeftSoftLimit.PeakOutputForward);
+        // linkMotorLeft.configPeakOutputReverse(LinkConst.LinkLeftSoftLimit.PeakOutputReverse);
 
-        linkMotorRight.configForwardSoftLimitThreshold(LinkConst.LinkRightSoftLimit.ForwardSoftLimit);
-        linkMotorRight.configForwardSoftLimitEnable(true);
-        linkMotorRight.configReverseSoftLimitThreshold(LinkConst.LinkRightSoftLimit.ReverseSoftLimit);
-        linkMotorRight.configReverseSoftLimitEnable(true);
-        linkMotorRight.configPeakOutputForward(LinkConst.LinkRightSoftLimit.PeakOutputForward);
-        linkMotorRight.configPeakOutputReverse(LinkConst.LinkRightSoftLimit.PeakOutputReverse);
+        // linkMotorRight.configForwardSoftLimitThreshold(LinkConst.LinkRightSoftLimit.ForwardSoftLimit);
+        // linkMotorRight.configForwardSoftLimitEnable(true);
+        // linkMotorRight.configReverseSoftLimitThreshold(LinkConst.LinkRightSoftLimit.ReverseSoftLimit);
+        // linkMotorRight.configReverseSoftLimitEnable(true);
+        // linkMotorRight.configPeakOutputForward(LinkConst.LinkRightSoftLimit.PeakOutputForward);
+        // linkMotorRight.configPeakOutputReverse(LinkConst.LinkRightSoftLimit.PeakOutputReverse);
 
         // IdleMode(motorのモード)設定
         linkMotorLeft.setNeutralMode(NeutralMode.Brake);
