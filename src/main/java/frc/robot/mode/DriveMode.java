@@ -13,13 +13,15 @@ import frc.robot.subClass.Util;
 
 class DriveMode extends ModeManager {
     public static void changeModel() {
-        DriveModel.driveMovement = DriveModel.DriveMovement.s_fastDrive;
-        if(driveController.getLeftBumper()){
+        DriveModel.driveMovement = DriveModel.DriveMovement.s_midDrive;
+        if(0.6 <= driveController.getLeftTriggerAxis()){
             DriveModel.driveMovement = DriveModel.DriveMovement.s_slowDrive;
+        }else if (0.6 <= driveController.getRightTriggerAxis()) {
+            DriveModel.driveMovement = DriveModel.DriveMovement.s_fastDrive;
         }
 
         DriveModel.driveSideSpeed = Util.deadband(driveController.getLeftX());
-        DriveModel.driveFowardSpeed = Util.deadband(-driveController.getLeftY()); //スティックを奥に倒すと正になるように変更
+        DriveModel.driveForwardSpeed = Util.deadband(-driveController.getLeftY()); //スティックを奥に倒すと正になるように変更
         DriveModel.driveThetaSpeed = Util.deadband(-driveController.getRightX()); //スティックを右に倒すと反時計回りになるように変更
         DriveModel.driveOriented = DriveModel.DriveOriented.s_fieldOriented;
         if(driveController.getRightBumper()) {

@@ -34,16 +34,16 @@ public class DriveModel {
     /**
      * ドライブベースを動かす
      * @param driveSideSpeed     左右成分 [-1 ~ 1] 右に進むとき正
-     * @param driveFowardSpeed     前後成分 [-1 ~ 1] 前に進むとき正
+     * @param driveForwardSpeed     前後成分 [-1 ~ 1] 前に進むとき正
      * @param driveThetaSpeed 回転成分 [-1 ~ 1] 反時計(左)回りが正
      */
-    public static double driveSideSpeed, driveFowardSpeed, driveThetaSpeed;
+    public static double driveSideSpeed, driveForwardSpeed, driveThetaSpeed;
 
     public static void reset() {
         driveMovement = DriveMovement.s_stopDrive;
         driveOriented = DriveOriented.s_fieldOriented;
         driveSideSpeed = 0;
-        driveFowardSpeed = 0;
+        driveForwardSpeed = 0;
         driveThetaSpeed = 0;
         driveAngle = false;
         resetGyroSensor = false;
