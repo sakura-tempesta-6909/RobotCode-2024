@@ -7,9 +7,9 @@ public class DriveParameter {
         public static final double Neutral = 0;
 
         /** ロボットが速いときの進む速度 */
-        public static final double FastDrive = 0.8;
+        public static final double FastDrive = 1.0;
         /** ロボットが普通の速さのときの進む速度 */
-        public static final double MidDrive = 0.4;
+        public static final double MidDrive = 0.8;
         /** ロボットが遅いときの進む速度 */
         public static final double SlowDrive = 0.25;
 

@@ -13,9 +13,11 @@ import frc.robot.subClass.Util;
 
 class DriveMode extends ModeManager {
     public static void changeModel() {
-        DriveModel.driveMovement = DriveModel.DriveMovement.s_fastDrive;
-        if(driveController.getLeftBumper()){
+        DriveModel.driveMovement = DriveModel.DriveMovement.s_midDrive;
+        if(0.6 <= driveController.getLeftTriggerAxis()){
             DriveModel.driveMovement = DriveModel.DriveMovement.s_slowDrive;
+        }else if (0.6 <= driveController.getRightTriggerAxis()) {
+            DriveModel.driveMovement = DriveModel.DriveMovement.s_fastDrive;
         }
 
         DriveModel.driveSideSpeed = Util.deadband(driveController.getLeftX());
