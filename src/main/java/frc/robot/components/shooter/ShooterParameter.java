@@ -21,10 +21,11 @@ public class ShooterParameter {
     }
     public static class PID {
         /**ShooterのPIDの値 */
-        public static final double ShooterP = 0.0002;
-        public static final double ShooterI = 2.05e-7;
+        public static final double ShooterP = 0.00003;
+        public static final double ShooterI = 1e-7;
         public static final double ShooterD = 0;
-        public static final double ShooterF = 0.00015;
+        public static final double ShooterF = 0.00017;
+        public static final double ShooterIZone = 1000;
     }
 
     public static class ShootLimit {

@@ -37,11 +37,13 @@ public class Shooter implements ShooterRepository {
         noteUpperShooterPID.setI(ShooterParameter.PID.ShooterI);
         noteUpperShooterPID.setD(ShooterParameter.PID.ShooterD);
         noteUpperShooterPID.setFF(ShooterParameter.PID.ShooterF);
+        noteUpperShooterPID.setIZone(ShooterParameter.PID.ShooterIZone);
         noteLowerShooterPID.setP(ShooterParameter.PID.ShooterP);
         noteLowerShooterPID.setI(ShooterParameter.PID.ShooterI);
         noteLowerShooterPID.setD(ShooterParameter.PID.ShooterD);
         noteLowerShooterPID.setFF(ShooterParameter.PID.ShooterF);
-
+        noteLowerShooterPID.setIZone(ShooterParameter.PID.ShooterIZone);
+        
         ShooterParameter.ConstInit();
     }
     
