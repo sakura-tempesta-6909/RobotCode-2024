@@ -6,10 +6,10 @@ import frc.robot.components.link.LinkConst.LinkRightSoftLimit;
 public class LinkParameter {
     public static final class Angles {
         /**
-         * 数値を変える！！
+         * 上と下の差: 212
          */
         /** Ampの角度 */
-        public static final double AmpLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 235;
+        public static final double AmpLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 212;
         /** SpeakerBelowの角度 */
         public static final double SpeakerBelowLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 206;
         /** Podiumの角度 */
@@ -19,7 +19,7 @@ public class LinkParameter {
         /** Intakeの角度 */
         public static final double IntakeLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 154;
         /** Climbの準備の角度 */
-        public static final double SetClimbLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 235;
+        public static final double SetClimbLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 212;
         /** Stageの角度 */
         public static final double StageLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit;
         /** KeepCurrentの角度 */
@@ -28,7 +28,7 @@ public class LinkParameter {
         public static final double ClimbLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit;
 
         /** Ampの角度 */
-        public static final double AmpLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 235;
+        public static final double AmpLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 212;
         /** SpeakerBelowの角度 */
         public static final double SpeakerBelowLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 206;
         /** Podiumの角度 */
@@ -38,7 +38,7 @@ public class LinkParameter {
         /** Intakeの角度 */
         public static final double IntakeLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 154;
         /** Climbの準備の角度 */
-        public static final double SetClimbLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 235;
+        public static final double SetClimbLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 212;
         /** Stageの角度 */
         public static final double StageLinkRight = LinkRightSoftLimit.ReverseSoftLimit;
         /** KeepCurrentの角度 */
