@@ -127,9 +127,9 @@ public class Link implements LinkRepository {
 
     @Override
     public void readSensors() {
-        LinkMeasuredState.linkLeftAngle = linkMotorLeft.getSelectedSensorPosition();
+        LinkMeasuredState.linkLeftAngle = linkMotorLeft.getSelectedSensorPosition() - LinkConst.LinkLeftSoftLimit.ReverseSoftLimit;
         SmartDashboard.putNumber("LinkLeftAngle", LinkMeasuredState.linkLeftAngle);
-        LinkMeasuredState.linkRightAngle = linkMotorRight.getSelectedSensorPosition();
+        LinkMeasuredState.linkRightAngle = linkMotorRight.getSelectedSensorPosition() - LinkConst.LinkRightSoftLimit.ReverseSoftLimit;
         SmartDashboard.putNumber("linkRightAngle", LinkMeasuredState.linkRightAngle);
 
         // 初期化

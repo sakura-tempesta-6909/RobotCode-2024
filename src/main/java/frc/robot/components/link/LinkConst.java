@@ -20,7 +20,7 @@ public class LinkConst {
       /** 最大高度 */
       public static final int ForwardSoftLimit = 495;
       /** 最低高度 */
-      public static final int ReverseSoftLimit = 274;
+      public static final int ReverseSoftLimit = 250;
       /** 最大PercentOutput */
       public static final double PeakOutputForward = .6;
       /** 最低PercentOutput */
