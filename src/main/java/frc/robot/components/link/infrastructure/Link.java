@@ -1,6 +1,7 @@
 package frc.robot.components.link.infrastructure;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -92,8 +93,8 @@ public class Link implements LinkRepository {
         linkMotorRight.selectProfileSlot(1, 0);
       }
       // LinkをsetpointまでPIDで動かすようにする
-      linkMotorLeft.set(ControlMode.Position, TargetShooterLeftAngle);
-      linkMotorRight.set(ControlMode.Position, TargetShooterRightAngle);
+      linkMotorLeft.set(ControlMode.Position, TargetShooterLeftAngle, DemandType.ArbitraryFeedForward, 0.05);
+      linkMotorRight.set(ControlMode.Position, TargetShooterRightAngle, DemandType.ArbitraryFeedForward, 0.05);
     }
     
     @Override

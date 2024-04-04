@@ -1,6 +1,8 @@
 
 package frc.robot.components.link;
 
+import java.net.PortUnreachableException;
+
 import frc.robot.components.link.LinkConst.LinkLeftSoftLimit;
 import frc.robot.components.link.LinkConst.LinkRightSoftLimit;
 import frc.robot.components.link.infrastructure.Link;
@@ -12,8 +14,12 @@ public class LinkParameter {
          * 右の上と下の差: 245
          */
 
+        /** 左の差 */
+        public static final double LinkLeftGap = LinkRightSoftLimit.ForwardSoftLimit - LinkRightSoftLimit.ReverseSoftLimit;
+        /** 右の差 */
+        public static final double LinkRightGap = LinkLeftSoftLimit.ForwardSoftLimit - LinkLeftSoftLimit.ReverseSoftLimit;
         /** 左と右の差 */
-        public static final double LinkGapPercent = (LinkRightSoftLimit.ForwardSoftLimit - LinkRightSoftLimit.ReverseSoftLimit) / (LinkLeftSoftLimit.ForwardSoftLimit - LinkLeftSoftLimit.ReverseSoftLimit); 
+        public static final double LinkGapPercent = LinkLeftGap / LinkRightGap;
 
         /** Ampの角度 */
         public static final double AmpLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 221;
@@ -57,8 +63,8 @@ public class LinkParameter {
     // pidの値を書く
     public static class PID {
         /** gain(0) */
-        public static final double UpLinkP = 6;
-        public static final double UpLinkI = 1e-3;
+        public static final double UpLinkP = 2;
+        public static final double UpLinkI = 5e-4;
         public static final double UpLinkD = 2;
 
         /** gain(1) */
