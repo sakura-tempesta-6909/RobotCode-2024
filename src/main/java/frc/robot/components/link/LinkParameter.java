@@ -1,15 +1,22 @@
+
 package frc.robot.components.link;
 
 import frc.robot.components.link.LinkConst.LinkLeftSoftLimit;
 import frc.robot.components.link.LinkConst.LinkRightSoftLimit;
+import frc.robot.components.link.infrastructure.Link;
 
 public class LinkParameter {
     public static final class Angles {
         /**
-         * 数値を変える！！
+         * 左の上と下の差: 221
+         * 右の上と下の差: 245
          */
+
+        /** 左と右の差 */
+        public static final double LinkGapPercent = (LinkRightSoftLimit.ForwardSoftLimit - LinkRightSoftLimit.ReverseSoftLimit) / (LinkLeftSoftLimit.ForwardSoftLimit - LinkLeftSoftLimit.ReverseSoftLimit); 
+
         /** Ampの角度 */
-        public static final double AmpLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 235;
+        public static final double AmpLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 221;
         /** SpeakerBelowの角度 */
         public static final double SpeakerBelowLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 206;
         /** Podiumの角度 */
@@ -19,7 +26,7 @@ public class LinkParameter {
         /** Intakeの角度 */
         public static final double IntakeLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 154;
         /** Climbの準備の角度 */
-        public static final double SetClimbLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 235;
+        public static final double SetClimbLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 221;
         /** Stageの角度 */
         public static final double StageLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit;
         /** KeepCurrentの角度 */
@@ -28,21 +35,21 @@ public class LinkParameter {
         public static final double ClimbLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit;
 
         /** Ampの角度 */
-        public static final double AmpLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 235;
+        public static final double AmpLinkRight = LinkRightSoftLimit.ReverseSoftLimit + (221 * LinkGapPercent);
         /** SpeakerBelowの角度 */
-        public static final double SpeakerBelowLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 206;
+        public static final double SpeakerBelowLinkRight = LinkRightSoftLimit.ReverseSoftLimit + (206 * LinkGapPercent);
         /** Podiumの角度 */
-        public static final double SpeakerPodiumLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 159;
+        public static final double SpeakerPodiumLinkRight = LinkRightSoftLimit.ReverseSoftLimit + (159 * LinkGapPercent);
         /** 第2Podiumの角度 */
-        public static final double SpeakerSecondPodiumLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 88;
+        public static final double SpeakerSecondPodiumLinkRight = LinkRightSoftLimit.ReverseSoftLimit + (88 * LinkGapPercent);
         /** Intakeの角度 */
-        public static final double IntakeLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 154;
+        public static final double IntakeLinkRight = LinkRightSoftLimit.ReverseSoftLimit + (154 * LinkGapPercent);
         /** Climbの準備の角度 */
-        public static final double SetClimbLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 235;
+        public static final double SetClimbLinkRight = LinkRightSoftLimit.ReverseSoftLimit + (221 * LinkGapPercent);
         /** Stageの角度 */
         public static final double StageLinkRight = LinkRightSoftLimit.ReverseSoftLimit;
         /** KeepCurrentの角度 */
-        public static final double KeepCurrentAngleLinkRight = LinkRightSoftLimit.ReverseSoftLimit + 48;
+        public static final double KeepCurrentAngleLinkRight = LinkRightSoftLimit.ReverseSoftLimit + (48 * LinkGapPercent);
         /** Climbするときの角度 */
         public static final double ClimbLinkRight = LinkRightSoftLimit.ReverseSoftLimit;
     }
