@@ -2,6 +2,8 @@ package frc.robot.phase;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.components.drive.DriveParameter;
+import frc.robot.components.drive.infrastructure.Drive;
 import frc.robot.domain.measure.LinkMeasuredState;
 import frc.robot.domain.measure.ShooterMeasuredState;
 import frc.robot.domain.model.DriveModel;
@@ -188,6 +190,27 @@ public class Autonomous {
                 phaseName
         );
 	}
+
+    /**
+     * Gyroの角度を変える
+     *
+     * @param phaseName 出力されるフェーズの名前
+     */
+    private static PhaseTransition.Phase changeGyroAngle(double angle,String phaseName) {
+        return new PhaseTransition.Phase(
+                () -> {
+					DriveModel.rewriteGyroSensorOrNot = true;
+                    DriveModel.offset = 120;
+                },
+                (double time) -> {
+                    
+                },
+                () -> {
+                }, 
+                phaseName
+        );
+	}
+
 
     public static void autonomousInit() {
         phaseTransitionA = new PhaseTransition();

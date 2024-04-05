@@ -29,12 +29,24 @@ class DriveMode extends ModeManager {
         DriveModel.driveOriented = DriveModel.DriveOriented.s_fieldOriented;
         if(driveController.getRightBumper()) {
             DriveModel.driveOriented = DriveModel.DriveOriented.s_robotOriented;
+        }
+        if(driveController.getYButton()) {
+            DriveModel.driveAngle = true;
+            DriveModel.setAngle = 0;
         } 
         if(driveController.getBButton()) {
             DriveModel.driveAngle = true;
-            DriveModel.setAngle = 180;
+            DriveModel.setAngle = 90;
         }
         if(driveController.getAButton()) {
+            DriveModel.driveAngle = true;
+            DriveModel.setAngle = 180;
+        }
+        if(driveController.getXButton()) {
+            DriveModel.driveAngle = true;
+            DriveModel.setAngle = 270;
+        }
+        if(130 < driveController.getPOV() && driveController.getPOV() < 230 ) {
             DriveModel.resetGyroSensor = true;
         }
         
