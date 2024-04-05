@@ -107,7 +107,7 @@ public class Shooter implements ShooterRepository {
         
         if(ShooterMeasuredState.counter >= 7) ShooterMeasuredState.readyToShoot = true;
         else ShooterMeasuredState.readyToShoot = false;
-
+        //ShooterMeasuredState.readyToShoot = true;
         SmartDashboard.putBoolean("ready to shoot", ShooterMeasuredState.readyToShoot);
     }
     @Override
