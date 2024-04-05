@@ -252,7 +252,7 @@ public class Autonomous {
         );
 
         phaseTransitionB.registerPhase(
-                changeGyroAngle(180, "Offset Gyro"),
+                changeGyroAngle(-120, "Offset Gyro"),
 
 				//LINKの角度をSHOOTERにSHOOTする角度に変える
 				adjustLinkSpeaker("Move to Shooter Angle"),
@@ -270,7 +270,7 @@ public class Autonomous {
         );
 
         phaseTransitionC.registerPhase(
-                changeGyroAngle(180, "Offset Gyro"),
+                changeGyroAngle(120, "Offset Gyro"),
 
 				//LINKの角度をSHOOTERにSHOOTする角度に変える
 				adjustLinkSpeaker("Move to Shooter Angle"),
