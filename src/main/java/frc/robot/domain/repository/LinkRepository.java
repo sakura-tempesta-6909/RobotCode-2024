@@ -27,6 +27,8 @@ public interface LinkRepository {
      */
     void MoveShooterFineAdjustment(double upOrDown); 
 
+    void resetPID();
+
     /**
      * センサーを読む
      */

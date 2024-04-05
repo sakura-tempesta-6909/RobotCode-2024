@@ -80,7 +80,7 @@ public class Autonomous {
                     DriveModel.driveOriented = DriveOriented.s_fieldOriented;
 					DriveModel.driveSideSpeed = 0;
 					DriveModel.driveMovement = DriveModel.DriveMovement.s_slowDrive;
-					DriveModel.driveForwardSpeed = 1;
+					DriveModel.driveForwardSpeed = -1;
 					/**
 					 * ドライブベースを動かす
 					 * @param driveSideSpeed     左右成分 [-1 ~ 1] 右に進むとき正
@@ -208,7 +208,7 @@ public class Autonomous {
 				//LINKの角度を元の位置にまで戻す
 				adjustLinkBack("Move Angle Back"),
 				//Taxi
-				taxi(0.5, "Move out of Robot Starting Zone")
+				taxi(1.5, "Move out of Robot Starting Zone")
         );
 
         phaseTransitionB.registerPhase(
@@ -223,12 +223,12 @@ public class Autonomous {
 				//LINKの角度を元の位置にまで戻す
 				adjustLinkBack("Move Angle Back"),
 				//Taxi
-				taxi(0.5, "Move out of Robot Starting Zone") 
+				taxi(1.5, "Move out of Robot Starting Zone") 
         );
 
         phaseTransitionC.registerPhase(
 				//Taxi
-            	taxi(0.5, "Move out of Robot Starting Zone")
+            	taxi(1.5, "Move out of Robot Starting Zone")
 
         );
 
