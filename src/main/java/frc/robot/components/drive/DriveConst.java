@@ -2,6 +2,7 @@ package frc.robot.components.drive;
 
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 
 //ファイルには空のクラスのみを記述する
@@ -53,7 +54,29 @@ public final class DriveConst {
         public static final int kFrontRightDriveAbsoluteEncoderPort = 8;
         public static final int kBackRightDriveAbsoluteEncoderPort = 5;
 
+        public static final double kPhysicalMaxSpeedMetersPerSecond = 5;
+        public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;
+
         public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 3;
         public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 3;
+    }
+
+    public static final class AutoConstants {
+        public static final double kMaxSpeedMetersPerSecond = DriveConstants.kPhysicalMaxSpeedMetersPerSecond / 4;
+        public static final double kMaxAngularSpeedRadiansPerSecond = //
+                DriveConstants.kPhysicalMaxAngularSpeedRadiansPerSecond / 10;
+        public static final double kMaxAccelerationMetersPerSecondSquared = 3;
+        public static final double kMaxAngularAccelerationRadiansPerSecondSquared = Math.PI / 4;
+        /** 左右方向のPID制御のPの値 */
+        public static final double kPXController = 1.5;
+        /** 前後方向のPID制御のPの値 */
+        public static final double kPYController = 1.5;
+        /** 回転のPID制御のPの値 */
+        public static final double kPThetaController = 3;
+
+        public static final TrapezoidProfile.Constraints kThetaControllerConstraints = //
+                new TrapezoidProfile.Constraints(
+                        kMaxAngularSpeedRadiansPerSecond,
+                        kMaxAngularAccelerationRadiansPerSecondSquared);
     }
 }

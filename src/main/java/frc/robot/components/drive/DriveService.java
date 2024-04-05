@@ -1,6 +1,8 @@
 package frc.robot.components.drive;
 
 import frc.robot.components.Service;
+import frc.robot.components.drive.infrastructure.SwerveSubsystem;
+import frc.robot.domain.measure.DriveMeasuredState;
 import frc.robot.domain.model.DriveModel;
 import frc.robot.domain.repository.DriveRepository;
 
@@ -60,6 +62,10 @@ public class DriveService implements Service {
 
         if(DriveModel.resetGyroSensor) {
             repository.resetGyroSensor();
+        }
+
+        if(DriveModel.rewriteGyroSensorOrNot){
+           repository.rewriteGyroSensor(DriveModel.offset);
         }
     }
     
