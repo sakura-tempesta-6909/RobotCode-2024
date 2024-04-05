@@ -67,8 +67,11 @@ public final class DriveConst {
                 DriveConstants.kPhysicalMaxAngularSpeedRadiansPerSecond / 10;
         public static final double kMaxAccelerationMetersPerSecondSquared = 3;
         public static final double kMaxAngularAccelerationRadiansPerSecondSquared = Math.PI / 4;
+        /** 左右方向のPID制御のPの値 */
         public static final double kPXController = 1.5;
+        /** 前後方向のPID制御のPの値 */
         public static final double kPYController = 1.5;
+        /** 回転のPID制御のPの値 */
         public static final double kPThetaController = 3;
 
         public static final TrapezoidProfile.Constraints kThetaControllerConstraints = //
