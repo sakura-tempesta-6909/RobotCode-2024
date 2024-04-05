@@ -13,6 +13,9 @@ import frc.robot.subClass.Util;
 
 class DriveMode extends ModeManager {
     public static void changeModel() {
+        if(operateController.getAButtonPressed() || operateController.getBButtonPressed() || operateController.getYButtonPressed() || operateController.getRightBumperPressed() || operateController.getBackButtonPressed()) {
+            LinkModel.resetPID = true;
+        }
         DriveModel.driveMovement = DriveModel.DriveMovement.s_midDrive;
         if(0.6 <= driveController.getLeftTriggerAxis()){
             DriveModel.driveMovement = DriveModel.DriveMovement.s_slowDrive;
@@ -26,12 +29,24 @@ class DriveMode extends ModeManager {
         DriveModel.driveOriented = DriveModel.DriveOriented.s_fieldOriented;
         if(driveController.getRightBumper()) {
             DriveModel.driveOriented = DriveModel.DriveOriented.s_robotOriented;
+        }
+        if(driveController.getYButton()) {
+            DriveModel.driveAngle = true;
+            DriveModel.setAngle = 0;
         } 
         if(driveController.getBButton()) {
             DriveModel.driveAngle = true;
-            DriveModel.setAngle = 180;
+            DriveModel.setAngle = 90;
         }
         if(driveController.getAButton()) {
+            DriveModel.driveAngle = true;
+            DriveModel.setAngle = 180;
+        }
+        if(driveController.getXButton()) {
+            DriveModel.driveAngle = true;
+            DriveModel.setAngle = 270;
+        }
+        if(130 < driveController.getPOV() && driveController.getPOV() < 230 ) {
             DriveModel.resetGyroSensor = true;
         }
         
@@ -39,7 +54,7 @@ class DriveMode extends ModeManager {
         /**SHOOTER LINK系 */
 
         /** SOURCEからのインテイクの角度にする＆インテイクする */
-        if(operateController.getRightBumper()) {
+        if(operateController.getAButton()) {
             LinkModel.shooterAngleMode = ShooterAngleMode.s_intakeNote;
             ShooterModel.shooterMode = ShooterMode.s_intake;
         }
@@ -49,21 +64,18 @@ class DriveMode extends ModeManager {
             ShooterModel.shooterMode = ShooterMode.s_outtake;
         }
 
-        /** SPEAKERの真下からのシュートの角度にする＆回転速度を上げる */
+        /** SPEAKERの真下からのシュートの角度にする */
         if(operateController.getYButton()) {
             LinkModel.shooterAngleMode = ShooterAngleMode.s_speakerShootBelow;
-            ShooterModel.shooterMode = ShooterMode.s_increaseRotation;
         }
 
-        /** podiumからのシュートの角度にする＆回転速度を上げる  */
+        /** podiumからのシュートの角度にする  */
         if(operateController.getBButton()) {
             LinkModel.shooterAngleMode = ShooterAngleMode.s_speakerShootPodium;
-            ShooterModel.shooterMode = ShooterMode.s_increaseRotation;
         }
 
-        /** 第2Podiumからのシュートの角度にする＆回転速度上げる */
-        if(operateController.getAButton()) {
-            LinkModel.shooterAngleMode = ShooterAngleMode.s_speakerShootSide;
+        /** shooterの回転数を上げる */
+        if(operateController.getRightBumper()) {
             ShooterModel.shooterMode = ShooterMode.s_increaseRotation;
         }
 
@@ -96,7 +108,7 @@ class DriveMode extends ModeManager {
             LinkModel.shooterAngleMode = ShooterAngleMode.s_climbUpFineAdjustment;
         }
 
-        if (ShooterMeasuredState.isNoteGet && operateController.getRightBumper()) {
+        if (ShooterMeasuredState.isNoteGet && ShooterModel.shooterMode == ShooterMode.s_intake) {
             LEDModel.pattern = LEDModel.LEDFlashes.NOTEGet;
         } else if (ShooterMeasuredState.readyToShoot) {
             LEDModel.pattern = LEDModel.LEDFlashes.ShooterSpeed;

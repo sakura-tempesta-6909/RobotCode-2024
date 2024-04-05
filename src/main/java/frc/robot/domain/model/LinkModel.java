@@ -29,10 +29,13 @@ public class LinkModel {
     }
     public static void reset() {
         shooterAngleMode = ShooterAngleMode.s_keepCurrentAngle;
+        resetPID = false;
     }
 
     public LinkModel() {
         reset();
     }
+
+    public static boolean resetPID;
 }
     

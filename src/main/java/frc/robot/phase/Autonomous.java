@@ -2,6 +2,8 @@ package frc.robot.phase;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.components.drive.DriveParameter;
+import frc.robot.components.drive.infrastructure.Drive;
 import frc.robot.domain.measure.LinkMeasuredState;
 import frc.robot.domain.measure.ShooterMeasuredState;
 import frc.robot.domain.model.DriveModel;
@@ -10,39 +12,52 @@ import frc.robot.domain.model.ShooterModel;
 import frc.robot.domain.model.DriveModel.DriveOriented;
 import frc.robot.domain.model.LinkModel.ShooterAngleMode;
 import frc.robot.domain.model.ShooterModel.ShooterMode;
+import frc.robot.domain.repository.DriveRepository;
 
 
 
 
 public class Autonomous {	
     /**
-     * ノートをシューターに入れる<br>
+     * ノートをシューター(正面）に入れる<br>
      * バックする
      */
     private static PhaseTransition phaseTransitionA;
     /**
-     * ノートをアンプに入れる<br>
+     * ノートをシューター(左）に入れる<br>
      * バックする
      */
     private static PhaseTransition phaseTransitionB;
     /**
+     * ノートをシューター(右）に入れる<br>
      * バックする
      */
     private static PhaseTransition phaseTransitionC;
+    /**
+     * ノートをアンプに入れる<br>
+     * バックする
+     */
+    private static PhaseTransition phaseTransitionD;
+    /**
+     * バックする
+     */
+    private static PhaseTransition phaseTransitionE;
 	/**
      * なし
      */
-    private static PhaseTransition phaseTransitionD;
+    private static PhaseTransition phaseTransitionF;
 	
 	private static String m_autoSelected;
 	
 	private final static SendableChooser<String> m_chooser = new SendableChooser<>();
 
 	public static void robotInit() {
-		m_chooser.setDefaultOption("Default", "D");
-		m_chooser.addOption("Shoot Speaker & Taxi", "A");
-		m_chooser.addOption("Shoot Amp & Taxi", "B");
-		m_chooser.addOption("Taxi", "C");
+		m_chooser.setDefaultOption("Default", "F");
+		m_chooser.addOption("Shoot Speaker(Front) & Taxi", "A");
+        m_chooser.addOption("Shoot Speaker(Left) & Taxi", "B");
+        m_chooser.addOption("Shoot Speaker(Right) & Taxi", "C");
+		m_chooser.addOption("Shoot Amp & Taxi", "D");
+		m_chooser.addOption("Taxi", "E");
 		SmartDashboard.putData("Auto choices", m_chooser);
 	}
 
@@ -80,7 +95,7 @@ public class Autonomous {
                     DriveModel.driveOriented = DriveOriented.s_fieldOriented;
 					DriveModel.driveSideSpeed = 0;
 					DriveModel.driveMovement = DriveModel.DriveMovement.s_slowDrive;
-					DriveModel.driveForwardSpeed = 1;
+					DriveModel.driveForwardSpeed = -1;
 					/**
 					 * ドライブベースを動かす
 					 * @param driveSideSpeed     左右成分 [-1 ~ 1] 右に進むとき正
@@ -189,29 +204,90 @@ public class Autonomous {
         );
 	}
 
+    /**
+     * Gyroの角度を変える
+     *
+     * @param phaseName 出力されるフェーズの名前
+     */
+    private static PhaseTransition.Phase changeGyroAngle(double angle,String phaseName) {
+        return new PhaseTransition.Phase(
+                () -> {
+                },
+                (double time) -> {
+                    return true;
+                },
+                () -> {
+                    DriveModel.offset = angle;
+                }, 
+                phaseName
+        );
+	}
+
+
     public static void autonomousInit() {
         phaseTransitionA = new PhaseTransition();
         phaseTransitionB = new PhaseTransition();
         phaseTransitionC = new PhaseTransition();
 		phaseTransitionD = new PhaseTransition();
+        phaseTransitionE = new PhaseTransition();
+        phaseTransitionF = new PhaseTransition();
         PhaseTransition.Phase.PhaseInit();
 
         phaseTransitionA.registerPhase(
+                changeGyroAngle(180, "Offset Gyro"),
+
 				//LINKの角度をSHOOTERにSHOOTする角度に変える
 				adjustLinkSpeaker("Move to Shooter Angle"),
 
 				//SPEAKERにSHOOT
-				shootSpeaker("Shoot to Speaker"),
+				shootSpeaker("Shoot to Speaker in Front"),
 
 				shooting(0.5, "Shooting"),
 
 				//LINKの角度を元の位置にまで戻す
-				adjustLinkBack("Move Angle Back"),
+				//adjustLinkBack("Move Angle Back"),
 				//Taxi
-				taxi(0.5, "Move out of Robot Starting Zone")
+
+				taxi(1.5, "Move out of Robot Starting Zone")
         );
 
         phaseTransitionB.registerPhase(
+                changeGyroAngle(-120, "Offset Gyro"),
+
+				//LINKの角度をSHOOTERにSHOOTする角度に変える
+				adjustLinkSpeaker("Move to Shooter Angle"),
+
+				//SPEAKERにSHOOT
+				shootSpeaker("Shoot to Speaker from Left(From Driver)"),
+
+				shooting(0.5, "Shooting"),
+
+				//LINKの角度を元の位置にまで戻す
+				//adjustLinkBack("Move Angle Back"),
+				//Taxi
+
+				taxi(1.5, "Move out of Robot Starting Zone")
+        );
+
+        phaseTransitionC.registerPhase(
+                changeGyroAngle(120, "Offset Gyro"),
+
+				//LINKの角度をSHOOTERにSHOOTする角度に変える
+				adjustLinkSpeaker("Move to Shooter Angle"),
+
+				//SPEAKERにSHOOT
+				shootSpeaker("Shoot to Speaker from Right(From Driver)"),
+
+				shooting(0.5, "Shooting"),
+
+				//LINKの角度を元の位置にまで戻す
+				//adjustLinkBack("Move Angle Back"),
+				//Taxi
+
+				taxi(1.5, "Move out of Robot Starting Zone")
+        );
+
+        phaseTransitionD.registerPhase(
                //LINKの角度をAMPにSHOOTする角度に変える
 				adjustLinkAmp("Move to Amp Angle"),
 
@@ -221,18 +297,18 @@ public class Autonomous {
 				shooting(0.5, "Shooting"),
 
 				//LINKの角度を元の位置にまで戻す
-				adjustLinkBack("Move Angle Back"),
+				//adjustLinkBack("Move Angle Back"),
 				//Taxi
-				taxi(0.5, "Move out of Robot Starting Zone") 
+				taxi(1.5, "Move out of Robot Starting Zone") 
         );
 
-        phaseTransitionC.registerPhase(
+        phaseTransitionE.registerPhase(
 				//Taxi
-            	taxi(0.5, "Move out of Robot Starting Zone")
+            	taxi(1.5, "Move out of Robot Starting Zone")
 
         );
 
-		phaseTransitionD.registerPhase(
+		phaseTransitionF.registerPhase(
                 //なんもしない
 
         );

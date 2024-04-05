@@ -5,9 +5,9 @@ public class ShooterParameter {
         /** SpeakerにShooterする時のShooter(上下）の理想の速度 */
         public static final double ShooterTargetSpeed = 4500;
         /** SpeakerにShootする時のPusherの速度 */
-        public static final double PusherShootSpeed = 0.5;
+        public static final double PusherShootSpeed = 0.3;
         /** AmpにShootする時のPusherの速度 */
-        public static final double PusherAmpSpeed = 0.2;
+        public static final double PusherAmpSpeed = 0.3;
         /** AmpにShootする時のShooterの速度 */
         public static final double ShooterAmpSpeed = 0.38;
         /** Intakeする時のPusherの速度 */
@@ -21,10 +21,10 @@ public class ShooterParameter {
     }
     public static class PID {
         /**ShooterのPIDの値 */
-        public static final double ShooterP = 0.00003;
-        public static final double ShooterI = 1e-7;
-        public static final double ShooterD = 0;
-        public static final double ShooterF = 0.00017;
+        public static final double ShooterP = 0.000047;
+        public static final double ShooterI = 1.5e-7;
+        public static final double ShooterD = 100;
+        public static final double ShooterF = 0.00018;
         public static final double ShooterIZone = 1000;
     }
 

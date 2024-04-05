@@ -3,6 +3,8 @@ package frc.robot;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.components.Service;
+import frc.robot.components.drive.DriveService;
+import frc.robot.components.drive.infrastructure.Drive;
 import frc.robot.components.led.LEDService;
 import frc.robot.components.led.infrastructure.LED;
 import frc.robot.components.link.LinkService;
@@ -21,12 +23,12 @@ public class Robot extends TimedRobot {
     @Override
     public void robotInit() {
         Autonomous.robotInit();
-        // services.add(new DriveService(new Drive()));
+        services.add(new DriveService(new Drive()));
         services.add(new LEDService(new LED()));
         services.add(new LinkService((new Link())));
         services.add(new ShooterService(new Shooter()));
         ModeManager.setupMode();
-        CameraServer.startAutomaticCapture();
+        // CameraServer.startAutomaticCapture();
 
     }
 

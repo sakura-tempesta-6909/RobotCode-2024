@@ -11,8 +11,12 @@ public class LinkParameter {
          * 右の上と下の差: 245
          */
 
+        /** 左の差 */
+        public static final double LinkLeftGap = LinkRightSoftLimit.ForwardSoftLimit - LinkRightSoftLimit.ReverseSoftLimit;
+        /** 右の差 */
+        public static final double LinkRightGap = LinkLeftSoftLimit.ForwardSoftLimit - LinkLeftSoftLimit.ReverseSoftLimit;
         /** 左と右の差 */
-        public static final double LinkGapPercent = (LinkRightSoftLimit.ForwardSoftLimit - LinkRightSoftLimit.ReverseSoftLimit) / (LinkLeftSoftLimit.ForwardSoftLimit - LinkLeftSoftLimit.ReverseSoftLimit); 
+        public static final double LinkGapPercent = LinkLeftGap / LinkRightGap;
 
         /** Ampの角度 */
         public static final double AmpLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 221;
@@ -23,7 +27,7 @@ public class LinkParameter {
         /** 第2Podiumの角度 */
         public static final double SpeakerSecondPodiumLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 88;
         /** Intakeの角度 */
-        public static final double IntakeLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 154;
+        public static final double IntakeLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 150;
         /** Climbの準備の角度 */
         public static final double SetClimbLinkLeft = LinkLeftSoftLimit.ReverseSoftLimit + 221;
         /** Stageの角度 */
@@ -42,7 +46,7 @@ public class LinkParameter {
         /** 第2Podiumの角度 */
         public static final double SpeakerSecondPodiumLinkRight = LinkRightSoftLimit.ReverseSoftLimit + (88 * LinkGapPercent);
         /** Intakeの角度 */
-        public static final double IntakeLinkRight = LinkRightSoftLimit.ReverseSoftLimit + (154 * LinkGapPercent);
+        public static final double IntakeLinkRight = LinkRightSoftLimit.ReverseSoftLimit + (150 * LinkGapPercent);
         /** Climbの準備の角度 */
         public static final double SetClimbLinkRight = LinkRightSoftLimit.ReverseSoftLimit + (221 * LinkGapPercent);
         /** Stageの角度 */
@@ -56,19 +60,17 @@ public class LinkParameter {
     // pidの値を書く
     public static class PID {
         /** gain(0) */
-        public static final double UpLinkP = 6;
-        public static final double UpLinkI = 1e-3;
-        public static final double UpLinkD = 2;
+        public static final double UpLinkP = 4;
+        public static final double UpLinkI = 1.5e-4;
+        public static final double UpLinkD = 10;
 
         /** gain(1) */
-        public static final double DownLinkP = 2;
+        public static final double DownLinkP = 5;
         public static final double DownLinkI = 2.5e-4;
-        public static final double DownLinkD = 2;
 
         /** gain(2) */
         public static final double ClimbLinkP = 8;
         public static final double ClimbLinkI = 4e-3;
-        public static final double ClimbLinkD = 2;
     }
 
     public static class Current {
@@ -77,8 +79,6 @@ public class LinkParameter {
     }
 
     public static class Percent {
-        /** ClimbするときのPercentOutput */
-        public static final double Climb = -0.6;
         /** KeepCurrentの時のOutPercentOutput */
         public static final double KeepCurrentAngleLink = 0.05;
     }
@@ -87,7 +87,7 @@ public class LinkParameter {
         /** Linkを上向きに微調整するときのPercentOutput */
         public static final double downAdjustment = -0.2;
         /** Linkを下向きに微調整するときのPercentOutput */
-        public static final double upAdjustment = 0.2;
+        public static final double upAdjustment = 0.15;
     }
 
     public static void ConstInit() {
