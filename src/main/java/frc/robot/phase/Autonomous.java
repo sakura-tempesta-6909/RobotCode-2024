@@ -208,7 +208,7 @@ public class Autonomous {
 				//LINKの角度を元の位置にまで戻す
 				adjustLinkBack("Move Angle Back"),
 				//Taxi
-				taxi(3, "Move out of Robot Starting Zone")
+				taxi(0.5, "Move out of Robot Starting Zone")
         );
 
         phaseTransitionB.registerPhase(
@@ -223,12 +223,12 @@ public class Autonomous {
 				//LINKの角度を元の位置にまで戻す
 				adjustLinkBack("Move Angle Back"),
 				//Taxi
-				taxi(3, "Move out of Robot Starting Zone") 
+				taxi(0.5, "Move out of Robot Starting Zone") 
         );
 
         phaseTransitionC.registerPhase(
 				//Taxi
-            	//taxi(3, "Move out of Robot Starting Zone")
+            	taxi(0.5, "Move out of Robot Starting Zone")
 
         );
 
