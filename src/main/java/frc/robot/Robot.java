@@ -28,7 +28,7 @@ public class Robot extends TimedRobot {
         services.add(new LinkService((new Link())));
         services.add(new ShooterService(new Shooter()));
         ModeManager.setupMode();
-        CameraServer.startAutomaticCapture();
+        // CameraServer.startAutomaticCapture();
 
     }
 

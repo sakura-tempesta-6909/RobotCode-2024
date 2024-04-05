@@ -12,6 +12,10 @@ public class LinkService implements Service {
     }
     @Override
     public void applyModel() {
+        if(LinkModel.resetPID) {
+            repository.resetPID();
+        }
+        
         switch (LinkModel.shooterAngleMode) {
             case s_ampShoot:
                 repository.MoveShooterToSpecifiedAngle(LinkParameter.Angles.AmpLinkLeft, LinkParameter.Angles.AmpLinkRight);

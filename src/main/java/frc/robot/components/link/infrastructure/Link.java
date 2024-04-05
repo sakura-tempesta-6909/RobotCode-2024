@@ -1,9 +1,11 @@
 package frc.robot.components.link.infrastructure;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.components.link.LinkConst;
 import frc.robot.components.link.LinkParameter;
@@ -65,20 +67,19 @@ public class Link implements LinkRepository {
         linkMotorLeft.config_kD(0, PID.UpLinkD);
         linkMotorLeft.config_kP(1, PID.DownLinkP);
         linkMotorLeft.config_kI(1, PID.DownLinkI);
-        linkMotorLeft.config_kD(1, PID.DownLinkD);
         linkMotorLeft.config_kP(2, PID.ClimbLinkP);
-        linkMotorLeft.config_kI(2, PID.ClimbLinkI);
-        linkMotorLeft.config_kD(2, PID.ClimbLinkD);  
+        linkMotorLeft.config_kI(2, PID.ClimbLinkI); 
 
         linkMotorRight.config_kP(0, PID.UpLinkP);
         linkMotorRight.config_kI(0, PID.UpLinkI);
         linkMotorRight.config_kD(0, PID.UpLinkD);
         linkMotorRight.config_kP(1, PID.DownLinkP);
         linkMotorRight.config_kI(1, PID.DownLinkI);
-        linkMotorRight.config_kD(1, PID.DownLinkD);
         linkMotorRight.config_kP(2, PID.ClimbLinkP);
-        linkMotorRight.config_kI(2, PID.ClimbLinkI);
-        linkMotorRight.config_kD(2, PID.ClimbLinkD); 
+        linkMotorRight.config_kI(2, PID.ClimbLinkI); 
+
+        linkMotorLeft.config_IntegralZone(0, 50);
+        linkMotorRight.config_IntegralZone(0, 50);
     }
 
     @Override
@@ -92,8 +93,8 @@ public class Link implements LinkRepository {
         linkMotorRight.selectProfileSlot(1, 0);
       }
       // LinkをsetpointまでPIDで動かすようにする
-      linkMotorLeft.set(ControlMode.Position, TargetShooterLeftAngle);
-      linkMotorRight.set(ControlMode.Position, TargetShooterRightAngle);
+      linkMotorLeft.set(ControlMode.Position, TargetShooterLeftAngle, DemandType.ArbitraryFeedForward, 0.05);
+      linkMotorRight.set(ControlMode.Position, TargetShooterRightAngle, DemandType.ArbitraryFeedForward, 0.05);
     }
     
     @Override
@@ -132,6 +133,7 @@ public class Link implements LinkRepository {
         LinkMeasuredState.linkRightAngle = linkMotorRight.getSelectedSensorPosition() - LinkConst.LinkRightSoftLimit.ReverseSoftLimit;
         SmartDashboard.putNumber("linkRightAngle", LinkMeasuredState.linkRightAngle);
 
+        
         // 初期化
         LinkMeasuredState.linkAmpHeight = false;
         LinkMeasuredState.linkClimbHeight = false;
@@ -140,23 +142,23 @@ public class Link implements LinkRepository {
         LinkMeasuredState.linkSpeakerSecondPodiumHeight = false;
         LinkMeasuredState.linkPodiumHeight = false;
         // 条件に応じてboolean変数の値を更新
-        if(LinkMeasuredState.linkLeftAngle <= Angles.AmpLinkLeft + 5 && Angles.AmpLinkLeft >= LinkLeftSoftLimit.ForwardSoftLimit - 5) {
+        if(LinkMeasuredState.linkLeftAngle <= Angles.AmpLinkLeft + 5 - LinkConst.LinkLeftSoftLimit.ReverseSoftLimit && LinkMeasuredState.linkLeftAngle >= LinkLeftSoftLimit.ForwardSoftLimit - 5 - LinkConst.LinkLeftSoftLimit.ReverseSoftLimit) {
           LinkMeasuredState.linkAmpHeight = true;
           LinkMeasuredState.linkClimbHeight = true;
         }
-        if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerPodiumLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerPodiumLinkLeft - 5) {
+        if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerPodiumLinkLeft + 5 - LinkConst.LinkLeftSoftLimit.ReverseSoftLimit && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerPodiumLinkLeft - 5 - LinkConst.LinkLeftSoftLimit.ReverseSoftLimit) {
           LinkMeasuredState.linkPodiumHeight = true;
         }
-        if(LinkMeasuredState.linkLeftAngle <= Angles.IntakeLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.IntakeLinkLeft - 5) {  
+        if(LinkMeasuredState.linkLeftAngle <= Angles.IntakeLinkLeft + 5 - LinkConst.LinkLeftSoftLimit.ReverseSoftLimit && LinkMeasuredState.linkLeftAngle >= Angles.IntakeLinkLeft - 5 - LinkConst.LinkLeftSoftLimit.ReverseSoftLimit) {  
           LinkMeasuredState.linkIntakeHeight = true;
         }
-        if(LinkMeasuredState.linkLeftAngle <= Angles.StageLinkLeft + 5) {
+        if(LinkMeasuredState.linkLeftAngle <= Angles.StageLinkLeft + 5 - LinkConst.LinkLeftSoftLimit.ReverseSoftLimit) {
           LinkMeasuredState.linkUnderStageHeight = true;
         }
-        if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerBelowLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerBelowLinkLeft - 5) {
+        if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerBelowLinkLeft + 5 - LinkConst.LinkLeftSoftLimit.ReverseSoftLimit && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerBelowLinkLeft - 5 - LinkConst.LinkLeftSoftLimit.ReverseSoftLimit) {
           LinkMeasuredState.linkSpeakerBelowHeight = true;
         }
-        if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerSecondPodiumLinkLeft + 5 && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerSecondPodiumLinkLeft - 5) {
+        if(LinkMeasuredState.linkLeftAngle <= Angles.SpeakerSecondPodiumLinkLeft + 5 - LinkConst.LinkLeftSoftLimit.ReverseSoftLimit && LinkMeasuredState.linkLeftAngle >= Angles.SpeakerSecondPodiumLinkLeft - 5 - LinkConst.LinkLeftSoftLimit.ReverseSoftLimit) {
           LinkMeasuredState.linkSpeakerSecondPodiumHeight = true;
         }
 
@@ -167,8 +169,17 @@ public class Link implements LinkRepository {
         SmartDashboard.putBoolean("Intake", LinkMeasuredState.linkIntakeHeight);
         SmartDashboard.putBoolean("Podium", LinkMeasuredState.linkPodiumHeight);
         SmartDashboard.putBoolean("SecondPodium", LinkMeasuredState.linkSpeakerSecondPodiumHeight);
+
+        linkMotorLeft.getIntegralAccumulator();
+        SmartDashboard.putNumber("Accmulator", linkMotorLeft.getIntegralAccumulator());
     }
 
     public void test() {
+    }
+
+    @Override
+    public void resetPID() {
+      linkMotorLeft.setIntegralAccumulator(0);
+      linkMotorRight.setIntegralAccumulator(0);
     }
 }

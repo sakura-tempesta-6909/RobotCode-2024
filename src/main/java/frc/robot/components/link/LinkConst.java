@@ -14,7 +14,7 @@ public class LinkConst {
       /** 最大PercentOutput */
       public static final double PeakOutputForward = .6;
       /** 最低PercentOutput */
-      public static final double PeakOutputReverse = -.6;
+      public static final double PeakOutputReverse = -.4;
     }
     public class LinkRightSoftLimit {
       /** 最大高度 */
@@ -24,6 +24,6 @@ public class LinkConst {
       /** 最大PercentOutput */
       public static final double PeakOutputForward = .6;
       /** 最低PercentOutput */
-      public static final double PeakOutputReverse = -.6;
+      public static final double PeakOutputReverse = -.4;
     }
 }
