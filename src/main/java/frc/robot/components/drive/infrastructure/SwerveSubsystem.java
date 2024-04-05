@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.components.drive.DriveConst;
 import frc.robot.components.drive.DriveConst.DriveConstants;
 import frc.robot.domain.measure.DriveMeasuredState;
+import frc.robot.domain.model.DriveModel;
 
 public class SwerveSubsystem extends SubsystemBase{
     public final SwerveModule frontLeft = new SwerveModule(
@@ -41,7 +42,7 @@ public class SwerveSubsystem extends SubsystemBase{
     //AHRS -> ADXRS450_Gyro
     //AHRS(SPI.Port.kMXP) -> ADXRS450_Gyro()
     //このジャイロだと教える
-    private final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+    private final static ADXRS450_Gyro gyro = new ADXRS450_Gyro();
     //[20:00]
     private final SwerveDriveOdometry odometer = new SwerveDriveOdometry(DriveConstants.kDriveKinematics, new Rotation2d(0),
     new SwerveModulePosition[]{
@@ -67,7 +68,7 @@ public class SwerveSubsystem extends SubsystemBase{
     //デフォルトでジャイロスコープからロボットの進行方向を取得する関数を作る[10:44]
     //ジャイロスコープは連続値のため、360度や720度などになってしまうので、わかりやすくするため-180度~180度に変換[11:01]
     public double getHeading(){
-        return Math.IEEEremainder(gyro.getAngle(), 360);
+        return Math.IEEEremainder(gyro.getAngle() + DriveModel.offset , 360);
     }
     //getHeading()は度数法なので Rotation2d 型に変換する
     public Rotation2d getRotation2d(){
