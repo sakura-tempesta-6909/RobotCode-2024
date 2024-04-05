@@ -96,7 +96,7 @@ class DriveMode extends ModeManager {
             LinkModel.shooterAngleMode = ShooterAngleMode.s_climbUpFineAdjustment;
         }
 
-        if (ShooterMeasuredState.isNoteGet && operateController.getRightBumper()) {
+        if (ShooterMeasuredState.isNoteGet && ShooterModel.shooterMode == ShooterMode.s_intake) {
             LEDModel.pattern = LEDModel.LEDFlashes.NOTEGet;
         } else if (ShooterMeasuredState.readyToShoot) {
             LEDModel.pattern = LEDModel.LEDFlashes.ShooterSpeed;

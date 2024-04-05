@@ -68,20 +68,16 @@ public class Link implements LinkRepository {
         linkMotorLeft.config_kD(0, PID.UpLinkD);
         linkMotorLeft.config_kP(1, PID.DownLinkP);
         linkMotorLeft.config_kI(1, PID.DownLinkI);
-        linkMotorLeft.config_kD(1, PID.DownLinkD);
         linkMotorLeft.config_kP(2, PID.ClimbLinkP);
-        linkMotorLeft.config_kI(2, PID.ClimbLinkI);
-        linkMotorLeft.config_kD(2, PID.ClimbLinkD);  
+        linkMotorLeft.config_kI(2, PID.ClimbLinkI); 
 
         linkMotorRight.config_kP(0, PID.UpLinkP);
         linkMotorRight.config_kI(0, PID.UpLinkI);
         linkMotorRight.config_kD(0, PID.UpLinkD);
         linkMotorRight.config_kP(1, PID.DownLinkP);
         linkMotorRight.config_kI(1, PID.DownLinkI);
-        linkMotorRight.config_kD(1, PID.DownLinkD);
         linkMotorRight.config_kP(2, PID.ClimbLinkP);
-        linkMotorRight.config_kI(2, PID.ClimbLinkI);
-        linkMotorRight.config_kD(2, PID.ClimbLinkD); 
+        linkMotorRight.config_kI(2, PID.ClimbLinkI); 
 
         linkMotorLeft.config_IntegralZone(0, 50);
         linkMotorRight.config_IntegralZone(0, 50);

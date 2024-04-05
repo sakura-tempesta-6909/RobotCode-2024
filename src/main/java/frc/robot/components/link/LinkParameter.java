@@ -68,14 +68,12 @@ public class LinkParameter {
         public static final double UpLinkD = 10;
 
         /** gain(1) */
-        public static final double DownLinkP = 2;
+        public static final double DownLinkP = 5;
         public static final double DownLinkI = 2.5e-4;
-        public static final double DownLinkD = 10;
 
         /** gain(2) */
         public static final double ClimbLinkP = 8;
         public static final double ClimbLinkI = 4e-3;
-        public static final double ClimbLinkD = 2;
     }
 
     public static class Current {
@@ -84,8 +82,6 @@ public class LinkParameter {
     }
 
     public static class Percent {
-        /** ClimbするときのPercentOutput */
-        public static final double Climb = -0.6;
         /** KeepCurrentの時のOutPercentOutput */
         public static final double KeepCurrentAngleLink = 0.05;
     }

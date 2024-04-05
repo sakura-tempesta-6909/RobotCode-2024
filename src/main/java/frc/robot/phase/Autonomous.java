@@ -206,7 +206,7 @@ public class Autonomous {
 				shooting(0.5, "Shooting"),
 
 				//LINKの角度を元の位置にまで戻す
-				adjustLinkBack("Move Angle Back"),
+				//adjustLinkBack("Move Angle Back"),
 				//Taxi
 				taxi(1.5, "Move out of Robot Starting Zone")
         );
@@ -221,7 +221,7 @@ public class Autonomous {
 				shooting(0.5, "Shooting"),
 
 				//LINKの角度を元の位置にまで戻す
-				adjustLinkBack("Move Angle Back"),
+				//adjustLinkBack("Move Angle Back"),
 				//Taxi
 				taxi(1.5, "Move out of Robot Starting Zone") 
         );
