@@ -1,11 +1,8 @@
 
 package frc.robot.components.link;
 
-import java.net.PortUnreachableException;
-
 import frc.robot.components.link.LinkConst.LinkLeftSoftLimit;
 import frc.robot.components.link.LinkConst.LinkRightSoftLimit;
-import frc.robot.components.link.infrastructure.Link;
 
 public class LinkParameter {
     public static final class Angles {
