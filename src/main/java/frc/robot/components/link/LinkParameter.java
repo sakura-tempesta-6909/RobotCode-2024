@@ -60,7 +60,7 @@ public class LinkParameter {
     // pidの値を書く
     public static class PID {
         /** gain(0) */
-        public static final double UpLinkP = 4;
+        public static final double UpLinkP = 3.5;
         public static final double UpLinkI = 1.5e-4;
         public static final double UpLinkD = 10;
 
