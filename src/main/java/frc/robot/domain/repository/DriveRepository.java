@@ -37,6 +37,9 @@ public interface DriveRepository {
     /** ジャイロセンサーをリセットする */
     void resetGyroSensor();
 
+    /** ジャイロセンサーを任意の角度に書き換える */
+    void rewriteGyroSensor();
+
     /**
      * センサーを読む
      */

@@ -31,6 +31,11 @@ public class DriveModel {
     /** trueの時にジャイロセンサーをリセットする */
     public static boolean resetGyroSensor;
 
+    /** gyroを任意の角度に書き換える　trueの時に書き換える */
+    public static boolean rewriteGyroSensorOrNot;
+    /** gyroを任意の角度に書き換える */
+    public static double rewriteGyroSensor;
+
     /**
      * ドライブベースを動かす
      * @param driveSideSpeed     左右成分 [-1 ~ 1] 右に進むとき正

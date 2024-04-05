@@ -23,6 +23,7 @@ import frc.robot.components.drive.DriveConst.DriveConstants;
 import frc.robot.components.drive.DriveConst;
 import frc.robot.components.drive.DriveParameter;
 import frc.robot.domain.measure.DriveMeasuredState;
+import frc.robot.domain.model.DriveModel;
 import frc.robot.domain.repository.DriveRepository;
 
 public class Drive implements DriveRepository {
@@ -118,6 +119,11 @@ public class Drive implements DriveRepository {
     @Override
     public void resetGyroSensor() {
         driveSubsystem.zeroHeading();
+    }
+
+    @Override
+    public void rewriteGyroSensor(){
+        if(DriveModel.rewriteGyroSensorOrNot)DriveMeasuredState.currentAngle = DriveModel.rewriteGyroSensor;
     }
 
     @Override
