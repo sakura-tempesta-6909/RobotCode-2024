@@ -92,10 +92,10 @@ public class Autonomous {
     private static PhaseTransition.Phase taxi(double waiter, String phaseName) {
         return new PhaseTransition.Phase(
                 () -> {
-                    // DriveModel.driveOriented = DriveOriented.s_fieldOriented;
-					// DriveModel.driveSideSpeed = 0;
-					// DriveModel.driveMovement = DriveModel.DriveMovement.s_slowDrive;
-					// DriveModel.driveForwardSpeed = 1;
+                    DriveModel.driveOriented = DriveOriented.s_robotOriented;
+					DriveModel.driveSideSpeed = 0;
+					DriveModel.driveMovement = DriveModel.DriveMovement.s_slowDrive;
+					DriveModel.driveForwardSpeed = -1;
 					/**
 					 * ドライブベースを動かす
 					 * @param driveSideSpeed     左右成分 [-1 ~ 1] 右に進むとき正
@@ -248,7 +248,7 @@ public class Autonomous {
 				//adjustLinkBack("Move Angle Back"),
 				//Taxi
 
-				taxi(1.5, "Move out of Robot Starting Zone")
+				taxi(3, "Move out of Robot Starting Zone")
         );
 
         phaseTransitionB.registerPhase(
@@ -266,7 +266,7 @@ public class Autonomous {
 				//adjustLinkBack("Move Angle Back"),
 				//Taxi
 
-				taxi(1.5, "Move out of Robot Starting Zone")
+				taxi(3, "Move out of Robot Starting Zone")
         );
 
         phaseTransitionC.registerPhase(
@@ -284,7 +284,7 @@ public class Autonomous {
 				//adjustLinkBack("Move Angle Back"),
 				//Taxi
 
-				taxi(1.5, "Move out of Robot Starting Zone")
+				taxi(3, "Move out of Robot Starting Zone")
         );
 
         phaseTransitionD.registerPhase(
@@ -299,12 +299,12 @@ public class Autonomous {
 				//LINKの角度を元の位置にまで戻す
 				//adjustLinkBack("Move Angle Back"),
 				//Taxi
-				taxi(1.5, "Move out of Robot Starting Zone") 
+				taxi(3, "Move out of Robot Starting Zone") 
         );
 
         phaseTransitionE.registerPhase(
 				//Taxi
-            	taxi(1.5, "Move out of Robot Starting Zone")
+            	taxi(3, "Move out of Robot Starting Zone")
 
         );
 
