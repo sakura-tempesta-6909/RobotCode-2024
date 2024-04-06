@@ -31,6 +31,8 @@ public interface LinkRepository {
 
     void disableSoftLimit();
 
+    void enableSoftLimit();
+
     /**
      * センサーを読む
      */

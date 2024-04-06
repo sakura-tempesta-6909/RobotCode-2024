@@ -22,8 +22,6 @@ public class LinkModel {
         s_climbUpFineAdjustment,
         /** Climb時のLinkの角度を下に微調整する */
         s_climbDownFineAdjustment,
-        /** RightTriggerでLinkの角度を調整する */
-        s_clib,
         /** 何も入力されていない時今の角度を維持する */
         s_keepCurrentAngle, 
         /** 720mm以下の角度 */

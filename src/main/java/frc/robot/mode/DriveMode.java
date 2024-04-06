@@ -13,6 +13,7 @@ import frc.robot.subClass.Util;
 
 class DriveMode extends ModeManager {
     public static void changeModel() {
+
         if(operateController.getAButtonPressed() || operateController.getBButtonPressed() || operateController.getYButtonPressed() || operateController.getRightBumperPressed() || operateController.getBackButtonPressed()) {
             LinkModel.resetPID = true;
         }

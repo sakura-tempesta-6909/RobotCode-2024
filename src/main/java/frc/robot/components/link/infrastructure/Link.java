@@ -133,6 +133,14 @@ public class Link implements LinkRepository {
     }
 
     @Override
+    public void enableSoftLimit() {
+      linkMotorLeft.configForwardSoftLimitEnable(true);
+      linkMotorLeft.configReverseSoftLimitEnable(true);
+      linkMotorRight.configForwardSoftLimitEnable(true);
+      linkMotorRight.configReverseSoftLimitEnable(true);
+    }
+
+    @Override
     public void readSensors() {
         LinkMeasuredState.linkLeftAngle = linkMotorLeft.getSelectedSensorPosition() - LinkConst.LinkLeftSoftLimit.ReverseSoftLimit;
         SmartDashboard.putNumber("LinkLeftAngle", LinkMeasuredState.linkLeftAngle);

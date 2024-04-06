@@ -40,7 +40,6 @@ public class LinkService implements Service {
                 break;
             case s_climb:
                 repository.MoveShooterClimb(LinkModel.climbSpeed);
-                repository.disableSoftLimit();
                 break;
             case s_climbUpFineAdjustment:
                 repository.MoveShooterFineAdjustment(LinkParameter.FineAdjustment.upAdjustment);

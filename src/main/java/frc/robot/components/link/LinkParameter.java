@@ -89,7 +89,7 @@ public class LinkParameter {
         /** Linkを上向きに微調整するときのPercentOutput */
         public static final double downAdjustment = -0.2;
         /** Linkを下向きに微調整するときのPercentOutput */
-        public static final double upAdjustment = 0.15;
+        public static final double upAdjustment = 0.2;
     }
 
     public static void ConstInit() {
