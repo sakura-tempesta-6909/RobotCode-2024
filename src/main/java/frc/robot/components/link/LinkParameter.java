@@ -8,7 +8,7 @@ public class LinkParameter {
     public static final class Angles {
         /**
          * 左の上と下の差: 221
-         * 右の上と下の差: 245
+         * 右の上と下の差: 260
          */
 
         /** 左の差 */
@@ -61,7 +61,7 @@ public class LinkParameter {
     public static class PID {
         /** gain(0) */
         public static final double UpLinkP = 3.5;
-        public static final double UpLinkI = 1.5e-4;
+        public static final double UpLinkI = 1.8e-4;
         public static final double UpLinkD = 10;
 
         /** gain(1) */
@@ -86,10 +86,13 @@ public class LinkParameter {
     }
 
     public class FineAdjustment {
-        /** Linkを上向きに微調整するときのPercentOutput */
-        public static final double downAdjustment = -0.2;
         /** Linkを下向きに微調整するときのPercentOutput */
+        public static final double downAdjustment = -0.2;
+        /** Linkを上向きに微調整するときのPercentOutput */
         public static final double upAdjustment = 0.2;
+        // /** 720mm以下のときにLinkを上向きに動かすとき */
+        // public static final double initialVelosity = 0.4;
+
     }
 
     public static void ConstInit() {
