@@ -217,6 +217,7 @@ public class Autonomous {
                     return true;
                 },
                 () -> {
+                    //DriveModel.resetGyroSensor=true;
                     DriveModel.offset = angle;
                 }, 
                 phaseName
@@ -234,6 +235,7 @@ public class Autonomous {
         PhaseTransition.Phase.PhaseInit();
 
         phaseTransitionA.registerPhase(
+
                 changeGyroAngle(180, "Offset Gyro"),
 
 				//LINKの角度をSHOOTERにSHOOTする角度に変える
@@ -248,7 +250,7 @@ public class Autonomous {
 				//adjustLinkBack("Move Angle Back"),
 				//Taxi
 
-				taxi(3, "Move out of Robot Starting Zone")
+				//taxi(2.5, "Move out of Robot Starting Zone")
         );
 
         phaseTransitionB.registerPhase(
@@ -278,13 +280,13 @@ public class Autonomous {
 				//SPEAKERにSHOOT
 				shootSpeaker("Shoot to Speaker from Right(From Driver)"),
 
-				shooting(0.5, "Shooting")
+				shooting(0.5, "Shooting"),
 
 				//LINKの角度を元の位置にまで戻す
 				//adjustLinkBack("Move Angle Back"),
 				//Taxi
 
-				//taxi(3, "Move out of Robot Starting Zone")
+				taxi(3, "Move out of Robot Starting Zone")
         );
 
         phaseTransitionD.registerPhase(
