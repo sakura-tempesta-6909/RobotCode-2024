@@ -217,7 +217,7 @@ public class Autonomous {
                     return true;
                 },
                 () -> {
-                    //DriveModel.resetGyroSensor=true;
+                    DriveModel.resetGyroSensor=true;
                     DriveModel.offset = angle;
                 }, 
                 phaseName
@@ -250,7 +250,7 @@ public class Autonomous {
 				//adjustLinkBack("Move Angle Back"),
 				//Taxi
 
-				//taxi(2.5, "Move out of Robot Starting Zone")
+				taxi(2.5, "Move out of Robot Starting Zone")
         );
 
         phaseTransitionB.registerPhase(
