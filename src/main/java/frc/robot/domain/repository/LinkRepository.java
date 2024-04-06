@@ -16,9 +16,9 @@ public interface LinkRepository {
 
     /**
      * climbする(Linkの角度を下げる時にPersentOutputを使用)
-     * @param MostlyClimb 大体のClimb時の角度
+     * @param climbSpeed Linkの角度を変える速度
      */
-    void MoveShooterClimb();
+    void MoveShooterClimb(double climbSpeed);
 
     /**
      * climbするときにLinkの角度を微調整するために上げる
@@ -28,6 +28,8 @@ public interface LinkRepository {
     void MoveShooterFineAdjustment(double upOrDown); 
 
     void resetPID();
+
+    void disableSoftLimit();
 
     /**
      * センサーを読む

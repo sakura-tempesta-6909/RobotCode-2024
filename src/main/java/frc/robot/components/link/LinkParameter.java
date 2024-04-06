@@ -81,6 +81,8 @@ public class LinkParameter {
     public static class Percent {
         /** KeepCurrentの時のOutPercentOutput */
         public static final double KeepCurrentAngleLink = 0.05;
+        /** ClimbするときのPercentOutput */
+        public static final double climb = -1;
     }
 
     public class FineAdjustment {
