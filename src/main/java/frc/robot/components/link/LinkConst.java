@@ -18,7 +18,7 @@ public class LinkConst {
     }
     public class LinkRightSoftLimit {
       /** 最大高度 */
-      public static final int ForwardSoftLimit = 495;
+      public static final int ForwardSoftLimit = 509;
       /** 最低高度 */
       public static final int ReverseSoftLimit = 250;
       /** 最大PercentOutput */

@@ -278,13 +278,13 @@ public class Autonomous {
 				//SPEAKERにSHOOT
 				shootSpeaker("Shoot to Speaker from Right(From Driver)"),
 
-				shooting(0.5, "Shooting"),
+				shooting(0.5, "Shooting")
 
 				//LINKの角度を元の位置にまで戻す
 				//adjustLinkBack("Move Angle Back"),
 				//Taxi
 
-				taxi(3, "Move out of Robot Starting Zone")
+				//taxi(3, "Move out of Robot Starting Zone")
         );
 
         phaseTransitionD.registerPhase(
