@@ -120,6 +120,7 @@ public class Drive implements DriveRepository {
     @Override
     public void resetGyroSensor() {
         driveSubsystem.zeroHeading();
+        DriveModel.offset = 0;
     }
 
     @Override

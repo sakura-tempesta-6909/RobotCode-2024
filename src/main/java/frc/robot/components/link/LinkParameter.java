@@ -87,7 +87,7 @@ public class LinkParameter {
 
     public class FineAdjustment {
         /** Linkを下向きに微調整するときのPercentOutput */
-        public static final double downAdjustment = -0.2;
+        public static final double downAdjustment = -0.3;
         /** Linkを上向きに微調整するときのPercentOutput */
         public static final double upAdjustment = 0.2;
         // /** 720mm以下のときにLinkを上向きに動かすとき */
