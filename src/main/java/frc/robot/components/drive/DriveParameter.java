@@ -14,7 +14,7 @@ public class DriveParameter {
         public static final double SlowDrive = 0.25;
 
         /** ロボットが速いときの回転速度 */
-        public static final double FastThetaDrive = 0.75;
+        public static final double FastThetaDrive = 0.8;
         /** ロボットが普通の速さときの回転速度 */
         public static final double MidThetaDrive = 0.6;
         /** ロボットが遅いときの回転速度 */

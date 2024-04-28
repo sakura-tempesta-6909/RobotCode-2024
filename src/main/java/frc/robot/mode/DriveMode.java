@@ -37,7 +37,7 @@ class DriveMode extends ModeManager {
         } 
         if(driveController.getBButton()) {
             DriveModel.driveAngle = true;
-            DriveModel.setAngle = -55;
+            DriveModel.setAngle = -50;
         }
         if(driveController.getAButton()) {
             DriveModel.driveAngle = true;
@@ -45,10 +45,11 @@ class DriveMode extends ModeManager {
         }
         if(driveController.getXButton()) {
             DriveModel.driveAngle = true;
-            DriveModel.setAngle = 55;  
+            DriveModel.setAngle = 50;  
         }
         if(130 < driveController.getPOV() && driveController.getPOV() < 230 ) {
             DriveModel.resetGyroSensor = true;
+            DriveModel.offset = 0;
         }
         
 
