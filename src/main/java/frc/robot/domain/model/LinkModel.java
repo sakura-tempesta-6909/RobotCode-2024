@@ -16,7 +16,7 @@ public class LinkModel {
         s_intakeNote,
         /** CLIMBをする */
         s_climb,
-        /** Climbの角度にする */
+        /** Linkをチェーンを引っ掛ける角度にする */
         s_climbAngle,
         /** Climb時のLinkの角度を上に微調整する */
         s_climbUpFineAdjustment,
@@ -27,6 +27,10 @@ public class LinkModel {
         /** 720mm以下の角度 */
         s_stageAngle,
     }
+
+    /** クライムする時のモーターの速度 */
+    public static double climbSpeed;
+
     public static void reset() {
         shooterAngleMode = ShooterAngleMode.s_keepCurrentAngle;
         resetPID = false;

@@ -111,11 +111,9 @@ public class Link implements LinkRepository {
     }
 
     @Override 
-    public void MoveShooterClimb() {
-      linkMotorLeft.selectProfileSlot(2, 0);
-      linkMotorRight.selectProfileSlot(2, 0);
-      linkMotorLeft.set(ControlMode.Position, LinkParameter.Angles.ClimbLinkLeft);
-      linkMotorRight.set(ControlMode.Position, LinkParameter.Angles.ClimbLinkRight);
+    public void MoveShooterClimb(double climbSpeed) {
+      linkMotorLeft.set(ControlMode.PercentOutput, climbSpeed);
+      linkMotorRight.set(ControlMode.PercentOutput, climbSpeed);
     }
 
     @Override
@@ -124,6 +122,22 @@ public class Link implements LinkRepository {
       //CheakConst
       linkMotorLeft.set(ControlMode.PercentOutput, upOrDown);
       linkMotorRight.set(ControlMode.PercentOutput, upOrDown);
+    }
+
+    @Override
+    public void disableSoftLimit() {
+      linkMotorLeft.configForwardSoftLimitEnable(false);
+      linkMotorLeft.configReverseSoftLimitEnable(false);
+      linkMotorRight.configForwardSoftLimitEnable(false);
+      linkMotorRight.configReverseSoftLimitEnable(false);
+    }
+
+    @Override
+    public void enableSoftLimit() {
+      linkMotorLeft.configForwardSoftLimitEnable(true);
+      linkMotorLeft.configReverseSoftLimitEnable(true);
+      linkMotorRight.configForwardSoftLimitEnable(true);
+      linkMotorRight.configReverseSoftLimitEnable(true);
     }
 
     @Override

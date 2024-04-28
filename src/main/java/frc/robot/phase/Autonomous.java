@@ -89,19 +89,14 @@ public class Autonomous {
      * @param waiter    後ろに下がる時間（実行時間）[sec]
      * @param phaseName 出力されるフェーズの名前
      */
+    /** 
     private static PhaseTransition.Phase taxi(double waiter, String phaseName) {
         return new PhaseTransition.Phase(
                 () -> {
-                    DriveModel.driveOriented = DriveOriented.s_fieldOriented;
+                    DriveModel.driveOriented = DriveOriented.s_robotOriented;
 					DriveModel.driveSideSpeed = 0;
 					DriveModel.driveMovement = DriveModel.DriveMovement.s_slowDrive;
 					DriveModel.driveForwardSpeed = -1;
-					/**
-					 * ドライブベースを動かす
-					 * @param driveSideSpeed     左右成分 [-1 ~ 1] 右に進むとき正
-					 * @param driveFowardSpeed     前後成分 [-1 ~ 1] 前に進むとき正
-					 * @param driveThetaSpeed 回転成分 [-1 ~ 1] 反時計(左)回りが正
-					 */
                 },
                 (double time) -> {
                     return time > waiter;
@@ -109,6 +104,7 @@ public class Autonomous {
                 phaseName
         );
     }
+    */
 	/**
      * LINKの値をSHOOTERにSHOOTする角度に変える
 	 * 
@@ -217,6 +213,7 @@ public class Autonomous {
                     return true;
                 },
                 () -> {
+                    DriveModel.resetGyroSensor=true;
                     DriveModel.offset = angle;
                 }, 
                 phaseName
@@ -234,6 +231,7 @@ public class Autonomous {
         PhaseTransition.Phase.PhaseInit();
 
         phaseTransitionA.registerPhase(
+
                 changeGyroAngle(180, "Offset Gyro"),
 
 				//LINKの角度をSHOOTERにSHOOTする角度に変える
@@ -242,13 +240,13 @@ public class Autonomous {
 				//SPEAKERにSHOOT
 				shootSpeaker("Shoot to Speaker in Front"),
 
-				shooting(0.5, "Shooting"),
+				shooting(0.5, "Shooting")
 
 				//LINKの角度を元の位置にまで戻す
 				//adjustLinkBack("Move Angle Back"),
 				//Taxi
 
-				taxi(1.5, "Move out of Robot Starting Zone")
+				//taxi(2.5, "Move out of Robot Starting Zone")
         );
 
         phaseTransitionB.registerPhase(
@@ -260,13 +258,13 @@ public class Autonomous {
 				//SPEAKERにSHOOT
 				shootSpeaker("Shoot to Speaker from Left(From Driver)"),
 
-				shooting(0.5, "Shooting"),
+				shooting(0.5, "Shooting")
 
 				//LINKの角度を元の位置にまで戻す
 				//adjustLinkBack("Move Angle Back"),
 				//Taxi
 
-				taxi(1.5, "Move out of Robot Starting Zone")
+				//taxi(3, "Move out of Robot Starting Zone")
         );
 
         phaseTransitionC.registerPhase(
@@ -278,13 +276,13 @@ public class Autonomous {
 				//SPEAKERにSHOOT
 				shootSpeaker("Shoot to Speaker from Right(From Driver)"),
 
-				shooting(0.5, "Shooting"),
+				shooting(0.5, "Shooting")
 
 				//LINKの角度を元の位置にまで戻す
 				//adjustLinkBack("Move Angle Back"),
 				//Taxi
 
-				taxi(1.5, "Move out of Robot Starting Zone")
+				//taxi(3, "Move out of Robot Starting Zone")
         );
 
         phaseTransitionD.registerPhase(
@@ -294,17 +292,17 @@ public class Autonomous {
 				//AMPにSHOOT
 				shootAmp("Shoot to Amp"),
 
-				shooting(0.5, "Shooting"),
+				shooting(0.5, "Shooting")
 
 				//LINKの角度を元の位置にまで戻す
 				//adjustLinkBack("Move Angle Back"),
 				//Taxi
-				taxi(1.5, "Move out of Robot Starting Zone") 
+				//taxi(3, "Move out of Robot Starting Zone") 
         );
 
         phaseTransitionE.registerPhase(
 				//Taxi
-            	taxi(1.5, "Move out of Robot Starting Zone")
+            	//taxi(3, "Move out of Robot Starting Zone")
 
         );
 

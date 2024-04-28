@@ -39,7 +39,7 @@ public class LinkService implements Service {
                 repository.KeepCurrentAngle();
                 break;
             case s_climb:
-                repository.MoveShooterClimb();
+                repository.MoveShooterClimb(LinkModel.climbSpeed);
                 break;
             case s_climbUpFineAdjustment:
                 repository.MoveShooterFineAdjustment(LinkParameter.FineAdjustment.upAdjustment);

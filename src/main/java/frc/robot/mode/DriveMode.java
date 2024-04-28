@@ -13,6 +13,7 @@ import frc.robot.subClass.Util;
 
 class DriveMode extends ModeManager {
     public static void changeModel() {
+
         if(operateController.getAButtonPressed() || operateController.getBButtonPressed() || operateController.getYButtonPressed() || operateController.getRightBumperPressed() || operateController.getBackButtonPressed()) {
             LinkModel.resetPID = true;
         }
@@ -36,7 +37,7 @@ class DriveMode extends ModeManager {
         } 
         if(driveController.getBButton()) {
             DriveModel.driveAngle = true;
-            DriveModel.setAngle = 90;
+            DriveModel.setAngle = -50;
         }
         if(driveController.getAButton()) {
             DriveModel.driveAngle = true;
@@ -44,10 +45,11 @@ class DriveMode extends ModeManager {
         }
         if(driveController.getXButton()) {
             DriveModel.driveAngle = true;
-            DriveModel.setAngle = 270;
+            DriveModel.setAngle = 50;  
         }
         if(130 < driveController.getPOV() && driveController.getPOV() < 230 ) {
             DriveModel.resetGyroSensor = true;
+            DriveModel.offset = 0;
         }
         
 

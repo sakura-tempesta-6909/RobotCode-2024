@@ -1,6 +1,7 @@
 package frc.robot.mode;
 
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.domain.repository.LinkRepository;
 
 public class ModeManager {
     public static void changeMode() {
@@ -10,7 +11,7 @@ public class ModeManager {
         }
 
         // ClimbModeに変更
-        if(driveController.getStartButton()) {
+        if(operateController.getStartButton()) {
             mode = ModeType.k_climb;
         }
     }

@@ -105,11 +105,11 @@ public class Shooter implements ShooterRepository {
         if(ShootAvaiable) ShooterMeasuredState.counter++;
         else ShooterMeasuredState.counter = 0;
         
-        if(ShooterMeasuredState.counter >= 7) ShooterMeasuredState.readyToShoot = true;
-        else ShooterMeasuredState.readyToShoot = false;
-
+        // if(ShooterMeasuredState.counter >= 7) ShooterMeasuredState.readyToShoot = true;
+        // else ShooterMeasuredState.readyToShoot = false;
+        ShooterMeasuredState.readyToShoot = true;
         SmartDashboard.putBoolean("ready to shoot", ShooterMeasuredState.readyToShoot);
-    }
+    }  
     @Override
     public void stopIntake() {
         noteUpperShooter.set(ShooterParameter.Speed.Neutral);
