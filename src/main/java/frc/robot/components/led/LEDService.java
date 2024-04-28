@@ -1,6 +1,7 @@
 package frc.robot.components.led;
 
 import frc.robot.components.Service;
+import frc.robot.domain.measure.LEDMeasuredState;
 import frc.robot.domain.model.LEDModel;
 import frc.robot.domain.repository.LEDRepository;
 
@@ -23,7 +24,7 @@ public class LEDService implements Service {
                 repository.flashLight(0, 150, 0);
                 break;
             case UnderStage:
-                repository.flashLight(0, 0, 150);
+                repository.rainbow(LEDMeasuredState.Hue, 255, 128);
                 break;
             case ClimbSuccess:
                 repository.flashLight(150, 0, 0);

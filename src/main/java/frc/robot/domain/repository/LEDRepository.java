@@ -10,6 +10,7 @@ public interface LEDRepository {
 
     void flashLight(int red, int green, int blue);
 
+    void rainbow(int h, int s, int v);
     /**
      * センサーを読む
      */
