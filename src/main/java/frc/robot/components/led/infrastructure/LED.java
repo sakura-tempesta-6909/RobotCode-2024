@@ -14,6 +14,8 @@ public class LED implements LEDRepository {
     final AddressableLEDBuffer ledBuffer;
     final Timer timer;
     int rainbowFirstPixelHue;
+    int brightnessIncrement = 5; // 明るさを増やす量
+    int maxBrightness = 255; // 最大の明るさ
  
     public LED() {
         led = new AddressableLED(LEDConst.Ports.LED);
@@ -69,5 +71,24 @@ public class LED implements LEDRepository {
         rainbowFirstPixelHue += 3;
         // Check bounds
         rainbowFirstPixelHue %= 180;
+        led.setData(ledBuffer);
+    }
+
+    @Override
+    public void increaseBrightness() {
+        for (int i = 0;i < LEDConst.Ports.LEDBuffer; i++) {
+            int currentRed = ledBuffer.getRed(i);
+            int newRed = currentRed + brightnessIncrement;
+            if (newRed > maxBrightness) {
+                newRed = maxBrightness;
+                brightnessIncrement *= -1;
+            } else if (currentRed < 0) {
+                // 明るさが0以下にならないようにする
+                newRed = 0;
+                // 明るさを増やす
+                brightnessIncrement *= -1;
+            }
+            ledBuffer.setRGB(i, newRed, 0, 0);
+        }
     }
 }
