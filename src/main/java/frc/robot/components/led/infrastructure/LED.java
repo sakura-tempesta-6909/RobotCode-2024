@@ -16,6 +16,7 @@ public class LED implements LEDRepository {
     int rainbowFirstPixelHue;
     int brightnessIncrement = 5; // 明るさを増やす量
     int maxBrightness = 255; // 最大の明るさ
+    int currentBrightness = 0;
  
     public LED() {
         led = new AddressableLED(LEDConst.Ports.LED);
@@ -77,18 +78,17 @@ public class LED implements LEDRepository {
     @Override
     public void increaseBrightness() {
         for (int i = 0;i < LEDConst.Ports.LEDBuffer; i++) {
-            int currentRed = ledBuffer.getRed(i);
-            int newRed = currentRed + brightnessIncrement;
-            if (newRed > maxBrightness) {
-                newRed = maxBrightness;
-                brightnessIncrement *= -1;
-            } else if (currentRed < 0) {
-                // 明るさが0以下にならないようにする
-                newRed = 0;
-                // 明るさを増やす
+            // 新しい明るさを計算
+            var newBrightness = currentBrightness + brightnessIncrement;
+            // 明るさが最大値または最小値に達した場合、増減する方向を逆にする
+            if (newBrightness >= maxBrightness || newBrightness <= 0) {
                 brightnessIncrement *= -1;
             }
-            ledBuffer.setRGB(i, newRed, 0, 0);
+            // 現在の明るさを更新
+            currentBrightness += brightnessIncrement;
+            // LEDに新しい明るさを設定
+            ledBuffer.setRGB(i, currentBrightness, 0, 0); // RGB値をすべて同じにして明るさを制御
+            led.setData(ledBuffer);
         }
     }
 }
