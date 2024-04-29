@@ -15,7 +15,7 @@ public class LEDService implements Service {
     public void applyModel() {
         switch (LEDModel.pattern) {
             case AlwaysOn:
-                repository.increaseBrightness();
+                repository.wave();
                 break;
             case NOTEGet:
                 repository.flashLight(150, 25, 0);

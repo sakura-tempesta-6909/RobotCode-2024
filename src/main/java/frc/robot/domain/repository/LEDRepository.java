@@ -14,7 +14,7 @@ public interface LEDRepository {
 
     void rainbow(int h, int s, int v);
     void increaseBrightness();
-    void wave(Color c1, Color c2, double cycleLength, double duration);
+    void wave();
     /**
      * センサーを読む
      */

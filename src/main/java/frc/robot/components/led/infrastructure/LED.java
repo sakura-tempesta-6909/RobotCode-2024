@@ -19,7 +19,7 @@ public class LED implements LEDRepository {
     int maxBrightness = 255; // 最大の明るさ
     int currentBrightness = 0;
     double brightnessChangeRate = 0.01; // 明るさの変化率
-    double waveExponent = 0.4;
+    int bluePulseBrightness = 0;
  
     public LED() {
         led = new AddressableLED(LEDConst.Ports.LED);
@@ -97,23 +97,20 @@ public class LED implements LEDRepository {
             led.setData(ledBuffer);
     }
 
-    public void wave(Color c1, Color c2, double cycleLength, double duration) {
-        double x = (1 - ((Timer.getFPGATimestamp() % duration) / duration)) * 2.0 * Math.PI;
-        double xDiffPerLed = (2.0 * Math.PI) / cycleLength;
-        for (int i = 0; i < LEDConst.Ports.LEDBuffer; i++) {
-            x += xDiffPerLed;
-            double ratio = (Math.pow(Math.sin(x), waveExponent) + 1.0) / 2.0;
-            if (Double.isNaN(ratio)) {
-                ratio = (-Math.pow(Math.sin(x + Math.PI), waveExponent) + 1.0) / 2.0;
-            }
-            if (Double.isNaN(ratio)) {
-                ratio = 0.5;
-            }
-            double red = (c1.red * (1 - ratio)) + (c2.red * ratio);
-            double green = (c1.green * (1 - ratio)) + (c2.green * ratio);
-            double blue = (c1.blue * (1 - ratio)) + (c2.blue * ratio);
-            ledBuffer.setLED(i, new Color(red, green, blue));
+    @Override
+    public void wave() {
+        for (var i = 0; i < ledBuffer.getLength(); i++) {
+            // Sets the specified LED to the RGB values for blue
+            ledBuffer.setRGB(i, 0, 0, bluePulseBrightness);
         }
+
+        //increase brightness
+        bluePulseBrightness += 5;
+
+        //Check bounds
+        bluePulseBrightness %= 255;
+
+        led.setData(ledBuffer);
     }
 
 
