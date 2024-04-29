@@ -1,5 +1,7 @@
 package frc.robot.domain.repository;
 
+import edu.wpi.first.wpilibj.util.Color;
+
 public interface LEDRepository {
     
     /**
@@ -12,6 +14,7 @@ public interface LEDRepository {
 
     void rainbow(int h, int s, int v);
     void increaseBrightness();
+    void wave(Color c1, Color c2, double cycleLength, double duration);
     /**
      * センサーを読む
      */
