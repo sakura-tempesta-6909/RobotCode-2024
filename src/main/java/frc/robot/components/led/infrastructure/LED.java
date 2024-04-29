@@ -17,7 +17,7 @@ public class LED implements LEDRepository {
     int brightnessIncrement = 5; // 明るさを増やす量
     int maxBrightness = 255; // 最大の明るさ
     int currentBrightness = 0;
-    int counter = 0;
+    double brightnessChangeRate = 0.01; // 明るさの変化率
  
     public LED() {
         led = new AddressableLED(LEDConst.Ports.LED);
@@ -78,22 +78,21 @@ public class LED implements LEDRepository {
 
     @Override
     public void increaseBrightness() {
-        for (int i = 0;i < LEDConst.Ports.LEDBuffer; i++) {
-            counter++;
-            if (counter > 10) {
-                // 新しい明るさを計算
-                var newBrightness = currentBrightness + brightnessIncrement;
-                // 明るさが最大値または最小値に達した場合、増減する方向を逆にする
-                if (newBrightness >= maxBrightness || newBrightness <= 0) {
-                    brightnessIncrement *= -1;
-                }
-                // 現在の明るさを更新
-                currentBrightness += brightnessIncrement;
-                // LEDに新しい明るさを設定
-                ledBuffer.setRGB(i, currentBrightness, 0, 0); // RGB値をすべて同じにして明るさを制御
-                counter = 0;
+        for (int i = 0; i < LEDConst.Ports.LEDBuffer; i++) {
+            currentBrightness += (int) (maxBrightness * brightnessChangeRate);
+            // 現在の明るさが最大値を超える場合、最大値に設定し変化の方向を反転する
+            if (currentBrightness >= maxBrightness) {
+                currentBrightness = maxBrightness;
+                brightnessChangeRate *= -1;
             }
-            led.setData(ledBuffer);
+            // 現在の明るさが最小値を下回る場合、最小値に設定し変化の方向を反転する
+            if (currentBrightness <= 0) {
+                currentBrightness = 0;
+                brightnessChangeRate *= -1;
+            }
+            ledBuffer.setRGB(i, currentBrightness, 0, 0);
         }
+            led.setData(ledBuffer);
     }
+
 }
