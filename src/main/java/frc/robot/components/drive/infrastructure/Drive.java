@@ -2,6 +2,12 @@ package frc.robot.components.drive.infrastructure;
 
 import java.util.List;
 
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
+import com.pathplanner.lib.util.PIDConstants;
+import com.pathplanner.lib.util.ReplanningConfig;
+
 import edu.wpi.first.math.controller.HolonomicDriveController;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
@@ -81,8 +87,24 @@ public class Drive implements DriveRepository {
             SwerveSubsystem::setModuleStates,
             SwerveSubsystem);*/
 
-        
+            AutoBuilder.configureHolonomic(
+                driveSubsystem::getPose,
+                driveSubsystem::resetOdometry,
+                driveSubsystem::getChassisSpeeds,
+                driveSubsystem::run, // ChassisSpeedsを入れたらその通りにSwerveが走るメソッド
+                new HolonomicPathFollowerConfig(
+                    new PIDConstants(DriveConst.AutoConstants.kPXController, 0, 0),
+                    new PIDConstants(DriveConst.AutoConstants.kPThetaController, 0, 0),
+                    DriveConst.AutoConstants.kMaxSpeedMetersPerSecond,
+                    0.4, // driveBaseRadius
+                    new ReplanningConfig() // その他はデフォルトの設定
+                ),
+                () -> {
+                    return false; // Trajectoryをミラーリングするかどうか (redとblueで違う場合など)
+                },
+                driveSubsystem);
 
+            Command SwerveControllerCommand = new PathPlannerAuto("test");
     }
 
     @Override
@@ -133,9 +155,22 @@ public class Drive implements DriveRepository {
     }
 
     @Override
+    public void resetForAutonomous() {
+        SwerveControllerCommand.initialize();
+    }
+
+    @Override
+    public void autonomousDrive() {
+        SwerveControllerCommand.execute();
+    }
+
+    @Override
     public void readSensors() {
+        SmartDashboard.putNumber("debug", DriveConst.DriveConstants.kPhysicalMaxAngularSpeedRadiansPerSecond);
         SmartDashboard.putNumber("Robot Heading", driveSubsystem.getHeading());
         driveSubsystem.periodic();
+
+        DriveMeasuredState.autonomousFinished = SwerveControllerCommand.isFinished();
 
         DriveMeasuredState.currentAngle = driveSubsystem.getHeading();
     }

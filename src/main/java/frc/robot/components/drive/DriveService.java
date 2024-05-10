@@ -15,6 +15,9 @@ public class DriveService implements Service {
 
     @Override
     public void applyModel(){
+        if(DriveModel.resetForAutonomous) {
+            repository.resetForAutonomous();
+        }
         switch (DriveModel.driveMovement) {
             /** ロボットの速度を速くする */
             case s_fastDrive:
@@ -58,6 +61,17 @@ public class DriveService implements Service {
             case s_robotOriented:
                 repository.robotOriented(DriveModel.driveSideSpeed, DriveModel.driveForwardSpeed, DriveModel.driveThetaSpeed);
                 break;
+            case s_autonomous:
+                repository.autonomousDrive();
+                break;
+        }
+
+        if(DriveModel.resetGyroSensor) {
+            repository.resetGyroSensor();
+        }
+
+        if(DriveModel.rewriteGyroSensorOrNot){
+           repository.rewriteGyroSensor(DriveModel.offset);
         }
 
         if(DriveModel.resetGyroSensor) {

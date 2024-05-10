@@ -14,14 +14,16 @@ public class DriveModel {
         s_stopDrive,
     }
 
-    /** Robot Oriented と Field Oriented の切り替え */
-    public static DriveOriented driveOriented;
-    public enum DriveOriented {
-        /** Robot Oriented で動く */
-        s_robotOriented,
-        /** Field Oriented で動く */
-        s_fieldOriented,
-    }
+        /** Robot Oriented と Field Oriented の切り替え */
+        public static DriveOriented driveOriented;
+        public static boolean resetForAutonomous;
+        public enum DriveOriented {
+            /** Robot Oriented で動く */
+            s_robotOriented,
+            /** Field Oriented で動く */
+            s_fieldOriented,
+            s_autonomous,
+        }
 
     /** ロボットを任意の角度に回転させる trueの時にPIDで回転させる */
     public static boolean driveAngle;
@@ -52,6 +54,7 @@ public class DriveModel {
         driveThetaSpeed = 0;
         driveAngle = false;
         resetGyroSensor = false;
+        resetForAutonomous = false;
     }
 
     public DriveModel() {

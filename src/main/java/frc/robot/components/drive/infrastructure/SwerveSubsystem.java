@@ -1,6 +1,7 @@
 package frc.robot.components.drive.infrastructure;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
@@ -86,6 +87,15 @@ public class SwerveSubsystem extends SubsystemBase{
         backLeft.getPosition(),
         backRight.getPosition()
     },pose);
+    }
+
+    public ChassisSpeeds getChassisSpeeds() {
+        return DriveConst.DriveConstants.kDriveKinematics.toChassisSpeeds(frontLeft.getState(), frontRight.getState(), backLeft.getState(), backRight.getState());
+    }
+
+    public void run(ChassisSpeeds speeds) {
+        SwerveModuleState[] moduleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(speeds);
+        setModuleStates(moduleStates);
     }
 
     //ロボットの進行方向の値を監視[11:13]

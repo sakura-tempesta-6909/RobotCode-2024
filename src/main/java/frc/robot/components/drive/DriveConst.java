@@ -54,8 +54,8 @@ public final class DriveConst {
         public static final int kFrontRightDriveAbsoluteEncoderPort = 8;
         public static final int kBackRightDriveAbsoluteEncoderPort = 5;
 
-        public static final double kPhysicalMaxSpeedMetersPerSecond = 5;
-        public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;
+        public static final double kPhysicalMaxSpeedMetersPerSecond = ModuleConstants.kDriveEncoderRPM2MeterPerSec * 5676;
+        public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = kPhysicalMaxSpeedMetersPerSecond / 0.325;
 
         public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 3;
         public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 3;
@@ -68,11 +68,11 @@ public final class DriveConst {
         public static final double kMaxAccelerationMetersPerSecondSquared = 3;
         public static final double kMaxAngularAccelerationRadiansPerSecondSquared = Math.PI / 4;
         /** 左右方向のPID制御のPの値 */
-        public static final double kPXController = 1.5;
+        public static final double kPXController = 0;
         /** 前後方向のPID制御のPの値 */
         public static final double kPYController = 1.5;
         /** 回転のPID制御のPの値 */
-        public static final double kPThetaController = 3;
+        public static final double kPThetaController = 0;
 
         public static final TrapezoidProfile.Constraints kThetaControllerConstraints = //
                 new TrapezoidProfile.Constraints(

@@ -144,8 +144,8 @@ public class SwerveModule {
         
         //操縦するときjoystickが90度を超えなくていいようにする [8:35]
         state = SwerveModuleState.optimize(state,getState().angle);
-        //動きが速すぎるので 1/3 かけて遅くする [8:50]
-        driveMotor.set(state.speedMetersPerSecond);
+
+        driveMotor.set(state.speedMetersPerSecond / DriveConst.DriveConstants.kPhysicalMaxSpeedMetersPerSecond);
         //pid制御について角度の目標値と現在値を計算する？ [9:00]　春日谷君のコードに変える
         //turningMotor.set(turningPidController.calculate(getTurningPosition(), state.angle.getRadians()));
 
