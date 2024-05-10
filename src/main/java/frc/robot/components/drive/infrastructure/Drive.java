@@ -41,7 +41,7 @@ public class Drive implements DriveRepository {
     PIDController xController, yController;
     ProfiledPIDController thetaController;
     HolonomicDriveController holonomicDriveController;
-    SwerveControllerCommand SwerveControllerCommand;
+    Command SwerveControllerCommand;
 
     public Drive(){
         driveSubsystem = new SwerveSubsystem();
@@ -104,7 +104,7 @@ public class Drive implements DriveRepository {
                 },
                 driveSubsystem);
 
-            Command SwerveControllerCommand = new PathPlannerAuto("test");
+            SwerveControllerCommand = new PathPlannerAuto("test");
     }
 
     @Override
