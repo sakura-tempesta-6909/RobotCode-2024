@@ -1,4 +1,5 @@
 package frc.robot.domain.repository;
 
-public class CameraRepository {
+public interface CameraRepository {
+    void readSensors();
 }
