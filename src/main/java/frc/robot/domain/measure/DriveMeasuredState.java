@@ -8,4 +8,6 @@ public class DriveMeasuredState {
 
     /** ロボットの現在の角度 */
     public static double currentAngle;
+
+    public static boolean autonomousFinished;
 }

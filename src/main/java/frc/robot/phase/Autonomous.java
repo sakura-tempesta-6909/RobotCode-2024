@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.components.drive.DriveParameter;
 import frc.robot.components.drive.infrastructure.Drive;
+import frc.robot.domain.measure.DriveMeasuredState;
 import frc.robot.domain.measure.LinkMeasuredState;
 import frc.robot.domain.measure.ShooterMeasuredState;
 import frc.robot.domain.model.DriveModel;
@@ -57,7 +58,7 @@ public class Autonomous {
         m_chooser.addOption("Shoot Speaker(Left) & Taxi", "B");
         m_chooser.addOption("Shoot Speaker(Right) & Taxi", "C");
 		m_chooser.addOption("Shoot Amp & Taxi", "D");
-		m_chooser.addOption("Taxi", "E");
+		m_chooser.addOption("Auto", "E");
 		SmartDashboard.putData("Auto choices", m_chooser);
 	}
 
@@ -301,8 +302,28 @@ public class Autonomous {
         );
 
         phaseTransitionE.registerPhase(
-				//Taxi
-            	//taxi(3, "Move out of Robot Starting Zone")
+            new PhaseTransition.Phase(
+                () -> {
+                },
+                (double time) -> {
+                    return true;
+                },
+                () -> {
+                    DriveModel.resetForAutonomous = true;;
+                },
+                "reset"
+                ),
+				new PhaseTransition.Phase(
+                () -> {
+					DriveModel.driveOriented = DriveModel.DriveOriented.s_autonomous;
+                },
+                (double time) -> {
+                    return DriveMeasuredState.autonomousFinished;
+                },
+                () -> {
+                },
+                "auto"
+                )
 
         );
 
@@ -327,6 +348,9 @@ public class Autonomous {
                 break;
 			case "D":
                 phaseTransitionD.run();
+                break;
+            case "E":
+                phaseTransitionE.run();
                 break;
             default:
                 phaseTransitionD.run();

@@ -40,6 +40,9 @@ public interface DriveRepository {
     /** ジャイロセンサーを任意の角度に書き換える */
     void rewriteGyroSensor(double rewriteAngle);
 
+    void resetForAutonomous();
+    
+    void autonomousDrive();
     /**
      * センサーを読む
      */
